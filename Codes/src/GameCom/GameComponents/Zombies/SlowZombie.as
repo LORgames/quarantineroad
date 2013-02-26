@@ -14,9 +14,11 @@ package GameCom.GameComponents.Zombies
 	 * ...
 	 * @author Paul
 	 */
-	public class SlowZombie extends Sprite implements BaseZombie {
+	public class SlowZombie extends Sprite implements IZombie {
+		private const BASE_HP:Number = 5.0;
 		
 		private var body:b2Body;
+		private var myHP:Number = 5.0;
 		
 		private var animation:AnimatedSprite = new AnimatedSprite();
 		private var eyes:AnimatedSprite = new AnimatedSprite();
@@ -90,12 +92,19 @@ package GameCom.GameComponents.Zombies
 			}
 		}
 		
+		public function Hit(damage:Number):void {
+			myHP -= damage;
+		}
+		
 		public function Move(newPosition:b2Vec2):void {
-			body.SetPosition(newPosition);
-			Update(0);
+			
 		}
 		
 		public function OutsideScene():Boolean {
+			if (myHP <= 0) {
+				return true;
+			}
+			
 			if (this.y - animation.height > animation.stage.stageHeight) {
 				return true;
 			}
@@ -103,9 +112,7 @@ package GameCom.GameComponents.Zombies
 			return false;
 		}
 		
-		public function AddToScene(layer0:Sprite, layer1:Sprite):void {
-			Update(0);
-			
+		public function AddToScene(position:b2Vec2, layer0:Sprite, layer1:Sprite):void {
 			layer0.addChild(this);
 			layer1.addChild(eyes);
 			
@@ -113,6 +120,12 @@ package GameCom.GameComponents.Zombies
 			quoteTimeout = Math.random() * 30;
 			
 			body.SetActive(true);
+			
+			body.SetPosition(position);
+			
+			myHP = BASE_HP;
+			
+			Update(0);
 		}
 		
 		public function RemoveFromScene(layer0:Sprite, layer1:Sprite):void {

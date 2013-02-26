@@ -1,15 +1,15 @@
 package GameCom.Managers {
 	import Box2D.Common.Math.b2Vec2;
 	import flash.display.Sprite;
-	import GameCom.GameComponents.Zombies.BaseZombie;
+	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.GameComponents.Zombies.SlowZombie;
 	/**
 	 * ...
 	 * @author Paul
 	 */
 	public class ZombieManager {
-		private var UsedZombies:Vector.<BaseZombie> = new Vector.<BaseZombie>();
-		private var UnusedZombies:Vector.<BaseZombie> = new Vector.<BaseZombie>();
+		private var UsedZombies:Vector.<IZombie> = new Vector.<IZombie>();
+		private var UnusedZombies:Vector.<IZombie> = new Vector.<IZombie>();
 		
 		private const TOTAL_ZOMBIES_ONSCREEN:int = 10;
 		
@@ -34,11 +34,9 @@ package GameCom.Managers {
 		
 		public function Update(dt:Number):void {
 			if (UsedZombies.length < TOTAL_ZOMBIES_ONSCREEN && UnusedZombies.length > 0) {
-				trace("adding a zombie" + UsedZombies);
-				var zombie:BaseZombie = UnusedZombies.splice(Math.random() * UnusedZombies.length, 1)[0];
+				var zombie:IZombie = UnusedZombies.splice(Math.random() * UnusedZombies.length, 1)[0];
 				
-				zombie.Move(new b2Vec2((Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE, Math.random() * -20));
-				zombie.AddToScene(layer0, layer1);
+				zombie.AddToScene(new b2Vec2((Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.9, Math.random() * -20), layer0, layer1);
 				
 				UsedZombies.push(zombie);
 			}

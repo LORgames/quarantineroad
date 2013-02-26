@@ -17,6 +17,7 @@ package GameCom.States {
 	import flash.utils.getTimer;
 	import flash.utils.Timer;
 	import GameCom.GameComponents.PlayerCharacter;
+	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.WorldManager;
@@ -101,6 +102,8 @@ package GameCom.States {
 			
 			explosionManager = new ExplosionManager(objectLayer);
 			
+			new BulletManager(objectLayer);
+			
 			zombies = new ZombieManager(objectLayer, eyeLayer);
 			
 			//player.Respawn();
@@ -113,14 +116,16 @@ package GameCom.States {
 		
 		private function Update(e:Event):void {
 			if (simulating) {
-				WorldManager.World.Step(Global.TIME_STEP, Global.VELOCITY_ITERATIONS, Global.POSITION_ITERATIONS);
-				WorldManager.World.ClearForces();
-				
 				//Update the objects
 				player.Update(Global.TIME_STEP);
 				zombies.Update(Global.TIME_STEP);
 				
+				BulletManager.I.Update(Global.TIME_STEP);
 				explosionManager.Update();
+				
+				//Update the world
+				WorldManager.World.Step(Global.TIME_STEP, Global.VELOCITY_ITERATIONS, Global.POSITION_ITERATIONS);
+				WorldManager.World.ClearForces();
 				
 				if(stage) {
 					worldSpr.x = Math.floor(WorldManager.WorldX + stage.stageWidth / 2);

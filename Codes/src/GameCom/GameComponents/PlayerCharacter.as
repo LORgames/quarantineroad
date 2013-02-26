@@ -7,7 +7,10 @@ package GameCom.GameComponents
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.Sprite;
 	import flash.ui.Keyboard;
+	import GameCom.GameComponents.Weapons.BasicGun;
+	import GameCom.GameComponents.Weapons.IWeapon;
 	import GameCom.Helpers.AnimatedSprite;
+	import GameCom.Helpers.BodyHelper;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.WorldManager;
 	import LORgames.Engine.Keys;
@@ -21,48 +24,34 @@ package GameCom.GameComponents
 		
 		private var MOVEMENT_SPEED:Number = 10;
 		
-		private var quotes:Array = ["I don't have pet peeves, I have whole kennels of irritation.", "Normal is nothing more than a cycle on a washing machine.", "When you are kind to someone in trouble, you hope they'll remember and be kind to someone else. And it'll become like a wildfire.", "We're here for a reason. I believe a bit of the reason is to throw little torches out to lead people through the dark."];
-		
-		private var showQuote:int = -1;
-		private var quoteTimeout:Number = 10;
+		private var weapons:Vector.<IWeapon> = new Vector.<IWeapon>();
 		
 		public function PlayerCharacter() {
-			//animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_0.png"));
-			animation.AddFrame(ThemeManager.Get("Player/Goldberg.png"));
+			animation.AddFrame(ThemeManager.Get("Player/0_0.png"));
 			animation.ChangePlayback(0.5, 0, 1);
 			
 			this.addChild(animation);
 			
-			//Create the defintion
-			var bodyDef:b2BodyDef = new b2BodyDef();
-			bodyDef.type = b2Body.b2_dynamicBody;
-			bodyDef.userData = this;
-			bodyDef.allowSleep = false;
-			bodyDef.position = new b2Vec2(0, 500 / Global.PHYSICS_SCALE);
-			
-			var fixture:b2FixtureDef = new b2FixtureDef();
-			fixture.restitution = 0;
-			fixture.friction = 0;
-			fixture.shape = new b2CircleShape(0.6);
-			fixture.userData = this;
-			fixture.density = 0.1;
-			fixture.filter.categoryBits = Global.PHYSCAT_PLAYER;
-			
-			body = WorldManager.World.CreateBody(bodyDef);
-			body.CreateFixture(fixture);
+			body = BodyHelper.GetGenericCircle(0.6, Global.PHYSCAT_PLAYER, this);
 			body.SetFixedRotation(true);
-			
 			body.SetLinearDamping(0.5);
+			
+			weapons.push(new BasicGun());
+			weapons[0].AddSafe(body);
 		}
 		
 		public function Update(dt:Number):void {
+			this.x = body.GetPosition().x * Global.PHYSICS_SCALE;
+			this.y = body.GetPosition().y * Global.PHYSICS_SCALE;
+			
 			animation.Update(dt);
 			
 			animation.x = -animation.width / 2;
 			animation.y = -animation.height + 0.6 * Global.PHYSICS_SCALE;
 			
-			this.x = body.GetPosition().x * Global.PHYSICS_SCALE;
-			this.y = body.GetPosition().y * Global.PHYSICS_SCALE;
+			for (var i:int = 0; i < weapons.length; i++) {
+				weapons[i].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1 + body.GetPosition().y));
+			}
 			
 			var xSpeed:Number = 0;
 			var ySpeed:Number = 0;
@@ -80,19 +69,6 @@ package GameCom.GameComponents
 			}
 			
 			body.SetLinearVelocity(new b2Vec2(xSpeed * MOVEMENT_SPEED, ySpeed * MOVEMENT_SPEED));
-			
-			quoteTimeout -= dt;
-			if (quoteTimeout < 0 && showQuote == -1) {
-				showQuote = Math.random() * quotes.length;
-				quoteTimeout = 5;
-			} else if (quoteTimeout < 0) {
-				showQuote = -1;
-				quoteTimeout = Math.random() * 25 + 5;
-			}
-			
-			if (showQuote != -1) {
-				GUIManager.I.ShowTooltipAt(this.x, this.y - animation.height, quotes[showQuote]);
-			}
 		}
 		
 	}
