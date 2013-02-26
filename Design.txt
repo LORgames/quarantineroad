@@ -1,0 +1,27 @@
+-----------------ZOMBIE TYPES
+Slow
+Ranged Vomitting
+Exploding
+Hands out of ground
+Running
+Soldier Zombie
+
+
+----------------------WEAPONS
+* Sniper Rifle (Piercing shot)
+* SMG (Split shot)
+* Shotgun (Short range fan)
+* Rocket Launcher (Directed AOE)
+* Homing Missile (Burst)
+Gattling Gun (MANY bullets)
+Flamethrower (Short range AOE)
+Laser ()
+Chain Lightning Gun
+Freeze Gun
+Land mine (Drop at feet)
+
+-------------------OTHER DROPS
+Laser Sight
+Motorbike
+Body Armour
+Allies
