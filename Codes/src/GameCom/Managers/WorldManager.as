@@ -106,6 +106,7 @@ package GameCom.Managers {
 			bDef.type = b2Body.b2_staticBody;
 			
 			var fDef:b2FixtureDef = new b2FixtureDef();
+			fDef.filter.categoryBits = Global.PHYSCAT_WALLS;
 			
 			wallsBody = World.CreateBody(bDef);
 			

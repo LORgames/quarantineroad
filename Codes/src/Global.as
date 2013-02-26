@@ -14,7 +14,11 @@ package  {
 		// Physics things
 		public static const PHYSICS_SCALE:Number = 20.0; //pixels per meter
 		public static const SCREEN_WIDTH:int = 438;
-		public static const DRAW_PHYSICS_ALWAYS:Boolean = true;
+		public static const DRAW_PHYSICS_ALWAYS:Boolean = false;
+		
+		public static const PHYSCAT_WALLS:int = 1;
+		public static const PHYSCAT_PLAYER:int = 2;
+		public static const PHYSCAT_ZOMBIES:int = 4;
 		
 		//Seconds between steps
 		public static const TIME_STEP:Number = 1.0 / 30.0;

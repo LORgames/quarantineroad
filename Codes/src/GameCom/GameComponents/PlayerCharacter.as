@@ -46,6 +46,7 @@ package GameCom.GameComponents
 			fixture.shape = new b2CircleShape(0.6);
 			fixture.userData = this;
 			fixture.density = 0.1;
+			fixture.filter.categoryBits = Global.PHYSCAT_PLAYER;
 			
 			body = WorldManager.World.CreateBody(bodyDef);
 			body.CreateFixture(fixture);

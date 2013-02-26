@@ -20,6 +20,7 @@ package GameCom.States {
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.WorldManager;
+	import GameCom.Managers.ZombieManager;
 	import GameCom.SystemMain;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
@@ -44,9 +45,11 @@ package GameCom.States {
 		
 		private var groundLayer:Sprite = new Sprite();
 		private var objectLayer:Sprite = new Sprite();
+		private var eyeLayer:Sprite = new Sprite();
 		
 		private var bgManager:BGManager;
 		private var explosionManager:ExplosionManager;
+		private var zombies:ZombieManager;
 		
 		private var gui:GUIManager;
 		
@@ -82,6 +85,7 @@ package GameCom.States {
 			
 			worldSpr.addChild(groundLayer);
 			worldSpr.addChild(objectLayer);
+			worldSpr.addChild(eyeLayer);
 			
 			worldSpr.addChild(WorldManager.debugDrawLayer);
 			
@@ -96,6 +100,8 @@ package GameCom.States {
 			this.addChild(gui);
 			
 			explosionManager = new ExplosionManager(objectLayer);
+			
+			zombies = new ZombieManager(objectLayer, eyeLayer);
 			
 			//player.Respawn();
 			
@@ -112,6 +118,7 @@ package GameCom.States {
 				
 				//Update the objects
 				player.Update(Global.TIME_STEP);
+				zombies.Update(Global.TIME_STEP);
 				
 				explosionManager.Update();
 				
@@ -125,6 +132,12 @@ package GameCom.States {
 			bgManager.Update();
 			
 			gui.Update();
+			
+			for (var i:int = 0; i < objectLayer.numChildren-1; i++) {
+				if (objectLayer.getChildAt(i).y > objectLayer.getChildAt(i + 1).y) {
+					objectLayer.swapChildrenAt(i, i + 1);
+				}
+			}
 			
 			if(Global.DRAW_PHYSICS_ALWAYS || (Keys.isKeyDown(Keyboard.B) && Keys.isKeyDown(Keyboard.U) && Keys.isKeyDown(Keyboard.G))) {
 				WorldManager.World.DrawDebugData();
