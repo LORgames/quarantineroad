@@ -40,8 +40,6 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function IsSafe(body:b2Body):Boolean {
-			trace(safeFixtures.indexOf(body));
-			
 			if (safeFixtures.indexOf(body) > -1) {
 				return true;
 			}

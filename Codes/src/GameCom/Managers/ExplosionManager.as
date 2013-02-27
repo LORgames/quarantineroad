@@ -4,6 +4,8 @@ package GameCom.Managers
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	import GameCom.GameComponents.Decorations.BigExplosion;
+	import GameCom.GameComponents.Decorations.IExplosion;
 	import GameCom.Helpers.AudioStore;
 	import LORgames.Engine.AudioController;
 	/**
@@ -14,60 +16,51 @@ package GameCom.Managers
 		
 		public static var I:ExplosionManager;
 		
-		private var playing_explosions:Vector.<MovieClip> = new Vector.<MovieClip>();
-		private var waiting_explosions:Vector.<MovieClip> = new Vector.<MovieClip>();
-		
-		private var playing_explosions_lamppost:Vector.<MovieClip> = new Vector.<MovieClip>();
-		private var waiting_explosions_lamppost:Vector.<MovieClip> = new Vector.<MovieClip>();
+		private var playing_explosions:Vector.<IExplosion> = new Vector.<IExplosion>();
+		private var waiting_explosions:Vector.<IExplosion> = new Vector.<IExplosion>();
 		
 		private var layer:Sprite;
 		
-		public function ExplosionManager(layer0:Sprite):void {
+		public function ExplosionManager(layer:Sprite):void {
 			I = this;
-			
-			this.layer = layer0;
+			this.layer = layer;
 		}
 		
 		public function RequestExplosionAt(p:Point):void {
 			if (waiting_explosions.length == 0) {
-				var cls:Class = ThemeManager.GetClassFromSWF("SWFs/Explosion.swf", "LORgames.explosion");
-				var new_explosion:MovieClip = new cls();
-				layer.addChild(new_explosion);
-				new_explosion.visible = false;
+				var new_explosion:IExplosion = new BigExplosion();
+				layer.addChild(new_explosion as Sprite);
 				
 				waiting_explosions.push(new_explosion);
 			}
 			
-			var explosion:MovieClip = waiting_explosions.pop();
+			var explosion:IExplosion = waiting_explosions.pop();
 			
-			explosion.visible = true;
+			(explosion as Sprite).visible = true;
 			
-			explosion.x = p.x;
-			explosion.y = p.y;
-			explosion.gotoAndPlay(0);
+			(explosion as Sprite).x = p.x;
+			(explosion as Sprite).y = p.y;
+			explosion.Reset();
 			
 			playing_explosions.push(explosion);
 			
-			WorldManager.Explode(new b2Vec2(p.x / Global.PHYSICS_SCALE, p.y / Global.PHYSICS_SCALE), 7.5, 300);
+			WorldManager.Explode(new b2Vec2(p.x / Global.PHYSICS_SCALE, p.y / Global.PHYSICS_SCALE), 2.5, 100);
 			
 			AudioController.PlaySound(AudioStore.Explode);
 		}
 		
-		public function Update():void {
+		public function Update(dt:Number):void {
 			var explosion:MovieClip;
 			
-			if (playing_explosions.length > 0 && playing_explosions[0].currentFrame == playing_explosions[0].totalFrames) {
-				explosion = playing_explosions.splice(0, 1)[0];
+			for (var i:int = 0; i < playing_explosions.length; i++) {
+				playing_explosions[i].Update(dt);
 				
-				waiting_explosions.push(explosion);
-				explosion.visible = false;
-			}
-			
-			if (playing_explosions_lamppost.length > 0 && playing_explosions_lamppost[0].currentFrame == playing_explosions_lamppost[0].totalFrames) {
-				explosion = playing_explosions_lamppost.splice(0, 1)[0];
-				
-				waiting_explosions_lamppost.push(explosion);
-				explosion.visible = false;
+				if (playing_explosions[i].IsFinished()) {
+					var e:IExplosion = playing_explosions.splice(i, 1)[0];
+					(e as Sprite).visible = false;
+					waiting_explosions.push(e);
+					i--;
+				}
 			}
 		}
 		

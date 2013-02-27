@@ -14,7 +14,7 @@ package GameCom.GameComponents.Projectiles {
 	 */
 	public class BasicBullet extends Sprite implements IBullet {
 		
-		public const DAMAGE:Number = 5;
+		public const DAMAGE:Number = 1;
 		private var owner:IWeapon;
 		
 		private var animation:AnimatedSprite = new AnimatedSprite();
@@ -29,7 +29,7 @@ package GameCom.GameComponents.Projectiles {
 			animation.ChangePlayback(0.1, 0, 2);
 			this.addChild(animation);
 			
-			body = BodyHelper.GetGenericCircle(0.1, Global.PHYSCAT_PLAYER, this, 0xFFFF & ~Global.PHYSCAT_WALLS);
+			body = BodyHelper.GetGenericCircle(0.1, Global.PHYSICS_CATEGORY_PLAYER, this, 0xFFFF & ~Global.PHYSICS_CATEGORY_WALLS);
 			body.SetActive(false);
 			body.SetBullet(true);
 		}

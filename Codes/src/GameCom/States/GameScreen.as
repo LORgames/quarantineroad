@@ -16,13 +16,16 @@ package GameCom.States {
 	import flash.ui.Keyboard;
 	import flash.utils.getTimer;
 	import flash.utils.Timer;
+	import GameCom.GameComponents.Loot.LootDrop;
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
+	import GameCom.Managers.LootManager;
 	import GameCom.Managers.WorldManager;
 	import GameCom.Managers.ZombieManager;
 	import GameCom.SystemMain;
+	import LORgames.Components.Button;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	import GameCom.Managers.BGManager;
@@ -51,6 +54,7 @@ package GameCom.States {
 		private var bgManager:BGManager;
 		private var explosionManager:ExplosionManager;
 		private var zombies:ZombieManager;
+		private var loot:LootManager;
 		
 		private var gui:GUIManager;
 		
@@ -100,16 +104,19 @@ package GameCom.States {
 			gui = new GUIManager(Pause, MockUpdate);
 			this.addChild(gui);
 			
-			explosionManager = new ExplosionManager(objectLayer);
+			explosionManager = new ExplosionManager(eyeLayer);
 			
 			new BulletManager(objectLayer);
 			
 			zombies = new ZombieManager(objectLayer, eyeLayer);
+			loot = new LootManager(groundLayer);
 			
 			//player.Respawn();
 			
 			simulating = true;
 			MockUpdate();
+			
+			WorldManager.WorldScrolled = 0;
 			
 			Resize();
 		}
@@ -119,9 +126,12 @@ package GameCom.States {
 				//Update the objects
 				player.Update(Global.TIME_STEP);
 				zombies.Update(Global.TIME_STEP);
+				loot.Update(Global.TIME_STEP);
+				
+				WorldManager.WorldScrolled += WorldManager.WorldScrollSpeed * Global.PHYSICS_SCALE * Global.TIME_STEP;
 				
 				BulletManager.I.Update(Global.TIME_STEP);
-				explosionManager.Update();
+				explosionManager.Update(Global.TIME_STEP);
 				
 				//Update the world
 				WorldManager.World.Step(Global.TIME_STEP, Global.VELOCITY_ITERATIONS, Global.POSITION_ITERATIONS);
@@ -138,9 +148,13 @@ package GameCom.States {
 			
 			gui.Update();
 			
-			for (var i:int = 0; i < objectLayer.numChildren-1; i++) {
+			for (var i:int = 1; i < objectLayer.numChildren-1; i++) {
 				if (objectLayer.getChildAt(i).y > objectLayer.getChildAt(i + 1).y) {
 					objectLayer.swapChildrenAt(i, i + 1);
+				}
+				
+				if (objectLayer.getChildAt(i-1).y > objectLayer.getChildAt(i).y) {
+					objectLayer.swapChildrenAt(i-1, i);
 				}
 			}
 			
@@ -207,6 +221,19 @@ package GameCom.States {
 			trace(stage.stageHeight);
 			WorldManager.WorldY = -stage.stageHeight / 2;
 			WorldManager.UpdateWalls(stage.stage);
+			
+			var m:Matrix = new Matrix();
+			m.createGradientBox(Global.SCREEN_WIDTH, stage.stageHeight / 3, Math.PI / 2, -Global.SCREEN_WIDTH / 2, 0);
+			
+			eyeLayer.graphics.clear();
+			eyeLayer.graphics.beginGradientFill(GradientType.LINEAR, [0x231722, 0x231722], [0.8, 0.0], [0, 255], m);
+			eyeLayer.graphics.drawRect( -Global.SCREEN_WIDTH / 2, 0, Global.SCREEN_WIDTH, stage.stageHeight / 3);
+			eyeLayer.graphics.endFill();
+			
+			m.createGradientBox(Global.SCREEN_WIDTH/2, stage.stageHeight, 0, -Global.SCREEN_WIDTH / 2, 0);
+			eyeLayer.graphics.beginGradientFill(GradientType.LINEAR, [0x333366, 0x333366], [0.333, 0], [0, 255], m, "reflect");
+			eyeLayer.graphics.drawRect( -Global.SCREEN_WIDTH / 2, 0, Global.SCREEN_WIDTH, stage.stageHeight);
+			eyeLayer.graphics.endFill();
 		}
 	}
 }

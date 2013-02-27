@@ -16,9 +16,10 @@ package  {
 		public static const SCREEN_WIDTH:int = 438;
 		public static const DRAW_PHYSICS_ALWAYS:Boolean = false;
 		
-		public static const PHYSCAT_WALLS:int = 1;
-		public static const PHYSCAT_PLAYER:int = 2;
-		public static const PHYSCAT_ZOMBIES:int = 4;
+		public static const PHYSICS_CATEGORY_WALLS:int = 1;
+		public static const PHYSICS_CATEGORY_PLAYER:int = 2;
+		public static const PHYSICS_CATEGORY_ZOMBIES:int = 4;
+		public static const PHYSICS_CATEGORY_LOOT:int = 8;
 		
 		//Seconds between steps
 		public static const TIME_STEP:Number = 1.0 / 30.0;

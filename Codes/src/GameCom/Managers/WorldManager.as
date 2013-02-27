@@ -10,6 +10,7 @@ package GameCom.Managers {
 	import Box2D.Dynamics.b2World;
 	import flash.display.Sprite;
 	import flash.display.Stage;
+	import GameCom.GameComponents.IHit;
 	/**
 	 * ...
 	 * @author Paul
@@ -21,6 +22,12 @@ package GameCom.Managers {
 		
 		public static var WorldX:Number = 0;
 		public static var WorldY:Number = 0;
+		public static var WorldScrolled:Number = 0;
+		
+		public static var WorldTargetX:Number = 0;
+		public static var WorldTargetY:Number = 0;
+		
+		public static var WorldScrollSpeed:Number = 1; // 1m/s
 		
 		private static var wallsBody:b2Body;
 		private static var floorBody:b2Body;
@@ -30,7 +37,6 @@ package GameCom.Managers {
 			World = new b2World(new b2Vec2(0, 0), true);
 			
 			CreatePlayerWalls();
-			CreateZombieKillBox();
 			
 			// set debug draw
 			var dbgDraw:b2DebugDraw = new b2DebugDraw();
@@ -94,6 +100,10 @@ package GameCom.Managers {
 				
 				b.SetAwake(true);
 				b.ApplyForce(forceVec, b.GetWorldCenter());
+				
+				if (b.GetUserData() is IHit) {
+					(b.GetUserData() as IHit).Hit(1);
+				}
 			}
 		}
 		
@@ -106,7 +116,7 @@ package GameCom.Managers {
 			bDef.type = b2Body.b2_staticBody;
 			
 			var fDef:b2FixtureDef = new b2FixtureDef();
-			fDef.filter.categoryBits = Global.PHYSCAT_WALLS;
+			fDef.filter.categoryBits = Global.PHYSICS_CATEGORY_WALLS;
 			
 			wallsBody = World.CreateBody(bDef);
 			
@@ -122,10 +132,6 @@ package GameCom.Managers {
 			floorBody = World.CreateBody(bDef);
 			fDef.shape = b2PolygonShape.AsEdge(new b2Vec2( -Global.SCREEN_WIDTH / 2 / Global.PHYSICS_SCALE, 0), new b2Vec2( Global.SCREEN_WIDTH / 2 / Global.PHYSICS_SCALE, 0));
 			floorBody.CreateFixture(fDef);
-		}
-		
-		public static function CreateZombieKillBox():void {
-			
 		}
 	}
 

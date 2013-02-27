@@ -9,6 +9,7 @@ package GameCom.GameComponents.Zombies
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	import GameCom.Helpers.AnimatedSprite;
+	import GameCom.Helpers.MathHelper;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.LootManager;
@@ -17,25 +18,33 @@ package GameCom.GameComponents.Zombies
 	 * ...
 	 * @author Paul
 	 */
-	public class SlowZombie extends Sprite implements IZombie {
-		private const BASE_HP:Number = 1.0;
+	public class ExplosionZombie extends Sprite implements IZombie {
+		private const BASE_HP:Number = 3.0;
 		
 		private var body:b2Body;
 		
-		private var myHP:Number = 1;
+		private var isDead:Boolean = false;
+		private var myHP:Number = 3.0;
 		private var mySpeed:Number = 1;
 		
 		private var animation:AnimatedSprite = new AnimatedSprite();
 		private var eyes:AnimatedSprite = new AnimatedSprite();
 		
-		private var quotes:Array = ["...", "BRAAAAAAIIIIINNNNNS"];
+		private var quotes:Array = ["My mama's so fat she still calls me bite size :'("];
 		
 		private var showQuote:int = -1;
 		private var quoteTimeout:Number = 10;
 		
-		public function SlowZombie() {
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_0.png"));
-			animation.ChangePlayback(0.5, 0, 1);
+		public function ExplosionZombie() {
+			animation.AddFrame(ThemeManager.Get("Zombies/ExplosionZombie/0_0.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/ExplosionZombie/0_1.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/ExplosionZombie/0_2.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/ExplosionZombie/0_3.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/ExplosionZombie/0_4.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/ExplosionZombie/0_5.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/ExplosionZombie/0_6.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/ExplosionZombie/0_7.png"));
+			animation.ChangePlayback(0.1, 0, 8);
 			this.addChild(animation);
 			
 			eyes.AddFrame(ThemeManager.Get("Zombies/Base Zombie/Eyes.png"));
@@ -53,9 +62,9 @@ package GameCom.GameComponents.Zombies
 			var fixture:b2FixtureDef = new b2FixtureDef();
 			fixture.restitution = 0;
 			fixture.friction = 0;
-			fixture.shape = new b2CircleShape(0.6);
+			fixture.shape = new b2CircleShape(0.9);
 			fixture.userData = this;
-			fixture.density = 0.1;
+			fixture.density = 1.0;
 			fixture.filter.categoryBits = Global.PHYSICS_CATEGORY_ZOMBIES;
 			fixture.filter.maskBits = 0xffff & ~Global.PHYSICS_CATEGORY_WALLS;
 			fixture.userData = this;
@@ -73,11 +82,11 @@ package GameCom.GameComponents.Zombies
 			
 			animation.Update(dt);
 			animation.x = -animation.width / 2;
-			animation.y = -animation.height + 0.6 * Global.PHYSICS_SCALE;
+			animation.y = -animation.height + 0.9 * Global.PHYSICS_SCALE;
 			
-			eyes.Update(dt);
-			eyes.x = this.x - eyes.width / 2;
-			eyes.y = this.y - eyes.height + 0.6 * Global.PHYSICS_SCALE;
+			//eyes.Update(dt);
+			//eyes.x = this.x - eyes.width / 2;
+			//eyes.y = this.y - eyes.height + 0.9 * Global.PHYSICS_SCALE;
 			
 			var xSpeed:Number = 0;
 			var ySpeed:Number = mySpeed + WorldManager.WorldScrollSpeed;
@@ -89,6 +98,11 @@ package GameCom.GameComponents.Zombies
 				} else {
 					xSpeed = -1;
 				}
+			}
+			
+			if (MathHelper.DistanceSquared(new Point(this.x, this.y), new Point(WorldManager.WorldTargetX, WorldManager.WorldTargetY)) < 5000) {
+				ExplosionManager.I.RequestExplosionAt(new Point(this.x, this.y));
+				myHP = -1;
 			}
 			
 			if(dt > 0) body.SetLinearVelocity(new b2Vec2(xSpeed, ySpeed));
@@ -109,6 +123,11 @@ package GameCom.GameComponents.Zombies
 		
 		public function Hit(damage:Number):void {
 			myHP -= damage;
+			
+			if (myHP <= 0 && !isDead) {
+				isDead = true;
+				ExplosionManager.I.RequestExplosionAt(new Point(this.x, this.y));
+			}
 		}
 		
 		public function Move(newPosition:b2Vec2):void {
@@ -139,6 +158,7 @@ package GameCom.GameComponents.Zombies
 			body.SetPosition(position);
 			
 			myHP = BASE_HP;
+			isDead = false;
 			
 			mySpeed = Math.random() / 2 + 0.75;
 			
