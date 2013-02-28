@@ -13,7 +13,7 @@ package GameCom.GameComponents.Weapons {
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
-		public const FIRE_RATE:Number = 0.5;
+		public const FIRE_RATE:Number = 0.4;
 		public var fireTime:Number = 0;
 		
 		public function BasicGun() {

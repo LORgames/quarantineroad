@@ -35,9 +35,7 @@ package GameCom.States {
 		
 		private var TextContainer:Sprite = new Sprite();
 		private var PlayText:TextField = new TextField();
-		private var ContinueText:TextField = new TextField();
 		private var WebsiteText:TextField = new TextField();
-		private var CreditsText:TextField = new TextField();
 		
 		private var settings:SettingsPane = new SettingsPane();
 		
@@ -60,20 +58,11 @@ package GameCom.States {
 			PlayText.selectable = false;
 			PlayText.defaultTextFormat = new TextFormat("Verdana", 36, 0xFFFFFF);
 			PlayText.autoSize = TextFieldAutoSize.CENTER;
-			PlayText.text = "New Game";
+			PlayText.text = "Play";
 			PlayText.addEventListener(MouseEvent.ROLL_OVER, MouseOverText);
 			PlayText.addEventListener(MouseEvent.ROLL_OUT, MouseOutText);
 			PlayText.addEventListener(MouseEvent.CLICK, PlayFunc, false, 0, true);
 			TextContainer.addChild(PlayText);
-			
-			ContinueText.selectable = false;
-			ContinueText.defaultTextFormat = new TextFormat("Verdana", 36, 0xFFFFFF);
-			ContinueText.autoSize = TextFieldAutoSize.CENTER;
-			ContinueText.text = "Continue";
-			ContinueText.addEventListener(MouseEvent.ROLL_OVER, MouseOverText);
-			ContinueText.addEventListener(MouseEvent.ROLL_OUT, MouseOutText);
-			ContinueText.addEventListener(MouseEvent.CLICK, ContinueFunc, false, 0, true);
-			TextContainer.addChild(ContinueText);
 			
 			WebsiteText.selectable = false;
 			WebsiteText.defaultTextFormat = new TextFormat("Verdana", 12, 0xFFFFFF);
@@ -84,25 +73,11 @@ package GameCom.States {
 			WebsiteText.addEventListener(MouseEvent.CLICK, WebsiteFunc, false, 0, true);
 			TextContainer.addChild(WebsiteText);
 			
-			CreditsText.selectable = false;
-			CreditsText.defaultTextFormat = new TextFormat("Verdana", 10, 0xFFFFFF);
-			CreditsText.autoSize = TextFieldAutoSize.CENTER;
-			CreditsText.htmlText = "LORgames: Paul 'OsiJr' Fox, Ryan 'HarkonX' Furlong, Ying 'ohoshiio' Luo, Samuel 'Samsinsane' Surtees, Miles 'Mozza26' Till and Nathan 'Nazka' Wentwoth-Perry.\n\nPowered by FZip and Box2DFlashAS3.";
-			CreditsText.wordWrap = true;
-			CreditsText.width = 274;
-			this.addChild(CreditsText);
-			
 			this.stage.addEventListener(Event.RESIZE, Resized, false, 0, true);
 			Resized();
 		}
 		
 		public function PlayFunc(e:MouseEvent):void {
-			AudioController.PlaySound(AudioStore.MenuClick);
-			Storage.Format();
-			SystemMain.instance.StateTo(new GameScreen());
-		}
-		
-		public function ContinueFunc(e:MouseEvent):void {
 			AudioController.PlaySound(AudioStore.MenuClick);
 			SystemMain.instance.StateTo(new GameScreen());
 		}
@@ -127,22 +102,13 @@ package GameCom.States {
 			this.graphics.drawRect((stage.stageWidth - bmp.width) / 2, (stage.stageHeight - bmp.height) / 2, bmp.width, bmp.height);
 			this.graphics.endFill();
 			
-			this.graphics.beginFill(0x0, 0.7);
-			this.graphics.lineStyle(2);
-			this.graphics.drawRoundRect(mat.tx + 438, mat.ty + 460, CreditsText.width+10, CreditsText.height+10, 20);
-			
 			TextContainer.x = mat.tx + 448 + 261/2;
 			TextContainer.y = mat.ty + 241;
 			
 			PlayText.x = -PlayText.width/2;
 			PlayText.y = 15;
-			ContinueText.x = -ContinueText.width/2;
-			ContinueText.y = PlayText.y + PlayText.height + 15;
 			WebsiteText.x = -WebsiteText.width / 2;
-			WebsiteText.y = ContinueText.y + ContinueText.height + 30;
-			
-			CreditsText.x = mat.tx + 443;
-			CreditsText.y = mat.ty + 465;
+			WebsiteText.y = PlayText.y + PlayText.height + 30;
 		}
 		
 		public function MouseOverText(e:MouseEvent):void {

@@ -26,7 +26,7 @@ package GameCom.Managers {
 	 * @author Paul
 	 */
 	public class GUIManager extends Sprite {
-		[Embed(source="../../../lib/visitor1.ttf", fontName="Visitor", mimeType="application/x-font")]
+		[Embed(source="../../../lib/visitor1.ttf", fontName="Visitor", embedAsCFF=false)]
 		private static var fontName:Class;
 
 		public static var I:GUIManager;
@@ -34,8 +34,10 @@ package GameCom.Managers {
 		private var PopupSprite:Sprite = new Sprite();
 		private var Overlay:Sprite = new Sprite();
 		
-		public static var Hearts:HeartBar = new HeartBar();
-		public static var Score:TextField = new TextField();
+		public var Hearts:HeartBar = new HeartBar();
+		public var Score:TextField = new TextField();
+		
+		private var ScoreValue:int = 0;
 		
 		private var tooltips:Vector.<Tooltip> = new Vector.<Tooltip>();
 		private var currentFrameTooltipIndex:int = 0;
@@ -52,9 +54,12 @@ package GameCom.Managers {
 			this.addChild(PopupSprite);
 			this.addChild(Hearts);
 			
-			Score.defaultTextFormat = new TextFormat("Visitor BRT", 20, 0xFFFFFF);
+			Score.embedFonts = true;
+			Score.defaultTextFormat = new TextFormat("Visitor", 20, 0xFFFFFF);
 			Score.filters = new Array(new GlowFilter(0x0, 1, 7, 7, 3));
-			Score.text = "Test!";
+			Score.text = "";
+			Score.autoSize = TextFieldAutoSize.LEFT;
+			Score.selectable = false;
 			this.addChild(Score);
 			
 			this.addChild(MuteButton);
@@ -72,8 +77,12 @@ package GameCom.Managers {
 			currentFrameTooltipIndex = 0;
 		}
 		
-		public function UpdateScore():void {
+		public function UpdateScore(score:int):void {
+			ScoreValue += score;
+			Score.text = ScoreValue.toString();
 			
+			Score.x = (stage.stageWidth - Score.width) / 2;
+			Score.y = 30;
 		}
 		
 		public function ShowTooltipAt(worldX:int, worldY:int, message:String):void {

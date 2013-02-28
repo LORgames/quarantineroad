@@ -20,6 +20,7 @@ package GameCom.GameComponents.Zombies
 	 */
 	public class ExplosionZombie extends Sprite implements IZombie {
 		private const BASE_HP:Number = 3.0;
+		private const SCORE:int = 3;
 		
 		private var body:b2Body;
 		
@@ -127,6 +128,8 @@ package GameCom.GameComponents.Zombies
 			if (myHP <= 0 && !isDead) {
 				isDead = true;
 				ExplosionManager.I.RequestExplosionAt(new Point(this.x, this.y));
+				
+				GUIManager.I.UpdateScore(SCORE);
 			}
 		}
 		
@@ -148,7 +151,6 @@ package GameCom.GameComponents.Zombies
 		
 		public function AddToScene(position:b2Vec2, layer0:Sprite, layer1:Sprite):void {
 			layer0.addChild(this);
-			layer1.addChild(eyes);
 			
 			showQuote = -1;
 			quoteTimeout = Math.random() * 30;
@@ -167,7 +169,6 @@ package GameCom.GameComponents.Zombies
 		
 		public function RemoveFromScene(layer0:Sprite, layer1:Sprite):void {
 			layer0.removeChild(this);
-			layer1.removeChild(eyes);
 			
 			if(Math.random() < 0.001) {
 				LootManager.I.SpawnLootAt(body.GetPosition());

@@ -5,6 +5,9 @@ package GameCom.Helpers
 	 * @author ...
 	 */
 	public class AudioStore {
+		[Embed(source="../../../lib/Audio/Music.mp3")]
+		public static const Music:Class;
+		
 		[Embed(source="../../../lib/Audio/MenuPopup.mp3")]
 		public static const MenuPopup:Class;
 		

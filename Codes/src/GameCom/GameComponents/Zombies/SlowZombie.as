@@ -9,6 +9,7 @@ package GameCom.GameComponents.Zombies
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	import GameCom.Helpers.AnimatedSprite;
+	import GameCom.Managers.BGManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.LootManager;
@@ -19,11 +20,13 @@ package GameCom.GameComponents.Zombies
 	 */
 	public class SlowZombie extends Sprite implements IZombie {
 		private const BASE_HP:Number = 1.0;
+		private const SCORE:int = 1;
 		
 		private var body:b2Body;
 		
 		private var myHP:Number = 1;
 		private var mySpeed:Number = 1;
+		private var dead:Boolean = false;
 		
 		private var animation:AnimatedSprite = new AnimatedSprite();
 		private var eyes:AnimatedSprite = new AnimatedSprite();
@@ -109,6 +112,17 @@ package GameCom.GameComponents.Zombies
 		
 		public function Hit(damage:Number):void {
 			myHP -= damage;
+			
+			if (myHP <= 0 && !dead) {
+				dead = true;
+				GUIManager.I.UpdateScore(SCORE);
+				
+				if(Math.random() < 0.001) {
+					LootManager.I.SpawnLootAt(body.GetPosition());
+				}
+				
+				BGManager.I.AddBloodSplatter(this.x, this.y);
+			}
 		}
 		
 		public function Move(newPosition:b2Vec2):void {
@@ -139,8 +153,9 @@ package GameCom.GameComponents.Zombies
 			body.SetPosition(position);
 			
 			myHP = BASE_HP;
+			dead = false;
 			
-			mySpeed = Math.random() / 2 + 0.75;
+			mySpeed = Math.random() + 1.5;
 			
 			Update(0);
 		}
@@ -148,10 +163,6 @@ package GameCom.GameComponents.Zombies
 		public function RemoveFromScene(layer0:Sprite, layer1:Sprite):void {
 			layer0.removeChild(this);
 			layer1.removeChild(eyes);
-			
-			if(Math.random() < 0.001) {
-				LootManager.I.SpawnLootAt(body.GetPosition());
-			}
 			
 			body.SetActive(false);
 		}

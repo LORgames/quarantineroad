@@ -97,13 +97,6 @@ package GameCom.GameComponents
 						(contact.other.GetUserData() as LootDrop).Pickup(weapons);
 					} else if (contact.other.GetUserData() is IZombie) {
 						Hit(1);
-						
-						if (myHP <= 0 && time == -1) {
-							new MessageBox("You died after " + ((getTimer() - startTime)/1000 as Number).toFixed(2) + "s", 0);
-							time = 1;
-							GameScreen.EndOfTheLine_TerminateASAP = true;
-						}
-						
 						(contact.other.GetUserData() as IZombie).Hit(int.MAX_VALUE);
 					}
 				}
@@ -114,7 +107,13 @@ package GameCom.GameComponents
 		
 		public function Hit(damage:Number):void {
 			myHP -= damage;
-			GUIManager.Hearts.SetHealth(myHP);
+			GUIManager.I.Hearts.SetHealth(myHP);
+			
+			if (myHP <= 0 && time == -1) {
+				new MessageBox("You died after " + ((getTimer() - startTime)/1000 as Number).toFixed(2) + "s", 0);
+				time = 1;
+				GameScreen.EndOfTheLine_TerminateASAP = true;
+			}
 		}
 		
 	}

@@ -13,11 +13,13 @@ package GameCom.States {
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
+	import flash.media.SoundChannel;
 	import flash.ui.Keyboard;
 	import flash.utils.getTimer;
 	import flash.utils.Timer;
 	import GameCom.GameComponents.Loot.LootDrop;
 	import GameCom.GameComponents.PlayerCharacter;
+	import GameCom.Helpers.AudioStore;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
@@ -60,7 +62,10 @@ package GameCom.States {
 		
 		private var player:PlayerCharacter;
 		
-		private var lastUpdate:int = 0;
+		private var lastUpdate:Number = 0;
+		private var lastScrolled:int = 0;
+		
+		private var sc:SoundChannel;
 		
 		//olol toggle bool for mute
 		private var mDown:Boolean = false;
@@ -71,6 +76,8 @@ package GameCom.States {
 			//Just make sure we're ready to do this...
 			if (this.stage) Init();
 			else addEventListener(Event.ADDED_TO_STAGE, Init);
+			
+			sc = AudioController.PlayLoop(AudioStore.Music);
 		}
 		
 		private function Init(e:* = null):void {
@@ -129,6 +136,19 @@ package GameCom.States {
 				loot.Update(Global.TIME_STEP);
 				
 				WorldManager.WorldScrolled += WorldManager.WorldScrollSpeed * Global.PHYSICS_SCALE * Global.TIME_STEP;
+				
+				//Add 1pt for every metre travelled
+				if (lastScrolled + 1 < WorldManager.WorldScrolled / Global.PHYSICS_SCALE) {
+					gui.UpdateScore(1);
+					lastScrolled += 1;
+				}
+				
+				//Add 1pt for every second playing
+				lastUpdate += Global.TIME_STEP;
+				if (lastUpdate > 1) {
+					lastUpdate -= 1;
+					GUIManager.I.UpdateScore(1);
+				}
 				
 				BulletManager.I.Update(Global.TIME_STEP);
 				explosionManager.Update(Global.TIME_STEP);
@@ -209,6 +229,8 @@ package GameCom.States {
 			player = null;
 			
 			simulating = false;
+			
+			sc.stop();
 			
 			this.removeEventListener(Event.ENTER_FRAME, Update);
 			

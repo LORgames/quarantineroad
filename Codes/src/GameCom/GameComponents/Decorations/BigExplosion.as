@@ -32,7 +32,7 @@ package GameCom.GameComponents.Decorations
 		
 		public function Reset():void {
 			animation.ChangePlayback(0.1, 0, 7);
-			endTime = getTimer() + 800;
+			endTime = getTimer() + 700;
 		}
 		
 		public function IsFinished():Boolean {
