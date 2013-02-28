@@ -97,18 +97,12 @@ package GameCom.Managers
 			
 			if (piece1.y < 0 && piece1.y > - 600) {
 				piece = piece1;
-				trace("p1");
 			} else if (piece2.y < 0 && piece2.y > - 600) {
 				piece = piece2;
-				trace("p2");
-			} else {
-				trace("p0");
 			}
 			
 			locationX += Global.SCREEN_WIDTH / 2;
 			locationY -= piece.y;
-			
-			trace(locationX + " & " + locationY);
 			
 			piece.graphics.beginBitmapFill(bmpd, new Matrix(flipX?-1:1, 0, 0, 1, locationX-(flipX?-bmpd.width/2:bmpd.width/2), locationY-bmpd.height/2), false, true);
 			piece.graphics.drawRect(locationX-bmpd.width/2, locationY-bmpd.height/2, bmpd.width, bmpd.height);
@@ -122,20 +116,21 @@ package GameCom.Managers
 			
 			for (var i:int = 0; i < randomItemsCount; i++) {
 				var item:String = items[int(items.length * Math.random())];
-				trace(item);
 				
 				if(item != "Trash/") {
 					var bmpd:BitmapData = ThemeManager.Get(item);
 					
 					var flipX:Boolean = Math.random() < 0.5;
 					var flipY:Boolean = false;
-				
+					
 					var x:int = Math.random() * (Global.SCREEN_WIDTH - bmpd.width) + (flipX?bmpd.width:0);
 					var y:int = Math.random() * 600;
 					
 					piece.graphics.beginBitmapFill(bmpd, new Matrix(flipX?-1:1, 0, 0, 1, x, y), false, true);
 					piece.graphics.drawRect(flipX?x-bmpd.width:x, y, bmpd.width, bmpd.height);
 					piece.graphics.endFill();
+				} else {
+					i--;
 				}
 			}
 		}

@@ -7,6 +7,7 @@ package GameCom.GameComponents
 	import Box2D.Dynamics.b2FixtureDef;
 	import Box2D.Dynamics.Contacts.b2ContactEdge;
 	import flash.display.Sprite;
+	import flash.filters.GlowFilter;
 	import flash.ui.Keyboard;
 	import flash.utils.getTimer;
 	import GameCom.GameComponents.Loot.LootDrop;
@@ -25,7 +26,7 @@ package GameCom.GameComponents
 	 * @author Paul
 	 */
 	public class PlayerCharacter extends Sprite implements IHit {
-		private var body:b2Body;
+		public var body:b2Body;
 		private var animation:AnimatedSprite = new AnimatedSprite();
 		
 		private var MOVEMENT_SPEED:Number = 3.6;
@@ -36,6 +37,9 @@ package GameCom.GameComponents
 		
 		private var time:int = -1;
 		private var startTime:int = 0;
+		
+		private var immunityTime:int = 0;
+		private const IMMUNITY_TIME:int = 750;
 		
 		public function PlayerCharacter() {
 			animation.AddFrame(ThemeManager.Get("Player/0_0.png"));
@@ -86,6 +90,12 @@ package GameCom.GameComponents
 				xSpeed = 1;
 			}
 			
+			if (getTimer() < immunityTime) {
+				animation.filters = [new GlowFilter(0xFFFFFF, 1, 2, 2)];
+			} else {
+				animation.filters = [];
+			}
+			
 			body.SetLinearVelocity(new b2Vec2(xSpeed * MOVEMENT_SPEED, ySpeed * MOVEMENT_SPEED));
 			
 			var contact:b2ContactEdge = body.GetContactList();
@@ -96,8 +106,7 @@ package GameCom.GameComponents
 					if (contact.other.GetUserData() is LootDrop) {
 						(contact.other.GetUserData() as LootDrop).Pickup(weapons);
 					} else if (contact.other.GetUserData() is IZombie) {
-						Hit(1);
-						(contact.other.GetUserData() as IZombie).Hit(int.MAX_VALUE);
+						Hit((contact.other.GetUserData() as IZombie).HitPlayer(this));
 					}
 				}
 				
@@ -106,13 +115,16 @@ package GameCom.GameComponents
 		}
 		
 		public function Hit(damage:Number):void {
-			myHP -= damage;
-			GUIManager.I.Hearts.SetHealth(myHP);
-			
-			if (myHP <= 0 && time == -1) {
-				new MessageBox("You died after " + ((getTimer() - startTime)/1000 as Number).toFixed(2) + "s", 0);
-				time = 1;
-				GameScreen.EndOfTheLine_TerminateASAP = true;
+			if(getTimer() > immunityTime) {
+				myHP -= damage;
+				GUIManager.I.Hearts.SetHealth(myHP);
+				
+				if (myHP <= 0 && time == -1) {
+					time = 1;
+					GameScreen.EndOfTheLine_TerminateASAP = true;
+				}
+				
+				immunityTime = getTimer() + IMMUNITY_TIME;
 			}
 		}
 		

@@ -13,7 +13,7 @@ package GameCom.GameComponents.Weapons {
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
-		public const FIRE_RATE:Number = 0.4;
+		public var FIRE_RATE:Number = 0.4;
 		public var fireTime:Number = 0;
 		
 		public function BasicGun() {
@@ -29,6 +29,10 @@ package GameCom.GameComponents.Weapons {
 				fireTime -= FIRE_RATE;
 				BulletManager.I.FireAt(location, BasicBullet, this);
 			}
+		}
+		
+		public function AddAmmo():void {
+			FIRE_RATE = 0.2;
 		}
 		
 		public function IsEmpty():Boolean {

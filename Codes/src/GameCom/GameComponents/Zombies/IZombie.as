@@ -2,6 +2,7 @@ package GameCom.GameComponents.Zombies {
 	import Box2D.Common.Math.b2Vec2;
 	import flash.display.Sprite;
 	import GameCom.GameComponents.IHit;
+	import GameCom.GameComponents.PlayerCharacter;
 	
 	/**
 	 * ...
@@ -9,6 +10,7 @@ package GameCom.GameComponents.Zombies {
 	 */
 	public interface IZombie extends IHit {
 		function Update(dt:Number):void;
+		function HitPlayer(player:PlayerCharacter):Number;
 		
 		function OutsideScene():Boolean;
 		

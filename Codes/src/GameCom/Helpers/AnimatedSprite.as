@@ -14,6 +14,9 @@ package GameCom.Helpers
 		private var startFrame:int = 0;
 		private var endFrame:int = 1;
 		
+		private var shouldStop:Boolean = false;
+		private var isStopped:Boolean = false;
+		
 		private var playbackSpeed:Number = 0.5;
 		
 		private var frames:Vector.<BitmapData> = new Vector.<BitmapData>();
@@ -32,15 +35,20 @@ package GameCom.Helpers
 			sizeY = bmpd.height;
 		}
 		
-		public function ChangePlayback(newPlaybackSpeed:Number = 0.5, newStartFrame:int = 0, frameDuration:int = 1):void {
+		public function ChangePlayback(newPlaybackSpeed:Number = 0.5, newStartFrame:int = 0, frameDuration:int = 1, shouldStop:Boolean = false):void {
 			playbackSpeed = newPlaybackSpeed;
 			startFrame = newStartFrame;
 			endFrame = newStartFrame + frameDuration;
 			
 			currentFrame = startFrame;
+			
+			isStopped = false;
+			this.shouldStop = shouldStop;
 		}
 		
 		public function Update(dt:Number):void {
+			if (isStopped) return;
+			
 			currentInterval += dt;
 			
 			while (currentInterval > playbackSpeed) {
@@ -48,7 +56,13 @@ package GameCom.Helpers
 				currentFrame++;
 				
 				if (currentFrame == endFrame) {
-					currentFrame = startFrame;
+					if(!shouldStop) {
+						currentFrame = startFrame;
+					} else {
+						currentFrame--;
+						isStopped = true;
+						currentInterval = 0;
+					}
 				}
 			}
 			
@@ -57,6 +71,10 @@ package GameCom.Helpers
 			this.graphics.beginBitmapFill(frames[currentFrame], null, false);
 			this.graphics.drawRect(0, 0, sizeX, sizeY);
 			this.graphics.endFill();
+		}
+		
+		public function IsStopped():Boolean {
+			return isStopped;
 		}
 		
 	}

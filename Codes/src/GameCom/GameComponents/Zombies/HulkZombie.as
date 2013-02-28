@@ -1,5 +1,4 @@
-package GameCom.GameComponents.Zombies 
-{
+package GameCom.GameComponents.Zombies {
 	import Box2D.Collision.Shapes.b2CircleShape;
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
@@ -8,10 +7,9 @@ package GameCom.GameComponents.Zombies
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.Sprite;
 	import flash.geom.Point;
-	import flash.utils.getTimer;
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
-	import GameCom.Managers.BGManager;
+	import GameCom.Helpers.MathHelper;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.LootManager;
@@ -20,34 +18,24 @@ package GameCom.GameComponents.Zombies
 	 * ...
 	 * @author Paul
 	 */
-	public class SlowZombie extends Sprite implements IZombie {
-		private const BASE_HP:Number = 1.0;
-		private const SCORE:int = 1;
+	public class HulkZombie extends Sprite implements IZombie {
+		private const BASE_HP:Number = 20.0;
+		private const SCORE:int = 20;
+		
+		private const RADIUS:Number = 1.3;
 		
 		private var body:b2Body;
 		
-		private var myHP:Number = 1;
+		private var isDead:Boolean = false;
+		private var myHP:Number = 3.0;
 		private var mySpeed:Number = 1;
-		private var dead:Boolean = false;
 		
 		private var animation:AnimatedSprite = new AnimatedSprite();
-		private var eyes:AnimatedSprite = new AnimatedSprite();
 		
-		public function SlowZombie() {
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_0.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_1.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_2.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_3.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_4.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_5.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_6.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_7.png"));
-			animation.ChangePlayback(0.1, 0, 8);
+		public function HulkZombie() {
+			animation.AddFrame(ThemeManager.Get("Zombies/Hulk Zombie/0_0.png"));
+			animation.ChangePlayback(0.1, 0, 1);
 			this.addChild(animation);
-			
-			eyes.AddFrame(ThemeManager.Get("Zombies/Base Zombie/Eyes.png"));
-			eyes.ChangePlayback(0.5, 0, 1);
-			eyes.Update(0);
 			
 			//Create the defintion
 			var bodyDef:b2BodyDef = new b2BodyDef();
@@ -60,9 +48,9 @@ package GameCom.GameComponents.Zombies
 			var fixture:b2FixtureDef = new b2FixtureDef();
 			fixture.restitution = 0;
 			fixture.friction = 0;
-			fixture.shape = new b2CircleShape(0.6);
+			fixture.shape = new b2CircleShape(RADIUS);
 			fixture.userData = this;
-			fixture.density = 0.1;
+			fixture.density = 100.0;
 			fixture.filter.categoryBits = Global.PHYSICS_CATEGORY_ZOMBIES;
 			fixture.filter.maskBits = 0xffff & ~Global.PHYSICS_CATEGORY_WALLS;
 			fixture.userData = this;
@@ -80,23 +68,10 @@ package GameCom.GameComponents.Zombies
 			
 			animation.Update(dt);
 			animation.x = -animation.width / 2;
-			animation.y = -animation.height + 0.6 * Global.PHYSICS_SCALE;
-			
-			eyes.Update(dt);
-			eyes.x = this.x - eyes.width / 2;
-			eyes.y = this.y - eyes.height + 0.6 * Global.PHYSICS_SCALE;
+			animation.y = -animation.height + RADIUS * Global.PHYSICS_SCALE;
 			
 			var xSpeed:Number = 0;
 			var ySpeed:Number = mySpeed + WorldManager.WorldScrollSpeed;
-			
-			//TODO: Logic to set X and Y speeds
-			if (this.y < WorldManager.WorldTargetY+100 && WorldManager.WorldTargetY - this.y < stage.stageHeight / 3) {
-				if (this.x < WorldManager.WorldTargetX) {
-					xSpeed = 1.25;
-				} else {
-					xSpeed = -1.25;
-				}
-			}
 			
 			if(dt > 0) body.SetLinearVelocity(new b2Vec2(xSpeed, ySpeed));
 		}
@@ -104,21 +79,24 @@ package GameCom.GameComponents.Zombies
 		public function Hit(damage:Number):void {
 			myHP -= damage;
 			
-			if (myHP <= 0 && !dead) {
-				dead = true;
+			if (myHP <= 0 && !isDead) {
+				isDead = true;
 				GUIManager.I.UpdateScore(SCORE);
 				
 				if(Math.random() < 0.001) {
 					LootManager.I.SpawnLootAt(body.GetPosition());
 				}
-				
-				BGManager.I.AddBloodSplatter(this.x, this.y);
 			}
 		}
 		
 		public function HitPlayer(player:PlayerCharacter):Number {
-			Hit(myHP);
-			return 1;
+			if(player.x < this.x) {
+				player.body.ApplyImpulse(new b2Vec2(-mySpeed/2, mySpeed/2), player.body.GetWorldCenter());
+			} else {
+				player.body.ApplyImpulse(new b2Vec2(mySpeed/2, mySpeed/2), player.body.GetWorldCenter());
+			}
+			
+			return 2;
 		}
 		
 		public function Move(newPosition:b2Vec2):void {
@@ -139,23 +117,20 @@ package GameCom.GameComponents.Zombies
 		
 		public function AddToScene(position:b2Vec2, layer0:Sprite, layer1:Sprite):void {
 			layer0.addChild(this);
-			layer1.addChild(eyes);
 			
 			body.SetActive(true);
 			body.SetPosition(position);
 			
 			myHP = BASE_HP;
-			dead = false;
+			isDead = false;
 			
-			mySpeed = Math.random() + 1.5;
+			mySpeed = 4.0 + Math.random()*2;
 			
 			Update(0);
 		}
 		
 		public function RemoveFromScene(layer0:Sprite, layer1:Sprite):void {
 			layer0.removeChild(this);
-			layer1.removeChild(eyes);
-			
 			body.SetActive(false);
 		}
 		

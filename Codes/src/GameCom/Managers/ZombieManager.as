@@ -3,7 +3,9 @@ package GameCom.Managers {
 	import flash.display.Sprite;
 	import flash.utils.getTimer;
 	import GameCom.GameComponents.Zombies.ExplosionZombie;
+	import GameCom.GameComponents.Zombies.HulkZombie;
 	import GameCom.GameComponents.Zombies.IZombie;
+	import GameCom.GameComponents.Zombies.LimpZombie;
 	import GameCom.GameComponents.Zombies.SlowZombie;
 	/**
 	 * ...
@@ -33,7 +35,10 @@ package GameCom.Managers {
 				UnusedZombies.push(new SlowZombie());
 			}
 			
+			ZombieTypes.push(SlowZombie);
+			ZombieTypes.push(LimpZombie);
 			ZombieTypes.push(ExplosionZombie);
+			ZombieTypes.push(HulkZombie);
 			
 			surviveTime = getTimer();
 		}
@@ -43,31 +48,31 @@ package GameCom.Managers {
 			var i:int;
 			
 			if (totalTime > 6000 && previousUpdate < 6000) {
-				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
+				for (i = 0; i < 9; i++) UnusedZombies.push(new LimpZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 12000 && previousUpdate < 12000) {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 18000 && previousUpdate < 18000) {
-				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
+				for (i = 0; i < 9; i++) UnusedZombies.push(new LimpZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 24000 && previousUpdate < 24000) {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 30000 && previousUpdate < 30000) {
-				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
+				for (i = 0; i < 9; i++) UnusedZombies.push(new LimpZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 36000 && previousUpdate < 36000) {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 42000 && previousUpdate < 42000) {
-				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
+				for (i = 0; i < 9; i++) UnusedZombies.push(new LimpZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 48000 && previousUpdate < 48000) {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 54000 && previousUpdate < 54000) {
-				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
+				for (i = 0; i < 9; i++) UnusedZombies.push(new LimpZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 60000 && previousUpdate < 60000) {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());

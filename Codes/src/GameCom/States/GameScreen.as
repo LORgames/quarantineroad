@@ -196,8 +196,7 @@ package GameCom.States {
 			this.graphics.endFill();
 			
 			if (EndOfTheLine_TerminateASAP) {
-				Cleanup();
-				SystemMain.instance.StateTo(new EndGame());
+				simulating = false;
 			}
 		}
 		
@@ -213,7 +212,9 @@ package GameCom.States {
 		}
 		
 		private function Pause():void {
-			simulating = !simulating;
+			if(!EndOfTheLine_TerminateASAP) {
+				simulating = !simulating;
+			}
 		}
 		
 		private function Cleanup():void {
@@ -243,6 +244,9 @@ package GameCom.States {
 			trace(stage.stageHeight);
 			WorldManager.WorldY = -stage.stageHeight / 2;
 			WorldManager.UpdateWalls(stage.stage);
+			
+			worldSpr.x = Math.floor(WorldManager.WorldX + stage.stageWidth / 2);
+			worldSpr.y = Math.floor(WorldManager.WorldY + stage.stageHeight / 2);
 			
 			var m:Matrix = new Matrix();
 			m.createGradientBox(Global.SCREEN_WIDTH, stage.stageHeight / 3, Math.PI / 2, -Global.SCREEN_WIDTH / 2, 0);

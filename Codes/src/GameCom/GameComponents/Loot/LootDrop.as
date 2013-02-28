@@ -12,15 +12,10 @@ package GameCom.GameComponents.Loot
 	 * @author Paul
 	 */
 	public class LootDrop extends Sprite {
-		public const WEAPON:int = 0;
-		public const EQUIPMENT:int = 1;
-		
 		private var body:b2Body;
 		private var speed:b2Vec2 = new b2Vec2();
 		
-		private var type:int = WEAPON;
-		private var cls:Class;
-		
+		private var type:int = 0;
 		private var pickedUP:Boolean = false;
 		
 		public function LootDrop() {
@@ -39,11 +34,10 @@ package GameCom.GameComponents.Loot
 			this.y = body.GetPosition().y * Global.PHYSICS_SCALE;
 		}
 		
-		public function Reassign(location:b2Vec2, cls:Class, type:int = WEAPON):void {
+		public function Reassign(location:b2Vec2, type:int):void {
 			body.SetPosition(location);
 			body.SetActive(true);
 			
-			this.cls = cls;
 			this.type = type;
 			
 			pickedUP = false;
@@ -59,8 +53,7 @@ package GameCom.GameComponents.Loot
 		}
 		
 		public function Pickup(equipment:Vector.<IWeapon>):void {
-			equipment.push(new cls());
-			
+			equipment[type].AddAmmo();
 			pickedUP = true;
 		}
 	}

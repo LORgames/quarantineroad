@@ -20,7 +20,7 @@ package GameCom.GameComponents.Zombies
 	 * ...
 	 * @author Paul
 	 */
-	public class SlowZombie extends Sprite implements IZombie {
+	public class LimpZombie extends Sprite implements IZombie {
 		private const BASE_HP:Number = 1.0;
 		private const SCORE:int = 1;
 		
@@ -33,7 +33,11 @@ package GameCom.GameComponents.Zombies
 		private var animation:AnimatedSprite = new AnimatedSprite();
 		private var eyes:AnimatedSprite = new AnimatedSprite();
 		
-		public function SlowZombie() {
+		private var currentTime:Number = 0;
+		private var moveTime:Number = 0.4;
+		private var stopped:Boolean = true;
+		
+		public function LimpZombie() {
 			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_0.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_1.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_2.png"));
@@ -86,15 +90,22 @@ package GameCom.GameComponents.Zombies
 			eyes.x = this.x - eyes.width / 2;
 			eyes.y = this.y - eyes.height + 0.6 * Global.PHYSICS_SCALE;
 			
+			currentTime += dt;
+			
+			if (currentTime > moveTime) {
+				stopped = !stopped;
+				currentTime -= moveTime;
+			}
+			
 			var xSpeed:Number = 0;
-			var ySpeed:Number = mySpeed + WorldManager.WorldScrollSpeed;
+			var ySpeed:Number = (stopped?0:mySpeed) + WorldManager.WorldScrollSpeed;
 			
 			//TODO: Logic to set X and Y speeds
 			if (this.y < WorldManager.WorldTargetY+100 && WorldManager.WorldTargetY - this.y < stage.stageHeight / 3) {
 				if (this.x < WorldManager.WorldTargetX) {
-					xSpeed = 1.25;
+					xSpeed = (stopped?0:2);
 				} else {
-					xSpeed = -1.25;
+					xSpeed = (stopped?0:-2);
 				}
 			}
 			

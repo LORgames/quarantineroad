@@ -8,6 +8,7 @@ package GameCom.GameComponents.Zombies
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.MathHelper;
 	import GameCom.Managers.ExplosionManager;
@@ -29,12 +30,6 @@ package GameCom.GameComponents.Zombies
 		private var mySpeed:Number = 1;
 		
 		private var animation:AnimatedSprite = new AnimatedSprite();
-		private var eyes:AnimatedSprite = new AnimatedSprite();
-		
-		private var quotes:Array = ["My mama's so fat she still calls me bite size :'("];
-		
-		private var showQuote:int = -1;
-		private var quoteTimeout:Number = 10;
 		
 		public function ExplosionZombie() {
 			animation.AddFrame(ThemeManager.Get("Zombies/ExplosionZombie/0_0.png"));
@@ -47,10 +42,6 @@ package GameCom.GameComponents.Zombies
 			animation.AddFrame(ThemeManager.Get("Zombies/ExplosionZombie/0_7.png"));
 			animation.ChangePlayback(0.1, 0, 8);
 			this.addChild(animation);
-			
-			eyes.AddFrame(ThemeManager.Get("Zombies/Base Zombie/Eyes.png"));
-			eyes.ChangePlayback(0.5, 0, 1);
-			eyes.Update(0);
 			
 			//Create the defintion
 			var bodyDef:b2BodyDef = new b2BodyDef();
@@ -85,14 +76,9 @@ package GameCom.GameComponents.Zombies
 			animation.x = -animation.width / 2;
 			animation.y = -animation.height + 0.9 * Global.PHYSICS_SCALE;
 			
-			//eyes.Update(dt);
-			//eyes.x = this.x - eyes.width / 2;
-			//eyes.y = this.y - eyes.height + 0.9 * Global.PHYSICS_SCALE;
-			
 			var xSpeed:Number = 0;
 			var ySpeed:Number = mySpeed + WorldManager.WorldScrollSpeed;
 			
-			//TODO: Logic to set X and Y speeds
 			if (this.y < WorldManager.WorldTargetY+100 && WorldManager.WorldTargetY - this.y < stage.stageHeight / 3) {
 				if (this.x < WorldManager.WorldTargetX) {
 					xSpeed = 1;
@@ -107,19 +93,6 @@ package GameCom.GameComponents.Zombies
 			}
 			
 			if(dt > 0) body.SetLinearVelocity(new b2Vec2(xSpeed, ySpeed));
-			
-			quoteTimeout -= dt;
-			if (quoteTimeout < 0 && showQuote == -1) {
-				showQuote = Math.random() * quotes.length;
-				quoteTimeout = 5;
-			} else if (quoteTimeout < 0) {
-				showQuote = -1;
-				quoteTimeout = Math.random() * 25 + 5;
-			}
-			
-			if (showQuote != -1) {
-				//GUIManager.I.ShowTooltipAt(body.GetPosition().x * Global.PHYSICS_SCALE, body.GetPosition().y * Global.PHYSICS_SCALE - animation.height, quotes[showQuote]);
-			}
 		}
 		
 		public function Hit(damage:Number):void {
@@ -131,6 +104,11 @@ package GameCom.GameComponents.Zombies
 				
 				GUIManager.I.UpdateScore(SCORE);
 			}
+		}
+		
+		public function HitPlayer(player:PlayerCharacter):Number {
+			Hit(myHP);
+			return 1;
 		}
 		
 		public function Move(newPosition:b2Vec2):void {
@@ -152,11 +130,7 @@ package GameCom.GameComponents.Zombies
 		public function AddToScene(position:b2Vec2, layer0:Sprite, layer1:Sprite):void {
 			layer0.addChild(this);
 			
-			showQuote = -1;
-			quoteTimeout = Math.random() * 30;
-			
 			body.SetActive(true);
-			
 			body.SetPosition(position);
 			
 			myHP = BASE_HP;
