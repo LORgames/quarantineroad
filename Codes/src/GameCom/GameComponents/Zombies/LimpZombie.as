@@ -38,14 +38,14 @@ package GameCom.GameComponents.Zombies
 		private var stopped:Boolean = true;
 		
 		public function LimpZombie() {
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_0.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_1.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_2.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_3.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_4.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_5.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_6.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie/0_7.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Limp Zombie/0_0.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Limp Zombie/0_1.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Limp Zombie/0_2.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Limp Zombie/0_3.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Limp Zombie/0_4.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Limp Zombie/0_5.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Limp Zombie/0_6.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Limp Zombie/0_7.png"));
 			animation.ChangePlayback(0.1, 0, 8);
 			this.addChild(animation);
 			

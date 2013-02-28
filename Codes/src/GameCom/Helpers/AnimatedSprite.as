@@ -41,6 +41,7 @@ package GameCom.Helpers
 			endFrame = newStartFrame + frameDuration;
 			
 			currentFrame = startFrame;
+			currentInterval = 0;
 			
 			isStopped = false;
 			this.shouldStop = shouldStop;
@@ -51,7 +52,7 @@ package GameCom.Helpers
 			
 			currentInterval += dt;
 			
-			while (currentInterval > playbackSpeed) {
+			while (currentInterval >= playbackSpeed) {
 				currentInterval -= playbackSpeed;
 				currentFrame++;
 				

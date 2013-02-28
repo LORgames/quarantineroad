@@ -31,16 +31,11 @@ package GameCom.GameComponents.Decorations
 		}
 		
 		public function Reset():void {
-			animation.ChangePlayback(0.1, 0, 7);
-			endTime = getTimer() + 700;
+			animation.ChangePlayback(0.1, 0, 7, true);
 		}
 		
 		public function IsFinished():Boolean {
-			if (getTimer() > endTime) {
-				return true;
-			}
-			
-			return false;
+			return animation.IsStopped();
 		}
 		
 		public function Update(dt:Number):void {

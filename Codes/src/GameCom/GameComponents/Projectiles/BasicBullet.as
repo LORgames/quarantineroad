@@ -6,8 +6,10 @@ package GameCom.GameComponents.Projectiles {
 	import flash.display.Sprite;
 	import GameCom.GameComponents.IHit;
 	import GameCom.GameComponents.Weapons.IWeapon;
+	import GameCom.GameComponents.Zombies.ExplosionZombie;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
+	import GameCom.Managers.ExplosionManager;
 	/**
 	 * ...
 	 * @author Paul
@@ -49,6 +51,8 @@ package GameCom.GameComponents.Projectiles {
 				if (contact.contact.IsTouching() && contact.other.GetUserData() is IHit && !owner.IsSafe(contact.other)) {
 					(contact.other.GetUserData() as IHit).Hit(DAMAGE);
 					hitSomething = true;
+					ExplosionManager.I.RequestBloodAt(this.x, animation.y+this.y);
+					break;
 				}
 				
 				contact = contact.next;

@@ -14,13 +14,8 @@ package GameCom.GameComponents.Decorations
 		
 		public function BloodExplosion() {
 			animation = new AnimatedSprite();
-			animation.AddFrame(ThemeManager.Get("Explosion/exp00.png"));
-			animation.AddFrame(ThemeManager.Get("Explosion/exp01.png"));
-			animation.AddFrame(ThemeManager.Get("Explosion/exp02.png"));
-			animation.AddFrame(ThemeManager.Get("Explosion/exp03.png"));
-			animation.AddFrame(ThemeManager.Get("Explosion/exp04.png"));
-			animation.AddFrame(ThemeManager.Get("Explosion/exp05.png"));
-			animation.AddFrame(ThemeManager.Get("Explosion/exp06.png"));
+			animation.AddFrame(ThemeManager.Get("Blood/BloodSplatter0_0.png"));
+			animation.AddFrame(ThemeManager.Get("Blood/BloodSplatter0_1.png"));
 			
 			animation.Update(0);
 			this.addChild(animation);
@@ -30,7 +25,7 @@ package GameCom.GameComponents.Decorations
 		}
 		
 		public function Reset():void {
-			animation.ChangePlayback(0.1, 0, 7);
+			animation.ChangePlayback(0.1, 0, 2, true);
 		}
 		
 		public function IsFinished():Boolean {
