@@ -8,20 +8,17 @@ Soldier Zombie
 
 
 ----------------------WEAPONS
-* Sniper Rifle (Piercing shot)
-* SMG (Split shot)
-* Shotgun (Short range fan)
-* Rocket Launcher (Directed AOE)
-* Homing Missile (Burst)
-Gattling Gun (MANY bullets)
-Flamethrower (Short range AOE)
-Laser ()
-Chain Lightning Gun
-Freeze Gun
-Land mine (Drop at feet)
+0 [Basic] Pistols* => Dual Pistols*
+1 [BulletCount] SMG* => Gattling Gun
+2 [Fan Shot] Shotgun* => Flame thrower
+3 [Piercing] Sniper Rifle => Laser
+4 [AOE] Rocket Launcher
+5 [Special0] Chain Lightning Gun
+6 [Special1] Freeze Gun
+9 [Thrown] Grenade
 
 -------------------OTHER DROPS
-Laser Sight
 Motorbike
 Body Armour
 Allies
+Health Pickup

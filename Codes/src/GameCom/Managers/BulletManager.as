@@ -2,6 +2,7 @@ package GameCom.Managers
 {
 	import Box2D.Common.Math.b2Vec2;
 	import flash.display.Sprite;
+	import flash.events.DRMCustomProperties;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Projectiles.IBullet;
 	import GameCom.GameComponents.Weapons.IWeapon;
@@ -24,7 +25,7 @@ package GameCom.Managers
 			this.layer = layer;
 		}
 		
-		public function FireAt(location:b2Vec2, bulletType:Class, owner:IWeapon):void {
+		public function FireAt(location:b2Vec2, bulletType:Class, owner:IWeapon, angle:Number = 0, distance:Number = 0, damage:Number = 0):void {
 			var bulletUsed:IBullet;
 			
 			switch(bulletType){
@@ -48,7 +49,7 @@ package GameCom.Managers
 				bulletUsed = new bulletType();
 			}
 			
-			bulletUsed.SetLocationAndActivate(location, owner, layer);
+			bulletUsed.SetLocationAndActivate(location, owner, layer, angle, distance, damage);
 			UsedBullets.push(bulletUsed);
 		}
 		

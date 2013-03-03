@@ -38,6 +38,10 @@ package GameCom.Managers {
 			ZombieTypes.push(SlowZombie);
 			ZombieTypes.push(LimpZombie);
 			ZombieTypes.push(ExplosionZombie);
+			ZombieTypes.push(ExplosionZombie);
+			ZombieTypes.push(ExplosionZombie);
+			ZombieTypes.push(ExplosionZombie);
+			ZombieTypes.push(ExplosionZombie);
 			ZombieTypes.push(HulkZombie);
 			
 			surviveTime = getTimer();
@@ -46,6 +50,7 @@ package GameCom.Managers {
 		public function Update(dt:Number):void {
 			var totalTime:int = getTimer() - surviveTime;
 			var i:int;
+			var cls:Class;
 			
 			if (totalTime > 6000 && previousUpdate < 6000) {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new LimpZombie());
@@ -61,6 +66,10 @@ package GameCom.Managers {
 				previousUpdate = totalTime;
 			} else if (totalTime > 30000 && previousUpdate < 30000) {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new LimpZombie());
+				
+				cls = ZombieTypes[int(ZombieTypes.length * Math.random())];
+				UnusedZombies.push(new cls());
+				
 				previousUpdate = totalTime;
 			} else if (totalTime > 36000 && previousUpdate < 36000) {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
@@ -78,7 +87,7 @@ package GameCom.Managers {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 60000 && totalTime > previousUpdate + 5000) {
-				var cls:Class = ZombieTypes[int(ZombieTypes.length * Math.random())];
+				cls = ZombieTypes[int(ZombieTypes.length * Math.random())];
 				UnusedZombies.push(new cls());
 				previousUpdate = totalTime;
 			}

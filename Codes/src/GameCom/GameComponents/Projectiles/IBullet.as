@@ -14,7 +14,7 @@ package GameCom.GameComponents.Projectiles {
 		function Update(dt:Number):void;
 		
 		function ShouldRemove():Boolean;
-		function SetLocationAndActivate(newLocation:b2Vec2, newOwner:IWeapon, layer:Sprite):void;
+		function SetLocationAndActivate(newLocation:b2Vec2, newOwner:IWeapon, layer:Sprite, angle:Number = 0, distance:Number = 0, damage:Number = 0):void;
 		function Deactivate(layer:Sprite):void;
 	}
 

@@ -13,6 +13,8 @@ package GameCom.GameComponents
 	import GameCom.GameComponents.Loot.LootDrop;
 	import GameCom.GameComponents.Weapons.BasicGun;
 	import GameCom.GameComponents.Weapons.IWeapon;
+	import GameCom.GameComponents.Weapons.Shotgun;
+	import GameCom.GameComponents.Weapons.SMG;
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
@@ -32,6 +34,7 @@ package GameCom.GameComponents
 		private var MOVEMENT_SPEED:Number = 3.6;
 		
 		private var weapons:Vector.<IWeapon> = new Vector.<IWeapon>();
+		private var activeWeapon:int = 0;
 		
 		private var myHP:int = 10;
 		
@@ -52,7 +55,12 @@ package GameCom.GameComponents
 			body.SetLinearDamping(0.5);
 			
 			weapons.push(new BasicGun());
+			weapons.push(new SMG());
+			weapons.push(new Shotgun());
+			
 			weapons[0].AddSafe(body);
+			weapons[1].AddSafe(body);
+			weapons[2].AddSafe(body);
 			
 			startTime = getTimer();
 		}
@@ -71,9 +79,23 @@ package GameCom.GameComponents
 			animation.x = -animation.width / 2;
 			animation.y = -animation.height + 0.6 * Global.PHYSICS_SCALE;
 			
-			for (var i:int = 0; i < weapons.length; i++) {
-				weapons[i].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1 + body.GetPosition().y));
+			if (Keys.isKeyDown(Keyboard.NUMBER_1)) {
+				activeWeapon = 0;
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_2)) {
+				activeWeapon = 1;
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_3)) {
+				activeWeapon = 2;
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_4)) {
+				activeWeapon = 0;
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_5)) {
+				activeWeapon = 0;
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_6)) {
+				activeWeapon = 0;
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_7)) {
+				activeWeapon = 0;
 			}
+			
+			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1 + body.GetPosition().y));
 			
 			var xSpeed:Number = 0;
 			var ySpeed:Number = 0;
@@ -101,7 +123,6 @@ package GameCom.GameComponents
 			var contact:b2ContactEdge = body.GetContactList();
 			
 			while (contact != null) {
-				
 				if(contact.contact.IsTouching()) {
 					if (contact.other.GetUserData() is LootDrop) {
 						(contact.other.GetUserData() as LootDrop).Pickup(weapons);
