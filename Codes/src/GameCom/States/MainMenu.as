@@ -7,7 +7,6 @@ package GameCom.States {
 	import flash.text.TextFormat;
 	import flash.text.TextFieldAutoSize;
 	import GameCom.Helpers.AudioStore;
-	import GameCom.SystemComponents.SettingsPane;
 	import GameCom.SystemMain;
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -35,9 +34,7 @@ package GameCom.States {
 		
 		private var TextContainer:Sprite = new Sprite();
 		private var PlayText:TextField = new TextField();
-		private var WebsiteText:TextField = new TextField();
-		
-		private var settings:SettingsPane = new SettingsPane();
+		private var WebsiteText:Button = new Button("WEBSITE", 200, 20, 10, null, true);
 		
 		public function MainMenu() {
 			//Just make sure we're ready to do this...
@@ -47,10 +44,6 @@ package GameCom.States {
 		
 		public function Init(e:Event = null):void {
 			removeEventListener(Event.ADDED_TO_STAGE, Init);
-			
-			this.addChild(settings);
-			settings.x = 100;
-			settings.y = 200;
 			
 			//Start Menu
 			this.addChild(TextContainer);
@@ -64,14 +57,8 @@ package GameCom.States {
 			PlayText.addEventListener(MouseEvent.CLICK, PlayFunc, false, 0, true);
 			TextContainer.addChild(PlayText);
 			
-			WebsiteText.selectable = false;
-			WebsiteText.defaultTextFormat = new TextFormat("Verdana", 12, 0xFFFFFF);
-			WebsiteText.autoSize = TextFieldAutoSize.CENTER;
-			WebsiteText.text = "www.lorgames.com";
-			WebsiteText.addEventListener(MouseEvent.ROLL_OVER, MouseOverText);
-			WebsiteText.addEventListener(MouseEvent.ROLL_OUT, MouseOutText);
 			WebsiteText.addEventListener(MouseEvent.CLICK, WebsiteFunc, false, 0, true);
-			TextContainer.addChild(WebsiteText);
+			this.addChild(WebsiteText);
 			
 			this.stage.addEventListener(Event.RESIZE, Resized, false, 0, true);
 			Resized();
@@ -107,8 +94,9 @@ package GameCom.States {
 			
 			PlayText.x = -PlayText.width/2;
 			PlayText.y = 15;
-			WebsiteText.x = -WebsiteText.width / 2;
-			WebsiteText.y = PlayText.y + PlayText.height + 30;
+			
+			WebsiteText.x = (stage.stageWidth-WebsiteText.width) / 2;
+			WebsiteText.y = 5;
 		}
 		
 		public function MouseOverText(e:MouseEvent):void {

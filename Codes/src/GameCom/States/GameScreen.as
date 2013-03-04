@@ -252,6 +252,11 @@ package GameCom.States {
 			m.createGradientBox(Global.SCREEN_WIDTH, stage.stageHeight / 3, Math.PI / 2, -Global.SCREEN_WIDTH / 2, 0);
 			
 			eyeLayer.graphics.clear();
+			
+			eyeLayer.graphics.beginFill(0x231722, 0.8);
+			eyeLayer.graphics.drawRect( -Global.SCREEN_WIDTH / 2, -100, Global.SCREEN_WIDTH, 100);
+			eyeLayer.graphics.endFill();
+			
 			eyeLayer.graphics.beginGradientFill(GradientType.LINEAR, [0x231722, 0x231722], [0.8, 0.0], [0, 255], m);
 			eyeLayer.graphics.drawRect( -Global.SCREEN_WIDTH / 2, 0, Global.SCREEN_WIDTH, stage.stageHeight / 3);
 			eyeLayer.graphics.endFill();

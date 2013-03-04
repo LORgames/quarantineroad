@@ -3,6 +3,7 @@ package GameCom.GameComponents.Weapons {
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
+	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.Managers.BulletManager;
 	/**
@@ -58,6 +59,14 @@ package GameCom.GameComponents.Weapons {
 			}
 			
 			return false;
+		}
+		
+		public function GetIcon():BitmapData {
+			return ThemeManager.Get("WeaponIcons/Weapon2_shotgun.png");
+		}
+		
+		public function GetAmmo():String {
+			return "∞";
 		}
 		
 	}

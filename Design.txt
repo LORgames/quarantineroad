@@ -1,7 +1,7 @@
 -----------------ZOMBIE TYPES
-Slow
-Ranged Vomitting
-Exploding
+* Slow
+* Ranged Vomitting
+* Exploding
 Hands out of ground
 Running
 Soldier Zombie

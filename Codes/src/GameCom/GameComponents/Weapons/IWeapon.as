@@ -1,6 +1,7 @@
 package GameCom.GameComponents.Weapons {
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
+	import flash.display.BitmapData;
 	/**
 	 * ...
 	 * @author Paul
@@ -12,6 +13,9 @@ package GameCom.GameComponents.Weapons {
 		
 		function AddSafe(body:b2Body):void;
 		function IsSafe(fixture:b2Body):Boolean;
+		
+		function GetIcon():BitmapData;
+		function GetAmmo():String;
 	}
 	
 }

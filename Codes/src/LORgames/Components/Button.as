@@ -24,7 +24,8 @@ package LORgames.Components {
 			tf.autoSize = TextFieldAutoSize.LEFT;
 			tf.filters = filters;
 			this.tabEnabled = false;
-			this.addChild(tf);
+			
+			if (!invisible) this.addChild(tf);
 			
 			m_invis = invisible;
 			
