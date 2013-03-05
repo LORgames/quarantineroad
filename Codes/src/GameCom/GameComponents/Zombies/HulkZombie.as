@@ -37,7 +37,10 @@ package GameCom.GameComponents.Zombies {
 		
 		public function HulkZombie() {
 			animation.AddFrame(ThemeManager.Get("Zombies/Hulk Zombie/0_0.png"));
-			animation.ChangePlayback(0.1, 0, 1);
+			animation.AddFrame(ThemeManager.Get("Zombies/Hulk Zombie/0_1.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Hulk Zombie/0_2.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Hulk Zombie/0_3.png"));
+			animation.ChangePlayback(0.1, 0, 4);
 			this.addChild(animation);
 			
 			//Create the defintion

@@ -39,7 +39,7 @@ package GameCom.Managers {
 			this.layer1 = layer1;
 			
 			for (var i:int = 0; i < 1; i++) {
-				UnusedZombies.push(new ZombieHand());
+				UnusedZombies.push(new HulkZombie());
 			}
 			
 			ZombieTypes.push(SlowZombie);

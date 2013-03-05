@@ -18,7 +18,7 @@ package LORgames.Engine
 		private static var quickPlaying:Vector.<SoundChannel> = new Vector.<SoundChannel>();
 		
 		//Mute bool
-		private static var muted:Boolean = false;
+		private static var muted:Boolean = true;
 		
 		public static function GetMuted():Boolean {
 			return muted;
