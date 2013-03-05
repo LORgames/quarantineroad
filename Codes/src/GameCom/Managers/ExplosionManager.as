@@ -7,6 +7,7 @@ package GameCom.Managers
 	import GameCom.GameComponents.Decorations.BigExplosion;
 	import GameCom.GameComponents.Decorations.BloodExplosion;
 	import GameCom.GameComponents.Decorations.IExplosion;
+	import GameCom.GameComponents.Decorations.VomitPuddle;
 	import GameCom.Helpers.AudioStore;
 	import LORgames.Engine.AudioController;
 	/**
@@ -22,6 +23,9 @@ package GameCom.Managers
 		
 		private var playing_blood_effects:Vector.<BloodExplosion> = new Vector.<BloodExplosion>();
 		private var waiting_blood_effects:Vector.<BloodExplosion> = new Vector.<BloodExplosion>();
+		
+		private var playing_puddle_effects:Vector.<VomitPuddle> = new Vector.<VomitPuddle>();
+		private var waiting_puddle_effects:Vector.<VomitPuddle> = new Vector.<VomitPuddle>();
 		
 		private var layer:Sprite;
 		
@@ -72,6 +76,25 @@ package GameCom.Managers
 			playing_blood_effects.push(explosion);
 		}
 		
+		public function RequestVomitAt(p:Point):void {
+			if (waiting_puddle_effects.length == 0) {
+				var new_explosion:VomitPuddle = new VomitPuddle();
+				layer.addChild(new_explosion);
+				
+				waiting_puddle_effects.push(new_explosion);
+			}
+			
+			var explosion:VomitPuddle = waiting_puddle_effects.pop();
+			
+			explosion.visible = true;
+			
+			explosion.x = p.x;
+			explosion.y = p.y;
+			explosion.Reset();
+			
+			playing_puddle_effects.push(explosion);
+		}
+		
 		public function Update(dt:Number):void {
 			var explosion:MovieClip;
 			
@@ -95,6 +118,18 @@ package GameCom.Managers
 					var b:BloodExplosion = playing_blood_effects.splice(i, 1)[0];
 					b.visible = false;
 					waiting_blood_effects.push(b);
+					i--;
+				}
+			}
+			
+			for (i = 0; i < playing_puddle_effects.length; i++) {
+				playing_puddle_effects[i].Update(dt);
+				
+				if (playing_puddle_effects[i].IsFinished()) {
+					var c:VomitPuddle = playing_puddle_effects.splice(i, 1)[0];
+					c.visible = false;
+					c.Deactivate();
+					waiting_puddle_effects.push(c);
 					i--;
 				}
 			}

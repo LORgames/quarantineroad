@@ -7,6 +7,7 @@ package GameCom.Managers {
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.GameComponents.Zombies.LimpZombie;
 	import GameCom.GameComponents.Zombies.SlowZombie;
+	import GameCom.GameComponents.Zombies.ThrowUpZombie;
 	import GameCom.Helpers.AudioStore;
 	import LORgames.Engine.AudioController;
 	/**
@@ -34,7 +35,7 @@ package GameCom.Managers {
 			this.layer1 = layer1;
 			
 			for (var i:int = 0; i < 10; i++) {
-				UnusedZombies.push(new SlowZombie());
+				UnusedZombies.push(new ThrowUpZombie());
 			}
 			
 			ZombieTypes.push(SlowZombie);
