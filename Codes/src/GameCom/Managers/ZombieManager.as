@@ -2,12 +2,14 @@ package GameCom.Managers {
 	import Box2D.Common.Math.b2Vec2;
 	import flash.display.Sprite;
 	import flash.utils.getTimer;
+	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.GameComponents.Zombies.ExplosionZombie;
 	import GameCom.GameComponents.Zombies.HulkZombie;
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.GameComponents.Zombies.LimpZombie;
 	import GameCom.GameComponents.Zombies.SlowZombie;
 	import GameCom.GameComponents.Zombies.ThrowUpZombie;
+	import GameCom.GameComponents.Zombies.ZombieHand;
 	import GameCom.Helpers.AudioStore;
 	import LORgames.Engine.AudioController;
 	/**
@@ -19,6 +21,8 @@ package GameCom.Managers {
 		private var UnusedZombies:Vector.<IZombie> = new Vector.<IZombie>();
 		
 		private var ZombieTypes:Vector.<Class> = new Vector.<Class>();
+		
+		private var Players:Vector.<PlayerCharacter> = new Vector.<PlayerCharacter>();
 		
 		private const TOTAL_ZOMBIES_ONSCREEN:int = 100;
 		
@@ -34,8 +38,8 @@ package GameCom.Managers {
 			this.layer0 = layer0;
 			this.layer1 = layer1;
 			
-			for (var i:int = 0; i < 10; i++) {
-				UnusedZombies.push(new HulkZombie());
+			for (var i:int = 0; i < 1; i++) {
+				UnusedZombies.push(new ZombieHand());
 			}
 			
 			ZombieTypes.push(SlowZombie);
@@ -47,8 +51,13 @@ package GameCom.Managers {
 			ZombieTypes.push(HulkZombie);
 			ZombieTypes.push(HulkZombie);
 			ZombieTypes.push(ThrowUpZombie);
+			ZombieTypes.push(ZombieHand);
 			
 			surviveTime = getTimer();
+		}
+		
+		public function AddPlayer(plr:PlayerCharacter):void {
+			Players.push(plr);
 		}
 		
 		public function Update(dt:Number):void {
@@ -102,6 +111,10 @@ package GameCom.Managers {
 			
 			if (UsedZombies.length < TOTAL_ZOMBIES_ONSCREEN && UnusedZombies.length > 0 && spawnTimeout <= 0) {
 				var zombie:IZombie = UnusedZombies.splice(Math.random() * UnusedZombies.length, 1)[0];
+				
+				if (zombie is ZombieHand) {
+					(zombie as ZombieHand).SetPlayer(Players[int(Players.length*Math.random())]);
+				}
 				
 				zombie.AddToScene(new b2Vec2((Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.9, Math.random() * -20), layer0, layer1);
 				

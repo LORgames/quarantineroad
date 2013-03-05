@@ -36,7 +36,7 @@ package GameCom.Managers
 			this.layer1 = layer1;
 		}
 		
-		public function RequestExplosionAt(p:Point):void {
+		public function RequestExplosionAt(p:Point, damage:Number = 100):void {
 			if (waiting_explosions.length == 0) {
 				var new_explosion:BigExplosion = new BigExplosion();
 				layer.addChild(new_explosion);
@@ -54,13 +54,13 @@ package GameCom.Managers
 			
 			playing_explosions.push(explosion);
 			
-			WorldManager.Explode(new b2Vec2(p.x / Global.PHYSICS_SCALE, p.y / Global.PHYSICS_SCALE), 2.5, 100);
+			WorldManager.Explode(new b2Vec2(p.x / Global.PHYSICS_SCALE, p.y / Global.PHYSICS_SCALE), 2.5, damage);
 			
 			AudioController.PlaySound(AudioStore.Explode);
 		}
 		
 		public function RequestBloodAt(x:Number, y:Number):void {
-			if (waiting_explosions.length == 0) {
+			if (waiting_blood_effects.length == 0) {
 				var new_explosion:BloodExplosion = new BloodExplosion();
 				layer.addChild(new_explosion);
 				

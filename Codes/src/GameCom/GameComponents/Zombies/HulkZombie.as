@@ -23,6 +23,7 @@ package GameCom.GameComponents.Zombies {
 	public class HulkZombie extends Sprite implements IZombie {
 		private const BASE_HP:Number = 20.0;
 		private const SCORE:int = 20;
+		private const SCREENSHAKE_AMT:Number = 0.75;
 		
 		private const RADIUS:Number = 1.3;
 		
@@ -75,15 +76,15 @@ package GameCom.GameComponents.Zombies {
 			var xSpeed:Number = 0;
 			var ySpeed:Number = mySpeed + WorldManager.WorldScrollSpeed;
 			
-			var contact:b2ContactEdge = body.GetContactList();
+			/*var contact:b2ContactEdge = body.GetContactList();
 			
 			while (contact != null) {
-				if (contact.other.GetUserData() is IHit && !contact.other.GetUserData() is PlayerCharacter) {
+				if (contact.other.GetUserData() is IHit && !(contact.other.GetUserData() is PlayerCharacter)) {
 					(contact.other.GetUserData() as IHit).Hit(2000);
 				}
 				
 				contact = contact.next;
-			}
+			}*/
 			
 			if(dt > 0) body.SetLinearVelocity(new b2Vec2(xSpeed, ySpeed));
 		}
@@ -139,11 +140,15 @@ package GameCom.GameComponents.Zombies {
 			mySpeed = 4.0 + Math.random()*2;
 			
 			Update(0);
+			
+			WorldManager.WorldShake += SCREENSHAKE_AMT;
 		}
 		
 		public function RemoveFromScene(layer0:Sprite, layer1:Sprite):void {
 			layer0.removeChild(this);
 			body.SetActive(false);
+			
+			WorldManager.WorldShake -= SCREENSHAKE_AMT;
 		}
 		
 	}

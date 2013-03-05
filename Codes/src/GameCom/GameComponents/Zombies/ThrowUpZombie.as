@@ -150,7 +150,10 @@ package GameCom.GameComponents.Zombies
 			
 			throwupTime = Math.random() * 30;
 			
-			mySpeed = Math.random() + 0.5 + BASE_SPEED;
+			mySpeed = Math.random() * 0.5 + BASE_SPEED;
+			
+			stopped = false;
+			myState = WALKING;
 			
 			Update(0);
 		}

@@ -10,6 +10,7 @@ package GameCom.GameComponents
 	import flash.filters.GlowFilter;
 	import flash.ui.Keyboard;
 	import flash.utils.getTimer;
+	import GameCom.GameComponents.Decorations.Grenade;
 	import GameCom.GameComponents.Loot.LootDrop;
 	import GameCom.GameComponents.Weapons.BasicGun;
 	import GameCom.GameComponents.Weapons.IWeapon;
@@ -40,6 +41,8 @@ package GameCom.GameComponents
 		
 		private var time:int = -1;
 		private var startTime:int = 0;
+		
+		private var grenade:Grenade = new Grenade();
 		
 		private var immunityTime:int = 0;
 		private const IMMUNITY_TIME:int = 750;
@@ -93,6 +96,21 @@ package GameCom.GameComponents
 				activeWeapon = 0;
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_7)) {
 				activeWeapon = 0;
+			} else if (Keys.isKeyDown(Keyboard.SPACE)) {
+				if(grenade.IsFinished()) {
+					grenade.x = this.x;
+					grenade.y = this.y;
+					
+					grenade.Reset(this.body.GetLinearVelocity());
+					this.parent.addChild(grenade);
+				}
+			}
+			
+			if (!grenade.IsFinished()) {
+				grenade.Update(dt);
+			} else if (grenade.parent != null) {
+				this.parent.removeChild(grenade);
+				grenade.Deactivate();
 			}
 			
 			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1 + body.GetPosition().y));
@@ -101,9 +119,9 @@ package GameCom.GameComponents
 			var ySpeed:Number = 0;
 			
 			if (Keys.isKeyDown(Keyboard.W) || Keys.isKeyDown(Keyboard.UP)) {
-				ySpeed = -1;
+				ySpeed = -1.5;
 			} else if (Keys.isKeyDown(Keyboard.S) || Keys.isKeyDown(Keyboard.DOWN)) {
-				ySpeed = 1;
+				ySpeed = 0.75;
 			}
 			
 			if (Keys.isKeyDown(Keyboard.A) || Keys.isKeyDown(Keyboard.LEFT)) {
@@ -118,7 +136,7 @@ package GameCom.GameComponents
 				animation.filters = [];
 			}
 			
-			body.SetLinearVelocity(new b2Vec2(xSpeed * MOVEMENT_SPEED, ySpeed * MOVEMENT_SPEED));
+			body.SetLinearVelocity(new b2Vec2(xSpeed * MOVEMENT_SPEED, ySpeed * MOVEMENT_SPEED + WorldManager.WorldScrollSpeed));
 			
 			var contact:b2ContactEdge = body.GetContactList();
 			

@@ -27,6 +27,8 @@ package GameCom.Managers {
 		public static var WorldTargetX:Number = 0;
 		public static var WorldTargetY:Number = 0;
 		
+		public static var WorldShake:Number = 0;
+		
 		public static var WorldScrollSpeed:Number = 1; // 1m/s
 		
 		private static var roofBody:b2Body;
@@ -103,7 +105,7 @@ package GameCom.Managers {
 				b.ApplyForce(forceVec, b.GetWorldCenter());
 				
 				if (b.GetUserData() is IHit) {
-					(b.GetUserData() as IHit).Hit(1);
+					(b.GetUserData() as IHit).Hit(1*strength/100);
 				}
 			}
 		}

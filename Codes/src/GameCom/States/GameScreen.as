@@ -119,6 +119,8 @@ package GameCom.States {
 			new BulletManager(objectLayer);
 			
 			zombies = new ZombieManager(objectLayer, eyeLayer);
+			zombies.AddPlayer(player);
+			
 			loot = new LootManager(groundLayer);
 			
 			//player.Respawn();
@@ -162,8 +164,8 @@ package GameCom.States {
 				WorldManager.World.ClearForces();
 				
 				if(stage) {
-					worldSpr.x = Math.floor(WorldManager.WorldX + stage.stageWidth / 2);
-					worldSpr.y = Math.floor(WorldManager.WorldY + stage.stageHeight / 2);
+					worldSpr.x = Math.floor(WorldManager.WorldX + stage.stageWidth / 2) + (Math.random()-0.5)*WorldManager.WorldShake;
+					worldSpr.y = Math.floor(WorldManager.WorldY + stage.stageHeight / 2) + (Math.random()-0.5)*WorldManager.WorldShake;
 				}
 			}
 			

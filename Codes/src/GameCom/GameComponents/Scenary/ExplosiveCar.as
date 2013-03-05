@@ -74,8 +74,6 @@ package GameCom.GameComponents.Scenary
 		}
 		
 		public function Hit(damage:Number):void {
-			trace("carHit: " + damage);
-			
 			currentHP -= damage;
 			
 			if (currentHP <= 0) {
@@ -95,9 +93,9 @@ package GameCom.GameComponents.Scenary
 		}
 		
 		public function OutsideScene():Boolean {
-			if (currentHP <= 0) { 
+			if (!body.IsActive()) { 
 				return true;
-			} else if (body.GetPosition().y > stage.stageHeight / Global.PHYSICS_SCALE + 5) {
+			} else if (body.GetPosition().y > stage.stageHeight / Global.PHYSICS_SCALE + 2) {
 				return true;
 			}
 			
