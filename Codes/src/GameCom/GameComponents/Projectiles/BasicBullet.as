@@ -56,7 +56,7 @@ package GameCom.GameComponents.Projectiles {
 				if (contact.contact.IsTouching() && contact.other.GetUserData() is IHit && !owner.IsSafe(contact.other)) {
 					(contact.other.GetUserData() as IHit).Hit(damage);
 					hitSomething = true;
-					//ExplosionManager.I.RequestBloodAt(this.x, animation.y+this.y);
+					ExplosionManager.I.RequestBloodAt(this.x, animation.y+this.y);
 					break;
 				}
 				

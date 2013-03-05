@@ -31,8 +31,6 @@ package GameCom.States {
 		private var background:Bitmap;
 		private const buttonPadding:int = 10;
 		
-		private var TextContainer:Sprite = new Sprite();
-		
 		private var DisplayText:TextField = new TextField();
 		private var PercentageText:TextField = new TextField();
 		
@@ -50,19 +48,17 @@ package GameCom.States {
 			//Start Menu
 			this.addChild(background);
 			
-			this.addChild(TextContainer);
-			
 			PercentageText.selectable = false;
 			PercentageText.defaultTextFormat = new TextFormat("Verdana", 40, 0xFFFFFF);
 			PercentageText.autoSize = TextFieldAutoSize.CENTER;
 			PercentageText.text = "0.00%";
-			TextContainer.addChild(PercentageText);
+			this.addChild(PercentageText);
 			
 			DisplayText.selectable = false;
 			DisplayText.defaultTextFormat = new TextFormat("Verdana", 16, 0xFFFFFF);
 			DisplayText.autoSize = TextFieldAutoSize.CENTER;
 			DisplayText.text = "Preparing Assets...";
-			TextContainer.addChild(DisplayText);
+			this.addChild(DisplayText);
 			
 			this.stage.addEventListener(Event.RESIZE, Resized, false, 0, true);
 			Resized();
@@ -93,14 +89,11 @@ package GameCom.States {
 			background.x = (this.stage.stageWidth - background.width) / 2;
 			background.y = (this.stage.stageHeight - background.height) / 2;
 			
-			TextContainer.x = background.x + 448 + 261/2;
-			TextContainer.y = background.y + 241;
+			PercentageText.x = background.x + 330 - PercentageText.width / 2;
+			PercentageText.y = background.y + 510;
 			
-			PercentageText.x = -PercentageText.width / 2;
-			PercentageText.y = 65;
-			
-			DisplayText.x = -DisplayText.width / 2;
-			DisplayText.y = 50;
+			DisplayText.x = background.x + 230 - DisplayText.width / 2;
+			DisplayText.y = background.y + 415;
 		}
 		
 		public function UpdatePercentageLoaded(newPercent:String):void {

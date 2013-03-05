@@ -29,8 +29,6 @@ package {
         [Bindable]
         public static var Logo:Class;
 		
-		private var TextContainer:Sprite = new Sprite();
-		
 		private var DisplayText:TextField = new TextField();
 		private var PercentageText:TextField = new TextField();
 		
@@ -56,18 +54,16 @@ package {
 			loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioError);
 			
 			// Show the Loader
-			this.addChild(TextContainer);
-			
 			PercentageText.selectable = false;
 			PercentageText.defaultTextFormat = new TextFormat("Verdana", 40, 0xFFFFFF);
 			PercentageText.autoSize = TextFieldAutoSize.CENTER;
 			PercentageText.text = "0.00%";
-			TextContainer.addChild(PercentageText);
+			this.addChild(PercentageText);
 			
 			DisplayText.defaultTextFormat = new TextFormat("Verdana", 16, 0xFFFFFF);
 			DisplayText.autoSize = TextFieldAutoSize.CENTER;
 			DisplayText.selectable = false;
-			TextContainer.addChild(DisplayText);
+			this.addChild(DisplayText);
 			
 			isAdFinished = true;
 			//this.addChild(adContainer);
@@ -125,14 +121,11 @@ package {
 			this.graphics.drawRect((stage.stageWidth - bmp.width) / 2, (stage.stageHeight - bmp.height) / 2, bmp.width, bmp.height);
 			this.graphics.endFill();
 			
-			TextContainer.x = mat.tx + 448 + 261/2;
-			TextContainer.y = mat.ty + 241;
+			PercentageText.x = mat.tx + 330 - PercentageText.width / 2;
+			PercentageText.y = mat.ty + 510;
 			
-			PercentageText.x = -PercentageText.width / 2;
-			PercentageText.y = 65;
-			
-			DisplayText.x = -DisplayText.width / 2;
-			DisplayText.y = 50;
+			DisplayText.x = mat.tx + 230 - DisplayText.width / 2;
+			DisplayText.y = mat.ty + 415;
 		}
 		
 		private function loadingFinished():void {
@@ -154,9 +147,8 @@ package {
 			stage.removeEventListener(Event.RESIZE, resize);
 			
 			// Hide the loader
-			TextContainer.removeChild(DisplayText);
-			TextContainer.removeChild(PercentageText);
-			this.removeChild(TextContainer);
+			this.removeChild(DisplayText);
+			this.removeChild(PercentageText);
 			
 			this.graphics.clear();
 			startup();
