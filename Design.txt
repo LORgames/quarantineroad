@@ -10,11 +10,10 @@ Soldier Zombie
 ----------------------WEAPONS
 0 [Basic] Pistols* => Dual Pistols*
 1 [BulletCount] SMG* => Gattling Gun
-2 [Fan Shot] Shotgun* => Flame thrower
+2 [Fan Shot] Shotgun* => Combat Shotgun
 3 [Piercing] Sniper Rifle => Laser
 4 [AOE] Rocket Launcher
-5 [Special0] Chain Lightning Gun
-6 [Special1] Freeze Gun
+5 [Special] Chain Lightning Gun / freeze / fire
 9 [Thrown] Grenade
 
 -------------------OTHER DROPS
