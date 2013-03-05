@@ -5,7 +5,9 @@ package GameCom.GameComponents.Weapons {
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
+	import GameCom.Helpers.AudioStore;
 	import GameCom.Managers.BulletManager;
+	import LORgames.Engine.AudioController;
 	/**
 	 * ...
 	 * @author Paul
@@ -30,6 +32,9 @@ package GameCom.GameComponents.Weapons {
 			fireTime += dt;
 			
 			if (fireTime > FIRE_RATE) {
+				AudioController.PlaySound(AudioStore.GetShotgunFireSound());
+				AudioController.PlaySound(AudioStore.ShotgunReload);
+				
 				fireTime -= FIRE_RATE;
 				BulletManager.I.FireAt(location, BasicBullet, this,-3*Math.PI/10, RANGE, DAMAGE);
 				BulletManager.I.FireAt(location, BasicBullet, this,-2*Math.PI/10, RANGE, DAMAGE);

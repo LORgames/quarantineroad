@@ -7,6 +7,8 @@ package GameCom.Managers {
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.GameComponents.Zombies.LimpZombie;
 	import GameCom.GameComponents.Zombies.SlowZombie;
+	import GameCom.Helpers.AudioStore;
+	import LORgames.Engine.AudioController;
 	/**
 	 * ...
 	 * @author Paul
@@ -51,6 +53,10 @@ package GameCom.Managers {
 			var totalTime:int = getTimer() - surviveTime;
 			var i:int;
 			var cls:Class;
+			
+			if (Math.random() < 0.025) {
+				AudioController.PlaySound(AudioStore.GetZombieSound());
+			}
 			
 			if (totalTime > 6000 && previousUpdate < 6000) {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new LimpZombie());
