@@ -35,7 +35,7 @@ package GameCom.Managers {
 			this.layer1 = layer1;
 			
 			for (var i:int = 0; i < 10; i++) {
-				UnusedZombies.push(new ThrowUpZombie());
+				UnusedZombies.push(new HulkZombie());
 			}
 			
 			ZombieTypes.push(SlowZombie);
@@ -44,8 +44,9 @@ package GameCom.Managers {
 			ZombieTypes.push(ExplosionZombie);
 			ZombieTypes.push(ExplosionZombie);
 			ZombieTypes.push(ExplosionZombie);
-			ZombieTypes.push(ExplosionZombie);
 			ZombieTypes.push(HulkZombie);
+			ZombieTypes.push(HulkZombie);
+			ZombieTypes.push(ThrowUpZombie);
 			
 			surviveTime = getTimer();
 		}

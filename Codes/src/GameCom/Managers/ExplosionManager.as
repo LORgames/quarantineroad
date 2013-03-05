@@ -28,10 +28,12 @@ package GameCom.Managers
 		private var waiting_puddle_effects:Vector.<VomitPuddle> = new Vector.<VomitPuddle>();
 		
 		private var layer:Sprite;
+		private var layer1:Sprite;
 		
-		public function ExplosionManager(layer:Sprite):void {
+		public function ExplosionManager(layer:Sprite, layer1:Sprite):void {
 			I = this;
 			this.layer = layer;
+			this.layer1 = layer1;
 		}
 		
 		public function RequestExplosionAt(p:Point):void {
@@ -79,7 +81,7 @@ package GameCom.Managers
 		public function RequestVomitAt(p:Point):void {
 			if (waiting_puddle_effects.length == 0) {
 				var new_explosion:VomitPuddle = new VomitPuddle();
-				layer.addChild(new_explosion);
+				layer1.addChild(new_explosion);
 				
 				waiting_puddle_effects.push(new_explosion);
 			}

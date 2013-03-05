@@ -20,7 +20,7 @@ package GameCom.GameComponents.Scenary
 	public class ExplosiveCar extends Sprite implements IZombie {
 		
 		private var art:AnimatedSprite = new AnimatedSprite();
-		private var currentHP:int = 30;
+		private var currentHP:int = -1;
 		
 		private var body:b2Body;
 		
@@ -74,6 +74,8 @@ package GameCom.GameComponents.Scenary
 		}
 		
 		public function Hit(damage:Number):void {
+			trace("carHit: " + damage);
+			
 			currentHP -= damage;
 			
 			if (currentHP <= 0) {

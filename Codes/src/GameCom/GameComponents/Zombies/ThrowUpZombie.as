@@ -11,6 +11,7 @@ package GameCom.GameComponents.Zombies
 	import flash.utils.getTimer;
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
+	import GameCom.Helpers.BodyHelper;
 	import GameCom.Managers.BGManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
@@ -24,6 +25,7 @@ package GameCom.GameComponents.Zombies
 		private const BASE_HP:Number = 1.0;
 		private const BASE_SPEED:Number = 0.5;
 		private const SCORE:int = 1;
+		private const RADIUS:Number = 0.9;
 		
 		private const WALKING:int = 0;
 		private const THROWING_UP:int = 1;
@@ -61,28 +63,7 @@ package GameCom.GameComponents.Zombies
 			this.addChild(animation);
 			
 			//Create the defintion
-			var bodyDef:b2BodyDef = new b2BodyDef();
-			bodyDef.type = b2Body.b2_dynamicBody;
-			bodyDef.userData = this;
-			bodyDef.allowSleep = false;
-			bodyDef.position = new b2Vec2(0, -100 / Global.PHYSICS_SCALE);
-			bodyDef.userData = this;
-			
-			var fixture:b2FixtureDef = new b2FixtureDef();
-			fixture.restitution = 0;
-			fixture.friction = 0;
-			fixture.shape = new b2CircleShape(0.6);
-			fixture.userData = this;
-			fixture.density = 0.1;
-			fixture.filter.categoryBits = Global.PHYSICS_CATEGORY_ZOMBIES;
-			fixture.filter.maskBits = 0xffff & ~Global.PHYSICS_CATEGORY_WALLS;
-			fixture.userData = this;
-			
-			body = WorldManager.World.CreateBody(bodyDef);
-			body.CreateFixture(fixture);
-			body.SetFixedRotation(true);
-			
-			body.SetLinearDamping(0.5);
+			body = BodyHelper.GetGenericCircle(RADIUS, Global.PHYSICS_CATEGORY_ZOMBIES, this, 0xFFFF & ~Global.PHYSICS_CATEGORY_WALLS & ~Global.PHYSICS_CATEGORY_VOMIT);
 		}
 		
 		public function Update(dt:Number):void {
@@ -91,7 +72,7 @@ package GameCom.GameComponents.Zombies
 			
 			animation.Update(dt);
 			animation.x = -animation.width / 2;
-			animation.y = -animation.height + 0.6 * Global.PHYSICS_SCALE;
+			animation.y = -animation.height + RADIUS * Global.PHYSICS_SCALE;
 			
 			throwupTime -= dt;
 			
@@ -146,10 +127,6 @@ package GameCom.GameComponents.Zombies
 			return 1;
 		}
 		
-		public function Move(newPosition:b2Vec2):void {
-			
-		}
-		
 		public function OutsideScene():Boolean {
 			if (myHP <= 0) {
 				return true;
@@ -171,9 +148,9 @@ package GameCom.GameComponents.Zombies
 			myHP = BASE_HP;
 			dead = false;
 			
-			throwupTime = Math.random() * 3 + 2;
+			throwupTime = Math.random() * 30;
 			
-			mySpeed = Math.random() + 1.5;
+			mySpeed = Math.random() + 0.5 + BASE_SPEED;
 			
 			Update(0);
 		}

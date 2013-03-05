@@ -113,7 +113,7 @@ package GameCom.States {
 			gui = new GUIManager(Pause, MockUpdate);
 			this.addChild(gui);
 			
-			explosionManager = new ExplosionManager(eyeLayer);
+			explosionManager = new ExplosionManager(eyeLayer, groundLayer);
 			
 			scenicManager = new ScenicManager(objectLayer);
 			new BulletManager(objectLayer);

@@ -16,11 +16,13 @@ package  {
 		public static const SCREEN_WIDTH:int = 438;
 		public static const DRAW_PHYSICS_ALWAYS:Boolean = false;
 		
+		public static const PHYSICS_CATEGORY_DEFAULT:int = 1;
 		public static const PHYSICS_CATEGORY_WALLS:int = 2;
 		public static const PHYSICS_CATEGORY_PLAYER:int = 4;
 		public static const PHYSICS_CATEGORY_ZOMBIES:int = 8;
 		public static const PHYSICS_CATEGORY_LOOT:int = 16;
 		public static const PHYSICS_CATEGORY_BULLETS:int = 32;
+		public static const PHYSICS_CATEGORY_VOMIT:int = 64;
 		
 		//Seconds between steps
 		public static const TIME_STEP:Number = 1.0 / 30.0;

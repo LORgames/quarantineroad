@@ -5,8 +5,10 @@ package GameCom.GameComponents.Zombies {
 	import Box2D.Dynamics.b2BodyDef;
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
+	import Box2D.Dynamics.Contacts.b2ContactEdge;
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	import GameCom.GameComponents.IHit;
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.MathHelper;
@@ -52,7 +54,7 @@ package GameCom.GameComponents.Zombies {
 			fixture.userData = this;
 			fixture.density = 100.0;
 			fixture.filter.categoryBits = Global.PHYSICS_CATEGORY_ZOMBIES;
-			fixture.filter.maskBits = 0xffff & ~Global.PHYSICS_CATEGORY_WALLS;
+			fixture.filter.maskBits = 0xffff & ~Global.PHYSICS_CATEGORY_WALLS & ~Global.PHYSICS_CATEGORY_VOMIT;
 			fixture.userData = this;
 			
 			body = WorldManager.World.CreateBody(bodyDef);
@@ -72,6 +74,16 @@ package GameCom.GameComponents.Zombies {
 			
 			var xSpeed:Number = 0;
 			var ySpeed:Number = mySpeed + WorldManager.WorldScrollSpeed;
+			
+			var contact:b2ContactEdge = body.GetContactList();
+			
+			while (contact != null) {
+				if (contact.other.GetUserData() is IHit && !contact.other.GetUserData() is PlayerCharacter) {
+					(contact.other.GetUserData() as IHit).Hit(2000);
+				}
+				
+				contact = contact.next;
+			}
 			
 			if(dt > 0) body.SetLinearVelocity(new b2Vec2(xSpeed, ySpeed));
 		}
