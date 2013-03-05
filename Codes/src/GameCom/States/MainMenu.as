@@ -29,11 +29,7 @@ package GameCom.States {
 		//Buttons and stuff?
 		private var background:Bitmap;
 		
-		private const totalButtons:int = 1;
-		private const buttonPadding:int = 10;
-		
-		private var TextContainer:Sprite = new Sprite();
-		private var PlayText:TextField = new TextField();
+		private var PlayText:Button = new Button("START", 195, 45, 10, null, true);
 		private var WebsiteText:Button = new Button("WEBSITE", 200, 20, 10, null, true);
 		
 		public function MainMenu() {
@@ -46,16 +42,8 @@ package GameCom.States {
 			removeEventListener(Event.ADDED_TO_STAGE, Init);
 			
 			//Start Menu
-			this.addChild(TextContainer);
-			
-			PlayText.selectable = false;
-			PlayText.defaultTextFormat = new TextFormat("Verdana", 36, 0xFFFFFF);
-			PlayText.autoSize = TextFieldAutoSize.CENTER;
-			PlayText.text = "Play";
-			PlayText.addEventListener(MouseEvent.ROLL_OVER, MouseOverText);
-			PlayText.addEventListener(MouseEvent.ROLL_OUT, MouseOutText);
 			PlayText.addEventListener(MouseEvent.CLICK, PlayFunc, false, 0, true);
-			TextContainer.addChild(PlayText);
+			this.addChild(PlayText);
 			
 			WebsiteText.addEventListener(MouseEvent.CLICK, WebsiteFunc, false, 0, true);
 			this.addChild(WebsiteText);
@@ -89,14 +77,11 @@ package GameCom.States {
 			this.graphics.drawRect((stage.stageWidth - bmp.width) / 2, (stage.stageHeight - bmp.height) / 2, bmp.width, bmp.height);
 			this.graphics.endFill();
 			
-			TextContainer.x = mat.tx + 448 + 261/2;
-			TextContainer.y = mat.ty + 241;
-			
-			PlayText.x = -PlayText.width/2;
-			PlayText.y = 15;
+			PlayText.x = mat.tx + 20;
+			PlayText.y = mat.ty + 400;
 			
 			WebsiteText.x = (stage.stageWidth-WebsiteText.width) / 2;
-			WebsiteText.y = 5;
+			WebsiteText.y = mat.ty + 5;
 		}
 		
 		public function MouseOverText(e:MouseEvent):void {

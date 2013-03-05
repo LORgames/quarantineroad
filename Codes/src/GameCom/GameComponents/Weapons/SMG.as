@@ -29,6 +29,7 @@ package GameCom.GameComponents.Weapons {
 			if (fireTime > FIRE_RATE) {
 				fireTime -= FIRE_RATE;
 				BulletManager.I.FireAt(location, BasicBullet, this, (Math.random()-0.5), 5);
+				BulletManager.I.FireAt(location, BasicBullet, this, (Math.random()-0.5), 5);
 			}
 		}
 		

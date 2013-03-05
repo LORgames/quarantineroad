@@ -70,6 +70,7 @@ package GameCom.GameComponents.Zombies
 			body = WorldManager.World.CreateBody(bodyDef);
 			body.CreateFixture(fixture);
 			body.SetFixedRotation(true);
+			body.SetActive(false);
 			
 			body.SetLinearDamping(0.5);
 		}

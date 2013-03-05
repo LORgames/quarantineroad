@@ -39,9 +39,6 @@ package GameCom.Managers {
 		
 		private var ScoreValue:int = 0;
 		
-		private var tooltips:Vector.<Tooltip> = new Vector.<Tooltip>();
-		private var currentFrameTooltipIndex:int = 0;
-		
 		private var MuteButton:Button = new Button("Mute", 20, 20, 6);
 		
 		private var Pause:Function;
@@ -70,11 +67,6 @@ package GameCom.Managers {
 		public function Update() : void {
 			if (stage == null) return;
 			
-			for (var i:int = currentFrameTooltipIndex; i < tooltips.length; i++) {
-				tooltips[i].visible = false;
-			}
-			
-			currentFrameTooltipIndex = 0;
 		}
 		
 		public function UpdateScore(score:int):void {
@@ -83,20 +75,6 @@ package GameCom.Managers {
 			
 			Score.x = (stage.stageWidth - Score.width) / 2;
 			Score.y = 30;
-		}
-		
-		public function ShowTooltipAt(worldX:int, worldY:int, message:String):void {
-			if (tooltips.length == currentFrameTooltipIndex) {
-				tooltips.push(new Tooltip("", Tooltip.UP, 25, 200, 0.85));
-				Overlay.addChild(tooltips[currentFrameTooltipIndex]);
-			}
-			
-			tooltips[currentFrameTooltipIndex].visible = true;
-			tooltips[currentFrameTooltipIndex].SetText(message);
-			tooltips[currentFrameTooltipIndex].x = worldX + WorldManager.WorldX + stage.stageWidth / 2;
-			tooltips[currentFrameTooltipIndex].y = worldY + WorldManager.WorldY + stage.stageHeight / 2;
-			
-			currentFrameTooltipIndex++;
 		}
 		
 		private function MuteClicked(me:MouseEvent):void {

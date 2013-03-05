@@ -24,6 +24,7 @@ package GameCom.States {
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.LootManager;
+	import GameCom.Managers.ScenicManager;
 	import GameCom.Managers.WorldManager;
 	import GameCom.Managers.ZombieManager;
 	import GameCom.SystemMain;
@@ -55,6 +56,7 @@ package GameCom.States {
 		
 		private var bgManager:BGManager;
 		private var explosionManager:ExplosionManager;
+		private var scenicManager:ScenicManager;
 		private var zombies:ZombieManager;
 		private var loot:LootManager;
 		
@@ -113,6 +115,7 @@ package GameCom.States {
 			
 			explosionManager = new ExplosionManager(eyeLayer);
 			
+			scenicManager = new ScenicManager(objectLayer);
 			new BulletManager(objectLayer);
 			
 			zombies = new ZombieManager(objectLayer, eyeLayer);
@@ -152,6 +155,7 @@ package GameCom.States {
 				
 				BulletManager.I.Update(Global.TIME_STEP);
 				explosionManager.Update(Global.TIME_STEP);
+				scenicManager.Update(Global.TIME_STEP);
 				
 				//Update the world
 				WorldManager.World.Step(Global.TIME_STEP, Global.VELOCITY_ITERATIONS, Global.POSITION_ITERATIONS);

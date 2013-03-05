@@ -135,6 +135,10 @@ public class b2Vec2
 	{
 		return b2Math.IsValid(x) && b2Math.IsValid(y);
 	}
+	
+	public function toString():String {
+		return "[b2vec2 " + x + "x" + y + "]";
+	}
 
 	public var x:Number;
 	public var y:Number;
