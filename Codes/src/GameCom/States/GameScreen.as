@@ -85,6 +85,7 @@ package GameCom.States {
 		
 		private function Init(e:* = null):void {
 			EndOfTheLine_TerminateASAP = false;
+			WorldManager.CleanupDynamics();
 			
 			removeEventListener(Event.ADDED_TO_STAGE, Init);
 			

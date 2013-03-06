@@ -46,8 +46,6 @@ package GameCom.GameComponents.Weapons {
 				fried = new Vector.<IZombie>();
 				WorldManager.World.QueryShape(QueryZombie, new b2CircleShape(5), new b2Transform(location, new b2Mat22()));
 				
-				trace("LIGHTNING ZIP ZIP ZAAAAPPPP " + fried.length + " zombies fried.");
-				
 				//LIGHTNING
 				var points:Vector.<Point> = new Vector.<Point>();
 				points.push(new Point(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE));

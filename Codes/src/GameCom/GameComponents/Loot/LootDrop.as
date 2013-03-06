@@ -32,11 +32,9 @@ package GameCom.GameComponents.Loot
 			this.y = body.GetPosition().y * Global.PHYSICS_SCALE;
 		}
 		
-		public function Reassign(location:b2Vec2, type:int):void {
+		public function Reassign(location:b2Vec2):void {
 			body.SetPosition(location);
 			body.SetActive(true);
-			
-			this.type = type;
 			
 			pickedUP = false;
 		}

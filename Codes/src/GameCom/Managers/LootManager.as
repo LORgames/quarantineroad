@@ -30,7 +30,7 @@ package GameCom.Managers {
 				loot = new LootDrop();
 			}
 			
-			loot.Reassign(location, 0);
+			loot.Reassign(location);
 			layer.addChild(loot);
 			
 			UsedLoot.push(loot);

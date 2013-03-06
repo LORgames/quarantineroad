@@ -56,7 +56,7 @@ package GameCom.Managers {
 			var body:b2Body = World.GetBodyList();
 			
 			while (body != null) {
-				if (body.GetType() == b2Body.b2_dynamicBody) {
+				if (body.GetType() == b2Body.b2_dynamicBody || body.GetType() == b2Body.b2_kinematicBody) {
 					World.DestroyBody(body);
 				}
 				
