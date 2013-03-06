@@ -19,7 +19,7 @@ package GameCom.GameComponents.Loot
 		private var pickedUP:Boolean = false;
 		
 		public function LootDrop() {
-			body = BodyHelper.GetGenericCircle(0.25, Global.PHYSICS_CATEGORY_LOOT, this);
+			body = BodyHelper.GetGenericCircle(0.5, Global.PHYSICS_CATEGORY_LOOT, this);
 			body.GetFixtureList().SetSensor(true);
 			body.SetActive(false);
 		}
@@ -49,7 +49,7 @@ package GameCom.GameComponents.Loot
 		}
 		
 		public function Pickup(equipment:Vector.<IWeapon>):void {
-			
+			pickedUP = true;
 		}
 	}
 

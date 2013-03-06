@@ -1,7 +1,9 @@
 package GameCom.Managers {
 	import Box2D.Common.Math.b2Vec2;
 	import flash.display.Sprite;
+	import GameCom.GameComponents.Loot.AmmoLootDrop;
 	import GameCom.GameComponents.Loot.LootDrop;
+	import GameCom.GameComponents.Loot.WeaponUpgradeLootDrop;
 	import GameCom.GameComponents.Weapons.BasicGun;
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.GameComponents.Zombies.SlowZombie;
@@ -12,8 +14,11 @@ package GameCom.Managers {
 	public class LootManager {
 		public static var I:LootManager;
 		
-		private var UsedLoot:Vector.<LootDrop> = new Vector.<LootDrop>();
-		private var UnusedLoot:Vector.<LootDrop> = new Vector.<LootDrop>();
+		private var UsedWeapons:Vector.<WeaponUpgradeLootDrop> = new Vector.<WeaponUpgradeLootDrop>();
+		private var UnusedWeapons:Vector.<WeaponUpgradeLootDrop> = new Vector.<WeaponUpgradeLootDrop>();
+		
+		private var UsedAmmo:Vector.<AmmoLootDrop> = new Vector.<AmmoLootDrop>();
+		private var UnusedAmmo:Vector.<AmmoLootDrop> = new Vector.<AmmoLootDrop>();
 		
 		private var layer:Sprite;
 		
@@ -22,33 +27,57 @@ package GameCom.Managers {
 			I = this;
 		}
 		
-		public function SpawnLootAt(location:b2Vec2, cls:Class = null):void {
-			var loot:LootDrop;
-			if(UnusedLoot.length > 0) {
-				loot = UnusedLoot.pop();
+		public function SpawnWeaponAt(location:b2Vec2):void {
+			var loot:WeaponUpgradeLootDrop;
+			if(UnusedWeapons.length > 0) {
+				loot = UnusedWeapons.pop();
 			} else {
-				loot = new LootDrop();
+				loot = new WeaponUpgradeLootDrop();
 			}
 			
 			loot.Reassign(location);
 			layer.addChild(loot);
 			
-			UsedLoot.push(loot);
+			UsedWeapons.push(loot);
+		}
+		
+		public function SpawnAmmoAt(location:b2Vec2):void {
+			var loot:AmmoLootDrop;
+			if(UnusedAmmo.length > 0) {
+				loot = UnusedAmmo.pop();
+			} else {
+				loot = new AmmoLootDrop();
+			}
+			
+			loot.Reassign(location);
+			layer.addChild(loot);
+			
+			UsedAmmo.push(loot);
 		}
 		
 		public function Update(dt:Number):void {
-			if (Math.random() < 0.00001) { //Very low chance to spawn random loot
-				SpawnLootAt(new b2Vec2((Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.9, Math.random() * -20));
+			var i:int;
+			
+			for (i = 0; i < UsedWeapons.length; i++) {
+				UsedWeapons[i].Update(dt);
+				
+				if (UsedWeapons[i].ShouldDeactivate()) {
+					UsedWeapons[i].Deactivate();
+					layer.removeChild(UsedWeapons[i]);
+					
+					UnusedWeapons.push(UsedWeapons.splice(i, 1)[0]);
+					i--;
+				}
 			}
 			
-			for (var i:int = 0; i < UsedLoot.length; i++) {
-				UsedLoot[i].Update(dt);
+			for (i = 0; i < UsedAmmo.length; i++) {
+				UsedAmmo[i].Update(dt);
 				
-				if (UsedLoot[i].ShouldDeactivate()) {
-					UsedLoot[i].Deactivate();
-					layer.removeChild(UsedLoot[i]);
+				if (UsedAmmo[i].ShouldDeactivate()) {
+					UsedAmmo[i].Deactivate();
+					layer.removeChild(UsedAmmo[i]);
 					
-					UnusedLoot.push(UsedLoot.splice(i, 1)[0]);
+					UnusedAmmo.push(UsedAmmo.splice(i, 1)[0]);
 					i--;
 				}
 			}

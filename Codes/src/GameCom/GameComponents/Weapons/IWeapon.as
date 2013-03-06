@@ -13,7 +13,9 @@ package GameCom.GameComponents.Weapons {
 		function Upgrade():void;
 		
 		function AddAmmo():void;
-		function GetAmmo():String;
+		function GetAmmoReadout():String;
+		
+		function Deactivate():void;
 		
 		function AddSafe(body:b2Body):void;
 		function IsSafe(fixture:b2Body):Boolean;

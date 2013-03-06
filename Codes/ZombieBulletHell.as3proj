@@ -6,7 +6,7 @@
     <movie input="" />
     <movie path="bin\ZombieBulletHell.swf" />
     <movie fps="30" />
-    <movie width="500" />
+    <movie width="438" />
     <movie height="600" />
     <movie version="10" />
     <movie minorVersion="1" />

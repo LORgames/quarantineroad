@@ -41,12 +41,16 @@ package GameCom.GameComponents.Weapons {
 			totalSMGs++;
 		}
 		
-		public function GetAmmo():String {
+		public function GetAmmoReadout():String {
 			return "∞";
 		}
 		
 		public function AddAmmo():void {
 			FIRE_RATE = 0.2;
+		}
+		
+		public function Deactivate():void {
+			
 		}
 		
 		public function IsEmpty():Boolean {

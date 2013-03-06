@@ -12,6 +12,7 @@ package GameCom.GameComponents.Scenary
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Managers.ExplosionManager;
+	import GameCom.Managers.LootManager;
 	import GameCom.Managers.WorldManager;
 	/**
 	 * ...
@@ -25,7 +26,12 @@ package GameCom.GameComponents.Scenary
 		private var isDead:Boolean = false;
 		private var body:b2Body;
 		
+		private static var IDN:int = 0;
+		private var myID:int = 0;
+		
 		public function ExplosiveCar(carid:int) {
+			myID = IDN++;
+			
 			art.AddFrame(ThemeManager.Get("ExplosiveCars/car0" + carid + "-00.png"));
 			art.AddFrame(ThemeManager.Get("ExplosiveCars/car0" + carid + "-01.png"));
 			art.AddFrame(ThemeManager.Get("ExplosiveCars/car0" + carid + "-02.png"));
@@ -63,9 +69,8 @@ package GameCom.GameComponents.Scenary
 			body = WorldManager.World.CreateBody(bodyDef);
 			body.CreateFixture(fixture);
 			body.SetFixedRotation(true);
-			//body.SetActive(false);
-			
 			body.SetLinearDamping(0.5);
+			body.SetActive(false);
 		}
 		
 		public function Update(dt:Number):void {
@@ -81,12 +86,13 @@ package GameCom.GameComponents.Scenary
 			if (currentHP <= 0) {
 				if(!isDead) {
 					isDead = true;
-					ExplosionManager.I.RequestExplosionAt(new Point(this.x, this.y));
+					ExplosionManager.I.RequestCarExplosionAt(new Point(this.x, this.y));
+					LootManager.I.SpawnWeaponAt(body.GetPosition());
 					this.body.SetActive(false);
 				}
-			} else if (currentHP <= 10) {
+			} else if (currentHP <= 5) {
 				art.ChangePlayback(0.1, 2, 1, true);
-			} else if (currentHP <= 20) {
+			} else if (currentHP <= 10) {
 				art.ChangePlayback(0.1, 1, 1, true);
 			}
 			
@@ -108,8 +114,13 @@ package GameCom.GameComponents.Scenary
 		}
 		
 		public function AddToScene(position:b2Vec2, layer0:Sprite, layer1:Sprite):void {
-			currentHP = 30;
+			currentHP = 15;
+			isDead = false;
 			body.SetPosition(position);
+			body.SetActive(true);
+			
+			art.ChangePlayback(0.1, 0, 1, true);
+			art.Update(0);
 		}
 		
 		public function RemoveFromScene(layer0:Sprite, layer1:Sprite):void {

@@ -111,7 +111,7 @@ package GameCom.GameComponents.Zombies
 				GUIManager.I.UpdateScore(SCORE);
 				
 				if(Math.random() < 0.001) {
-					LootManager.I.SpawnLootAt(body.GetPosition());
+					LootManager.I.SpawnAmmoAt(body.GetPosition());
 				}
 				
 				BGManager.I.AddBloodSplatter(this.x, this.y, true);

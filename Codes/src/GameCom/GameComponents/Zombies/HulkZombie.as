@@ -23,7 +23,7 @@ package GameCom.GameComponents.Zombies {
 	public class HulkZombie extends Sprite implements IZombie {
 		private const BASE_HP:Number = 20.0;
 		private const SCORE:int = 20;
-		private const SCREENSHAKE_AMT:Number = 0.75;
+		private const SCREENSHAKE_AMT:Number = 0.1;
 		
 		private const RADIUS:Number = 1.3;
 		
@@ -100,7 +100,7 @@ package GameCom.GameComponents.Zombies {
 				GUIManager.I.UpdateScore(SCORE);
 				
 				if(Math.random() < 0.001) {
-					LootManager.I.SpawnLootAt(body.GetPosition());
+					LootManager.I.SpawnAmmoAt(body.GetPosition());
 				}
 			}
 		}

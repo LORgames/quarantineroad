@@ -60,8 +60,13 @@ package GameCom.GameComponents
 		public function init(e:Event = null):void {
 			this.removeEventListener(Event.ADDED_TO_STAGE, init);
 			
-			animation.AddFrame(ThemeManager.Get("Player/0_0.png"));
-			animation.ChangePlayback(0.5, 0, 1);
+			animation.AddFrame(ThemeManager.Get("Player/Legs/0_0.png"));
+			animation.AddFrame(ThemeManager.Get("Player/Legs/0_1.png"));
+			animation.AddFrame(ThemeManager.Get("Player/Legs/0_2.png"));
+			animation.AddFrame(ThemeManager.Get("Player/Legs/0_3.png"));
+			animation.AddFrame(ThemeManager.Get("Player/Legs/0_4.png"));
+			animation.AddFrame(ThemeManager.Get("Player/Legs/0_5.png"));
+			animation.ChangePlayback(0.1, 0, 6);
 			
 			this.addChild(animation);
 			

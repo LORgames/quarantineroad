@@ -85,12 +85,14 @@ package GameCom.GameComponents.Zombies {
 					state = HITING;
 					animation.ChangePlayback(0.25, 9, 1, true);
 					body.SetActive(true);
+					body.GetFixtureList().SetSensor(false);
 					
 					WorldManager.WorldShake += SCREENSHAKE_AMT;
 				}
 			} else if (animation.IsStopped() && state == HITING) {
 				WorldManager.WorldShake -= SCREENSHAKE_AMT;
-				body.SetActive(false);
+				//body.SetActive(false);
+				body.GetFixtureList().SetSensor(true);
 				
 				state = HIDING;
 				animation.ChangePlayback(0.1, 10, 4, true);

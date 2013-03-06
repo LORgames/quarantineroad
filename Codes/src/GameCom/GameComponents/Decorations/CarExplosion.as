@@ -8,12 +8,12 @@ package GameCom.GameComponents.Decorations
 	 * ...
 	 * @author Paul
 	 */
-	public class BigExplosion extends Sprite implements IExplosion {
+	public class CarExplosion extends Sprite implements IExplosion {
 		
 		private var animation:AnimatedSprite;
 		private var endTime:int = 0;
 		
-		public function BigExplosion() {
+		public function CarExplosion() {
 			animation = new AnimatedSprite();
 			animation.AddFrame(ThemeManager.Get("Explosion/exp00.png"));
 			animation.AddFrame(ThemeManager.Get("Explosion/exp01.png"));

@@ -4,7 +4,7 @@ package GameCom.Managers
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.geom.Point;
-	import GameCom.GameComponents.Decorations.BigExplosion;
+	import GameCom.GameComponents.Decorations.CarExplosion;
 	import GameCom.GameComponents.Decorations.BloodExplosion;
 	import GameCom.GameComponents.Decorations.IExplosion;
 	import GameCom.GameComponents.Decorations.VomitPuddle;
@@ -18,8 +18,8 @@ package GameCom.Managers
 		
 		public static var I:ExplosionManager;
 		
-		private var playing_explosions:Vector.<BigExplosion> = new Vector.<BigExplosion>();
-		private var waiting_explosions:Vector.<BigExplosion> = new Vector.<BigExplosion>();
+		private var playing_car_explosions:Vector.<CarExplosion> = new Vector.<CarExplosion>();
+		private var waiting_car_explosions:Vector.<CarExplosion> = new Vector.<CarExplosion>();
 		
 		private var playing_blood_effects:Vector.<BloodExplosion> = new Vector.<BloodExplosion>();
 		private var waiting_blood_effects:Vector.<BloodExplosion> = new Vector.<BloodExplosion>();
@@ -36,15 +36,15 @@ package GameCom.Managers
 			this.layer1 = layer1;
 		}
 		
-		public function RequestExplosionAt(p:Point, damage:Number = 100):void {
-			if (waiting_explosions.length == 0) {
-				var new_explosion:BigExplosion = new BigExplosion();
+		public function RequestCarExplosionAt(p:Point, damage:Number = 100):void {
+			if (waiting_car_explosions.length == 0) {
+				var new_explosion:CarExplosion = new CarExplosion();
 				layer.addChild(new_explosion);
 				
-				waiting_explosions.push(new_explosion);
+				waiting_car_explosions.push(new_explosion);
 			}
 			
-			var explosion:BigExplosion = waiting_explosions.pop();
+			var explosion:CarExplosion = waiting_car_explosions.pop();
 			
 			explosion.visible = true;
 			
@@ -52,7 +52,7 @@ package GameCom.Managers
 			explosion.y = p.y;
 			explosion.Reset();
 			
-			playing_explosions.push(explosion);
+			playing_car_explosions.push(explosion);
 			
 			WorldManager.Explode(new b2Vec2(p.x / Global.PHYSICS_SCALE, p.y / Global.PHYSICS_SCALE), 2.5, damage);
 			
@@ -102,13 +102,13 @@ package GameCom.Managers
 			
 			var i:int;
 			
-			for (i = 0; i < playing_explosions.length; i++) {
-				playing_explosions[i].Update(dt);
+			for (i = 0; i < playing_car_explosions.length; i++) {
+				playing_car_explosions[i].Update(dt);
 				
-				if (playing_explosions[i].IsFinished()) {
-					var e:BigExplosion = playing_explosions.splice(i, 1)[0];
+				if (playing_car_explosions[i].IsFinished()) {
+					var e:CarExplosion = playing_car_explosions.splice(i, 1)[0];
 					e.visible = false;
-					waiting_explosions.push(e);
+					waiting_car_explosions.push(e);
 					i--;
 				}
 			}

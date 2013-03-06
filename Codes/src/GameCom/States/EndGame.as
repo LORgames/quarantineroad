@@ -5,6 +5,7 @@ package GameCom.States {
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFieldAutoSize;
+	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.AudioStore;
 	import GameCom.SystemMain;
 	import flash.display.Bitmap;
@@ -30,10 +31,12 @@ package GameCom.States {
 		//Buttons and stuff?
 		private var background:Sprite = new Sprite();
 		
-		private var RestartBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Start Button.png"), ThemeManager.Get("Interface/Restart Button Mouse Over.png"));
-		private var MenuBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Trophies Button.png"), ThemeManager.Get("Interface/Trophies Button Mouse Over.png"));
+		private var RestartBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Restart Button.png"), ThemeManager.Get("Interface/Restart Button Mouse Over.png"));
+		private var MenuBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Menu Button.png"), ThemeManager.Get("Interface/Menu Button Mouse Over.png"));
 		
 		private var adContainer:MovieClip = new MovieClip();
+		
+		private var handAnimation:AnimatedSprite = new AnimatedSprite();
 		
 		public function EndGame() {
 			//Just make sure we're ready to do this...
@@ -50,23 +53,50 @@ package GameCom.States {
 			background.graphics.drawRect(0, 0, Global.SCREEN_WIDTH, 600);
 			background.graphics.endFill();
 			
+			//The hand thing
+			this.addChild(handAnimation);
+			
 			//Start Menu
 			this.addChild(background);
 			
 			RestartBtn.addEventListener(MouseEvent.CLICK, RestartClicked, false, 0, true);
 			this.addChild(RestartBtn);
 			
+			MenuBtn.addEventListener(MouseEvent.CLICK, MenuClicked, false, 0, true);
+			this.addChild(MenuBtn);
+			
 			adContainer.x = 70; adContainer.y = 337;
 			this.addChild(adContainer);
-			MochiAd.showClickAwayAd( { clip:adContainer, id:"5a3aaf31eb62a90e" } );
+			
+			//TODO: ENABLE ADS
+			//MochiAd.showClickAwayAd( { clip:adContainer, id:"5a3aaf31eb62a90e" } );
 			//.showPreGameAd({clip:adContainer, id:"5a3aaf31eb62a90e", res:stage.stageWidth+"x"+stage.stageHeight, ad_finished:fAdFinished, no_progress_bar:true});
 			
+			handAnimation.AddFrame(ThemeManager.Get("Zombies/Hand/0_5.png"));
+			handAnimation.AddFrame(ThemeManager.Get("Zombies/Hand/0_6.png"));
+			handAnimation.AddFrame(ThemeManager.Get("Zombies/Hand/0_7.png"));
+			handAnimation.AddFrame(ThemeManager.Get("Zombies/Hand/0_8.png"));
+			handAnimation.AddFrame(ThemeManager.Get("Zombies/Hand/0_7.png"));
+			handAnimation.AddFrame(ThemeManager.Get("Zombies/Hand/0_6.png"));
+			handAnimation.ChangePlayback(0.1, 0, 6);
+			handAnimation.Update(0);
+			
+			this.stage.addEventListener(Event.ENTER_FRAME, Update, false, 0, true);
 			this.stage.addEventListener(Event.RESIZE, Resized, false, 0, true);
+			
 			Resized();
+		}
+		
+		public function Update(e:*):void {
+			handAnimation.Update(Global.TIME_STEP);
 		}
 		
 		public function RestartClicked(e:MouseEvent):void {
 			SystemMain.instance.StateTo(new GameScreen());
+		}
+		
+		public function MenuClicked(e:MouseEvent):void {
+			SystemMain.instance.StateTo(new MainMenu());
 		}
 		
 		public function Resized(e:Event = null):void {
@@ -77,6 +107,12 @@ package GameCom.States {
 			
 			RestartBtn.x = background.x + 18;
 			RestartBtn.y = background.y + 230;
+			
+			MenuBtn.x = background.x + 223;
+			MenuBtn.y = background.y + 230;
+			
+			handAnimation.x = (stage.stageWidth - handAnimation.width) / 2;
+			handAnimation.y = background.y + 35;
 		}
 		
 		public function MouseOverText(e:MouseEvent):void {

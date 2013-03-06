@@ -88,7 +88,7 @@ package GameCom.GameComponents.Zombies
 			}
 			
 			if (MathHelper.DistanceSquared(new Point(this.x, this.y), new Point(WorldManager.WorldTargetX, WorldManager.WorldTargetY)) < 5000) {
-				ExplosionManager.I.RequestExplosionAt(new Point(this.x, this.y));
+				ExplosionManager.I.RequestCarExplosionAt(new Point(this.x, this.y));
 				myHP = -1;
 			}
 			
@@ -100,7 +100,7 @@ package GameCom.GameComponents.Zombies
 			
 			if (myHP <= 0 && !isDead) {
 				isDead = true;
-				ExplosionManager.I.RequestExplosionAt(new Point(this.x, this.y));
+				ExplosionManager.I.RequestCarExplosionAt(new Point(this.x, this.y));
 				
 				GUIManager.I.UpdateScore(SCORE);
 			}
@@ -146,7 +146,7 @@ package GameCom.GameComponents.Zombies
 			layer0.removeChild(this);
 			
 			if(Math.random() < 0.001) {
-				LootManager.I.SpawnLootAt(body.GetPosition());
+				LootManager.I.SpawnAmmoAt(body.GetPosition());
 			}
 			
 			body.SetActive(false);

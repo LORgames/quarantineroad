@@ -73,8 +73,12 @@ package GameCom.GameComponents.Weapons {
 			
 		}
 		
-		public function GetAmmo():String {
+		public function GetAmmoReadout():String {
 			return "∞";
+		}
+		
+		public function Deactivate():void {
+			lightning.visible = false;
 		}
 		
 		public function AddAmmo():void {

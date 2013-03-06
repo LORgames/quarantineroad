@@ -55,7 +55,11 @@ package GameCom.GameComponents.Weapons {
 			
 		}
 		
-		public function GetAmmo():String {
+		public function Deactivate():void {
+			
+		}
+		
+		public function GetAmmoReadout():String {
 			return "∞";
 		}
 		

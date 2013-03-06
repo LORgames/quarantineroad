@@ -10,10 +10,10 @@ package GameCom.GameComponents.Loot {
 	 * ...
 	 * @author Paul
 	 */
-	public class WeaponUpgradeLootDrop extends LootDrop {
+	public class AmmoLootDrop extends LootDrop {
 		private var type:int = 0;
 		
-		public function WeaponUpgradeLootDrop() {
+		public function AmmoLootDrop() {
 			this.addChild(SpriteHelper.CreateCenteredBitmapData(ThemeManager.Get("Loot/EmptyLoot.png")));
 		}
 		
@@ -22,7 +22,7 @@ package GameCom.GameComponents.Loot {
 		}
 		
 		public override function Pickup(equipment:Vector.<IWeapon>):void {
-			equipment[type].Upgrade();
+			equipment[type].AddAmmo();
 			super.Pickup(equipment);
 		}
 	}
