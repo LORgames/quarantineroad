@@ -67,6 +67,8 @@ package GameCom.Managers {
 		public function Update() : void {
 			if (stage == null) return;
 			
+			Hearts.x = (stage.stageWidth - Hearts.width) / 2;
+			Hearts.y = 15;
 		}
 		
 		public function UpdateScore(score:int):void {

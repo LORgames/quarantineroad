@@ -26,14 +26,6 @@ package GameCom.SystemComponents {
 				this.graphics.drawRect((GAP + 12) * i, 0, 12, 10);
 				this.graphics.endFill();
 			}
-			
-			if (this.stage) {
-				this.x = (stage.stageWidth - this.width) / 2;
-				this.y = 15;
-			} else {
-				this.x = (800 - this.width) / 2;
-				this.y = 15;
-			}
 		}
 		
 	}

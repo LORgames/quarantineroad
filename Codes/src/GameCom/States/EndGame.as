@@ -19,7 +19,8 @@ package GameCom.States {
 	import LORgames.Engine.Storage;
 	import LORgames.Localization.Strings;
 	import mx.core.BitmapAsset;
-	
+	import mochi.as3.MochiAd;
+	import flash.display.MovieClip;
 	/**
 	 * ...
 	 * @author P. Fox
@@ -31,6 +32,8 @@ package GameCom.States {
 		
 		private var RestartBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Start Button.png"), ThemeManager.Get("Interface/Restart Button Mouse Over.png"));
 		private var MenuBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Trophies Button.png"), ThemeManager.Get("Interface/Trophies Button Mouse Over.png"));
+		
+		private var adContainer:MovieClip = new MovieClip();
 		
 		public function EndGame() {
 			//Just make sure we're ready to do this...
@@ -52,6 +55,11 @@ package GameCom.States {
 			
 			RestartBtn.addEventListener(MouseEvent.CLICK, RestartClicked, false, 0, true);
 			this.addChild(RestartBtn);
+			
+			adContainer.x = 70; adContainer.y = 337;
+			this.addChild(adContainer);
+			MochiAd.showClickAwayAd( { clip:adContainer, id:"5a3aaf31eb62a90e" } );
+			//.showPreGameAd({clip:adContainer, id:"5a3aaf31eb62a90e", res:stage.stageWidth+"x"+stage.stageHeight, ad_finished:fAdFinished, no_progress_bar:true});
 			
 			this.stage.addEventListener(Event.RESIZE, Resized, false, 0, true);
 			Resized();
