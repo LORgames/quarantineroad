@@ -244,7 +244,7 @@ package GameCom.States {
 			
 			simulating = false;
 			
-			sc.stop();
+			if(sc != null) sc.stop();
 			
 			this.removeEventListener(Event.ENTER_FRAME, Update);
 			stage.removeEventListener(Event.RESIZE, Resize);
