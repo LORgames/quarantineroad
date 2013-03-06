@@ -42,7 +42,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetAmmoReadout():String {
-			return "∞";
+			return "INF";
 		}
 		
 		public function AddAmmo():void {
@@ -70,7 +70,11 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			return ThemeManager.Get("WeaponIcons/Weapon1_smg.png");
+			if(totalSMGs == 2) {
+				return ThemeManager.Get("WeaponIcons/w03_dual_smg.png");
+			} else {
+				return ThemeManager.Get("WeaponIcons/w02_smg.png");
+			}
 		}
 		
 	}

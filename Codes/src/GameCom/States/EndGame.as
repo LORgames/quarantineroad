@@ -65,11 +65,11 @@ package GameCom.States {
 			MenuBtn.addEventListener(MouseEvent.CLICK, MenuClicked, false, 0, true);
 			this.addChild(MenuBtn);
 			
-			adContainer.x = 70; adContainer.y = 337;
+			adContainer.x = 72; adContainer.y = 335;
 			this.addChild(adContainer);
 			
 			//TODO: ENABLE ADS
-			//MochiAd.showClickAwayAd( { clip:adContainer, id:"5a3aaf31eb62a90e" } );
+			MochiAd.showClickAwayAd( { clip:adContainer, id:"5a3aaf31eb62a90e" } );
 			//.showPreGameAd({clip:adContainer, id:"5a3aaf31eb62a90e", res:stage.stageWidth+"x"+stage.stageHeight, ad_finished:fAdFinished, no_progress_bar:true});
 			
 			handAnimation.AddFrame(ThemeManager.Get("Zombies/Hand/0_5.png"));

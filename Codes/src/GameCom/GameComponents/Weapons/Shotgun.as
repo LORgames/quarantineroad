@@ -60,7 +60,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetAmmoReadout():String {
-			return "∞";
+			return "INF";
 		}
 		
 		public function IsEmpty():Boolean {
@@ -80,7 +80,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			return ThemeManager.Get("WeaponIcons/Weapon2_shotgun.png");
+			return ThemeManager.Get("WeaponIcons/w04_shotgun.png");
 		}
 		
 	}

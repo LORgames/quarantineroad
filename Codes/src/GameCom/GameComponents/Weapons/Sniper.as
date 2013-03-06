@@ -42,7 +42,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetAmmoReadout():String {
-			return "∞";
+			return "INF";
 		}
 		
 		public function Deactivate():void {
@@ -66,7 +66,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			return ThemeManager.Get("WeaponIcons/Weapon0_pistol.png");
+			return ThemeManager.Get("WeaponIcons/w06_sniper.png");
 		}
 		
 	}

@@ -12,10 +12,12 @@ package GameCom.Managers {
 	import flash.text.TextFormat;
 	import flash.ui.Keyboard;
 	import flash.utils.getTimer;
+	import GameCom.GameComponents.Weapons.IWeapon;
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.MathHelper;
 	import GameCom.Helpers.SpriteHelper;
 	import GameCom.SystemComponents.HeartBar;
+	import GameCom.SystemComponents.WeaponUIPanel;
 	import LORgames.Components.Button;
 	import LORgames.Components.Tooltip;
 	import LORgames.Engine.AudioController;
@@ -44,6 +46,8 @@ package GameCom.Managers {
 		private var Pause:Function;
 		private var MockUpdateWorld:Function;
 		
+		private var Weapons:Vector.<WeaponUIPanel> = new Vector.<WeaponUIPanel>();
+		
 		public function GUIManager(pauseLoopback:Function, mockupdate:Function) {
 			I = this;
 			
@@ -62,13 +66,16 @@ package GameCom.Managers {
 			this.addChild(MuteButton);
 			MuteButton.addEventListener(MouseEvent.CLICK, MuteClicked, false, 0, true);
 			MuteButton.alpha = 0;
+			
+			Resize();
 		}
 		
 		public function Update() : void {
 			if (stage == null) return;
 			
-			Hearts.x = (stage.stageWidth - Hearts.width) / 2;
-			Hearts.y = 15;
+			for (var i:int = 0; i < Weapons.length; i++) {
+				Weapons[i].Draw();
+			}
 		}
 		
 		public function UpdateScore(score:int):void {
@@ -81,6 +88,31 @@ package GameCom.Managers {
 		
 		private function MuteClicked(me:MouseEvent):void {
 			AudioController.SetMuted(!AudioController.GetMuted());
+		}
+		
+		public function AddWeapons(newWeps:Vector.<IWeapon>):void {
+			for (var i:int = 0; i < newWeps.length; i++) {
+				var wui:WeaponUIPanel = new WeaponUIPanel(newWeps[i]);
+				this.addChild(wui);
+				Weapons.push(wui);
+			}
+			
+			Update();
+		}
+		
+		public function Resize():void {
+			if (stage == null) return;
+			
+			Hearts.x = (stage.stageWidth - Hearts.width) / 2;
+			Hearts.y = 15;
+			
+			for (var i:int = 0; i < Weapons.length; i++) {
+				//Weapons[i].x = (stage.stageWidth - WeaponUIPanel.TILE_WIDTH * Weapons.length) / 2 + WeaponUIPanel.TILE_WIDTH * i;
+				//Weapons[i].y = stage.stageHeight - WeaponUIPanel.TILE_HEIGHT;
+				Weapons[i].x = stage.stageWidth - WeaponUIPanel.TILE_WIDTH;
+				Weapons[i].y = WeaponUIPanel.TILE_HEIGHT*i;
+				Weapons[i].FullRedraw();
+			}
 		}
 		
 	}

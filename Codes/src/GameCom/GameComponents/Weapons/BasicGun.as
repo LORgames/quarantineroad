@@ -42,7 +42,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetAmmoReadout():String {
-			return "∞";
+			return "INF";
 		}
 		
 		public function Deactivate():void {
@@ -66,7 +66,11 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			return ThemeManager.Get("WeaponIcons/Weapon0_pistol.png");
+			if(FIRE_RATE > 0.3) {
+				return ThemeManager.Get("WeaponIcons/w00_pistol.png");
+			} else {
+				return ThemeManager.Get("WeaponIcons/w01_dual_pistol.png");
+			}
 		}
 		
 	}

@@ -52,7 +52,11 @@ package GameCom.GameComponents
 		private var immunityTime:int = 0;
 		private const IMMUNITY_TIME:int = 750;
 		
-		public function PlayerCharacter() {
+		private var weaponsLayer:Sprite;
+		
+		public function PlayerCharacter(weaponsLayer:Sprite) {
+			this.weaponsLayer = weaponsLayer;
+			
 			if (this.stage) init();
 			else this.addEventListener(Event.ADDED_TO_STAGE, init);
 		}
@@ -78,10 +82,12 @@ package GameCom.GameComponents
 			weapons.push(new SMG(body));
 			weapons.push(new Shotgun(body));
 			weapons.push(new Sniper(body));
-			weapons.push(new LaserGun(body));
-			weapons.push(new ChainLightningGun(body, this.parent as Sprite));
+			weapons.push(new LaserGun(body, weaponsLayer));
+			weapons.push(new ChainLightningGun(body, weaponsLayer));
 			weapons.push(new Flamethrower(body));
 			weapons.push(new RocketLauncher(body));
+			
+			GUIManager.I.AddWeapons(weapons);
 			
 			startTime = getTimer();
 		}
@@ -100,24 +106,31 @@ package GameCom.GameComponents
 			animation.x = -animation.width / 2;
 			animation.y = -animation.height + 0.6 * Global.PHYSICS_SCALE;
 			
+			var newEquipedWeapon:int = activeWeapon;
+			
 			if (Keys.isKeyDown(Keyboard.NUMBER_1)) {
-				activeWeapon = 0; // Pistols
+				newEquipedWeapon = 0; // Pistols
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_2)) {
-				activeWeapon = 1; // SMGs
+				newEquipedWeapon = 1; // SMGs
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_3)) {
-				activeWeapon = 2; // Shotguns
+				newEquipedWeapon = 2; // Shotguns
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_4)) {
-				activeWeapon = 3; // Sniper
+				newEquipedWeapon = 3; // Sniper
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_5)) {
-				activeWeapon = 4; // Laser
+				newEquipedWeapon = 4; // Laser
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_6)) {
-				activeWeapon = 5; // Chain Lightning
+				newEquipedWeapon = 5; // Chain Lightning
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_7)) {
-				activeWeapon = 6; // Flamethrower
+				newEquipedWeapon = 6; // Flamethrower
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_8)) {
-				activeWeapon = 7; // Rocket Launcher
+				newEquipedWeapon = 7; // Rocket Launcher
 			} else if (Keys.isKeyDown(Keyboard.SPACE)) {
 				GrenadeHelper.I.SpawnGrenade(this.x, this.y);
+			}
+			
+			if (newEquipedWeapon != activeWeapon) {
+				weapons[activeWeapon].Deactivate();
+				activeWeapon = newEquipedWeapon;
 			}
 			
 			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1 + body.GetPosition().y));

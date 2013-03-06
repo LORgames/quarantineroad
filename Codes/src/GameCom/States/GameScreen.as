@@ -53,6 +53,7 @@ package GameCom.States {
 		
 		private var groundLayer:Sprite = new Sprite();
 		private var objectLayer:Sprite = new Sprite();
+		private var skyLayer:Sprite = new Sprite();
 		private var eyeLayer:Sprite = new Sprite();
 		
 		private var bgManager:BGManager;
@@ -102,19 +103,21 @@ package GameCom.States {
 			
 			worldSpr.addChild(groundLayer);
 			worldSpr.addChild(objectLayer);
+			worldSpr.addChild(skyLayer);
 			worldSpr.addChild(eyeLayer);
 			
 			worldSpr.addChild(WorldManager.debugDrawLayer);
 			
+			gui = new GUIManager(Pause, MockUpdate);
+			this.addChild(gui);
+			
 			// player is added to objectLayer
-			player = new PlayerCharacter();
+			player = new PlayerCharacter(skyLayer);
 			objectLayer.addChild(player);
 			
 			// bgManager (ground) is added to groundLayer
 			bgManager = new BGManager(groundLayer);
 			
-			gui = new GUIManager(Pause, MockUpdate);
-			this.addChild(gui);
 			
 			explosionManager = new ExplosionManager(eyeLayer, groundLayer);
 			
@@ -171,7 +174,8 @@ package GameCom.States {
 				WorldManager.World.ClearForces();
 				
 				if(stage) {
-					worldSpr.x = Math.floor(WorldManager.WorldX + stage.stageWidth / 2) + (Math.random()-0.5)*WorldManager.WorldShake;
+					//worldSpr.x = Math.floor(WorldManager.WorldX + stage.stageWidth / 2) + (Math.random()-0.5)*WorldManager.WorldShake;
+					worldSpr.x = Global.SCREEN_WIDTH/2 + (Math.random()-0.5)*WorldManager.WorldShake;
 					worldSpr.y = Math.floor(WorldManager.WorldY + stage.stageHeight / 2) + (Math.random()-0.5)*WorldManager.WorldShake;
 				}
 			}
@@ -281,6 +285,8 @@ package GameCom.States {
 			eyeLayer.graphics.beginGradientFill(GradientType.LINEAR, [0x333366, 0x333366], [0.333, 0], [0, 255], m, "reflect");
 			eyeLayer.graphics.drawRect( -Global.SCREEN_WIDTH / 2, 0, Global.SCREEN_WIDTH, stage.stageHeight);
 			eyeLayer.graphics.endFill();
+			
+			GUIManager.I.Resize();
 		}
 	}
 }

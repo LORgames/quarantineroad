@@ -38,6 +38,7 @@ package GameCom.GameComponents.Weapons {
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
 		public function Update(dt:Number, location:b2Vec2):void {
+			lightning.visible = true;
 			fireTime += dt;
 			
 			if (fireTime > FIRE_RATE) {
@@ -74,7 +75,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetAmmoReadout():String {
-			return "∞";
+			return "INF";
 		}
 		
 		public function Deactivate():void {
@@ -102,7 +103,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			return ThemeManager.Get("WeaponIcons/Weapon1_smg.png");
+			return ThemeManager.Get("WeaponIcons/w11_chain_lightning.png");
 		}
 		
 	}
