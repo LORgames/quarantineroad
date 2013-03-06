@@ -84,11 +84,13 @@ package GameCom.GameComponents.Zombies {
 				if (waitTime < 0) {
 					state = HITING;
 					animation.ChangePlayback(0.25, 9, 1, true);
+					body.SetActive(true);
 					
 					WorldManager.WorldShake += SCREENSHAKE_AMT;
 				}
 			} else if (animation.IsStopped() && state == HITING) {
 				WorldManager.WorldShake -= SCREENSHAKE_AMT;
+				body.SetActive(false);
 				
 				state = HIDING;
 				animation.ChangePlayback(0.1, 10, 4, true);
@@ -113,9 +115,6 @@ package GameCom.GameComponents.Zombies {
 		
 		public function AddToScene(position:b2Vec2, layer0:Sprite, layer1:Sprite):void {
 			layer0.addChild(this);
-			
-			body.SetActive(true);
-			//body.SetPosition(position);
 			
 			animation.ChangePlayback(0.1, 0, 10, true);
 			
