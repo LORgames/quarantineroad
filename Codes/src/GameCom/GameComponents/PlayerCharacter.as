@@ -58,6 +58,8 @@ package GameCom.GameComponents
 		}
 		
 		public function init(e:Event = null):void {
+			this.removeEventListener(Event.ADDED_TO_STAGE, init);
+			
 			animation.AddFrame(ThemeManager.Get("Player/0_0.png"));
 			animation.ChangePlayback(0.5, 0, 1);
 			
