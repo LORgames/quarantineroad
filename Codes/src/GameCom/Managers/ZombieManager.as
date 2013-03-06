@@ -31,6 +31,9 @@ package GameCom.Managers {
 		
 		private var spawnTimeout:int = 0;
 		
+		private const HAND_DELAY:Number = 15;
+		private var handTimeout:Number = 0;
+		
 		private var surviveTime:int = 0;
 		private var previousUpdate:int = 0;
 		
@@ -38,8 +41,8 @@ package GameCom.Managers {
 			this.layer0 = layer0;
 			this.layer1 = layer1;
 			
-			for (var i:int = 0; i < 1; i++) {
-				UnusedZombies.push(new HulkZombie());
+			for (var i:int = 0; i < 10; i++) {
+				UnusedZombies.push(new SlowZombie());
 			}
 			
 			ZombieTypes.push(SlowZombie);
@@ -67,6 +70,10 @@ package GameCom.Managers {
 			
 			if (Math.random() < 0.025) {
 				AudioController.PlaySound(AudioStore.GetZombieSound());
+			}
+			
+			if (handTimeout > 0) {
+				handTimeout -= dt;
 			}
 			
 			if (totalTime > 6000 && previousUpdate < 6000) {
@@ -109,11 +116,16 @@ package GameCom.Managers {
 				previousUpdate = totalTime;
 			}
 			
-			if (UsedZombies.length < TOTAL_ZOMBIES_ONSCREEN && UnusedZombies.length > 0 && spawnTimeout <= 0) {
+			while (UsedZombies.length < TOTAL_ZOMBIES_ONSCREEN && UnusedZombies.length > 0 && spawnTimeout <= 0) {
 				var zombie:IZombie = UnusedZombies.splice(Math.random() * UnusedZombies.length, 1)[0];
 				
 				if (zombie is ZombieHand) {
-					(zombie as ZombieHand).SetPlayer(Players[int(Players.length*Math.random())]);
+					if (handTimeout > 0) {
+						break;
+					}
+					
+					(zombie as ZombieHand).SetPlayer(Players[int(Players.length * Math.random())]);
+					handTimeout = HAND_DELAY;
 				}
 				
 				zombie.AddToScene(new b2Vec2((Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.9, Math.random() * -20), layer0, layer1);
@@ -121,6 +133,8 @@ package GameCom.Managers {
 				UsedZombies.push(zombie);
 				
 				spawnTimeout = 3;
+				
+				break;
 			}
 			
 			for (i = 0; i < UsedZombies.length; i++) {

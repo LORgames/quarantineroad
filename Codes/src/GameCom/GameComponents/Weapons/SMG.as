@@ -17,8 +17,10 @@ package GameCom.GameComponents.Weapons {
 		public var FIRE_RATE:Number = 0.1;
 		public var fireTime:Number = 0;
 		
-		public function SMG() {
-			
+		private var totalSMGs:int = 1;
+		
+		public function SMG(body:b2Body) {
+			AddSafe(body);
 		}
 		
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
@@ -28,9 +30,19 @@ package GameCom.GameComponents.Weapons {
 			
 			if (fireTime > FIRE_RATE) {
 				fireTime -= FIRE_RATE;
-				BulletManager.I.FireAt(location, BasicBullet, this, (Math.random()-0.5), 5);
-				BulletManager.I.FireAt(location, BasicBullet, this, (Math.random()-0.5), 5);
+				
+				for (var i:int = 0; i < totalSMGs; i++) {
+					BulletManager.I.FireAt(location, BasicBullet, this, (Math.random() - 0.5), 5);
+				}
 			}
+		}
+		
+		public function Upgrade():void {
+			totalSMGs++;
+		}
+		
+		public function GetAmmo():String {
+			return "∞";
 		}
 		
 		public function AddAmmo():void {
@@ -55,10 +67,6 @@ package GameCom.GameComponents.Weapons {
 		
 		public function GetIcon():BitmapData {
 			return ThemeManager.Get("WeaponIcons/Weapon1_smg.png");
-		}
-		
-		public function GetAmmo():String {
-			return "∞";
 		}
 		
 	}

@@ -22,6 +22,7 @@ package GameCom.GameComponents.Scenary
 		private var art:AnimatedSprite = new AnimatedSprite();
 		private var currentHP:int = -1;
 		
+		private var isDead:Boolean = false;
 		private var body:b2Body;
 		
 		public function ExplosiveCar(carid:int) {
@@ -39,11 +40,12 @@ package GameCom.GameComponents.Scenary
 			
 			//Create the defintion
 			var bodyDef:b2BodyDef = new b2BodyDef();
-			bodyDef.type = b2Body.b2_kinematicBody;
+			bodyDef.type = b2Body.b2_dynamicBody;
 			bodyDef.userData = this;
 			bodyDef.allowSleep = false;
 			bodyDef.position = new b2Vec2(5, -100 / Global.PHYSICS_SCALE);
 			bodyDef.userData = this;
+			bodyDef.fixedRotation = true;
 			
 			var shape:b2PolygonShape = new b2PolygonShape();
 			shape.SetAsOrientedBox(0.9, 2.4, new b2Vec2(), -0.9);
@@ -77,8 +79,11 @@ package GameCom.GameComponents.Scenary
 			currentHP -= damage;
 			
 			if (currentHP <= 0) {
-				ExplosionManager.I.RequestExplosionAt(new Point(this.x, this.y));
-				this.body.SetActive(false);
+				if(!isDead) {
+					isDead = true;
+					ExplosionManager.I.RequestExplosionAt(new Point(this.x, this.y));
+					this.body.SetActive(false);
+				}
 			} else if (currentHP <= 10) {
 				art.ChangePlayback(0.1, 2, 1, true);
 			} else if (currentHP <= 20) {
@@ -109,6 +114,10 @@ package GameCom.GameComponents.Scenary
 		
 		public function RemoveFromScene(layer0:Sprite, layer1:Sprite):void {
 			
+		}
+		
+		public function GetPixelLocation():Point {
+			return new Point(this.x, this.y);
 		}
 		
 	}

@@ -7,18 +7,25 @@ package GameCom.GameComponents
 	import Box2D.Dynamics.b2FixtureDef;
 	import Box2D.Dynamics.Contacts.b2ContactEdge;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.filters.GlowFilter;
 	import flash.ui.Keyboard;
 	import flash.utils.getTimer;
 	import GameCom.GameComponents.Decorations.Grenade;
 	import GameCom.GameComponents.Loot.LootDrop;
 	import GameCom.GameComponents.Weapons.BasicGun;
+	import GameCom.GameComponents.Weapons.ChainLightningGun;
+	import GameCom.GameComponents.Weapons.Flamethrower;
 	import GameCom.GameComponents.Weapons.IWeapon;
+	import GameCom.GameComponents.Weapons.LaserGun;
+	import GameCom.GameComponents.Weapons.RocketLauncher;
 	import GameCom.GameComponents.Weapons.Shotgun;
 	import GameCom.GameComponents.Weapons.SMG;
+	import GameCom.GameComponents.Weapons.Sniper;
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
+	import GameCom.Helpers.GrenadeHelper;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.WorldManager;
 	import GameCom.States.GameScreen;
@@ -42,12 +49,15 @@ package GameCom.GameComponents
 		private var time:int = -1;
 		private var startTime:int = 0;
 		
-		private var grenade:Grenade = new Grenade();
-		
 		private var immunityTime:int = 0;
 		private const IMMUNITY_TIME:int = 750;
 		
 		public function PlayerCharacter() {
+			if (this.stage) init();
+			else this.addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		
+		public function init(e:Event = null):void {
 			animation.AddFrame(ThemeManager.Get("Player/0_0.png"));
 			animation.ChangePlayback(0.5, 0, 1);
 			
@@ -57,13 +67,14 @@ package GameCom.GameComponents
 			body.SetFixedRotation(true);
 			body.SetLinearDamping(0.5);
 			
-			weapons.push(new BasicGun());
-			weapons.push(new SMG());
-			weapons.push(new Shotgun());
-			
-			weapons[0].AddSafe(body);
-			weapons[1].AddSafe(body);
-			weapons[2].AddSafe(body);
+			weapons.push(new BasicGun(body));
+			weapons.push(new SMG(body));
+			weapons.push(new Shotgun(body));
+			weapons.push(new Sniper(body));
+			weapons.push(new LaserGun(body));
+			weapons.push(new ChainLightningGun(body, this.parent as Sprite));
+			weapons.push(new Flamethrower(body));
+			weapons.push(new RocketLauncher(body));
 			
 			startTime = getTimer();
 		}
@@ -83,34 +94,23 @@ package GameCom.GameComponents
 			animation.y = -animation.height + 0.6 * Global.PHYSICS_SCALE;
 			
 			if (Keys.isKeyDown(Keyboard.NUMBER_1)) {
-				activeWeapon = 0;
+				activeWeapon = 0; // Pistols
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_2)) {
-				activeWeapon = 1;
+				activeWeapon = 1; // SMGs
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_3)) {
-				activeWeapon = 2;
+				activeWeapon = 2; // Shotguns
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_4)) {
-				activeWeapon = 0;
+				activeWeapon = 3; // Sniper
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_5)) {
-				activeWeapon = 0;
+				activeWeapon = 4; // Laser
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_6)) {
-				activeWeapon = 0;
+				activeWeapon = 5; // Chain Lightning
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_7)) {
-				activeWeapon = 0;
+				activeWeapon = 6; // Flamethrower
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_8)) {
+				activeWeapon = 7; // Rocket Launcher
 			} else if (Keys.isKeyDown(Keyboard.SPACE)) {
-				if(grenade.IsFinished()) {
-					grenade.x = this.x;
-					grenade.y = this.y;
-					
-					grenade.Reset(this.body.GetLinearVelocity());
-					this.parent.addChild(grenade);
-				}
-			}
-			
-			if (!grenade.IsFinished()) {
-				grenade.Update(dt);
-			} else if (grenade.parent != null) {
-				this.parent.removeChild(grenade);
-				grenade.Deactivate();
+				GrenadeHelper.I.SpawnGrenade(this.x, this.y);
 			}
 			
 			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1 + body.GetPosition().y));
@@ -163,7 +163,8 @@ package GameCom.GameComponents
 					GameScreen.EndOfTheLine_TerminateASAP = true;
 				}
 				
-				immunityTime = getTimer() + IMMUNITY_TIME;
+				//Immune if you got hurt
+				if(damage > 0) immunityTime = getTimer() + IMMUNITY_TIME;
 			}
 		}
 		

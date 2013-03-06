@@ -1,5 +1,4 @@
-package GameCom.GameComponents.Decorations 
-{
+package GameCom.GameComponents.Decorations {
 	import flash.display.Sprite;
 	import flash.utils.getTimer;
 	import GameCom.Helpers.AnimatedSprite;

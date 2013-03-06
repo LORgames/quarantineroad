@@ -87,8 +87,8 @@ package GameCom.Managers
 			AddRandomTrash(piece);
 		}
 		
-		public function AddBloodSplatter(locationX:Number, locationY:Number):void {
-			var bmpd:BitmapData = ThemeManager.Get("Blood/splat0"+int(Math.random()*10)+".png");
+		public function AddBloodSplatter(locationX:Number, locationY:Number, isRed:Boolean):void {
+			var bmpd:BitmapData = ThemeManager.Get("Blood/splat"+int(Math.random()*15 + (isRed?0:15))+".png");
 			
 			var flipX:Boolean = Math.random() < 0.5;
 			

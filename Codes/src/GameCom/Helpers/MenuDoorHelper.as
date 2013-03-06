@@ -32,7 +32,7 @@ package GameCom.Helpers {
 			stage.addEventListener(Event.ENTER_FRAME, Update);
 		}
 		
-		private function CleanUp():void {
+		public function CleanUp():void {
 			stage.removeEventListener(Event.ENTER_FRAME, Update);
 			this.parent.removeChild(this);
 		}

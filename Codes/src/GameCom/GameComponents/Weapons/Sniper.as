@@ -11,14 +11,14 @@ package GameCom.GameComponents.Weapons {
 	 * ...
 	 * @author Paul
 	 */
-	public class BasicGun implements IWeapon {
+	public class Sniper implements IWeapon {
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
-		public var FIRE_RATE:Number = 0.4;
+		public var FIRE_RATE:Number = 1.5;
 		public var fireTime:Number = 0;
 		
-		public function BasicGun(body:b2Body) {
+		public function Sniper(body:b2Body) {
 			AddSafe(body);
 		}
 		
@@ -29,12 +29,12 @@ package GameCom.GameComponents.Weapons {
 			
 			if (fireTime > FIRE_RATE) {
 				fireTime -= FIRE_RATE;
-				BulletManager.I.FireAt(location, BasicBullet, this);
+				BulletManager.I.FireAt(location, SniperBullet, this);
 			}
 		}
 		
 		public function Upgrade():void {
-			FIRE_RATE = 0.2;
+			
 		}
 		
 		public function AddAmmo():void {

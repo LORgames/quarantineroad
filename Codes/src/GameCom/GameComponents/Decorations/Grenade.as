@@ -46,14 +46,11 @@ package GameCom.GameComponents.Decorations {
 			body.SetBullet(true);
 		}
 		
-		public function Reset(addedMonentum:b2Vec2):void {
+		public function Reset():void {
 			body.SetPosition(new b2Vec2(this.x / Global.PHYSICS_SCALE, this.y / Global.PHYSICS_SCALE));
 			body.SetActive(true);
 			
 			animation.ChangePlayback(0.1, 0, 13, true);
-			
-			//var throwSpeed:b2Vec2 = new b2Vec2(addedMonentum.x/20, -0.5 + addedMonentum.y/20);
-			//body.
 			
 			body.SetLinearVelocity(new b2Vec2(0,0));
 			body.SetAngularVelocity(0);
@@ -64,6 +61,10 @@ package GameCom.GameComponents.Decorations {
 		
 		public function Deactivate():void {
 			body.SetActive(false);
+			
+			if (this.parent != null) {
+				this.parent.removeChild(this);
+			}
 		}
 		
 		public function IsFinished():Boolean {
@@ -77,7 +78,7 @@ package GameCom.GameComponents.Decorations {
 			this.y = body.GetPosition().y * Global.PHYSICS_SCALE;
 			
 			if (animation.IsStopped()) {
-				ExplosionManager.I.RequestExplosionAt(new Point(this.x, this.y), 5000);
+				ExplosionManager.I.RequestExplosionAt(new Point(this.x, this.y));
 				this.parent.removeChild(this);
 				Deactivate();
 			}

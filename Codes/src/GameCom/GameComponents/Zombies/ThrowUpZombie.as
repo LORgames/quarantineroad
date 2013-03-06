@@ -118,7 +118,7 @@ package GameCom.GameComponents.Zombies
 					LootManager.I.SpawnLootAt(body.GetPosition());
 				}
 				
-				BGManager.I.AddBloodSplatter(this.x, this.y);
+				BGManager.I.AddBloodSplatter(this.x, this.y, false);
 			}
 		}
 		
@@ -162,6 +162,10 @@ package GameCom.GameComponents.Zombies
 			layer0.removeChild(this);
 			
 			body.SetActive(false);
+		}
+		
+		public function GetPixelLocation():Point {
+			return new Point(this.x, this.y);
 		}
 		
 	}

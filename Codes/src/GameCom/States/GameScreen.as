@@ -20,6 +20,7 @@ package GameCom.States {
 	import GameCom.GameComponents.Loot.LootDrop;
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AudioStore;
+	import GameCom.Helpers.GrenadeHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
@@ -116,7 +117,9 @@ package GameCom.States {
 			explosionManager = new ExplosionManager(eyeLayer, groundLayer);
 			
 			scenicManager = new ScenicManager(objectLayer);
+			
 			new BulletManager(objectLayer);
+			new GrenadeHelper(objectLayer);
 			
 			zombies = new ZombieManager(objectLayer, eyeLayer);
 			zombies.AddPlayer(player);
@@ -156,6 +159,8 @@ package GameCom.States {
 				}
 				
 				BulletManager.I.Update(Global.TIME_STEP);
+				GrenadeHelper.I.Update(Global.TIME_STEP);
+				
 				explosionManager.Update(Global.TIME_STEP);
 				scenicManager.Update(Global.TIME_STEP);
 				
@@ -203,6 +208,8 @@ package GameCom.States {
 			
 			if (EndOfTheLine_TerminateASAP) {
 				simulating = false;
+				Cleanup();
+				SystemMain.instance.StateTo(new EndGame());
 			}
 		}
 		
@@ -240,6 +247,7 @@ package GameCom.States {
 			sc.stop();
 			
 			this.removeEventListener(Event.ENTER_FRAME, Update);
+			stage.removeEventListener(Event.RESIZE, Resize);
 			
 			while (this.numChildren > 0) {
 				this.removeChildAt(0);

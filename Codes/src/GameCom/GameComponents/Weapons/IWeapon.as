@@ -9,13 +9,16 @@ package GameCom.GameComponents.Weapons {
 	public interface IWeapon {
 		function Update(dt:Number, location:b2Vec2):void;
 		function IsEmpty():Boolean;
+		
+		function Upgrade():void;
+		
 		function AddAmmo():void;
+		function GetAmmo():String;
 		
 		function AddSafe(body:b2Body):void;
 		function IsSafe(fixture:b2Body):Boolean;
 		
 		function GetIcon():BitmapData;
-		function GetAmmo():String;
 	}
 	
 }

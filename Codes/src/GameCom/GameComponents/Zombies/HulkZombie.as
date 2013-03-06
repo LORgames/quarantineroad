@@ -154,6 +154,10 @@ package GameCom.GameComponents.Zombies {
 			WorldManager.WorldShake -= SCREENSHAKE_AMT;
 		}
 		
+		public function GetPixelLocation():Point {
+			return new Point(this.x, this.y);
+		}
+		
 	}
 
 }

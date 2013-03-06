@@ -19,11 +19,11 @@ package GameCom.GameComponents.Weapons {
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
-		public var FIRE_RATE:Number = 1;
+		public var FIRE_RATE:Number = 0.5;
 		public var fireTime:Number = 0;
 		
-		public function Shotgun() {
-			
+		public function Shotgun(body:b2Body) {
+			AddSafe(body);
 		}
 		
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
@@ -46,8 +46,17 @@ package GameCom.GameComponents.Weapons {
 			}
 		}
 		
-		public function AddAmmo():void {
+		
+		public function Upgrade():void {
 			FIRE_RATE = 0.2;
+		}
+		
+		public function AddAmmo():void {
+			
+		}
+		
+		public function GetAmmo():String {
+			return "∞";
 		}
 		
 		public function IsEmpty():Boolean {
@@ -68,10 +77,6 @@ package GameCom.GameComponents.Weapons {
 		
 		public function GetIcon():BitmapData {
 			return ThemeManager.Get("WeaponIcons/Weapon2_shotgun.png");
-		}
-		
-		public function GetAmmo():String {
-			return "∞";
 		}
 		
 	}

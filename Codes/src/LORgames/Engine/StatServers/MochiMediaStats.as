@@ -12,7 +12,7 @@ package LORgames.Engine.StatServers
 		
 		public function MochiMediaStats() {
 			trace("using mochi stats: UNSUPPORTED ANALYTICS =(");
-			MochiServices.connect("c3ebe5c39a9741ba", Main.GetStage(), onConnectError);
+			MochiServices.connect("5a3aaf31eb62a90e", Main.GetStage(), onConnectError);
 		}
 		
 		private function onConnectError(str:String):void {

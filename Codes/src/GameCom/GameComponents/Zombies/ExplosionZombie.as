@@ -151,6 +151,10 @@ package GameCom.GameComponents.Zombies
 			body.SetActive(false);
 		}
 		
+		public function GetPixelLocation():Point {
+			return new Point(this.x, this.y);
+		}
+		
 	}
 
 }

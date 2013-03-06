@@ -5,20 +5,19 @@ package GameCom.GameComponents.Weapons {
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
-	import GameCom.GameComponents.Projectiles.SniperBullet;
 	import GameCom.Managers.BulletManager;
 	/**
 	 * ...
 	 * @author Paul
 	 */
-	public class BasicGun implements IWeapon {
+	public class Flamethrower implements IWeapon {
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
-		public var FIRE_RATE:Number = 0.4;
+		public var FIRE_RATE:Number = 0.1;
 		public var fireTime:Number = 0;
 		
-		public function BasicGun(body:b2Body) {
+		public function Flamethrower(body:b2Body) {
 			AddSafe(body);
 		}
 		
@@ -29,20 +28,21 @@ package GameCom.GameComponents.Weapons {
 			
 			if (fireTime > FIRE_RATE) {
 				fireTime -= FIRE_RATE;
-				BulletManager.I.FireAt(location, BasicBullet, this);
+				
+				//FIRE
 			}
 		}
 		
 		public function Upgrade():void {
-			FIRE_RATE = 0.2;
-		}
-		
-		public function AddAmmo():void {
 			
 		}
 		
 		public function GetAmmo():String {
 			return "∞";
+		}
+		
+		public function AddAmmo():void {
+			FIRE_RATE = 0.2;
 		}
 		
 		public function IsEmpty():Boolean {
@@ -62,7 +62,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			return ThemeManager.Get("WeaponIcons/Weapon0_pistol.png");
+			return ThemeManager.Get("WeaponIcons/Weapon1_smg.png");
 		}
 		
 	}

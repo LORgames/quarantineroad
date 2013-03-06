@@ -49,9 +49,9 @@ package GameCom.Helpers {
 			animation.x = x;
 			animation.y = y;
 			
-			while (Math.random() > 0.2) {
-				animation.Update(Math.random());
-			}
+			//while (Math.random() > 0.2) {
+				//animation.Update(Math.random());
+			//}
 			
 			this.addChild(animation);
 			

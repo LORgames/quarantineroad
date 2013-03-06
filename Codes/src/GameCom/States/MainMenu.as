@@ -70,6 +70,8 @@ package GameCom.States {
 		}
 		
 		public function PlayFunc(e:MouseEvent):void {
+			if (mdh.parent == this) mdh.CleanUp();
+			
 			AudioController.PlaySound(AudioStore.MenuClick);
 			SystemMain.instance.StateTo(new GameScreen());
 		}

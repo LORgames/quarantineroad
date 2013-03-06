@@ -5,7 +5,9 @@ package GameCom.Managers
 	import flash.events.DRMCustomProperties;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Projectiles.IBullet;
+	import GameCom.GameComponents.Projectiles.SniperBullet;
 	import GameCom.GameComponents.Weapons.IWeapon;
+	import GameCom.GameComponents.Weapons.Sniper;
 	/**
 	 * ...
 	 * @author Paul
@@ -17,6 +19,7 @@ package GameCom.Managers
 		
 		private var UnusedBullets_Generic:Vector.<IBullet> = new Vector.<IBullet>();
 		private var UnusedBullets_BasicBullet:Vector.<IBullet> = new Vector.<IBullet>();
+		private var UnusedBullets_SniperShots:Vector.<IBullet> = new Vector.<IBullet>();
 		
 		private var layer:Sprite;
 		
@@ -32,6 +35,12 @@ package GameCom.Managers
 				case BasicBullet:
 					if (UnusedBullets_BasicBullet.length > 0) {
 						bulletUsed = UnusedBullets_BasicBullet.pop();
+					}
+					
+					break;
+				case SniperBullet:
+					if (UnusedBullets_SniperShots.length > 0) {
+						bulletUsed = UnusedBullets_SniperShots.pop();
 					}
 					
 					break;
@@ -60,7 +69,9 @@ package GameCom.Managers
 				if (UsedBullets[i].ShouldRemove()) {
 					if (UsedBullets[i] is BasicBullet) {
 						UnusedBullets_BasicBullet.push(UsedBullets[i]);
-					} else {
+					} else if (UsedBullets[i] is SniperBullet) {
+						UnusedBullets_SniperShots.push(UsedBullets[i]);
+					}else {
 						UnusedBullets_Generic.push(UsedBullets[i]);
 					}
 					
