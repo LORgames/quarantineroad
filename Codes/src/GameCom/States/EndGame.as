@@ -29,7 +29,7 @@ package GameCom.States {
 		//Buttons and stuff?
 		private var background:Sprite = new Sprite();
 		
-		private var RestartBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Start Button.png"), ThemeManager.Get("Interface/Start Button Mouse Over.png"));
+		private var RestartBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Start Button.png"), ThemeManager.Get("Interface/Restart Button Mouse Over.png"));
 		private var MenuBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Trophies Button.png"), ThemeManager.Get("Interface/Trophies Button Mouse Over.png"));
 		
 		public function EndGame() {
@@ -50,12 +50,15 @@ package GameCom.States {
 			//Start Menu
 			this.addChild(background);
 			
+			RestartBtn.addEventListener(MouseEvent.CLICK, RestartClicked, false, 0, true);
+			this.addChild(RestartBtn);
+			
 			this.stage.addEventListener(Event.RESIZE, Resized, false, 0, true);
 			Resized();
 		}
 		
-		public function PlayFunc(e:MouseEvent):void {
-			SystemMain.instance.StateTo(new MainMenu());
+		public function RestartClicked(e:MouseEvent):void {
+			SystemMain.instance.StateTo(new GameScreen());
 		}
 		
 		public function Resized(e:Event = null):void {
@@ -64,7 +67,8 @@ package GameCom.States {
 			background.x = (this.stage.stageWidth - background.width) / 2;
 			background.y = (this.stage.stageHeight - background.height) / 2;
 			
-			
+			RestartBtn.x = background.x + 18;
+			RestartBtn.y = background.y + 230;
 		}
 		
 		public function MouseOverText(e:MouseEvent):void {
