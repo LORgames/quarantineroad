@@ -55,16 +55,13 @@ package GameCom.GameComponents.Weapons {
 			
 		}
 		
-		public function Deactivate():void {
-			
-		}
+		private var isActive:Boolean = false;
+		public function Activate():void { isActive = true; }
+		public function Deactivate():void { isActive = false; }
+		public function IsActive():Boolean { return isActive; }
 		
 		public function GetAmmoReadout():String {
 			return "INF";
-		}
-		
-		public function IsEmpty():Boolean {
-			return false; //This weapon never runs out of ammo/time
 		}
 		
 		public function AddSafe(body:b2Body):void {

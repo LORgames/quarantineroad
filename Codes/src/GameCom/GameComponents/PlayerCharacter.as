@@ -87,6 +87,7 @@ package GameCom.GameComponents
 			weapons.push(new Flamethrower(body));
 			weapons.push(new RocketLauncher(body));
 			
+			weapons[activeWeapon].Activate();
 			GUIManager.I.AddWeapons(weapons);
 			
 			startTime = getTimer();
@@ -131,6 +132,9 @@ package GameCom.GameComponents
 			if (newEquipedWeapon != activeWeapon) {
 				weapons[activeWeapon].Deactivate();
 				activeWeapon = newEquipedWeapon;
+				weapons[activeWeapon].Activate();
+				
+				GUIManager.I.RedrawWeapons();
 			}
 			
 			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1 + body.GetPosition().y));

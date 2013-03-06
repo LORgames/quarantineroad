@@ -11,6 +11,7 @@ package GameCom.Managers {
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import GameCom.GameComponents.IHit;
+	import GameCom.SystemComponents.WeaponUIPanel;
 	/**
 	 * ...
 	 * @author Paul
@@ -111,7 +112,7 @@ package GameCom.Managers {
 		}
 		
 		public static function UpdateWalls(stage:Stage):void {
-			floorBody.SetPosition(new b2Vec2(0, stage.stageHeight / Global.PHYSICS_SCALE));
+			floorBody.SetPosition(new b2Vec2(0, (stage.stageHeight-WeaponUIPanel.TILE_HEIGHT/2) / Global.PHYSICS_SCALE));
 		}
 		
 		public static function CreatePlayerWalls():void {

@@ -45,13 +45,10 @@ package GameCom.GameComponents.Weapons {
 			return "INF";
 		}
 		
-		public function Deactivate():void {
-			
-		}
-		
-		public function IsEmpty():Boolean {
-			return false; //This weapon never runs out of ammo/time
-		}
+		private var isActive:Boolean = false;
+		public function Activate():void { isActive = true; }
+		public function Deactivate():void { isActive = false; }
+		public function IsActive():Boolean { return isActive; }
 		
 		public function AddSafe(body:b2Body):void {
 			safeFixtures.push(body);

@@ -78,6 +78,14 @@ package GameCom.Managers {
 			}
 		}
 		
+		public function RedrawWeapons() : void {
+			if (stage == null) return;
+			
+			for (var i:int = 0; i < Weapons.length; i++) {
+				Weapons[i].FullRedraw();
+			}
+		}
+		
 		public function UpdateScore(score:int):void {
 			ScoreValue += score;
 			Score.text = ScoreValue.toString();
@@ -107,10 +115,10 @@ package GameCom.Managers {
 			Hearts.y = 15;
 			
 			for (var i:int = 0; i < Weapons.length; i++) {
-				//Weapons[i].x = (stage.stageWidth - WeaponUIPanel.TILE_WIDTH * Weapons.length) / 2 + WeaponUIPanel.TILE_WIDTH * i;
-				//Weapons[i].y = stage.stageHeight - WeaponUIPanel.TILE_HEIGHT;
-				Weapons[i].x = stage.stageWidth - WeaponUIPanel.TILE_WIDTH;
-				Weapons[i].y = WeaponUIPanel.TILE_HEIGHT*i;
+				Weapons[i].x = (stage.stageWidth - WeaponUIPanel.TILE_WIDTH * Weapons.length) / 2 + WeaponUIPanel.TILE_WIDTH * i;
+				Weapons[i].y = stage.stageHeight - WeaponUIPanel.TILE_HEIGHT;
+				//Weapons[i].x = stage.stageWidth - WeaponUIPanel.TILE_WIDTH;
+				//Weapons[i].y = WeaponUIPanel.TILE_HEIGHT*i;
 				Weapons[i].FullRedraw();
 			}
 		}

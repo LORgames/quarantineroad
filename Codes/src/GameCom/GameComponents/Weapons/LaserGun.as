@@ -70,13 +70,20 @@ package GameCom.GameComponents.Weapons {
 			CHARGE_TIME = 0.1;
 		}
 		
+		private var isActive:Boolean = false;
+		
+		public function Activate():void {
+			isActive = true;
+		}
+		
 		public function Deactivate():void {
+			isActive = false
 			charge = 0;
 			Layer.graphics.clear();
 		}
 		
-		public function IsEmpty():Boolean {
-			return false; //This weapon never runs out of ammo/time
+		public function IsActive():Boolean {
+			return isActive;
 		}
 		
 		public function AddSafe(body:b2Body):void {

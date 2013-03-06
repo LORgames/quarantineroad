@@ -8,14 +8,15 @@ package GameCom.GameComponents.Weapons {
 	 */
 	public interface IWeapon {
 		function Update(dt:Number, location:b2Vec2):void;
-		function IsEmpty():Boolean;
 		
 		function Upgrade():void;
 		
 		function AddAmmo():void;
 		function GetAmmoReadout():String;
 		
+		function Activate():void;
 		function Deactivate():void;
+		function IsActive():Boolean;
 		
 		function AddSafe(body:b2Body):void;
 		function IsSafe(fixture:b2Body):Boolean;

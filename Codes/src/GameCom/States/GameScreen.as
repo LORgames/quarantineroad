@@ -174,8 +174,8 @@ package GameCom.States {
 				WorldManager.World.ClearForces();
 				
 				if(stage) {
-					//worldSpr.x = Math.floor(WorldManager.WorldX + stage.stageWidth / 2) + (Math.random()-0.5)*WorldManager.WorldShake;
-					worldSpr.x = Global.SCREEN_WIDTH/2 + (Math.random()-0.5)*WorldManager.WorldShake;
+					worldSpr.x = Math.floor(WorldManager.WorldX + stage.stageWidth / 2) + (Math.random()-0.5)*WorldManager.WorldShake;
+					//worldSpr.x = Global.SCREEN_WIDTH/2 + (Math.random()-0.5)*WorldManager.WorldShake;
 					worldSpr.y = Math.floor(WorldManager.WorldY + stage.stageHeight / 2) + (Math.random()-0.5)*WorldManager.WorldShake;
 				}
 			}

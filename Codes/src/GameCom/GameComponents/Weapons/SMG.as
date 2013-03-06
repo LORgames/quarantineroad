@@ -19,6 +19,8 @@ package GameCom.GameComponents.Weapons {
 		
 		private var totalSMGs:int = 1;
 		
+		private var bullets:int = 2000;
+		
 		public function SMG(body:b2Body) {
 			AddSafe(body);
 		}
@@ -32,7 +34,10 @@ package GameCom.GameComponents.Weapons {
 				fireTime -= FIRE_RATE;
 				
 				for (var i:int = 0; i < totalSMGs; i++) {
-					BulletManager.I.FireAt(location, BasicBullet, this, (Math.random() - 0.5), 5);
+					if(bullets > 0) {
+						BulletManager.I.FireAt(location, BasicBullet, this, (Math.random() - 0.5), 5);
+						bullets--;
+					}
 				}
 			}
 		}
@@ -42,20 +47,17 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetAmmoReadout():String {
-			return "INF";
+			return bullets.toString();
 		}
 		
 		public function AddAmmo():void {
 			FIRE_RATE = 0.2;
 		}
 		
-		public function Deactivate():void {
-			
-		}
-		
-		public function IsEmpty():Boolean {
-			return false; //This weapon never runs out of ammo/time
-		}
+		private var isActive:Boolean = false;
+		public function Activate():void { isActive = true; }
+		public function Deactivate():void { isActive = false; }
+		public function IsActive():Boolean { return isActive; }
 		
 		public function AddSafe(body:b2Body):void {
 			safeFixtures.push(body);

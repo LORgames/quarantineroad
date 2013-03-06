@@ -7,6 +7,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Projectiles.SniperBullet;
 	import GameCom.Managers.BulletManager;
+	import GameCom.Managers.GUIManager;
 	/**
 	 * ...
 	 * @author Paul
@@ -35,6 +36,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Upgrade():void {
 			FIRE_RATE = 0.2;
+			GUIManager.I.RedrawWeapons();
 		}
 		
 		public function AddAmmo():void {
@@ -45,13 +47,10 @@ package GameCom.GameComponents.Weapons {
 			return "INF";
 		}
 		
-		public function Deactivate():void {
-			
-		}
-		
-		public function IsEmpty():Boolean {
-			return false; //This weapon never runs out of ammo/time
-		}
+		private var isActive:Boolean = false;
+		public function Activate():void { isActive = true; }
+		public function Deactivate():void { isActive = false; }
+		public function IsActive():Boolean { return isActive; }
 		
 		public function AddSafe(body:b2Body):void {
 			safeFixtures.push(body);

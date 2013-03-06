@@ -28,24 +28,30 @@ package GameCom.GameComponents.Weapons {
 		
 		public var fried:Vector.<IZombie>;
 		
+		private var battery:Number = 3.0;
+		
 		private var lightning:Lightning = new Lightning();
 		
 		public function ChainLightningGun(body:b2Body, layer:Sprite) {
 			AddSafe(body);
 			layer.addChild(lightning);
+			lightning.visible = false;
 		}
 		
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
 		public function Update(dt:Number, location:b2Vec2):void {
-			lightning.visible = true;
 			fireTime += dt;
 			
-			if (fireTime > FIRE_RATE) {
+			if (fireTime > FIRE_RATE && battery > 0) {
 				fireTime -= FIRE_RATE;
 				
 				fried = new Vector.<IZombie>();
 				WorldManager.World.QueryShape(QueryZombie, new b2CircleShape(5), new b2Transform(location, new b2Mat22()));
+				
+				if (fried.length > 0) {
+					battery -= FIRE_RATE;
+				}
 				
 				//LIGHTNING
 				var points:Vector.<Point> = new Vector.<Point>();
@@ -75,19 +81,27 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetAmmoReadout():String {
-			return "INF";
+			if(battery > Number.MIN_VALUE*5) {
+				return battery.toPrecision(2);
+			} else {
+				return "0.0";
+			}
+		}
+		
+		public function Activate():void {
+			lightning.visible = true;
 		}
 		
 		public function Deactivate():void {
 			lightning.visible = false;
 		}
 		
-		public function AddAmmo():void {
-			FIRE_RATE = 0.2;
+		public function IsActive():Boolean {
+			return lightning.visible;
 		}
 		
-		public function IsEmpty():Boolean {
-			return false; //This weapon never runs out of ammo/time
+		public function AddAmmo():void {
+			FIRE_RATE = 0.2;
 		}
 		
 		public function AddSafe(body:b2Body):void {
