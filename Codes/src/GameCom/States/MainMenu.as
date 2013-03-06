@@ -106,10 +106,11 @@ package GameCom.States {
 			WebsiteText.x = (stage.stageWidth-WebsiteText.width) / 2;
 			WebsiteText.y = mat.ty + 5;
 			
-			if (mdh.parent == this) {
-				mdh.x = mat.tx;
-				mdh.y = mat.ty;
-			}
+			mdh.x = mat.tx;
+			mdh.y = mat.ty;
+			
+			mbh.x = mat.tx;
+			mbh.y = mat.ty;
 		}
 		
 		public function MouseOverText(e:MouseEvent):void {

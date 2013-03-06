@@ -3,10 +3,12 @@ package GameCom.Managers {
 	import flash.display.Sprite;
 	import flash.utils.getTimer;
 	import GameCom.GameComponents.PlayerCharacter;
+	import GameCom.GameComponents.Zombies.BlueZombie;
 	import GameCom.GameComponents.Zombies.ExplosionZombie;
 	import GameCom.GameComponents.Zombies.HulkZombie;
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.GameComponents.Zombies.LimpZombie;
+	import GameCom.GameComponents.Zombies.RedZombie;
 	import GameCom.GameComponents.Zombies.SlowZombie;
 	import GameCom.GameComponents.Zombies.ThrowUpZombie;
 	import GameCom.GameComponents.Zombies.ZombieHand;
@@ -55,6 +57,9 @@ package GameCom.Managers {
 			ZombieTypes.push(HulkZombie);
 			ZombieTypes.push(ThrowUpZombie);
 			ZombieTypes.push(ZombieHand);
+			ZombieTypes.push(BlueZombie);
+			ZombieTypes.push(BlueZombie);
+			ZombieTypes.push(RedZombie);
 			
 			surviveTime = getTimer();
 		}
@@ -89,7 +94,7 @@ package GameCom.Managers {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 30000 && previousUpdate < 30000) {
-				for (i = 0; i < 9; i++) UnusedZombies.push(new LimpZombie());
+				for (i = 0; i < 9; i++) UnusedZombies.push(new BlueZombie());
 				
 				cls = ZombieTypes[int(ZombieTypes.length * Math.random())];
 				UnusedZombies.push(new cls());
@@ -108,7 +113,7 @@ package GameCom.Managers {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new LimpZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 60000 && previousUpdate < 60000) {
-				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
+				for (i = 0; i < 9; i++) UnusedZombies.push(new RedZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 60000 && totalTime > previousUpdate + 5000) {
 				cls = ZombieTypes[int(ZombieTypes.length * Math.random())];

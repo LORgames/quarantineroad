@@ -1,5 +1,6 @@
 package GameCom.Helpers {
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.Event;
@@ -16,6 +17,9 @@ package GameCom.Helpers {
 		public function MenuDoorHelper() {
 			if (stage) init();
 			else this.addEventListener(Event.ADDED_TO_STAGE, init);
+			
+			this.mask = new Bitmap(new BitmapData(Global.SCREEN_WIDTH, Global.SCREEN_WIDTH, false, 0x0));
+			this.addChild(this.mask);
 		}
 		
 		private function init(e:Event = null):void {
