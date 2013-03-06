@@ -126,6 +126,7 @@ package GameCom.GameComponents.Zombies {
 		}
 		
 		public function RemoveFromScene(layer0:Sprite, layer1:Sprite):void {
+			body.SetPosition(new b2Vec2(0, -200));
 			layer0.removeChild(this);
 			body.SetActive(false);
 		}
