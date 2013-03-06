@@ -21,7 +21,7 @@ package GameCom.GameComponents.Zombies
 	 * @author Paul
 	 */
 	public class BlueZombie extends Sprite implements IZombie {
-		private const BASE_HP:Number = 2.0;
+		private const BASE_HP:Number = 5.0;
 		private const SCORE:int = 1;
 		
 		private var body:b2Body;
@@ -148,7 +148,7 @@ package GameCom.GameComponents.Zombies
 			myHP = BASE_HP;
 			dead = false;
 			
-			mySpeed = Math.random() + 2;
+			mySpeed = Math.random()*0.75 + 0.25;
 			
 			Update(0);
 		}

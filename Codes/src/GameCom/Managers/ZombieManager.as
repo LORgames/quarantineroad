@@ -94,7 +94,7 @@ package GameCom.Managers {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new SlowZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 30000 && previousUpdate < 30000) {
-				for (i = 0; i < 9; i++) UnusedZombies.push(new BlueZombie());
+				for (i = 0; i < 9; i++) UnusedZombies.push(new RedZombie());
 				
 				cls = ZombieTypes[int(ZombieTypes.length * Math.random())];
 				UnusedZombies.push(new cls());
@@ -113,7 +113,7 @@ package GameCom.Managers {
 				for (i = 0; i < 9; i++) UnusedZombies.push(new LimpZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 60000 && previousUpdate < 60000) {
-				for (i = 0; i < 9; i++) UnusedZombies.push(new RedZombie());
+				for (i = 0; i < 9; i++) UnusedZombies.push(new BlueZombie());
 				previousUpdate = totalTime;
 			} else if (totalTime > 60000 && totalTime > previousUpdate + 5000) {
 				cls = ZombieTypes[int(ZombieTypes.length * Math.random())];

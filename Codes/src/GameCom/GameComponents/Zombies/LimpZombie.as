@@ -7,6 +7,7 @@ package GameCom.GameComponents.Zombies
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.Sprite;
+	import flash.filters.BlurFilter;
 	import flash.geom.Point;
 	import flash.utils.getTimer;
 	import GameCom.GameComponents.PlayerCharacter;

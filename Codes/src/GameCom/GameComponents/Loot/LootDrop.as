@@ -22,8 +22,6 @@ package GameCom.GameComponents.Loot
 			body = BodyHelper.GetGenericCircle(0.25, Global.PHYSICS_CATEGORY_LOOT, this);
 			body.GetFixtureList().SetSensor(true);
 			body.SetActive(false);
-			
-			this.addChild(SpriteHelper.CreateCenteredBitmapData(ThemeManager.Get("Loot/BasicWeapon.png")));
 		}
 		
 		public function Update(dt:Number):void {
@@ -53,8 +51,7 @@ package GameCom.GameComponents.Loot
 		}
 		
 		public function Pickup(equipment:Vector.<IWeapon>):void {
-			equipment[type].AddAmmo();
-			pickedUP = true;
+			
 		}
 	}
 

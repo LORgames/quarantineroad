@@ -7,6 +7,7 @@ package GameCom.GameComponents.Zombies
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.Sprite;
+	import flash.filters.BlurFilter;
 	import flash.geom.Point;
 	import flash.utils.getTimer;
 	import GameCom.GameComponents.PlayerCharacter;
@@ -21,7 +22,7 @@ package GameCom.GameComponents.Zombies
 	 * @author Paul
 	 */
 	public class RedZombie extends Sprite implements IZombie {
-		private const BASE_HP:Number = 5.0;
+		private const BASE_HP:Number = 1.0;
 		private const SCORE:int = 1;
 		
 		private var body:b2Body;
@@ -42,7 +43,7 @@ package GameCom.GameComponents.Zombies
 			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie Red/6.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie Red/7.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie Red/8.png"));
-			animation.ChangePlayback(0.1, 0, 8);
+			animation.ChangePlayback(0.3333, 0, 8);
 			this.addChild(animation);
 			
 			eyes.AddFrame(ThemeManager.Get("Zombies/Base Zombie/Eyes.png"));
@@ -148,7 +149,7 @@ package GameCom.GameComponents.Zombies
 			myHP = BASE_HP;
 			dead = false;
 			
-			mySpeed = Math.random() + 0.5;
+			mySpeed = Math.random() + 7.5;
 			
 			Update(0);
 		}
