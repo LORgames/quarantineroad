@@ -75,6 +75,14 @@ package GameCom.GameComponents.Weapons {
 			}
 		}
 		
+		public function GetPlayerBody():BitmapData {
+			if(FIRE_RATE > 0.3) {
+				return ThemeManager.Get("Player/top/base00_pistol.png");
+			} else {
+				return ThemeManager.Get("Player/top/base01_dual_pistol.png");
+			}
+		}
+		
 		public function GetUpgradeIcon():BitmapData {
 			if(FIRE_RATE < 0.3) {
 				return ThemeManager.Get("WeaponIcons/w01_dual_pistol.png");

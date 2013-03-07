@@ -7,6 +7,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Projectiles.SniperBullet;
 	import GameCom.Managers.BulletManager;
+	import LORgames.Engine.Keys;
 	/**
 	 * ...
 	 * @author Paul
@@ -26,8 +27,10 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Update(dt:Number, location:b2Vec2):void {
 			if (fireTime > FIRE_RATE) {
-				fireTime -= FIRE_RATE;
-				BulletManager.I.FireAt(location, SniperBullet, this);
+				if(Keys.isKeyDown(32)) {
+					fireTime -= FIRE_RATE;
+					BulletManager.I.FireAt(location, SniperBullet, this);
+				}
 			} else {
 				fireTime += dt;
 			}
@@ -64,6 +67,10 @@ package GameCom.GameComponents.Weapons {
 		
 		public function GetIcon():BitmapData {
 			return ThemeManager.Get("WeaponIcons/w06_sniper.png");
+		}
+		
+		public function GetPlayerBody():BitmapData {
+			return ThemeManager.Get("Player/top/base06_sniper.png");
 		}
 		
 		public function GetUpgradeIcon():BitmapData {

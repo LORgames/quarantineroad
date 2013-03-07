@@ -70,6 +70,10 @@ package GameCom.GameComponents.Weapons {
 			return ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png");
 		}
 		
+		public function GetPlayerBody():BitmapData {
+			return ThemeManager.Get("Player/top/base09_grenade_launcher.png");
+		}
+		
 		public function GetUpgradeIcon():BitmapData {
 			return null;
 		}

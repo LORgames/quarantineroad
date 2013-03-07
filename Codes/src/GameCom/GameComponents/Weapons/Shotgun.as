@@ -100,6 +100,14 @@ package GameCom.GameComponents.Weapons {
 			}
 		}
 		
+		public function GetPlayerBody():BitmapData {
+			if(!upgraded) {
+				return ThemeManager.Get("Player/top/base04_shotgun.png");
+			} else {
+				return ThemeManager.Get("Player/top/base05_combat_shotgun.png");
+			}
+		}
+		
 		public function GetUpgradeIcon():BitmapData {
 			if(!upgraded) {
 				return ThemeManager.Get("WeaponIcons/w05_combat_shotgun.png");

@@ -84,6 +84,14 @@ package GameCom.GameComponents.Weapons {
 			}
 		}
 		
+		public function GetPlayerBody():BitmapData {
+			if(totalSMGs == 2) {
+				return ThemeManager.Get("Player/top/base03_dual_smg.png");
+			} else {
+				return ThemeManager.Get("Player/top/base02_smg.png");
+			}
+		}
+		
 		public function GetUpgradeIcon():BitmapData {
 			if(totalSMGs == 1) {
 				return ThemeManager.Get("WeaponIcons/w03_dual_smg.png");

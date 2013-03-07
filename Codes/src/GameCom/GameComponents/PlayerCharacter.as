@@ -6,6 +6,7 @@ package GameCom.GameComponents
 	import Box2D.Dynamics.b2BodyDef;
 	import Box2D.Dynamics.b2FixtureDef;
 	import Box2D.Dynamics.Contacts.b2ContactEdge;
+	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.filters.GlowFilter;
@@ -53,6 +54,7 @@ package GameCom.GameComponents
 		private const IMMUNITY_TIME:int = 750;
 		
 		private var weaponsLayer:Sprite;
+		private var top:Sprite = new Sprite();
 		
 		public function PlayerCharacter(weaponsLayer:Sprite) {
 			this.weaponsLayer = weaponsLayer;
@@ -90,6 +92,15 @@ package GameCom.GameComponents
 			weapons[activeWeapon].Activate();
 			GUIManager.I.AddWeapons(weapons);
 			
+			this.addChild(top);
+			top.x = -10;
+			top.y = -50;
+			
+			top.graphics.clear();
+			top.graphics.beginBitmapFill(weapons[activeWeapon].GetPlayerBody());
+			top.graphics.drawRect(0, 0, 21, 38);
+			top.graphics.endFill();
+			
 			startTime = getTimer();
 		}
 		
@@ -108,6 +119,8 @@ package GameCom.GameComponents
 			animation.y = -animation.height + 0.6 * Global.PHYSICS_SCALE;
 			
 			var newEquipedWeapon:int = activeWeapon;
+			
+			if (activeWeapon == -1) activeWeapon = 0;
 			
 			if (Keys.isKeyDown(Keyboard.NUMBER_1)) {
 				newEquipedWeapon = 0; // Pistols
@@ -135,6 +148,11 @@ package GameCom.GameComponents
 				weapons[activeWeapon].Activate();
 				
 				GUIManager.I.RedrawWeapons();
+				
+				top.graphics.clear();
+				top.graphics.beginBitmapFill(weapons[activeWeapon].GetPlayerBody());
+				top.graphics.drawRect(0, 0, 21, 38);
+				top.graphics.endFill();
 			}
 			
 			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1 + body.GetPosition().y));

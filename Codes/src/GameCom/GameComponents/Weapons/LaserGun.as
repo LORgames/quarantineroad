@@ -47,8 +47,8 @@ package GameCom.GameComponents.Weapons {
 					WorldManager.World.RayCast(RCCallback, location, pointHit);
 					
 					Layer.graphics.clear();
-					Layer.graphics.beginBitmapFill(ThemeManager.Get("bullets/Laser.png"), new Matrix(1, 0, 0, 1, int(location.x * Global.PHYSICS_SCALE) - 2, 0));
-					Layer.graphics.drawRect(int(pointHit.x * Global.PHYSICS_SCALE) - 2, int(pointHit.y * Global.PHYSICS_SCALE) - 20, 5, (location.y - pointHit.y) * Global.PHYSICS_SCALE + 20);
+					Layer.graphics.beginBitmapFill(ThemeManager.Get("bullets/Laser00.png"), new Matrix(1, 0, 0, 1, int(location.x * Global.PHYSICS_SCALE) - 3, 0));
+					Layer.graphics.drawRect(int(pointHit.x * Global.PHYSICS_SCALE) - 2, int(pointHit.y * Global.PHYSICS_SCALE) - 20, 6, (location.y - pointHit.y) * Global.PHYSICS_SCALE + 20);
 					
 					if(objectHit != null) {
 						if (objectHit.GetUserData() is IZombie) {
@@ -113,6 +113,10 @@ package GameCom.GameComponents.Weapons {
 		
 		public function GetIcon():BitmapData {
 			return ThemeManager.Get("WeaponIcons/w07_laser.png");
+		}
+		
+		public function GetPlayerBody():BitmapData {
+			return ThemeManager.Get("Player/top/base07_laser.png");
 		}
 		
 		public function GetUpgradeIcon():BitmapData {

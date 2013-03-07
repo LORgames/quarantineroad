@@ -66,6 +66,10 @@ package GameCom.GameComponents.Weapons {
 			return ThemeManager.Get("WeaponIcons/w10_flame_thrower.png");
 		}
 		
+		public function GetPlayerBody():BitmapData {
+			return ThemeManager.Get("Player/top/base10_flame_thrower.png");
+		}
+		
 		public function GetUpgradeIcon():BitmapData {
 			return null;
 		}
