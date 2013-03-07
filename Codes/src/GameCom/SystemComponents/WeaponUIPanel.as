@@ -1,5 +1,6 @@
 package GameCom.SystemComponents {
 	import flash.display.BitmapData;
+	import flash.display.GradientType;
 	import flash.display.Sprite;
 	import flash.filters.GlowFilter;
 	import flash.geom.Matrix;
@@ -39,10 +40,13 @@ package GameCom.SystemComponents {
 		public function FullRedraw():void {
 			this.graphics.clear();
 			
+			var mat:Matrix = new Matrix();
+			mat.createGradientBox(TILE_WIDTH, TILE_HEIGHT, Math.PI/2);
+			
 			if(Weapon.IsActive()) {
-				this.graphics.beginFill(0xFFC0C0, 0.3);
+				this.graphics.beginGradientFill(GradientType.LINEAR, [0x8080FF,0x8080FF], [0, 0.3], [0, 255], mat);
 			} else {
-				this.graphics.beginFill(0xFFFFFF, 0.3);
+				this.graphics.beginGradientFill(GradientType.LINEAR, [0xFFFFFF,0xFFFFFF], [0, 0.3], [0, 255], mat);
 			}
 				
 			this.graphics.drawRect(0, 0, TILE_WIDTH, TILE_HEIGHT);
@@ -52,6 +56,10 @@ package GameCom.SystemComponents {
 			this.graphics.beginBitmapFill(bmpd, new Matrix(1, 0, 0, 1, (TILE_WIDTH - bmpd.width) / 2, 2), false, true);
 			this.graphics.drawRect((TILE_WIDTH - bmpd.width) / 2, 2, bmpd.width, bmpd.height);
 			this.graphics.endFill();
+			
+			this.graphics.lineStyle(1, 0xFFFFFF);
+			this.graphics.moveTo(TILE_WIDTH, 5);
+			this.graphics.lineTo(TILE_WIDTH, TILE_HEIGHT);
 			
 			info.text = Weapon.GetAmmoReadout();
 			info.x = (TILE_WIDTH - info.width) / 2;

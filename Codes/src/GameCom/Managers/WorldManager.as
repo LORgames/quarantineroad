@@ -121,7 +121,6 @@ package GameCom.Managers {
 			
 			var fDef:b2FixtureDef = new b2FixtureDef();
 			
-			trace(fDef.filter.categoryBits);
 			fDef.filter.categoryBits = Global.PHYSICS_CATEGORY_WALLS;
 			
 			//ROOF

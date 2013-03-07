@@ -78,7 +78,7 @@ package GameCom.GameComponents.Decorations {
 			this.y = body.GetPosition().y * Global.PHYSICS_SCALE;
 			
 			if (animation.IsStopped()) {
-				ExplosionManager.I.RequestCarExplosionAt(new Point(this.x, this.y));
+				ExplosionManager.I.RequestBombExplosionAt(new Point(this.x, this.y));
 				this.parent.removeChild(this);
 				Deactivate();
 			}

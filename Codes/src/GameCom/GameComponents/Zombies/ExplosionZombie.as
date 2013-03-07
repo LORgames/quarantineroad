@@ -8,6 +8,7 @@ package GameCom.GameComponents.Zombies
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	import GameCom.GameComponents.Decorations.SqlshExplosion;
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.MathHelper;
@@ -88,7 +89,7 @@ package GameCom.GameComponents.Zombies
 			}
 			
 			if (MathHelper.DistanceSquared(new Point(this.x, this.y), new Point(WorldManager.WorldTargetX, WorldManager.WorldTargetY)) < 5000) {
-				ExplosionManager.I.RequestCarExplosionAt(new Point(this.x, this.y));
+				SqlshExplosion.RequestExplosionAt(new Point(this.x, this.y));
 				myHP = -1;
 			}
 			
@@ -100,8 +101,8 @@ package GameCom.GameComponents.Zombies
 			
 			if (myHP <= 0 && !isDead) {
 				isDead = true;
-				ExplosionManager.I.RequestCarExplosionAt(new Point(this.x, this.y));
 				
+				SqlshExplosion.RequestExplosionAt(new Point(this.x, this.y));
 				GUIManager.I.UpdateScore(SCORE);
 			}
 		}

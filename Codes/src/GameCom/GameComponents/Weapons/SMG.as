@@ -6,6 +6,7 @@ package GameCom.GameComponents.Weapons {
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.Managers.BulletManager;
+	import GameCom.Managers.GUIManager;
 	/**
 	 * ...
 	 * @author Paul
@@ -19,7 +20,7 @@ package GameCom.GameComponents.Weapons {
 		
 		private var totalSMGs:int = 1;
 		
-		private var bullets:int = 2000;
+		private var bullets:int = 250;
 		
 		public function SMG(body:b2Body) {
 			AddSafe(body);
@@ -43,7 +44,8 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function Upgrade():void {
-			totalSMGs++;
+			totalSMGs = 2;
+			GUIManager.I.RedrawWeapons();
 		}
 		
 		public function GetAmmoReadout():String {

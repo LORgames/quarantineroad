@@ -48,8 +48,6 @@ package {
 				stage.align = StageAlign.TOP_LEFT;
 			}
 			
-			trace(stage.stageWidth + "x" + stage.stageHeight);
-			
 			addEventListener(Event.ENTER_FRAME, checkFrame);
 			stage.addEventListener(Event.RESIZE, resize);
 			loaderInfo.addEventListener(ProgressEvent.PROGRESS, progress);

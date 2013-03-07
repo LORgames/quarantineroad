@@ -215,7 +215,7 @@ package GameCom.States {
 			if (EndOfTheLine_TerminateASAP) {
 				simulating = false;
 				Cleanup();
-				SystemMain.instance.StateTo(new EndGame());
+				SystemMain.instance.StateTo(new EndGame(parseInt(GUIManager.I.Score.text), (WorldManager.WorldScrolled/Global.PHYSICS_SCALE).toFixed(2), 0));
 			}
 		}
 		
@@ -261,7 +261,6 @@ package GameCom.States {
 		}
 		
 		private function Resize(e:Event = null):void {
-			trace(stage.stageHeight);
 			WorldManager.WorldY = -stage.stageHeight / 2;
 			WorldManager.UpdateWalls(stage.stage);
 			

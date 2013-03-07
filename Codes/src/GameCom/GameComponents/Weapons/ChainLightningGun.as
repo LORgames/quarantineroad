@@ -82,7 +82,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function GetAmmoReadout():String {
 			if(battery > Number.MIN_VALUE*5) {
-				return battery.toPrecision(2);
+				return battery.toFixed(1);
 			} else {
 				return "0.0";
 			}

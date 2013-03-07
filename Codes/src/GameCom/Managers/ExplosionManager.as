@@ -3,10 +3,13 @@ package GameCom.Managers
 	import Box2D.Common.Math.b2Vec2;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
+	import flash.display.StageQuality;
 	import flash.geom.Point;
 	import GameCom.GameComponents.Decorations.CarExplosion;
 	import GameCom.GameComponents.Decorations.BloodExplosion;
+	import GameCom.GameComponents.Decorations.GrenadeExplosion;
 	import GameCom.GameComponents.Decorations.IExplosion;
+	import GameCom.GameComponents.Decorations.SqlshExplosion;
 	import GameCom.GameComponents.Decorations.VomitPuddle;
 	import GameCom.Helpers.AudioStore;
 	import LORgames.Engine.AudioController;
@@ -27,6 +30,9 @@ package GameCom.Managers
 		private var playing_puddle_effects:Vector.<VomitPuddle> = new Vector.<VomitPuddle>();
 		private var waiting_puddle_effects:Vector.<VomitPuddle> = new Vector.<VomitPuddle>();
 		
+		private var playing_bomb_explosions:Vector.<GrenadeExplosion> = new Vector.<GrenadeExplosion>();
+		private var waiting_bomb_explosions:Vector.<GrenadeExplosion> = new Vector.<GrenadeExplosion>();
+		
 		private var layer:Sprite;
 		private var layer1:Sprite;
 		
@@ -34,6 +40,8 @@ package GameCom.Managers
 			I = this;
 			this.layer = layer;
 			this.layer1 = layer1;
+			
+			SqlshExplosion.SetLayer(layer);
 		}
 		
 		public function RequestCarExplosionAt(p:Point, damage:Number = 100):void {
@@ -53,6 +61,29 @@ package GameCom.Managers
 			explosion.Reset();
 			
 			playing_car_explosions.push(explosion);
+			
+			WorldManager.Explode(new b2Vec2(p.x / Global.PHYSICS_SCALE, p.y / Global.PHYSICS_SCALE), 2.5, damage);
+			
+			AudioController.PlaySound(AudioStore.Explode);
+		}
+		
+		public function RequestBombExplosionAt(p:Point, damage:Number = 100):void {
+			if (waiting_bomb_explosions.length == 0) {
+				var new_explosion:GrenadeExplosion = new GrenadeExplosion();
+				layer.addChild(new_explosion);
+				
+				waiting_bomb_explosions.push(new_explosion);
+			}
+			
+			var explosion:GrenadeExplosion = waiting_bomb_explosions.pop();
+			
+			explosion.visible = true;
+			
+			explosion.x = p.x;
+			explosion.y = p.y;
+			explosion.Reset();
+			
+			playing_bomb_explosions.push(explosion);
 			
 			WorldManager.Explode(new b2Vec2(p.x / Global.PHYSICS_SCALE, p.y / Global.PHYSICS_SCALE), 2.5, damage);
 			
@@ -135,6 +166,19 @@ package GameCom.Managers
 					i--;
 				}
 			}
+			
+			for (i = 0; i < playing_bomb_explosions.length; i++) {
+				playing_bomb_explosions[i].Update(dt);
+				
+				if (playing_bomb_explosions[i].IsFinished()) {
+					var g:GrenadeExplosion = playing_bomb_explosions.splice(i, 1)[0];
+					g.visible = false;
+					waiting_bomb_explosions.push(g);
+					i--;
+				}
+			}
+			
+			SqlshExplosion.Update(dt);
 		}
 		
 		

@@ -97,11 +97,11 @@ package GameCom.States {
 			background.graphics.drawRect((stage.stageWidth - bmp.width) / 2, (stage.stageHeight - bmp.height) / 2, bmp.width, bmp.height);
 			background.graphics.endFill();
 			
-			StartBtn.x = mat.tx + 10;
-			StartBtn.y = mat.ty + 393;
+			StartBtn.x = mat.tx + 39;
+			StartBtn.y = mat.ty + 395;
 			
-			TrophiesBtn.x = mat.tx + 220;
-			TrophiesBtn.y = mat.ty + 393;
+			TrophiesBtn.x = mat.tx + 251;
+			TrophiesBtn.y = mat.ty + 395;
 			
 			WebsiteText.x = (stage.stageWidth-WebsiteText.width) / 2;
 			WebsiteText.y = mat.ty + 5;

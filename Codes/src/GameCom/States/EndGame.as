@@ -38,7 +38,13 @@ package GameCom.States {
 		
 		private var handAnimation:AnimatedSprite = new AnimatedSprite();
 		
-		public function EndGame() {
+		private var score:int = 0;
+		private var distance:int = 0;
+		private var zombiekills:int = 0;
+		
+		public function EndGame(score:int, distance:String, zombiekills:int) {
+			trace("S:" + score + " D:" + distance + " Z:" + zombiekills);
+			
 			//Just make sure we're ready to do this...
 			if (this.stage) Init();
 			else addEventListener(Event.ADDED_TO_STAGE, Init, false, 0, true);
@@ -113,6 +119,9 @@ package GameCom.States {
 			
 			handAnimation.x = (stage.stageWidth - handAnimation.width) / 2;
 			handAnimation.y = background.y + 35;
+			
+			adContainer.x = background.x + 72;
+			adContainer.y = background.y + 335;
 		}
 		
 		public function MouseOverText(e:MouseEvent):void {

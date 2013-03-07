@@ -19,9 +19,12 @@ package GameCom.GameComponents.Loot {
 		
 		public override function Reassign(location:b2Vec2):void {
 			super.Reassign(location);
+			type = Math.random() * 8;
 		}
 		
 		public override function Pickup(equipment:Vector.<IWeapon>):void {
+			trace("Upgraded: " + type);
+			
 			equipment[type].Upgrade();
 			super.Pickup(equipment);
 		}

@@ -26,6 +26,8 @@ package GameCom.Managers {
 		
 		private var Players:Vector.<PlayerCharacter> = new Vector.<PlayerCharacter>();
 		
+		private var SpawnList:Array = new Array();
+		
 		private const TOTAL_ZOMBIES_ONSCREEN:int = 100;
 		
 		private var layer0:Sprite;
@@ -42,6 +44,8 @@ package GameCom.Managers {
 		public function ZombieManager(layer0:Sprite, layer1:Sprite) {
 			this.layer0 = layer0;
 			this.layer1 = layer1;
+			
+			SpawnList = SpawnList.concat(ZombieSpawns.Spawns);
 			
 			for (var i:int = 0; i < 10; i++) {
 				UnusedZombies.push(new SlowZombie());
@@ -81,44 +85,16 @@ package GameCom.Managers {
 				handTimeout -= dt;
 			}
 			
-			if (totalTime > 6000 && previousUpdate < 6000) {
-				for (i = 0; i < 4; i++) UnusedZombies.push(new LimpZombie());
-				previousUpdate = totalTime;
-			} else if (totalTime > 12000 && previousUpdate < 12000) {
-				for (i = 0; i < 4; i++) UnusedZombies.push(new SlowZombie());
-				previousUpdate = totalTime;
-			} else if (totalTime > 18000 && previousUpdate < 18000) {
-				for (i = 0; i < 4; i++) UnusedZombies.push(new LimpZombie());
-				previousUpdate = totalTime;
-			} else if (totalTime > 24000 && previousUpdate < 24000) {
-				for (i = 0; i < 4; i++) UnusedZombies.push(new SlowZombie());
-				previousUpdate = totalTime;
-			} else if (totalTime > 30000 && previousUpdate < 30000) {
-				for (i = 0; i < 4; i++) UnusedZombies.push(new LimpZombie());
+			if (totalTime > previousUpdate + 1000) {
+				if (SpawnList.length == 0) {
+					//Spawning a random one
+					cls = ZombieTypes[int(ZombieTypes.length * Math.random())];
+				} else {
+					//Spawn from the list
+					cls = (SpawnList.pop() as Class);
+				}
 				
-				cls = ZombieTypes[int(ZombieTypes.length * Math.random())];
 				UnusedZombies.push(new cls());
-				
-				previousUpdate = totalTime;
-			} else if (totalTime > 36000 && previousUpdate < 36000) {
-				for (i = 0; i < 4; i++) UnusedZombies.push(new SlowZombie());
-				previousUpdate = totalTime;
-			} else if (totalTime > 42000 && previousUpdate < 42000) {
-				for (i = 0; i < 4; i++) UnusedZombies.push(new LimpZombie());
-				previousUpdate = totalTime;
-			} else if (totalTime > 48000 && previousUpdate < 48000) {
-				for (i = 0; i < 4; i++) UnusedZombies.push(new SlowZombie());
-				previousUpdate = totalTime;
-			} else if (totalTime > 54000 && previousUpdate < 54000) {
-				for (i = 0; i < 4; i++) UnusedZombies.push(new LimpZombie());
-				previousUpdate = totalTime;
-			} else if (totalTime > 60000 && previousUpdate < 60000) {
-				for (i = 0; i < 4; i++) UnusedZombies.push(new SlowZombie());
-				previousUpdate = totalTime;
-			} else if (totalTime > 60000 && totalTime > previousUpdate + 1000) {
-				cls = ZombieTypes[int(ZombieTypes.length * Math.random())];
-				UnusedZombies.push(new cls());
-				
 				previousUpdate = totalTime;
 			}
 			
