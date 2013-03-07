@@ -16,7 +16,7 @@ package GameCom.SystemComponents {
 		public static const TILE_WIDTH:Number = 62.5;
 		public static const TILE_HEIGHT:int = 40;
 		
-		private var Weapon:IWeapon;
+		public var Weapon:IWeapon;
 		private var info:TextField;
 		
 		public function WeaponUIPanel(weapon:IWeapon) {

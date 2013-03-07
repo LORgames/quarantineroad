@@ -22,6 +22,7 @@ package GameCom.GameComponents.Weapons {
 		function IsSafe(fixture:b2Body):Boolean;
 		
 		function GetIcon():BitmapData;
+		function GetUpgradeIcon():BitmapData;
 	}
 	
 }

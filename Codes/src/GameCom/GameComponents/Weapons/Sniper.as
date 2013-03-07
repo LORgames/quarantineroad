@@ -66,6 +66,10 @@ package GameCom.GameComponents.Weapons {
 			return ThemeManager.Get("WeaponIcons/w06_sniper.png");
 		}
 		
+		public function GetUpgradeIcon():BitmapData {
+			return null;
+		}
+		
 	}
 
 }

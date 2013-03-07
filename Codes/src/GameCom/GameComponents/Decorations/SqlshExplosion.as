@@ -52,11 +52,19 @@ package GameCom.GameComponents.Decorations
 		private static var waiting_explosions:Vector.<SqlshExplosion> = new Vector.<SqlshExplosion>();
 		private static var layer:Sprite;
 		
-		public static function SetLayer(layer:Sprite):void {
-			SqlshExplosion.layer = layer;
+		public static function SetLayer(_layer:Sprite):void {
+			if (layer != null) {
+				while(playing_explosions.length > 0) {
+					var b:SqlshExplosion = playing_explosions.pop();
+					layer.removeChild(b);
+					waiting_explosions.push(b);
+				}
+			}
+			
+			layer = _layer;
 		}
 		
-		public static function RequestExplosionAt(p:Point):void {
+		public static function RequestExplosionAt(x:Number, y:Number):void {
 			if (waiting_explosions.length == 0) {
 				var new_explosion:SqlshExplosion = new SqlshExplosion();
 				waiting_explosions.push(new_explosion);
@@ -66,13 +74,13 @@ package GameCom.GameComponents.Decorations
 			
 			layer.addChild(explosion);
 			
-			explosion.x = p.x;
-			explosion.y = p.y;
+			explosion.x = x;
+			explosion.y = y;
 			explosion.Reset();
 			
 			playing_explosions.push(explosion);
 			
-			WorldManager.Explode(new b2Vec2(p.x / Global.PHYSICS_SCALE, p.y / Global.PHYSICS_SCALE), 2.5, 100);
+			WorldManager.Explode(new b2Vec2(x / Global.PHYSICS_SCALE, y / Global.PHYSICS_SCALE), 2.5, 100);
 		}
 		
 		public static function Update(dt:Number):void {

@@ -89,7 +89,7 @@ package GameCom.GameComponents.Zombies
 			}
 			
 			if (MathHelper.DistanceSquared(new Point(this.x, this.y), new Point(WorldManager.WorldTargetX, WorldManager.WorldTargetY)) < 5000) {
-				SqlshExplosion.RequestExplosionAt(new Point(this.x, this.y));
+				SqlshExplosion.RequestExplosionAt(this.x, this.y);
 				myHP = -1;
 			}
 			
@@ -102,7 +102,7 @@ package GameCom.GameComponents.Zombies
 			if (myHP <= 0 && !isDead) {
 				isDead = true;
 				
-				SqlshExplosion.RequestExplosionAt(new Point(this.x, this.y));
+				SqlshExplosion.RequestExplosionAt(this.x, this.y);
 				GUIManager.I.UpdateScore(SCORE);
 			}
 		}

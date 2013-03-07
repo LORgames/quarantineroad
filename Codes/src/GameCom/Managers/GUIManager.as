@@ -46,7 +46,7 @@ package GameCom.Managers {
 		private var Pause:Function;
 		private var MockUpdateWorld:Function;
 		
-		private var Weapons:Vector.<WeaponUIPanel> = new Vector.<WeaponUIPanel>();
+		public var Weapons:Vector.<WeaponUIPanel> = new Vector.<WeaponUIPanel>();
 		
 		public function GUIManager(pauseLoopback:Function, mockupdate:Function) {
 			I = this;

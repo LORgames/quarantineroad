@@ -109,25 +109,6 @@ package GameCom.Managers
 			playing_blood_effects.push(explosion);
 		}
 		
-		public function RequestVomitAt(p:Point):void {
-			if (waiting_puddle_effects.length == 0) {
-				var new_explosion:VomitPuddle = new VomitPuddle();
-				layer1.addChild(new_explosion);
-				
-				waiting_puddle_effects.push(new_explosion);
-			}
-			
-			var explosion:VomitPuddle = waiting_puddle_effects.pop();
-			
-			explosion.visible = true;
-			
-			explosion.x = p.x;
-			explosion.y = p.y;
-			explosion.Reset();
-			
-			playing_puddle_effects.push(explosion);
-		}
-		
 		public function Update(dt:Number):void {
 			var explosion:MovieClip;
 			
@@ -155,18 +136,6 @@ package GameCom.Managers
 				}
 			}
 			
-			for (i = 0; i < playing_puddle_effects.length; i++) {
-				playing_puddle_effects[i].Update(dt);
-				
-				if (playing_puddle_effects[i].IsFinished()) {
-					var c:VomitPuddle = playing_puddle_effects.splice(i, 1)[0];
-					c.visible = false;
-					c.Deactivate();
-					waiting_puddle_effects.push(c);
-					i--;
-				}
-			}
-			
 			for (i = 0; i < playing_bomb_explosions.length; i++) {
 				playing_bomb_explosions[i].Update(dt);
 				
@@ -179,6 +148,7 @@ package GameCom.Managers
 			}
 			
 			SqlshExplosion.Update(dt);
+			VomitPuddle.Update(dt);
 		}
 		
 		

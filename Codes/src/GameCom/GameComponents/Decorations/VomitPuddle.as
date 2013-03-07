@@ -82,6 +82,56 @@ package GameCom.GameComponents.Decorations
 				edge = edge.next;
 			}
 		}
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////// VOMIT CONTROLLER
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		private static var playing_explosions:Vector.<VomitPuddle> = new Vector.<VomitPuddle>();
+		private static var waiting_explosions:Vector.<VomitPuddle> = new Vector.<VomitPuddle>();
+		private static var layer:Sprite;
+		
+		public static function SetLayer(_layer:Sprite):void {
+			if (layer != null) {
+				while(playing_explosions.length > 0) {
+					var b:VomitPuddle = playing_explosions.pop();
+					layer.removeChild(b);
+					waiting_explosions.push(b);
+				}
+			}
+			
+			layer = _layer;
+		}
+		
+		public static function RequestAt(x:Number, y:Number):void {
+			if (waiting_explosions.length == 0) {
+				var new_explosion:VomitPuddle = new VomitPuddle();
+				waiting_explosions.push(new_explosion);
+			}
+			
+			var explosion:VomitPuddle = waiting_explosions.pop();
+			
+			layer.addChild(explosion);
+			
+			explosion.x = x;
+			explosion.y = y;
+			explosion.Reset();
+			
+			playing_explosions.push(explosion);
+		}
+		
+		public static function Update(dt:Number):void {
+			for (var i:int = 0; i < playing_explosions.length; i++) {
+				playing_explosions[i].Update(dt);
+				
+				if (playing_explosions[i].IsFinished()) {
+					var b:VomitPuddle = playing_explosions.splice(i, 1)[0];
+					layer.removeChild(b);
+					b.Deactivate();
+					waiting_explosions.push(b);
+					i--;
+				}
+			}
+		}
 	}
 
 }

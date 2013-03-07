@@ -81,6 +81,14 @@ package GameCom.GameComponents.Weapons {
 			}
 		}
 		
+		public function GetUpgradeIcon():BitmapData {
+			if(totalSMGs == 1) {
+				return ThemeManager.Get("WeaponIcons/w03_dual_smg.png");
+			}
+			
+			return null;
+		}
+		
 	}
 
 }

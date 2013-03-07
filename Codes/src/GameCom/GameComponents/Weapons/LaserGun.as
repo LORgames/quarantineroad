@@ -102,6 +102,9 @@ package GameCom.GameComponents.Weapons {
 			return ThemeManager.Get("WeaponIcons/w07_laser.png");
 		}
 		
+		public function GetUpgradeIcon():BitmapData {
+			return null;
+		}
 	}
 
 }

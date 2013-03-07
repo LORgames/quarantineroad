@@ -27,7 +27,7 @@ package GameCom.Helpers {
 			
 			stage.addEventListener(Event.ENTER_FRAME, Update, false, 0, true);
 			
-			for (var i:int = 1; i < 8; i++) {
+			for (var i:int = 2; i < 8; i++) {
 				for (var j:int = 0; j < 8; j++) {
 					dancers.push(CreateZombie(50 * i + (Math.random()-0.5) * 30, 50 * j + (Math.random()-0.5) * 30));
 				}

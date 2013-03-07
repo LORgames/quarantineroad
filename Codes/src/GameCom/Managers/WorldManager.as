@@ -138,19 +138,19 @@ package GameCom.Managers {
 			wallsBody = World.CreateBody(bDef);
 			
 			//Left wall
-			fDef.shape = b2PolygonShape.AsEdge(new b2Vec2( -Global.SCREEN_WIDTH*0.9 / 2 / Global.PHYSICS_SCALE, 0), new b2Vec2( -Global.SCREEN_WIDTH*0.9 / 2 / Global.PHYSICS_SCALE, 500));
+			fDef.shape = b2PolygonShape.AsEdge(new b2Vec2( -Global.SCREEN_WIDTH*0.85 / 2 / Global.PHYSICS_SCALE, 0), new b2Vec2( -Global.SCREEN_WIDTH*0.85 / 2 / Global.PHYSICS_SCALE, 500));
 			wallsBody.CreateFixture(fDef);
 			
 			//Right wall
-			fDef.shape = b2PolygonShape.AsEdge(new b2Vec2( Global.SCREEN_WIDTH*0.9 / 2 / Global.PHYSICS_SCALE, 0), new b2Vec2( Global.SCREEN_WIDTH*0.9 / 2 / Global.PHYSICS_SCALE, 500));
+			fDef.shape = b2PolygonShape.AsEdge(new b2Vec2( Global.SCREEN_WIDTH*0.85 / 2 / Global.PHYSICS_SCALE, 0), new b2Vec2( Global.SCREEN_WIDTH*0.85 / 2 / Global.PHYSICS_SCALE, 500));
 			wallsBody.CreateFixture(fDef);
 			
 			//Left Gutter
-			fDef.shape = b2PolygonShape.AsEdge(new b2Vec2( -Global.SCREEN_WIDTH*1.5 / 2 / Global.PHYSICS_SCALE, -20), new b2Vec2( -Global.SCREEN_WIDTH*0.9 / 2 / Global.PHYSICS_SCALE, 0));
+			fDef.shape = b2PolygonShape.AsEdge(new b2Vec2( -Global.SCREEN_WIDTH*1.5 / 2 / Global.PHYSICS_SCALE, -20), new b2Vec2( -Global.SCREEN_WIDTH*0.85 / 2 / Global.PHYSICS_SCALE, 0));
 			wallsBody.CreateFixture(fDef);
 			
 			//Right Gutter
-			fDef.shape = b2PolygonShape.AsEdge(new b2Vec2( Global.SCREEN_WIDTH*1.5 / 2 / Global.PHYSICS_SCALE, -20), new b2Vec2( Global.SCREEN_WIDTH*0.9 / 2 / Global.PHYSICS_SCALE, 0));
+			fDef.shape = b2PolygonShape.AsEdge(new b2Vec2( Global.SCREEN_WIDTH*1.5 / 2 / Global.PHYSICS_SCALE, -20), new b2Vec2( Global.SCREEN_WIDTH*0.85 / 2 / Global.PHYSICS_SCALE, 0));
 			wallsBody.CreateFixture(fDef);
 		}
 	}

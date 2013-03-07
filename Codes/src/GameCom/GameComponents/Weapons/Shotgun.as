@@ -97,6 +97,14 @@ package GameCom.GameComponents.Weapons {
 			}
 		}
 		
+		public function GetUpgradeIcon():BitmapData {
+			if(!upgraded) {
+				return ThemeManager.Get("WeaponIcons/w05_combat_shotgun.png");
+			}
+			
+			return null;
+		}
+		
 	}
 
 }

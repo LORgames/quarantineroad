@@ -9,6 +9,7 @@ package GameCom.GameComponents.Zombies
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	import flash.utils.getTimer;
+	import GameCom.GameComponents.Decorations.VomitPuddle;
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
@@ -85,7 +86,7 @@ package GameCom.GameComponents.Zombies
 				if (animation.IsStopped()) {
 					stopped = false;
 					
-					ExplosionManager.I.RequestVomitAt(new Point(this.x, this.y));
+					VomitPuddle.RequestAt(this.x, this.y);
 					
 					throwupTime = Math.random() * 3 + 2;
 					myState = WALKING;

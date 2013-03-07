@@ -72,6 +72,14 @@ package GameCom.GameComponents.Weapons {
 			}
 		}
 		
+		public function GetUpgradeIcon():BitmapData {
+			if(FIRE_RATE < 0.3) {
+				return ThemeManager.Get("WeaponIcons/w01_dual_pistol.png");
+			}
+			
+			return null;
+		}
+		
 	}
 
 }

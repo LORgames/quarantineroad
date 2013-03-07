@@ -120,6 +120,10 @@ package GameCom.GameComponents.Weapons {
 			return ThemeManager.Get("WeaponIcons/w11_chain_lightning.png");
 		}
 		
+		public function GetUpgradeIcon():BitmapData {
+			return null;
+		}
+		
 	}
 
 }
