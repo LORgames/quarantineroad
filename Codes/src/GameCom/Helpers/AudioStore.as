@@ -90,9 +90,6 @@ package GameCom.Helpers
 		[Embed(source = "../../../lib/Audio/Shotgun/reload.mp3")]
 		public static const ShotgunReload:Class;
 		
-		[Embed(source = "../../../lib/Audio/ZombieSounds/1.mp3")]
-		public static const ZombieSound1:Class;
-		
 		[Embed(source = "../../../lib/Audio/ZombieSounds/2.mp3")]
 		public static const ZombieSound2:Class;
 		
@@ -112,7 +109,7 @@ package GameCom.Helpers
 		public static const ZombieSound7:Class;
 		//} endregion
 		
-		public static var ZombieSounds:Array = new Array(ZombieSound1, ZombieSound2, ZombieSound3, ZombieSound4, ZombieSound5, ZombieSound6, ZombieSound7);
+		public static var ZombieSounds:Array = new Array(ZombieSound2, ZombieSound3, ZombieSound4, ZombieSound5, ZombieSound6, ZombieSound7);
 		public static var FootstepSounds:Array = new Array(Footstep1, Footstep2, Footstep3, Footstep4, Footstep5);
 		public static var ShotgunFire:Array = new Array(ShotgunFire1, ShotgunFire2, ShotgunFire3, ShotgunFire4, ShotgunFire5, ShotgunFire6, ShotgunFire7);
 		

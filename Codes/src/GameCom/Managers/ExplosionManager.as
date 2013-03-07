@@ -9,6 +9,7 @@ package GameCom.Managers
 	import GameCom.GameComponents.Decorations.BloodExplosion;
 	import GameCom.GameComponents.Decorations.GrenadeExplosion;
 	import GameCom.GameComponents.Decorations.IExplosion;
+	import GameCom.GameComponents.Decorations.SniperTrail;
 	import GameCom.GameComponents.Decorations.SqlshExplosion;
 	import GameCom.GameComponents.Decorations.VomitPuddle;
 	import GameCom.Helpers.AudioStore;
@@ -43,6 +44,7 @@ package GameCom.Managers
 			
 			SqlshExplosion.SetLayer(layer);
 			VomitPuddle.SetLayer(layer1);
+			SniperTrail.SetLayer(layer);
 		}
 		
 		public function RequestCarExplosionAt(p:Point, damage:Number = 100):void {
@@ -150,6 +152,7 @@ package GameCom.Managers
 			
 			SqlshExplosion.Update(dt);
 			VomitPuddle.Update(dt);
+			SniperTrail.Update(dt);
 		}
 		
 		

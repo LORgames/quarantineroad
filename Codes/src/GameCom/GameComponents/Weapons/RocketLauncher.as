@@ -7,6 +7,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.Helpers.GrenadeHelper;
 	import GameCom.Managers.BulletManager;
+	import LORgames.Engine.Keys;
 	/**
 	 * ...
 	 * @author Paul
@@ -25,12 +26,14 @@ package GameCom.GameComponents.Weapons {
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
 		public function Update(dt:Number, location:b2Vec2):void {
-			fireTime += dt;
-			
 			if (fireTime > FIRE_RATE) {
-				fireTime -= FIRE_RATE;
-				
-				GrenadeHelper.I.SpawnGrenade(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE);
+				if(Keys.isKeyDown(32)) {
+					fireTime -= FIRE_RATE;
+					
+					GrenadeHelper.I.SpawnGrenade(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE);
+				}
+			} else {
+				fireTime += dt;
 			}
 		}
 		

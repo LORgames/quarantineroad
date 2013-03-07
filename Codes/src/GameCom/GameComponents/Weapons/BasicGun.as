@@ -8,6 +8,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.GameComponents.Projectiles.SniperBullet;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
+	import LORgames.Engine.Keys;
 	/**
 	 * ...
 	 * @author Paul
@@ -26,11 +27,13 @@ package GameCom.GameComponents.Weapons {
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
 		public function Update(dt:Number, location:b2Vec2):void {
-			fireTime += dt;
-			
 			if (fireTime > FIRE_RATE) {
-				fireTime -= FIRE_RATE;
-				BulletManager.I.FireAt(location, BasicBullet, this);
+				if(Keys.isKeyDown(32)) {
+					fireTime -= FIRE_RATE;
+					BulletManager.I.FireAt(location, BasicBullet, this);
+				}
+			} else {
+				fireTime += dt;
 			}
 		}
 		

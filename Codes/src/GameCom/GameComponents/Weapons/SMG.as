@@ -7,6 +7,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
+	import LORgames.Engine.Keys;
 	/**
 	 * ...
 	 * @author Paul
@@ -29,17 +30,19 @@ package GameCom.GameComponents.Weapons {
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
 		public function Update(dt:Number, location:b2Vec2):void {
-			fireTime += dt;
-			
 			if (fireTime > FIRE_RATE) {
-				fireTime -= FIRE_RATE;
-				
-				for (var i:int = 0; i < totalSMGs; i++) {
-					if(bullets > 0) {
-						BulletManager.I.FireAt(location, BasicBullet, this, (Math.random() - 0.5), 5);
-						bullets--;
+				if(Keys.isKeyDown(32)) {
+					fireTime -= FIRE_RATE;
+					
+					for (var i:int = 0; i < totalSMGs; i++) {
+						if(bullets > 0) {
+							BulletManager.I.FireAt(location, BasicBullet, this, (Math.random() - 0.5), 5);
+							bullets--;
+						}
 					}
 				}
+			} else {
+				fireTime += dt;
 			}
 		}
 		

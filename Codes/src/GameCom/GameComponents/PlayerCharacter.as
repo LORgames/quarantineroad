@@ -125,9 +125,9 @@ package GameCom.GameComponents
 				newEquipedWeapon = 6; // Flamethrower
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_8)) {
 				newEquipedWeapon = 7; // Rocket Launcher
-			} else if (Keys.isKeyDown(Keyboard.SPACE)) {
+			} /*else if (Keys.isKeyDown(Keyboard.SPACE)) {
 				GrenadeHelper.I.SpawnGrenade(this.x, this.y);
-			}
+			}*/
 			
 			if (newEquipedWeapon != activeWeapon) {
 				weapons[activeWeapon].Deactivate();

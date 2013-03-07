@@ -9,6 +9,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
 	import LORgames.Engine.AudioController;
+	import LORgames.Engine.Keys;
 	/**
 	 * ...
 	 * @author Paul
@@ -33,27 +34,29 @@ package GameCom.GameComponents.Weapons {
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
 		public function Update(dt:Number, location:b2Vec2):void {
-			fireTime += dt;
-			
 			if (fireTime > FIRE_RATE) {
-				if(shells > 0) {
-					AudioController.PlaySound(AudioStore.GetShotgunFireSound());
+				if(Keys.isKeyDown(32)) {
+					if(shells > 0) {
+						AudioController.PlaySound(AudioStore.GetShotgunFireSound());
+						
+						fireTime -= FIRE_RATE;
+						BulletManager.I.FireAt(location, BasicBullet, this,-3*Math.PI/10, RANGE, DAMAGE);
+						BulletManager.I.FireAt(location, BasicBullet, this,-2*Math.PI/10, RANGE, DAMAGE);
+						BulletManager.I.FireAt(location, BasicBullet, this,-1*Math.PI/10, RANGE, DAMAGE);
+						BulletManager.I.FireAt(location, BasicBullet, this,-0*Math.PI/10, RANGE, DAMAGE);
+						BulletManager.I.FireAt(location, BasicBullet, this, 1*Math.PI/10, RANGE, DAMAGE);
+						BulletManager.I.FireAt(location, BasicBullet, this, 2*Math.PI/10, RANGE, DAMAGE);
+						BulletManager.I.FireAt(location, BasicBullet, this, 3 * Math.PI / 10, RANGE, DAMAGE);
+						
+						shells--;
+					}
 					
-					fireTime -= FIRE_RATE;
-					BulletManager.I.FireAt(location, BasicBullet, this,-3*Math.PI/10, RANGE, DAMAGE);
-					BulletManager.I.FireAt(location, BasicBullet, this,-2*Math.PI/10, RANGE, DAMAGE);
-					BulletManager.I.FireAt(location, BasicBullet, this,-1*Math.PI/10, RANGE, DAMAGE);
-					BulletManager.I.FireAt(location, BasicBullet, this,-0*Math.PI/10, RANGE, DAMAGE);
-					BulletManager.I.FireAt(location, BasicBullet, this, 1*Math.PI/10, RANGE, DAMAGE);
-					BulletManager.I.FireAt(location, BasicBullet, this, 2*Math.PI/10, RANGE, DAMAGE);
-					BulletManager.I.FireAt(location, BasicBullet, this, 3 * Math.PI / 10, RANGE, DAMAGE);
-					
-					shells--;
+					if (shells > 0) {
+						AudioController.PlaySound(AudioStore.ShotgunReload);
+					}
 				}
-				
-				if (shells > 0) {
-					AudioController.PlaySound(AudioStore.ShotgunReload);
-				}
+			} else {
+				fireTime += dt;
 			}
 		}
 		

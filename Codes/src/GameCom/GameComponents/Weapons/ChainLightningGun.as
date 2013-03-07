@@ -15,6 +15,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.WorldManager;
+	import LORgames.Engine.Keys;
 	/**
 	 * ...
 	 * @author Paul
@@ -41,28 +42,30 @@ package GameCom.GameComponents.Weapons {
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
 		public function Update(dt:Number, location:b2Vec2):void {
-			fireTime += dt;
-			
-			if (fireTime > FIRE_RATE && battery > 0) {
-				fireTime -= FIRE_RATE;
-				
-				fried = new Vector.<IZombie>();
-				WorldManager.World.QueryShape(QueryZombie, new b2CircleShape(5), new b2Transform(location, new b2Mat22()));
-				
-				if (fried.length > 0) {
-					battery -= FIRE_RATE;
+			if (fireTime > FIRE_RATE) {
+				if (battery > 0 && Keys.isKeyDown(32)) {
+					fireTime -= FIRE_RATE;
+					
+					fried = new Vector.<IZombie>();
+					WorldManager.World.QueryShape(QueryZombie, new b2CircleShape(5), new b2Transform(location, new b2Mat22()));
+					
+					if (fried.length > 0) {
+						battery -= FIRE_RATE;
+					}
+					
+					//LIGHTNING
+					var points:Vector.<Point> = new Vector.<Point>();
+					points.push(new Point(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE));
+					
+					for (var i:int = 0; i < Math.min(3, fried.length); i++) {
+						fried[i].Hit(0.5);
+						points.push(fried[i].GetPixelLocation());
+					}
+					
+					lightning.DrawPoints(points);
 				}
-				
-				//LIGHTNING
-				var points:Vector.<Point> = new Vector.<Point>();
-				points.push(new Point(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE));
-				
-				for (var i:int = 0; i < Math.min(3, fried.length); i++) {
-					fried[i].Hit(0.5);
-					points.push(fried[i].GetPixelLocation());
-				}
-				
-				lightning.DrawPoints(points);
+			} else {
+				fireTime += dt;
 			}
 			
 			lightning.Update(dt);

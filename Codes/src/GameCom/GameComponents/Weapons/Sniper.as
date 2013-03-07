@@ -25,11 +25,11 @@ package GameCom.GameComponents.Weapons {
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
 		public function Update(dt:Number, location:b2Vec2):void {
-			fireTime += dt;
-			
 			if (fireTime > FIRE_RATE) {
 				fireTime -= FIRE_RATE;
 				BulletManager.I.FireAt(location, SniperBullet, this);
+			} else {
+				fireTime += dt;
 			}
 		}
 		
