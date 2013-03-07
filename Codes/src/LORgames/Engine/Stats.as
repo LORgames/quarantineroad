@@ -1,6 +1,5 @@
 package LORgames.Engine {
 	import flash.display.LoaderInfo;
-	import LORgames.Engine.StatServers.BlankStatServer;
 	import LORgames.Engine.StatServers.IStatServer;
 	import LORgames.Engine.StatServers.KongregateStats;
 	import LORgames.Engine.StatServers.MochiMediaStats;
@@ -13,12 +12,10 @@ package LORgames.Engine {
 		
 		public static function Connect():void {
 			if (LoaderInfo(Main.GetStage().loaderInfo).parameters.kongregate_api_path) {
-				//statServer = new KongregateStats();
+				statServer = new KongregateStats();
 			} else {
-				//statServer = new MochiMediaStats();
+				statServer = new MochiMediaStats();
 			}
-			
-			statServer = new BlankStatServer();
 		}
 		
 		public static function AddOne(statname:String):void {
@@ -65,8 +62,8 @@ package LORgames.Engine {
 			}
 		}
 		
-		public static function StartLevel(CurrentLevel:int):void {
-			statServer.StartLevel("level_" + CurrentLevel);
+		public static function StartLevel():void {
+			statServer.StartLevel();
 		}
 		
 		public static function EndLevel():void {

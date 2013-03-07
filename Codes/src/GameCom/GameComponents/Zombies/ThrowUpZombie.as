@@ -45,6 +45,14 @@ package GameCom.GameComponents.Zombies
 		private var myState:int = WALKING;
 		
 		public function ThrowUpZombie() {
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Walk_1.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Walk_2.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Walk_3.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Walk_4.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Walk_5.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Walk_6.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Walk_7.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Walk_8.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/0_0.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/0_1.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/0_2.png"));
@@ -60,37 +68,40 @@ package GameCom.GameComponents.Zombies
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/0_12.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/0_13.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/0_14.png"));
-			animation.ChangePlayback(0.1, 0, 1);
+			
+			animation.ChangePlayback(0.1, 0, 8);
+			animation.Update(0);
+			
 			this.addChild(animation);
 			
 			//Create the defintion
 			body = BodyHelper.GetGenericCircle(RADIUS, Global.PHYSICS_CATEGORY_ZOMBIES, this, 0xFFFF & ~Global.PHYSICS_CATEGORY_WALLS & ~Global.PHYSICS_CATEGORY_VOMIT);
-			body.SetType(b2Body.b2_kinematicBody);
+			body.SetType(b2Body.b2_dynamicBody);
 		}
 		
 		public function Update(dt:Number):void {
 			this.x = Math.round(body.GetPosition().x * Global.PHYSICS_SCALE);
 			this.y = Math.round(body.GetPosition().y * Global.PHYSICS_SCALE);
 			
-			animation.Update(dt);
-			animation.x = -animation.width / 2;
-			animation.y = -animation.height + RADIUS * Global.PHYSICS_SCALE;
-			
 			throwupTime -= dt;
 			
 			if (throwupTime <= 0 && myState != THROWING_UP) {
 				stopped = true;
-				animation.ChangePlayback(0.1, 0, 15, true);
+				animation.ChangePlayback(0.1, 8, 15, true);
 				myState = THROWING_UP;
+				
+				VomitPuddle.RequestAt(this.x, this.y);
+				
+				body.SetLinearDamping(1);
 			} else if (myState == THROWING_UP) {
 				if (animation.IsStopped()) {
 					stopped = false;
 					
-					VomitPuddle.RequestAt(this.x, this.y);
-					
-					throwupTime = Math.random() * 3 + 2;
+					throwupTime = Math.random() * 5 + 5;
 					myState = WALKING;
-					animation.ChangePlayback(0.1, 0, 1);
+					animation.ChangePlayback(0.1, 0, 8);
+					
+					body.SetLinearDamping(0.1);
 				}
 			}
 			
@@ -105,6 +116,10 @@ package GameCom.GameComponents.Zombies
 					xSpeed = (stopped?0:-2);
 				}
 			}
+			
+			animation.Update(dt);
+			animation.x = -animation.width / 2;
+			animation.y = -animation.height + RADIUS * Global.PHYSICS_SCALE;
 			
 			if(dt > 0) body.SetLinearVelocity(new b2Vec2(xSpeed, ySpeed));
 		}
@@ -146,16 +161,20 @@ package GameCom.GameComponents.Zombies
 			
 			body.SetActive(true);
 			body.SetPosition(position);
+			body.SetLinearDamping(0.1);
 			
 			myHP = BASE_HP;
 			dead = false;
 			
-			throwupTime = Math.random() * 30;
+			throwupTime = Math.random() * 5 + 5;
 			
 			mySpeed = Math.random() * 0.5 + BASE_SPEED;
 			
 			stopped = false;
 			myState = WALKING;
+			
+			animation.ChangePlayback(0.1, 0, 8);
+			animation.Update(0);
 			
 			Update(0);
 		}

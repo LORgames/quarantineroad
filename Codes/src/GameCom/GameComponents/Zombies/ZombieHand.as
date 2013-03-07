@@ -23,7 +23,7 @@ package GameCom.GameComponents.Zombies {
 	public class ZombieHand extends Sprite implements IZombie {
 		private const BASE_HP:Number = 1.0;
 		private const SCORE:int = 1;
-		private const BASE_WAIT_TIME:Number = 0.0;
+		private const BASE_WAIT_TIME:Number = 0.5;
 		private const SCREENSHAKE_AMT:Number = 50.0;
 		
 		private const RISING:int = 0;
@@ -104,7 +104,7 @@ package GameCom.GameComponents.Zombies {
 		}
 		
 		public function HitPlayer(player:PlayerCharacter):Number {
-			return 1;
+			return 0;
 		}
 		
 		public function OutsideScene():Boolean {

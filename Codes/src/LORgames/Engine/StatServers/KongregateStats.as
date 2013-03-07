@@ -54,7 +54,7 @@ package LORgames.Engine.StatServers
 			// etc...
 		}
 		
-		public function StartLevel(levelID:String):void {}
+		public function StartLevel():void {}
 		public function EndLevel():void {}
 		
 		public function Submit(statname:String, statvalue:int):void {

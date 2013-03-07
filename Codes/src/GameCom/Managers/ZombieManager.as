@@ -53,17 +53,11 @@ package GameCom.Managers {
 			
 			ZombieTypes.push(SlowZombie);
 			ZombieTypes.push(LimpZombie);
-			ZombieTypes.push(ExplosionZombie);
-			ZombieTypes.push(ExplosionZombie);
-			ZombieTypes.push(ExplosionZombie);
-			ZombieTypes.push(ExplosionZombie);
-			ZombieTypes.push(HulkZombie);
-			ZombieTypes.push(HulkZombie);
-			ZombieTypes.push(ThrowUpZombie);
-			ZombieTypes.push(ZombieHand);
-			ZombieTypes.push(BlueZombie);
 			ZombieTypes.push(BlueZombie);
 			ZombieTypes.push(RedZombie);
+			ZombieTypes.push(ExplosionZombie);
+			ZombieTypes.push(HulkZombie);
+			ZombieTypes.push(ThrowUpZombie);
 			
 			surviveTime = getTimer();
 		}

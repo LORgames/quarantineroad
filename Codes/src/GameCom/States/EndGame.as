@@ -38,12 +38,18 @@ package GameCom.States {
 		
 		private var handAnimation:AnimatedSprite = new AnimatedSprite();
 		
-		private var score:int = 0;
-		private var distance:int = 0;
-		private var zombiekills:int = 0;
+		private var score:String = "";
+		private var distance:String = "";
+		private var zombiekills:String = "";
 		
-		public function EndGame(score:int, distance:String, zombiekills:int) {
-			trace("S:" + score + " D:" + distance + " Z:" + zombiekills);
+		private var scoreTF:TextField;
+		private var distanceTF:TextField;
+		private var zombiekillsTF:TextField;
+		
+		public function EndGame(score:String, distance:String, zombiekills:String) {
+			this.score = score;
+			this.distance = distance;
+			this.zombiekills = zombiekills;
 			
 			//Just make sure we're ready to do this...
 			if (this.stage) Init();
@@ -71,12 +77,10 @@ package GameCom.States {
 			MenuBtn.addEventListener(MouseEvent.CLICK, MenuClicked, false, 0, true);
 			this.addChild(MenuBtn);
 			
-			adContainer.x = 72; adContainer.y = 335;
 			this.addChild(adContainer);
 			
 			//TODO: ENABLE ADS
 			MochiAd.showClickAwayAd( { clip:adContainer, id:"5a3aaf31eb62a90e" } );
-			//.showPreGameAd({clip:adContainer, id:"5a3aaf31eb62a90e", res:stage.stageWidth+"x"+stage.stageHeight, ad_finished:fAdFinished, no_progress_bar:true});
 			
 			handAnimation.AddFrame(ThemeManager.Get("Zombies/Hand/0_5.png"));
 			handAnimation.AddFrame(ThemeManager.Get("Zombies/Hand/0_6.png"));
@@ -90,7 +94,24 @@ package GameCom.States {
 			this.stage.addEventListener(Event.ENTER_FRAME, Update, false, 0, true);
 			this.stage.addEventListener(Event.RESIZE, Resized, false, 0, true);
 			
+			scoreTF = CreateTextField(score + " <font color='#9DD2D0'>points</font>");
+			distanceTF = CreateTextField(distance + " <font color='#D0CB4C'>meters run</font>");
+			zombiekillsTF = CreateTextField(zombiekills + " <font color='#64C24B'>zombies slain</font>");
+			
 			Resized();
+		}
+		
+		public function CreateTextField(str:String):TextField {
+			var info:TextField = new TextField();
+			info.embedFonts = true;
+			info.defaultTextFormat = new TextFormat("Visitor", 18, 0xFFFFFF);
+			info.filters = new Array(new GlowFilter(0x3B3535, 1, 4, 4, 10));
+			info.htmlText = str;
+			info.autoSize = TextFieldAutoSize.LEFT;
+			info.selectable = false;
+			this.addChild(info);
+			
+			return info;
 		}
 		
 		public function Update(e:*):void {
@@ -111,17 +132,26 @@ package GameCom.States {
 			background.x = (this.stage.stageWidth - background.width) / 2;
 			background.y = (this.stage.stageHeight - background.height) / 2;
 			
-			RestartBtn.x = background.x + 18;
+			RestartBtn.x = background.x + 38;
 			RestartBtn.y = background.y + 230;
 			
-			MenuBtn.x = background.x + 223;
+			MenuBtn.x = background.x + 254;
 			MenuBtn.y = background.y + 230;
 			
 			handAnimation.x = (stage.stageWidth - handAnimation.width) / 2;
 			handAnimation.y = background.y + 35;
 			
-			adContainer.x = background.x + 72;
-			adContainer.y = background.y + 335;
+			adContainer.x = background.x + 100;
+			adContainer.y = background.y + 336;
+			
+			scoreTF.x = background.x + 225;
+			scoreTF.y = background.y + 172;
+			
+			distanceTF.x = background.x + 225;
+			distanceTF.y = background.y + 194;
+			
+			zombiekillsTF.x = background.x + 225;
+			zombiekillsTF.y = background.y + 215;
 		}
 		
 		public function MouseOverText(e:MouseEvent):void {

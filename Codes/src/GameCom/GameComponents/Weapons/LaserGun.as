@@ -7,6 +7,7 @@ package GameCom.GameComponents.Weapons {
 	import flash.display.Sprite;
 	import flash.geom.Matrix;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
+	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.WorldManager;
 	/**
@@ -44,7 +45,11 @@ package GameCom.GameComponents.Weapons {
 				
 				Layer.graphics.clear();
 				Layer.graphics.beginBitmapFill(ThemeManager.Get("bullets/Laser.png"), new Matrix(1, 0, 0, 1, int(location.x * Global.PHYSICS_SCALE) - 2, 0));
-				Layer.graphics.drawRect(int(pointHit.x * Global.PHYSICS_SCALE) - 2, int(pointHit.y * Global.PHYSICS_SCALE) - 20, 5, (location.y-pointHit.y)*Global.PHYSICS_SCALE + 20);
+				Layer.graphics.drawRect(int(pointHit.x * Global.PHYSICS_SCALE) - 2, int(pointHit.y * Global.PHYSICS_SCALE) - 20, 5, (location.y - pointHit.y) * Global.PHYSICS_SCALE + 20);
+				
+				if (objectHit.GetUserData() is IZombie) {
+					(objectHit.GetUserData() as IZombie).Hit(0.05);
+				}
 			}
 		}
 		

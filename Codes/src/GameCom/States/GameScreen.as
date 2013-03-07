@@ -35,6 +35,7 @@ package GameCom.States {
 	import GameCom.Managers.BGManager;
 	import LORgames.Engine.Logger;
 	import LORgames.Engine.MessageBox;
+	import LORgames.Engine.Stats;
 	/**
 	 * ...
 	 * @author P. Fox
@@ -138,6 +139,8 @@ package GameCom.States {
 			
 			WorldManager.WorldScrolled = 0;
 			
+			Stats.StartLevel();
+			
 			Resize();
 		}
 		
@@ -215,7 +218,8 @@ package GameCom.States {
 			if (EndOfTheLine_TerminateASAP) {
 				simulating = false;
 				Cleanup();
-				SystemMain.instance.StateTo(new EndGame(parseInt(GUIManager.I.Score.text), (WorldManager.WorldScrolled/Global.PHYSICS_SCALE).toFixed(2), 0));
+				Stats.EndLevel();
+				SystemMain.instance.StateTo(new EndGame(GUIManager.I.Score.text, (WorldManager.WorldScrolled/Global.PHYSICS_SCALE).toFixed(2), "0"));
 			}
 		}
 		

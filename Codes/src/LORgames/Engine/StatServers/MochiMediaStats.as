@@ -11,7 +11,6 @@ package LORgames.Engine.StatServers
 		private var isWorking:Boolean = true;
 		
 		public function MochiMediaStats() {
-			trace("using mochi stats: UNSUPPORTED ANALYTICS =(");
 			MochiServices.connect("5a3aaf31eb62a90e", Main.GetStage(), onConnectError);
 		}
 		
@@ -20,8 +19,8 @@ package LORgames.Engine.StatServers
 			//isWorking = false;
 		}
 		
-		public function StartLevel(level:String):void {
-			MochiEvents.startPlay(level);
+		public function StartLevel():void {
+			MochiEvents.startPlay();
 		}
 		
 		public function EndLevel():void {

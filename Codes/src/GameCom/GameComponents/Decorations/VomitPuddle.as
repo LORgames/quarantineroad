@@ -20,7 +20,6 @@ package GameCom.GameComponents.Decorations
 		
 		public function VomitPuddle() {
 			animation = new AnimatedSprite();
-			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/0.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/1.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/2.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/3.png"));
@@ -30,12 +29,21 @@ package GameCom.GameComponents.Decorations
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/7.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/8.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/9.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/10.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/11.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/12.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/13.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/14.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/15.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Poison/Acid/16.png"));
 			
+			animation.ChangePlayback(0.1, 0, 5, true);
 			animation.Update(0);
+			
 			this.addChild(animation);
 			
 			animation.x = -animation.width / 2;
-			animation.y = -animation.height / 2;
+			animation.y = -animation.height * 0.7;
 			
 			body = BodyHelper.GetGenericCircle(1.5, Global.PHYSICS_CATEGORY_VOMIT, this, 0xFFFF & ~Global.PHYSICS_CATEGORY_BULLETS & ~Global.PHYSICS_CATEGORY_PLAYER);
 			body.SetType(b2Body.b2_kinematicBody);
@@ -50,7 +58,9 @@ package GameCom.GameComponents.Decorations
 			body.SetActive(true);
 			body2.SetPosition(new b2Vec2(this.x / Global.PHYSICS_SCALE, this.y / Global.PHYSICS_SCALE));
 			body2.SetActive(true);
-			animation.ChangePlayback(0.1, 0, 10);
+			
+			animation.ChangePlayback(0.1, 0, 5, true);
+			animation.Update(0);
 		}
 		
 		public function Deactivate():void {
@@ -59,10 +69,11 @@ package GameCom.GameComponents.Decorations
 		}
 		
 		public function IsFinished():Boolean {
-			return animation.IsStopped();
+			return this.y-50 > stage.stageHeight;
 		}
 		
 		public function Update(dt:Number):void {
+			if (animation.IsStopped()) animation.ChangePlayback(0.1, 5, 11);
 			animation.Update(dt);
 			
 			body.SetLinearVelocity(new b2Vec2(0, WorldManager.WorldScrollSpeed));

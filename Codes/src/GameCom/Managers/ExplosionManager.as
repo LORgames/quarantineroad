@@ -42,6 +42,7 @@ package GameCom.Managers
 			this.layer1 = layer1;
 			
 			SqlshExplosion.SetLayer(layer);
+			VomitPuddle.SetLayer(layer1);
 		}
 		
 		public function RequestCarExplosionAt(p:Point, damage:Number = 100):void {
