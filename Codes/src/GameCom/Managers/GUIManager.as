@@ -74,7 +74,7 @@ package GameCom.Managers {
 		public function Update() : void {
 			if (stage == null) return;
 			
-			Score.text = ScoreHelper.Score.value.toString();
+			Score.text = ScoreHelper.Score.Value.toString();
 			
 			Score.x = (stage.stageWidth - Score.width) / 2;
 			Score.y = 30;

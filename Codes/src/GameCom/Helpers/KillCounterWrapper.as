@@ -21,29 +21,36 @@ package GameCom.Helpers
 			this.type = type;
 		}
 		
-		public function get value():Number {
+		public function get Value():Number {
 			return _val.value;
 		}
 		
-		public function addValue(val:Number):void {
+		public function AddValue(val:Number):void {
 			_val.addValue(val);
 			
-			if (type == DISTANCE) {
-				if (value > 200 && ScoreHelper.AllKills.value == 0) TrophyHelper.GotTrophyByName("Pacifist");
-				if (value > 100) TrophyHelper.GotTrophyByName("100m Run");
-				if (value > 500) TrophyHelper.GotTrophyByName("500m Run");
-				if (value > 1000) TrophyHelper.GotTrophyByName("1000m Run");
-			} else if (type == KILLS) {
-				ScoreHelper.AllKills.addValue(val);
+			if (type == KILLS) {
+				ScoreHelper.AllKills.AddValue(val);
 			} else if (type == TIME) {
-				if (value > 180) TrophyHelper.GotTrophyByName("Time");
-				if (value > 360) TrophyHelper.GotTrophyByName("Man vs Zombie");
+				if (Value > 180) TrophyHelper.GotTrophyByName("Time");
+				if (Value > 360) TrophyHelper.GotTrophyByName("Man vs Zombie");
 			} else if (type == TOTAL) {
-				if (WorldManager.WorldShake >= 0.3) {
-					ScoreHelper.ShakeyKills.addValue(val);
-				}
+				if (WorldManager.WorldShake >= 0.3) ScoreHelper.ShakeyKills.AddValue(val);
+				if (Value > 100) TrophyHelper.GotTrophyByName("Piece of Cake");
+				if (Value > 500) TrophyHelper.GotTrophyByName("Zombie");
+				if (Value > 1000) TrophyHelper.GotTrophyByName("Project Alice");
 			} else if (type == SHAKEY_KILLS) {
-				if (value > 20) TrophyHelper.GotTrophyByName("Harlem Shake");
+				if (Value > 20) TrophyHelper.GotTrophyByName("Harlem Shake");
+			}
+		}
+		
+		public function SetValue(value:Number):void {
+			_val.setValue(value);
+			
+			if (type == DISTANCE) {
+				if (Value > 200 && ScoreHelper.AllKills.Value == 0) TrophyHelper.GotTrophyByName("Pacifist");
+				if (Value > 100) TrophyHelper.GotTrophyByName("100m Run");
+				if (Value > 500) TrophyHelper.GotTrophyByName("500m Run");
+				if (Value > 1000) TrophyHelper.GotTrophyByName("1000m Run");
 			}
 		}
 	}

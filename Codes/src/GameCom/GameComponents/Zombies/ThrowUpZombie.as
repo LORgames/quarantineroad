@@ -132,10 +132,10 @@ package GameCom.GameComponents.Zombies
 			if (myHP <= 0 && !dead) {
 				dead = true;
 				
-				ScoreHelper.Score.addValue(SCORE);
-				ScoreHelper.ThrowUpKills.addValue(1);
+				ScoreHelper.Score.AddValue(SCORE);
+				ScoreHelper.ThrowUpKills.AddValue(1);
 				
-				if (ScoreHelper.ThrowUpKills.value == 25) {
+				if (ScoreHelper.ThrowUpKills.Value == 25) {
 					TrophyHelper.GotTrophyByName("My name is Hurl");
 				}
 				

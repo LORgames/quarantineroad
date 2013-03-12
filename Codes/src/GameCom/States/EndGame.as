@@ -50,9 +50,9 @@ package GameCom.States {
 		private var zombiekillsTF:TextField;
 		
 		public function EndGame() {
-			this.score = ScoreHelper.Score.value.toFixed(0);
-			this.distance = ScoreHelper.Distance.value.toFixed(2);
-			this.zombiekills = ScoreHelper.AllKills.value.toFixed(0);
+			this.score = ScoreHelper.Score.Value.toFixed(0);
+			this.distance = ScoreHelper.Distance.Value.toFixed(2);
+			this.zombiekills = ScoreHelper.AllKills.Value.toFixed(0);
 			
 			//Just make sure we're ready to do this...
 			if (this.stage) Init();

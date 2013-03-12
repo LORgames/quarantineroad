@@ -51,12 +51,12 @@ package GameCom.Managers {
 				UnusedZombies.push(new SlowZombie());
 			}
 			
-			ZombieTypes.push(SlowZombie);
-			ZombieTypes.push(LimpZombie);
 			ZombieTypes.push(BlueZombie);
-			ZombieTypes.push(RedZombie);
 			ZombieTypes.push(ExplosionZombie);
 			ZombieTypes.push(HulkZombie);
+			ZombieTypes.push(LimpZombie);
+			ZombieTypes.push(RedZombie);
+			ZombieTypes.push(SlowZombie);
 			ZombieTypes.push(ThrowUpZombie);
 			
 			surviveTime = getTimer();
@@ -79,7 +79,7 @@ package GameCom.Managers {
 				handTimeout -= dt;
 			}
 			
-			if (totalTime > previousUpdate + 1000) {
+			if (totalTime > previousUpdate + 2500) {
 				if (SpawnList.length == 0) {
 					//Spawning a random one
 					cls = ZombieTypes[int(ZombieTypes.length * Math.random())];

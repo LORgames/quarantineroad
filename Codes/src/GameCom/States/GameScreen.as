@@ -159,17 +159,18 @@ package GameCom.States {
 				
 				//Add 1pt for every metre travelled
 				if (lastScrolled + 1 < WorldManager.WorldScrolled / Global.PHYSICS_SCALE) {
-					ScoreHelper.Score.addValue(1);
+					ScoreHelper.Score.AddValue(1);
 					lastScrolled += 1;
 				}
 				
 				//Add 1pt for every second playing
 				lastUpdate += Global.TIME_STEP;
-				ScoreHelper.Time.addValue(Global.TIME_STEP);
+				ScoreHelper.Time.AddValue(Global.TIME_STEP);
+				ScoreHelper.Distance.SetValue(WorldManager.WorldScrolled / Global.PHYSICS_SCALE);
 				
 				if (lastUpdate > 1) {
 					lastUpdate -= 1;
-					ScoreHelper.Score.addValue(1);
+					ScoreHelper.Score.AddValue(1);
 				}
 				
 				BulletManager.I.Update(Global.TIME_STEP);
@@ -181,16 +182,6 @@ package GameCom.States {
 				//Update the world
 				WorldManager.World.Step(Global.TIME_STEP, Global.VELOCITY_ITERATIONS, Global.POSITION_ITERATIONS);
 				WorldManager.World.ClearForces();
-				
-				if (ScoreHelper.AllKills.value > 100) {
-					TrophyHelper.GotTrophyByName("Piece of Cake");
-				}
-				if (ScoreHelper.AllKills.value > 500) {
-					TrophyHelper.GotTrophyByName("Zombie");
-				}
-				if (ScoreHelper.AllKills.value > 1000) {
-					TrophyHelper.GotTrophyByName("Project Alice");
-				}
 				
 				if(stage) {
 					worldSpr.x = Math.floor(WorldManager.WorldX + stage.stageWidth / 2) + (Math.random()-0.5)*WorldManager.WorldShake;

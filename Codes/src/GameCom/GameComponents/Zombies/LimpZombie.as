@@ -120,8 +120,8 @@ package GameCom.GameComponents.Zombies
 			if (myHP <= 0 && !dead) {
 				dead = true;
 				
-				ScoreHelper.Score.addValue(SCORE);
-				ScoreHelper.LimpKills.addValue(1);
+				ScoreHelper.Score.AddValue(SCORE);
+				ScoreHelper.LimpKills.AddValue(1);
 				
 				if(Math.random() < 0.001) {
 					LootManager.I.SpawnAmmoAt(body.GetPosition());

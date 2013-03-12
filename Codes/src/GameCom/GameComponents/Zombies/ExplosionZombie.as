@@ -106,8 +106,8 @@ package GameCom.GameComponents.Zombies
 				
 				var kills:int = SqlshExplosion.RequestExplosionAt(this.x, this.y);
 				
-				ScoreHelper.Score.addValue(SCORE);
-				ScoreHelper.ExplosiveKills.addValue(1);
+				ScoreHelper.Score.AddValue(SCORE);
+				ScoreHelper.ExplosiveKills.AddValue(1);
 				
 				trace("ExplosionZombie Killed: " + kills);
 				

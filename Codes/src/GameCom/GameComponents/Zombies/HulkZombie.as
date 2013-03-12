@@ -99,8 +99,8 @@ package GameCom.GameComponents.Zombies {
 			if (myHP <= 0 && !isDead) {
 				isDead = true;
 				
-				ScoreHelper.Score.addValue(SCORE);
-				ScoreHelper.HulkKills.addValue(1);
+				ScoreHelper.Score.AddValue(SCORE);
+				ScoreHelper.HulkKills.AddValue(1);
 				
 				if(Math.random() < 0.001) {
 					LootManager.I.SpawnAmmoAt(body.GetPosition());

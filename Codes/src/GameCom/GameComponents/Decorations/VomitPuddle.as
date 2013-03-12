@@ -44,7 +44,7 @@ package GameCom.GameComponents.Decorations
 			animation.x = -animation.width / 2;
 			animation.y = -animation.height * 0.7;
 			
-			body = BodyHelper.GetGenericCircle(1.5, Global.PHYSICS_CATEGORY_VOMIT, this, 0xFFFF);
+			body = BodyHelper.GetGenericCircle(1.5, Global.PHYSICS_CATEGORY_VOMIT, this, 0xFFFF & ~Global.PHYSICS_CATEGORY_WALLS & ~Global.PHYSICS_CATEGORY_BULLETS & ~Global.PHYSICS_CATEGORY_ZOMBIES);
 			body.GetFixtureList().SetSensor(true);
 			body.SetType(b2Body.b2_kinematicBody);
 		}
