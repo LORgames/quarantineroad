@@ -7,35 +7,35 @@ package GameCom.Helpers
 	 */
 	public class ScoreHelper {
 		//Score systems
-		public static var Score:MochiDigits;
-		public static var Distance:MochiDigits;
-		public static var Time:MochiDigits;
+		public static var Score:KillCounterWrapper;
+		public static var Distance:KillCounterWrapper;
+		public static var Time:KillCounterWrapper;
 		
 		//Zombie kill stats
-		public static var AllKills:MochiDigits;
+		public static var AllKills:KillCounterWrapper;
 		
-		public static var SlowKills:MochiDigits;
-		public static var LimpKills:MochiDigits;
-		public static var RedKills:MochiDigits;
-		public static var BlueKills:MochiDigits;
-		public static var ThrowUpKills:MochiDigits;
-		public static var HandKills:MochiDigits;
-		public static var ExplosiveKills:MochiDigits;
-		public static var HulkKills:MochiDigits;
+		public static var SlowKills:KillCounterWrapper;
+		public static var LimpKills:KillCounterWrapper;
+		public static var RedKills:KillCounterWrapper;
+		public static var BlueKills:KillCounterWrapper;
+		public static var ThrowUpKills:KillCounterWrapper;
+		public static var HandKills:KillCounterWrapper;
+		public static var ExplosiveKills:KillCounterWrapper;
+		public static var HulkKills:KillCounterWrapper;
 		
 		public static function Reset():void {
-			Score = new MochiDigits();
-			Distance = new MochiDigits();
-			Time = new MochiDigits();
+			Score = new KillCounterWrapper(false);
+			Distance = new KillCounterWrapper(false);
+			Time = new KillCounterWrapper(false);
 			
-			AllKills = new MochiDigits();
-			SlowKills = new MochiDigits();
-			LimpKills = new MochiDigits();
-			RedKills = new MochiDigits();
-			BlueKills = new MochiDigits();
-			ThrowUpKills = new MochiDigits();
-			ExplosiveKills = new MochiDigits();
-			HulkKills = new MochiDigits();
+			AllKills = new KillCounterWrapper();
+			SlowKills = new KillCounterWrapper(true);
+			LimpKills = new KillCounterWrapper(true);
+			RedKills = new KillCounterWrapper(true);
+			BlueKills = new KillCounterWrapper(true);
+			ThrowUpKills = new KillCounterWrapper(true);
+			ExplosiveKills = new KillCounterWrapper(true);
+			HulkKills = new KillCounterWrapper(true);
 		}
 		
 		

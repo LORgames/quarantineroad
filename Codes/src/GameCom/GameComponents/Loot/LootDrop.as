@@ -4,6 +4,7 @@ package GameCom.GameComponents.Loot
 	import Box2D.Dynamics.b2Body;
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
+	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.GameComponents.Weapons.IWeapon;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
@@ -73,7 +74,7 @@ package GameCom.GameComponents.Loot
 			return (this.y > stage.stageHeight + 50);
 		}
 		
-		public function Pickup(equipment:Vector.<IWeapon>):void {
+		public function Pickup(equipment:Vector.<IWeapon>, player:PlayerCharacter):void {
 			pickedUP = true;
 		}
 		

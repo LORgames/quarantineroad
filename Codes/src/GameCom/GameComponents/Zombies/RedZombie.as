@@ -42,9 +42,7 @@ package GameCom.GameComponents.Zombies
 			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie Red/4.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie Red/5.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie Red/6.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie Red/7.png"));
-			animation.AddFrame(ThemeManager.Get("Zombies/Base Zombie Red/8.png"));
-			animation.ChangePlayback(0.3333, 0, 8);
+			animation.ChangePlayback(0.1, 0, 6);
 			this.addChild(animation);
 			
 			eyes.AddFrame(ThemeManager.Get("Zombies/Base Zombie/Eyes.png"));

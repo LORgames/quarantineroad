@@ -27,6 +27,7 @@ package GameCom.GameComponents
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
 	import GameCom.Helpers.GrenadeHelper;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.WorldManager;
 	import GameCom.States.GameScreen;
@@ -185,7 +186,7 @@ package GameCom.GameComponents
 			while (contact != null) {
 				if(contact.contact.IsTouching()) {
 					if (contact.other.GetUserData() is LootDrop) {
-						(contact.other.GetUserData() as LootDrop).Pickup(weapons);
+						(contact.other.GetUserData() as LootDrop).Pickup(weapons, this);
 					} else if (contact.other.GetUserData() is IZombie) {
 						Hit((contact.other.GetUserData() as IZombie).HitPlayer(this));
 					}
@@ -196,7 +197,16 @@ package GameCom.GameComponents
 		}
 		
 		public function Hit(damage:Number):Boolean {
-			if(getTimer() > immunityTime) {
+			if (damage < 0) { //Heal
+				if (myHP == 1) {
+					TrophyHelper.GotTrophyByName("Close Call");
+				}
+				
+				myHP -= damage
+				myHP = Math.min(myHP, 10);
+				
+				GUIManager.I.Hearts.SetHealth(myHP);
+			} else if(getTimer() > immunityTime) {
 				myHP -= damage;
 				GUIManager.I.Hearts.SetHealth(myHP);
 				

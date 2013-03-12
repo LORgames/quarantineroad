@@ -2,6 +2,7 @@ package GameCom.Managers {
 	import Box2D.Common.Math.b2Vec2;
 	import flash.display.Sprite;
 	import GameCom.GameComponents.Loot.AmmoLootDrop;
+	import GameCom.GameComponents.Loot.HealthLootDrop;
 	import GameCom.GameComponents.Loot.LootDrop;
 	import GameCom.GameComponents.Loot.WeaponUpgradeLootDrop;
 	import GameCom.GameComponents.Weapons.BasicGun;
@@ -20,6 +21,9 @@ package GameCom.Managers {
 		private var UsedAmmo:Vector.<AmmoLootDrop> = new Vector.<AmmoLootDrop>();
 		private var UnusedAmmo:Vector.<AmmoLootDrop> = new Vector.<AmmoLootDrop>();
 		
+		private var UsedHealth:Vector.<HealthLootDrop> = new Vector.<HealthLootDrop>();
+		private var UnusedHealth:Vector.<HealthLootDrop> = new Vector.<HealthLootDrop>();
+		
 		private var layer:Sprite;
 		
 		public function LootManager(layer:Sprite) {
@@ -29,6 +33,7 @@ package GameCom.Managers {
 		
 		public function SpawnWeaponAt(location:b2Vec2):void {
 			var loot:WeaponUpgradeLootDrop;
+			
 			if(UnusedWeapons.length > 0) {
 				loot = UnusedWeapons.pop();
 			} else {
@@ -43,6 +48,7 @@ package GameCom.Managers {
 		
 		public function SpawnAmmoAt(location:b2Vec2):void {
 			var loot:AmmoLootDrop;
+			
 			if(UnusedAmmo.length > 0) {
 				loot = UnusedAmmo.pop();
 			} else {
@@ -53,6 +59,21 @@ package GameCom.Managers {
 			layer.addChild(loot);
 			
 			UsedAmmo.push(loot);
+		}
+		
+		public function SpawnHealthAt(location:b2Vec2):void {
+			var loot:HealthLootDrop;
+			
+			if(UnusedHealth.length > 0) {
+				loot = UnusedHealth.pop();
+			} else {
+				loot = new HealthLootDrop();
+			}
+			
+			loot.Reassign(location);
+			layer.addChild(loot);
+			
+			UsedHealth.push(loot);
 		}
 		
 		public function Update(dt:Number):void {
@@ -78,6 +99,18 @@ package GameCom.Managers {
 					layer.removeChild(UsedAmmo[i]);
 					
 					UnusedAmmo.push(UsedAmmo.splice(i, 1)[0]);
+					i--;
+				}
+			}
+			
+			for (i = 0; i < UsedHealth.length; i++) {
+				UsedHealth[i].Update(dt);
+				
+				if (UsedHealth[i].ShouldDeactivate()) {
+					UsedHealth[i].Deactivate();
+					layer.removeChild(UsedHealth[i]);
+					
+					UnusedHealth.push(UsedHealth.splice(i, 1)[0]);
 					i--;
 				}
 			}

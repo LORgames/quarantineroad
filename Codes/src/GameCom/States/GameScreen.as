@@ -22,6 +22,7 @@ package GameCom.States {
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.GrenadeHelper;
 	import GameCom.Helpers.ScoreHelper;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
@@ -180,6 +181,16 @@ package GameCom.States {
 				//Update the world
 				WorldManager.World.Step(Global.TIME_STEP, Global.VELOCITY_ITERATIONS, Global.POSITION_ITERATIONS);
 				WorldManager.World.ClearForces();
+				
+				if (ScoreHelper.AllKills.value > 100) {
+					TrophyHelper.GotTrophyByName("Piece of Cake");
+				}
+				if (ScoreHelper.AllKills.value > 500) {
+					TrophyHelper.GotTrophyByName("Zombie");
+				}
+				if (ScoreHelper.AllKills.value > 1000) {
+					TrophyHelper.GotTrophyByName("Project Alice");
+				}
 				
 				if(stage) {
 					worldSpr.x = Math.floor(WorldManager.WorldX + stage.stageWidth / 2) + (Math.random()-0.5)*WorldManager.WorldShake;

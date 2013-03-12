@@ -4,11 +4,13 @@ package GameCom.GameComponents.Loot {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
+	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.GameComponents.Weapons.IWeapon;
 	import GameCom.Helpers.BodyHelper;
 	import GameCom.Helpers.SpriteHelper;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.GUIManager;
+	import GameCom.Managers.LootManager;
 	import GameCom.Managers.WorldManager;
 	/**
 	 * ...
@@ -35,6 +37,13 @@ package GameCom.GameComponents.Loot {
 			
 			if (bmpd == null) {
 				pickedUP = true;
+				
+				if(Math.random() > 0.5) {
+					LootManager.I.SpawnAmmoAt(location);
+				} else {
+					LootManager.I.SpawnHealthAt(location);
+				}
+				
 				return;
 			}
 			
@@ -49,13 +58,13 @@ package GameCom.GameComponents.Loot {
 			super.Reassign(location);
 		}
 		
-		public override function Pickup(equipment:Vector.<IWeapon>):void {
+		public override function Pickup(equipment:Vector.<IWeapon>, player:PlayerCharacter):void {
 			trace("Upgraded: " + type);
 			
 			TrophyHelper.GotTrophyByName("Upgrade");
 			
 			equipment[type].Upgrade();
-			super.Pickup(equipment);
+			super.Pickup(equipment, player);
 		}
 	}
 

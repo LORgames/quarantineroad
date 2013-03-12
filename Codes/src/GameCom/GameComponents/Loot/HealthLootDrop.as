@@ -13,11 +13,11 @@ package GameCom.GameComponents.Loot {
 	 * ...
 	 * @author Paul
 	 */
-	public class AmmoLootDrop extends LootDrop {
+	public class HealthLootDrop extends LootDrop {
 		private var type:int = 0;
 		
-		public function AmmoLootDrop() {
-			var bmpd:BitmapData = ThemeManager.Get("WeaponIcons/ammo.png");
+		public function HealthLootDrop() {
+			var bmpd:BitmapData = ThemeManager.Get("WeaponIcons/w13_Medkit.png");
 			
 			var bmp:Bitmap = new Bitmap(bmpd);
 			bmp.x = -bmp.width / 2;
@@ -27,10 +27,7 @@ package GameCom.GameComponents.Loot {
 		}
 		
 		public override function Pickup(equipment:Vector.<IWeapon>, player:PlayerCharacter):void {
-			for (var i:int = 0; i < equipment.length; i++) {
-				equipment[i].AddAmmo();
-			}
-			
+			player.Hit(-2);
 			super.Pickup(equipment, player);
 		}
 	}

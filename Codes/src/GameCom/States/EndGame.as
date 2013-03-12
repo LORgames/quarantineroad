@@ -109,9 +109,6 @@ package GameCom.States {
 			
 			//PROCESS ACHIEVEMENTS
 			if(Stats.GetInt("Gameplays") >= 28) TrophyHelper.GotTrophyByName("28 Plays Later");
-			if(parseFloat(distance) > 100) TrophyHelper.GotTrophyByName("100m Run");
-			if(parseFloat(distance) > 500) TrophyHelper.GotTrophyByName("500m Run");
-			if(parseFloat(distance) > 1000) TrophyHelper.GotTrophyByName("1000m Run");
 		}
 		
 		public function CreateTextField(str:String):TextField {
