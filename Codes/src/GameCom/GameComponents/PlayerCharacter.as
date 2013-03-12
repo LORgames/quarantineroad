@@ -27,6 +27,7 @@ package GameCom.GameComponents
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
 	import GameCom.Helpers.GrenadeHelper;
+	import GameCom.Helpers.SpriteHelper;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.WorldManager;
@@ -66,6 +67,9 @@ package GameCom.GameComponents
 		
 		public function init(e:Event = null):void {
 			this.removeEventListener(Event.ADDED_TO_STAGE, init);
+			
+			this.addChild(SpriteHelper.CreateCenteredBitmapData(ThemeManager.Get("Player/player shadow.png")));
+			this.getChildAt(0).y = 7;
 			
 			animation.AddFrame(ThemeManager.Get("Player/Legs/0_0.png"));
 			animation.AddFrame(ThemeManager.Get("Player/Legs/0_1.png"));

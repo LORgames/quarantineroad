@@ -20,13 +20,15 @@ package GameCom.GameComponents.Weapons {
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
-		public var CHARGE_TIME:Number = 1.0;
+		public var CHARGE_TIME:Number = 0.5;
 		public var charge:Number = 0;
 		
 		private var Layer:Sprite;
 		
 		private var objectHit:b2Fixture;
 		private var pointHit:b2Vec2;
+		
+		private var isActive:Boolean = false;
 		
 		public function LaserGun(body:b2Body, layer:Sprite) {
 			this.Layer = layer;
@@ -49,15 +51,17 @@ package GameCom.GameComponents.Weapons {
 					Layer.graphics.clear();
 					Layer.graphics.beginBitmapFill(ThemeManager.Get("bullets/Laser00.png"), new Matrix(1, 0, 0, 1, int(location.x * Global.PHYSICS_SCALE) - 3, 0));
 					Layer.graphics.drawRect(int(pointHit.x * Global.PHYSICS_SCALE) - 2, int(pointHit.y * Global.PHYSICS_SCALE) - 20, 6, (location.y - pointHit.y) * Global.PHYSICS_SCALE + 20);
+					Layer.graphics.endFill();
 					
 					if(objectHit != null) {
 						if (objectHit.GetUserData() is IZombie) {
-							(objectHit.GetUserData() as IZombie).Hit(0.1);
+							(objectHit.GetUserData() as IZombie).Hit(0.25);
 						}
 					}
 				}
 			} else {
 				charge = 0;
+				Layer.graphics.clear();
 			}
 		}
 		
@@ -72,7 +76,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function Upgrade():void {
-			
+			CHARGE_TIME = 0.1;
 		}
 		
 		public function GetAmmoReadout():String {
@@ -80,10 +84,8 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			CHARGE_TIME = 0.1;
+			
 		}
-		
-		private var isActive:Boolean = false;
 		
 		public function Activate():void {
 			isActive = true;

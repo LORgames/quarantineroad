@@ -235,7 +235,7 @@ package GameCom.States {
 				simulating = false;
 				Cleanup();
 				Stats.EndLevel();
-				SystemMain.instance.StateTo(new EndGame(GUIManager.I.Score.text, (WorldManager.WorldScrolled/Global.PHYSICS_SCALE).toFixed(2), "0"));
+				SystemMain.instance.StateTo(new EndGame());
 			}
 		}
 		

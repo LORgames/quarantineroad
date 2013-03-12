@@ -7,6 +7,7 @@ package GameCom.States {
 	import flash.text.TextFieldAutoSize;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.AudioStore;
+	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.SystemMain;
 	import flash.display.Bitmap;
@@ -48,10 +49,10 @@ package GameCom.States {
 		private var distanceTF:TextField;
 		private var zombiekillsTF:TextField;
 		
-		public function EndGame(score:String, distance:String, zombiekills:String) {
-			this.score = score;
-			this.distance = distance;
-			this.zombiekills = zombiekills;
+		public function EndGame() {
+			this.score = ScoreHelper.Score.value.toFixed(0);
+			this.distance = ScoreHelper.Distance.value.toFixed(2);
+			this.zombiekills = ScoreHelper.AllKills.value.toFixed(0);
 			
 			//Just make sure we're ready to do this...
 			if (this.stage) Init();
