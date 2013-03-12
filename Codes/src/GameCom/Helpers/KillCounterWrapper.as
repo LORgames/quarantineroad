@@ -10,6 +10,8 @@ package GameCom.Helpers
 		public static const DISTANCE:int = 1;
 		public static const TIME:int = 2;
 		public static const TOTAL:int = 3;
+		public static const SCORE:int = 4;
+		public static const SHAKEY_KILLS:int = 5;
 		
 		private var _val:MochiDigits = new MochiDigits();
 		private var type:int = KILLS;

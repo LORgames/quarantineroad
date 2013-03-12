@@ -13,6 +13,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.GameComponents.Decorations.Lightning;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Zombies.IZombie;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.WorldManager;
 	import LORgames.Engine.Keys;
@@ -32,6 +33,8 @@ package GameCom.GameComponents.Weapons {
 		private var battery:Number = 3.0;
 		
 		private var lightning:Lightning = new Lightning();
+		
+		private var totalKills:int = 0;
 		
 		public function ChainLightningGun(body:b2Body, layer:Sprite) {
 			AddSafe(body);
@@ -131,7 +134,13 @@ package GameCom.GameComponents.Weapons {
 			return null;
 		}
 		
-		public function ReportKills(newKills:int):void {}
+		public function ReportKills(newKills:int):void {
+			totalKills += newKills;
+			
+			if (totalKills > 100) {
+				TrophyHelper.GotTrophyByName("Tesla's Pride");
+			}
+		}
 		
 	}
 

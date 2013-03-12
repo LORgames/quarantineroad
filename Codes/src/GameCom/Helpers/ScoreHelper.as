@@ -24,18 +24,20 @@ package GameCom.Helpers
 		public static var HulkKills:KillCounterWrapper;
 		
 		public static function Reset():void {
-			Score = new KillCounterWrapper(false);
-			Distance = new KillCounterWrapper(false);
-			Time = new KillCounterWrapper(false);
+			Score = new KillCounterWrapper(KillCounterWrapper.SCORE);
+			Distance = new KillCounterWrapper(KillCounterWrapper.DISTANCE);
+			Time = new KillCounterWrapper(KillCounterWrapper.TIME);
 			
-			AllKills = new KillCounterWrapper();
-			SlowKills = new KillCounterWrapper(true);
-			LimpKills = new KillCounterWrapper(true);
-			RedKills = new KillCounterWrapper(true);
-			BlueKills = new KillCounterWrapper(true);
-			ThrowUpKills = new KillCounterWrapper(true);
-			ExplosiveKills = new KillCounterWrapper(true);
-			HulkKills = new KillCounterWrapper(true);
+			AllKills = new KillCounterWrapper(KillCounterWrapper.TOTAL);
+			
+			
+			SlowKills = new KillCounterWrapper(KillCounterWrapper.KILLS);
+			LimpKills = new KillCounterWrapper(KillCounterWrapper.KILLS);
+			RedKills = new KillCounterWrapper(KillCounterWrapper.KILLS);
+			BlueKills = new KillCounterWrapper(KillCounterWrapper.KILLS);
+			ThrowUpKills = new KillCounterWrapper(KillCounterWrapper.KILLS);
+			ExplosiveKills = new KillCounterWrapper(KillCounterWrapper.KILLS);
+			HulkKills = new KillCounterWrapper(KillCounterWrapper.KILLS);
 		}
 		
 		
