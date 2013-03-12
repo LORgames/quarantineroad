@@ -74,6 +74,7 @@ package GameCom.GameComponents
 			animation.AddFrame(ThemeManager.Get("Player/Legs/0_4.png"));
 			animation.AddFrame(ThemeManager.Get("Player/Legs/0_5.png"));
 			animation.ChangePlayback(0.1, 0, 6);
+			animation.Update(0);
 			
 			this.addChild(animation);
 			
@@ -113,8 +114,6 @@ package GameCom.GameComponents
 			WorldManager.WorldTargetY = this.y;
 			
 			WorldManager.WorldScrollSpeed = ((stage.stageHeight - this.y) / stage.stageHeight) * 4 + 1;
-			
-			animation.Update(dt);
 			
 			animation.x = -animation.width / 2;
 			animation.y = -animation.height + 0.6 * Global.PHYSICS_SCALE;
@@ -173,10 +172,16 @@ package GameCom.GameComponents
 				xSpeed = 1;
 			}
 			
+			if (xSpeed != 0 || ySpeed != 0) {
+				animation.Update(dt);
+			}
+			
 			if (getTimer() < immunityTime) {
 				animation.filters = [new GlowFilter(0xFFFFFF, 1, 2, 2)];
+				top.filters = [new GlowFilter(0xFFFFFF, 1, 2, 2)];
 			} else {
 				animation.filters = [];
+				top.filters = [];
 			}
 			
 			body.SetLinearVelocity(new b2Vec2(xSpeed * MOVEMENT_SPEED, ySpeed * MOVEMENT_SPEED + WorldManager.WorldScrollSpeed));

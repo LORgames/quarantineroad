@@ -33,7 +33,7 @@ package GameCom.Managers
 			if (spawnTimeout <= 0) {
 				var car:ExplosiveCar = cars.splice(Math.random() * cars.length, 1)[0];
 				
-				car.AddToScene(new b2Vec2((Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.5, -1), null, null);
+				car.AddToScene(new b2Vec2((Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.5, -10), null, null);
 				activecars.push(car);
 				layer.addChild(car);
 				

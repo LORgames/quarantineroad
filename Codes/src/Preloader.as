@@ -122,10 +122,10 @@ package {
 			this.graphics.drawRect((stage.stageWidth - bmp.width) / 2, (stage.stageHeight - bmp.height) / 2, bmp.width, bmp.height);
 			this.graphics.endFill();
 			
-			PercentageText.x = mat.tx + 330 - PercentageText.width / 2;
+			PercentageText.x = mat.tx + 366 - PercentageText.width / 2;
 			PercentageText.y = mat.ty + 510;
 			
-			DisplayText.x = mat.tx + 230 - DisplayText.width / 2;
+			DisplayText.x = mat.tx + 250 - DisplayText.width / 2;
 			DisplayText.y = mat.ty + 415;
 		}
 		

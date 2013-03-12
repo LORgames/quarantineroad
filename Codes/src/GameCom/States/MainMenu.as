@@ -83,7 +83,7 @@ package GameCom.States {
 		
 		public function TropiesFunc(e:MouseEvent):void {
 			AudioController.PlaySound(AudioStore.MenuClick);
-			//TODO: Implement tropies
+			mdh.Switch();
 		}
 		
 		public function WebsiteFunc(e:MouseEvent):void {

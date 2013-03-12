@@ -89,10 +89,10 @@ package GameCom.States {
 			background.x = (this.stage.stageWidth - background.width) / 2;
 			background.y = (this.stage.stageHeight - background.height) / 2;
 			
-			PercentageText.x = background.x + 330 - PercentageText.width / 2;
+			PercentageText.x = background.x + 366 - PercentageText.width / 2;
 			PercentageText.y = background.y + 510;
 			
-			DisplayText.x = background.x + 230 - DisplayText.width / 2;
+			DisplayText.x = background.x + 250 - DisplayText.width / 2;
 			DisplayText.y = background.y + 415;
 		}
 		

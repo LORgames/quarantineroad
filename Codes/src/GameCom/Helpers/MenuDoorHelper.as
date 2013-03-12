@@ -14,6 +14,8 @@ package GameCom.Helpers {
 		private var rightDoor:Bitmap;
 		private var overlay:Bitmap;
 		
+		private static var direction:int = 5;
+		
 		public function MenuDoorHelper() {
 			if (stage) init();
 			else this.addEventListener(Event.ADDED_TO_STAGE, init);
@@ -29,11 +31,11 @@ package GameCom.Helpers {
 			rightDoor = new Bitmap(ThemeManager.Get("Interface/RightDoor.png"));
 			overlay = new Bitmap(ThemeManager.Get("Interface/MenuOverlay.png"));
 			
-			this.addChild(leftDoor);
 			this.addChild(rightDoor);
+			this.addChild(leftDoor);
 			this.addChild(overlay);
 			
-			stage.addEventListener(Event.ENTER_FRAME, Update);
+			stage.addEventListener(Event.ENTER_FRAME, Update, false, 0, true);
 		}
 		
 		public function CleanUp():void {
@@ -42,12 +44,17 @@ package GameCom.Helpers {
 		}
 		
 		private function Update(e:Event):void {
-			if (leftDoor.x > -leftDoor.width) {
-				leftDoor.x -= 5;
-				rightDoor.x += 5;
-			} else {
-				CleanUp();
+			if (leftDoor.x > -leftDoor.width && direction > 0) {
+				leftDoor.x -= direction;
+				rightDoor.x += direction;
+			} else if (leftDoor.x < 0 && direction < 0) {
+				leftDoor.x -= direction;
+				rightDoor.x += direction;
 			}
+		}
+		
+		public function Switch():void {
+			direction = -direction;
 		}
 		
 	}

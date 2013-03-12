@@ -104,7 +104,7 @@ package GameCom.Managers {
 					handTimeout = HAND_DELAY;
 				}
 				
-				zombie.AddToScene(new b2Vec2((Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.9, Math.random() * -20), layer0, layer1);
+				zombie.AddToScene(new b2Vec2((Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.9, Math.random() * -5 - 1), layer0, layer1);
 				
 				UsedZombies.push(zombie);
 				
