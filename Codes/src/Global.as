@@ -34,7 +34,7 @@ package  {
 		
 		//Storage things
 		public static const StorageRevision:int = 1;
-		public static const WipeStorageBelowRevision:int = 2;
+		public static const WipeStorageBelowRevision:int = 0;
 	}
 
 }

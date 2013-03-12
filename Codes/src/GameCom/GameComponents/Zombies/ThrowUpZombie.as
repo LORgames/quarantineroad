@@ -13,6 +13,8 @@ package GameCom.GameComponents.Zombies
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
+	import GameCom.Helpers.ScoreHelper;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BGManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
@@ -129,7 +131,13 @@ package GameCom.GameComponents.Zombies
 			
 			if (myHP <= 0 && !dead) {
 				dead = true;
-				GUIManager.I.UpdateScore(SCORE);
+				
+				ScoreHelper.Score.addValue(SCORE);
+				ScoreHelper.ThrowUpKills.addValue(1);
+				
+				if (ScoreHelper.ThrowUpKills.value == 25) {
+					TrophyHelper.GotTrophyByName("My name is Hurl");
+				}
 				
 				if(Math.random() < 0.001) {
 					LootManager.I.SpawnAmmoAt(body.GetPosition());

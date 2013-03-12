@@ -20,7 +20,7 @@ package GameCom.Helpers
 			"Time", "Survive 3:00 min",
 			"Man vs Zombie", "Survive 6 minutes in a single game.",
 			
-			"Telsa's Pride", "Kill 100 zombies with the lightning gun",
+			"Tesla's Pride", "Kill 100 zombies with the lightning gun",
 			"Fire in the Hole", "Kill 100 zombies with grenades in a single game.",
 			"Brain", "Kill at least 1 of each type of zombie in a single game.",
 			

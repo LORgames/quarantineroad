@@ -11,6 +11,7 @@ package GameCom.GameComponents.Zombies
 	import flash.utils.getTimer;
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
+	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Managers.BGManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
@@ -107,7 +108,9 @@ package GameCom.GameComponents.Zombies
 			
 			if (myHP <= 0 && !dead) {
 				dead = true;
-				GUIManager.I.UpdateScore(SCORE);
+				
+				ScoreHelper.Score.addValue(SCORE);
+				ScoreHelper.BlueKills.addValue(1);
 				
 				if(Math.random() < 0.001) {
 					LootManager.I.SpawnAmmoAt(body.GetPosition());

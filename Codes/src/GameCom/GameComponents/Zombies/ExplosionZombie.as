@@ -12,6 +12,7 @@ package GameCom.GameComponents.Zombies
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.MathHelper;
+	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
@@ -104,7 +105,9 @@ package GameCom.GameComponents.Zombies
 				isDead = true;
 				
 				var kills:int = SqlshExplosion.RequestExplosionAt(this.x, this.y);
-				GUIManager.I.UpdateScore(SCORE);
+				
+				ScoreHelper.Score.addValue(SCORE);
+				ScoreHelper.ExplosiveKills.addValue(1);
 				
 				trace("ExplosionZombie Killed: " + kills);
 				

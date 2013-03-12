@@ -15,6 +15,7 @@ package GameCom.Managers {
 	import GameCom.GameComponents.Weapons.IWeapon;
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.MathHelper;
+	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Helpers.SpriteHelper;
 	import GameCom.SystemComponents.HeartBar;
 	import GameCom.SystemComponents.WeaponUIPanel;
@@ -73,6 +74,11 @@ package GameCom.Managers {
 		public function Update() : void {
 			if (stage == null) return;
 			
+			Score.text = ScoreHelper.Score.value.toString();
+			
+			Score.x = (stage.stageWidth - Score.width) / 2;
+			Score.y = 30;
+			
 			for (var i:int = 0; i < Weapons.length; i++) {
 				Weapons[i].Draw();
 			}
@@ -84,14 +90,6 @@ package GameCom.Managers {
 			for (var i:int = 0; i < Weapons.length; i++) {
 				Weapons[i].FullRedraw();
 			}
-		}
-		
-		public function UpdateScore(score:int):void {
-			ScoreValue += score;
-			Score.text = ScoreValue.toString();
-			
-			Score.x = (stage.stageWidth - Score.width) / 2;
-			Score.y = 30;
 		}
 		
 		private function MuteClicked(me:MouseEvent):void {

@@ -21,6 +21,7 @@ package GameCom.States {
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.GrenadeHelper;
+	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
@@ -90,6 +91,8 @@ package GameCom.States {
 			WorldManager.CleanupDynamics();
 			WorldManager.WorldShake = 0;
 			
+			ScoreHelper.Reset();
+			
 			removeEventListener(Event.ADDED_TO_STAGE, Init);
 			
 			stage.focus = stage;
@@ -155,15 +158,17 @@ package GameCom.States {
 				
 				//Add 1pt for every metre travelled
 				if (lastScrolled + 1 < WorldManager.WorldScrolled / Global.PHYSICS_SCALE) {
-					gui.UpdateScore(1);
+					ScoreHelper.Score.addValue(1);
 					lastScrolled += 1;
 				}
 				
 				//Add 1pt for every second playing
 				lastUpdate += Global.TIME_STEP;
+				ScoreHelper.Time.addValue(Global.TIME_STEP);
+				
 				if (lastUpdate > 1) {
 					lastUpdate -= 1;
-					GUIManager.I.UpdateScore(1);
+					ScoreHelper.Score.addValue(1);
 				}
 				
 				BulletManager.I.Update(Global.TIME_STEP);

@@ -24,6 +24,8 @@ package GameCom.GameComponents.Weapons {
 		
 		private var bullets:int = 250;
 		
+		private var totalKills:int = 0;
+		
 		public function SMG(body:b2Body) {
 			AddSafe(body);
 		}
@@ -102,7 +104,13 @@ package GameCom.GameComponents.Weapons {
 			return null;
 		}
 		
-		public function ReportKills(newKills:int):void {}
+		public function ReportKills(newKills:int):void {
+			totalKills += newKills;
+			
+			if (totalKills > 100) {
+				TrophyHelper.GotTrophyByName("Spray and Prey");
+			}
+		}
 		
 	}
 
