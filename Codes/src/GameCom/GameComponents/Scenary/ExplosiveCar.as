@@ -80,7 +80,7 @@ package GameCom.GameComponents.Scenary
 			body.SetLinearVelocity(new b2Vec2(0, WorldManager.WorldScrollSpeed));
 		}
 		
-		public function Hit(damage:Number):void {
+		public function Hit(damage:Number):Boolean {
 			currentHP -= damage;
 			
 			if (currentHP <= 0) {
@@ -97,6 +97,8 @@ package GameCom.GameComponents.Scenary
 			}
 			
 			art.Update(0);
+			
+			return false; //The kill never counts for cars
 		}
 		
 		public function HitPlayer(player:PlayerCharacter):Number {

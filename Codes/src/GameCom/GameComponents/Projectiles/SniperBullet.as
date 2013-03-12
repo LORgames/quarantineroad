@@ -48,14 +48,13 @@ package GameCom.GameComponents.Projectiles {
 			animation.y = -animation.height + 0.1 * Global.PHYSICS_SCALE;
 			
 			//TODO: Fix world scrolling in speed.
-			body.SetLinearVelocity(new b2Vec2(0, -60));
+			body.SetLinearVelocity(new b2Vec2(0, -120));
 			
 			var contact:b2ContactEdge = body.GetContactList();
 			while (contact != null) {
 				if (contact.contact.IsTouching() && contact.other.GetUserData() is IHit && !owner.IsSafe(contact.other)) {
 					(contact.other.GetUserData() as IHit).Hit(damage);
 					ExplosionManager.I.RequestBloodAt(this.x, animation.y + this.y);
-					
 					break;
 				}
 				

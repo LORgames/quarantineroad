@@ -6,6 +6,7 @@ package GameCom.GameComponents.Weapons {
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Projectiles.SniperBullet;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
 	import LORgames.Engine.Keys;
@@ -40,6 +41,7 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			FIRE_RATE = 0.2;
 			GUIManager.I.RedrawWeapons();
+			TrophyHelper.GotTrophyByName("2 for 1");
 		}
 		
 		public function AddAmmo():void {
@@ -84,12 +86,14 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetUpgradeIcon():BitmapData {
-			if(FIRE_RATE < 0.3) {
+			if (FIRE_RATE < 0.3) {
 				return ThemeManager.Get("WeaponIcons/w01_dual_pistol.png");
 			}
 			
 			return null;
 		}
+		
+		public function ReportKills(newKills:int):void {}
 		
 	}
 

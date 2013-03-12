@@ -5,6 +5,7 @@ package GameCom.GameComponents.Weapons {
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
 	import LORgames.Engine.Keys;
@@ -49,6 +50,7 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			totalSMGs = 2;
 			GUIManager.I.RedrawWeapons();
+			TrophyHelper.GotTrophyByName("2 for 1");
 		}
 		
 		public function GetAmmoReadout():String {
@@ -99,6 +101,8 @@ package GameCom.GameComponents.Weapons {
 			
 			return null;
 		}
+		
+		public function ReportKills(newKills:int):void {}
 		
 	}
 

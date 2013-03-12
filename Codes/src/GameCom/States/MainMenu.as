@@ -10,6 +10,7 @@ package GameCom.States {
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.MenuBackgroundHelper;
 	import GameCom.Helpers.MenuDoorHelper;
+	import GameCom.SystemComponents.TrophyMenu;
 	import GameCom.SystemMain;
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -40,6 +41,8 @@ package GameCom.States {
 		private var mbh:MenuBackgroundHelper = new MenuBackgroundHelper();
 		private var mdh:MenuDoorHelper = new MenuDoorHelper();
 		
+		private var trophies:TrophyMenu = new TrophyMenu();
+		
 		public function MainMenu() {
 			//Just make sure we're ready to do this...
 			if (this.stage) Init();
@@ -50,6 +53,8 @@ package GameCom.States {
 			removeEventListener(Event.ADDED_TO_STAGE, Init);
 			
 			this.addChild(mbh);
+			
+			this.addChild(trophies);
 			
 			this.addChild(background);
 			

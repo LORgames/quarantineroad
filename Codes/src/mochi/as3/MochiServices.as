@@ -473,19 +473,19 @@ package mochi.as3 {
                 // MochiServices core events
                 case "services":
                     MochiServices.triggerEvent( pkg.event, pkg.args );
-                    break ;
+                    break;
                 // MochiEvents tunnel
                 case "events":
                     MochiEvents.triggerEvent( pkg.event, pkg.args );
-                    break ;
+                    break;
                 // MochiSocial tunnel
                 case "coins":
                     MochiCoins.triggerEvent( pkg.event, pkg.args );
-                    break ;
+                    break;
                 // MochiSocial tunnel
                 case "social":
                     MochiSocial.triggerEvent( pkg.event, pkg.args );
-                    break ;
+                    break;
             }
         }
 

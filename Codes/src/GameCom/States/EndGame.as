@@ -7,6 +7,7 @@ package GameCom.States {
 	import flash.text.TextFieldAutoSize;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.AudioStore;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.SystemMain;
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -17,6 +18,7 @@ package GameCom.States {
 	import LORgames.Components.TextBox;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
+	import LORgames.Engine.Stats;
 	import LORgames.Engine.Storage;
 	import LORgames.Localization.Strings;
 	import mx.core.BitmapAsset;
@@ -99,6 +101,17 @@ package GameCom.States {
 			zombiekillsTF = CreateTextField(zombiekills + " <font color='#64C24B'>zombies slain</font>");
 			
 			Resized();
+			
+			//SET SOME STATS
+			Stats.SetHighestInt("HighestScore", parseInt(score));
+			Stats.SetHighestNumber("HighestDistance", parseFloat(distance));
+			Stats.SetHighestInt("HighestZombieKills", parseInt(zombiekills));
+			
+			//PROCESS ACHIEVEMENTS
+			if(Stats.GetInt("Gameplays") >= 28) TrophyHelper.GotTrophyByName("28 Plays Later");
+			if(parseFloat(distance) > 100) TrophyHelper.GotTrophyByName("100m Run");
+			if(parseFloat(distance) > 500) TrophyHelper.GotTrophyByName("500m Run");
+			if(parseFloat(distance) > 1000) TrophyHelper.GotTrophyByName("1000m Run");
 		}
 		
 		public function CreateTextField(str:String):TextField {

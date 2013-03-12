@@ -131,6 +131,8 @@ package GameCom.GameComponents.Weapons {
 			return null;
 		}
 		
+		public function ReportKills(newKills:int):void {}
+		
 	}
 
 }

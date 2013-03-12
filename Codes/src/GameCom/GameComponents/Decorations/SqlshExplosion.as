@@ -64,7 +64,7 @@ package GameCom.GameComponents.Decorations
 			layer = _layer;
 		}
 		
-		public static function RequestExplosionAt(x:Number, y:Number):void {
+		public static function RequestExplosionAt(x:Number, y:Number):int {
 			if (waiting_explosions.length == 0) {
 				var new_explosion:SqlshExplosion = new SqlshExplosion();
 				waiting_explosions.push(new_explosion);
@@ -80,7 +80,7 @@ package GameCom.GameComponents.Decorations
 			
 			playing_explosions.push(explosion);
 			
-			WorldManager.Explode(new b2Vec2(x / Global.PHYSICS_SCALE, y / Global.PHYSICS_SCALE), 2.5, 100);
+			return WorldManager.Explode(new b2Vec2(x / Global.PHYSICS_SCALE, y / Global.PHYSICS_SCALE), 2.5, 100);
 		}
 		
 		public static function Update(dt:Number):void {

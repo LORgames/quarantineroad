@@ -6,6 +6,7 @@ package GameCom.GameComponents.Weapons {
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.Helpers.AudioStore;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
 	import LORgames.Engine.AudioController;
@@ -26,6 +27,8 @@ package GameCom.GameComponents.Weapons {
 		
 		private var upgraded:Boolean = false;
 		private var shells:int = 10;
+		
+		private var totalKills:int = 0;
 		
 		public function Shotgun(body:b2Body) {
 			AddSafe(body);
@@ -114,6 +117,14 @@ package GameCom.GameComponents.Weapons {
 			}
 			
 			return null;
+		}
+		
+		public function ReportKills(newKills:int):void {
+			totalKills += newKills;
+			
+			if (totalKills > 100) {
+				TrophyHelper.GotTrophyByName("Boomstick");
+			}
 		}
 		
 	}

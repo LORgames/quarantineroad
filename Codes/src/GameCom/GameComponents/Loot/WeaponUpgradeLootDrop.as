@@ -7,6 +7,7 @@ package GameCom.GameComponents.Loot {
 	import GameCom.GameComponents.Weapons.IWeapon;
 	import GameCom.Helpers.BodyHelper;
 	import GameCom.Helpers.SpriteHelper;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.WorldManager;
 	/**
@@ -50,6 +51,8 @@ package GameCom.GameComponents.Loot {
 		
 		public override function Pickup(equipment:Vector.<IWeapon>):void {
 			trace("Upgraded: " + type);
+			
+			TrophyHelper.GotTrophyByName("Upgrade");
 			
 			equipment[type].Upgrade();
 			super.Pickup(equipment);

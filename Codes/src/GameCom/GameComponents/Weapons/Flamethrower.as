@@ -5,6 +5,7 @@ package GameCom.GameComponents.Weapons {
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	/**
 	 * ...
@@ -16,6 +17,8 @@ package GameCom.GameComponents.Weapons {
 		
 		public var FIRE_RATE:Number = 0.1;
 		public var fireTime:Number = 0;
+		
+		private var totalKills:int = 0;
 		
 		public function Flamethrower(body:b2Body) {
 			AddSafe(body);
@@ -72,6 +75,14 @@ package GameCom.GameComponents.Weapons {
 		
 		public function GetUpgradeIcon():BitmapData {
 			return null;
+		}
+		
+		public function ReportKills(newKills:int):void {
+			totalKills += newKills;
+			
+			if (totalKills >= 100) {
+				TrophyHelper.GotTrophyByName("Crispy");
+			}
 		}
 		
 	}

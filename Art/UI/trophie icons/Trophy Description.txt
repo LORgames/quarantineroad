@@ -1,29 +1,24 @@
-2 for 1 - pick up a secondary pistol or smg
-28 Plays Later - play game 28 times
-100m Run - Move 100m in a single playthrough
-500m Run - Move 500m in a single playthrough
-1000m Run - Move 1000m in a single playthrough
-Back for Maaaw - Reload the game after a break
-Close Call - Pick up a health pack when on half a heart left
-Boomstick - Get X amount of kills with shotgun
-Crispy - Get X amount of kills with flame thrower
-Don't Bite Me Bro - Die without taking any damage from zombies
-Fire in the Hole - Kill X amount of Zombies with Grenades
-Fully Loaded - Obtain all weapon upgrades in a single play through
-Harlem Shake - Kill X amount of zombies while the screen is shaking
-Headshot - kill a zombie from more then 25m away with the sniper rifle
-High Five - Get Killed by the hand zombie
-Man vs Zombie - Survive 6 minutes in a single round
-Max ammo - Obtain Full ammo for each type of weapon
-My name is Hurl - Kill X amount of Vomit Zombies
-New Shoes - Walk through an acid pool and survive
-Pacafist - Walk 200m without killing a zombie
-Party Pooper - Kill X amount of zombies using Bloat Explosions
-Piece of Cake - Kill X amount of zombies
-Project Alice - Kill x amount of zombies (more than zombie slayer achievement)
-Spray and Prey - Kill x amount of zombies with SMG or Dual SMG
-Telsa's Pride - Kill x amount of Zombies with the lightning gun
-Throw like a girl - Kill yourself with a grenade
-Time - Survive 3:00 min
-Upgrade - Find a weapon Upgrade
-Zombie - Kill x amount of zombies (more than Piece of Cake achievement)
+"Close Call", "Pick up a health pack when on half a heart left.",
+"Boomstick", "Get 100 kills with the shotgun in a single game.",
+"Crispy", "Get 100 kills with the flame thrower in a single game.",
+"Don't Bite Me Bro", "Die without taking any damage from zombies.",
+"Fire in the Hole", "Kill 100 zombies with grenades in a single game.",
+"Fully Loaded", "Obtain all weapon upgrades in a single game.",
+"Harlem Shake", "Kill 20 zombies while the screen is shaking in a single game.",
+"Headshot", "Kill a zombie from more then 25m away with the sniper rifle.",
+"High Five", "<SQUISH> Killed by the hand.",
+"Man vs Zombie", "Survive 6 minutes in a single game.",
+"Max Ammo", "Obtain Full ammo for each type of weapon in a single game.",
+"My name is Hurl", "Kill 25 Vomit Zombies in a single game.",
+"New Shoes", "Walk through an acid pool and survive",
+"Pacifist", "Walk 200m without killing a zombie",
+"Party Pooper", "Kill 10 zombies in a single Bloat Explosion",
+"Piece of Cake", "Kill 100 zombies",
+"Project Alice", "Kill x amount of zombies (more than zombie slayer achievement)",
+"Spray and Prey", "Kill x amount of zombies with SMG or Dual SMG",
+"Telsa's Pride", "Kill x amount of Zombies with the lightning gun",
+"Throw like a girl", "Kill yourself with a grenade",
+"Time", "Survive 3:00 min",
+"Upgrade", "Find a weapon Upgrade",
+"Zombie", "Kill x amount of zombies (more than Piece of Cake achievement)",
+"Brain", "Kill 99 Red Zombloons."

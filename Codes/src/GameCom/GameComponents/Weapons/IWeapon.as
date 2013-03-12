@@ -24,6 +24,8 @@ package GameCom.GameComponents.Weapons {
 		function GetIcon():BitmapData;
 		function GetPlayerBody():BitmapData;
 		function GetUpgradeIcon():BitmapData;
+		
+		function ReportKills(newKills:int):void;
 	}
 	
 }

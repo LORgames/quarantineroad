@@ -122,6 +122,8 @@ package GameCom.GameComponents.Weapons {
 		public function GetUpgradeIcon():BitmapData {
 			return null;
 		}
+		
+		public function ReportKills(newKills:int):void {}
 	}
 
 }

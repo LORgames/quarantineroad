@@ -4,6 +4,7 @@ package GameCom.GameComponents.Decorations {
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	import flash.utils.getTimer;
+	import GameCom.GameComponents.Weapons.IWeapon;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
 	import GameCom.Managers.ExplosionManager;
@@ -15,6 +16,8 @@ package GameCom.GameComponents.Decorations {
 	public class Grenade extends Sprite {
 		private var animation:AnimatedSprite;
 		private var body:b2Body;
+		
+		private var owner:IWeapon;
 		
 		public function Grenade() {
 			animation = new AnimatedSprite();
@@ -46,7 +49,7 @@ package GameCom.GameComponents.Decorations {
 			body.SetBullet(true);
 		}
 		
-		public function Reset():void {
+		public function Reset(owner:IWeapon):void {
 			body.SetPosition(new b2Vec2(this.x / Global.PHYSICS_SCALE, this.y / Global.PHYSICS_SCALE));
 			body.SetActive(true);
 			
@@ -57,6 +60,8 @@ package GameCom.GameComponents.Decorations {
 			
 			var throwSpeed:b2Vec2 = new b2Vec2(0, -0.5);
 			body.ApplyImpulse(throwSpeed, body.GetWorldCenter());
+			
+			this.owner = owner;
 		}
 		
 		public function Deactivate():void {
@@ -78,7 +83,7 @@ package GameCom.GameComponents.Decorations {
 			this.y = body.GetPosition().y * Global.PHYSICS_SCALE;
 			
 			if (animation.IsStopped()) {
-				ExplosionManager.I.RequestBombExplosionAt(new Point(this.x, this.y));
+				owner.ReportKills(ExplosionManager.I.RequestBombExplosionAt(new Point(this.x, this.y)));
 				this.parent.removeChild(this);
 				Deactivate();
 			}

@@ -74,7 +74,7 @@ package GameCom.Managers {
             return true;
         }
 		
-		public static function Explode(position:b2Vec2, radius:Number, strength:Number):void {
+		public static function Explode(position:b2Vec2, radius:Number, strength:Number):int {
 			var aabb:b2AABB = new b2AABB();
 			
 			var vMin:b2Vec2 = position.Copy();
@@ -92,6 +92,8 @@ package GameCom.Managers {
 			var b:b2Body;
 			var forceVec:b2Vec2;
 			
+			var deaths:int = 0;
+			
 			for (var i:int = 0; i < bodies.length; i++) {
 				b = bodies[i].GetBody();
 				
@@ -106,9 +108,11 @@ package GameCom.Managers {
 				b.ApplyForce(forceVec, b.GetWorldCenter());
 				
 				if (b.GetUserData() is IHit) {
-					(b.GetUserData() as IHit).Hit(1*strength/100);
+					deaths += ((b.GetUserData() as IHit).Hit(1*strength/100)?1:0);
 				}
 			}
+			
+			return deaths;
 		}
 		
 		public static function UpdateWalls(stage:Stage):void {

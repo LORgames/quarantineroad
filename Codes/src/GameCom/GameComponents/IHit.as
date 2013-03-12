@@ -4,7 +4,12 @@ package GameCom.GameComponents {
 	 * @author Paul
 	 */
 	public interface IHit {
-		function Hit(damage:Number):void;
+		/**
+		 * 
+		 * @param	damage
+		 * @return false if alive, true if dead
+		 */
+		function Hit(damage:Number):Boolean;
 	}
 	
 }

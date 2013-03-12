@@ -6,6 +6,7 @@ package GameCom.GameComponents.Weapons {
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.Helpers.GrenadeHelper;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import LORgames.Engine.Keys;
 	/**
@@ -19,6 +20,8 @@ package GameCom.GameComponents.Weapons {
 		public var FIRE_RATE:Number = 0.8;
 		public var fireTime:Number = 0;
 		
+		private var totalKills:int = 0;
+		
 		public function RocketLauncher(body:b2Body) {
 			AddSafe(body);
 		}
@@ -30,7 +33,7 @@ package GameCom.GameComponents.Weapons {
 				if(Keys.isKeyDown(32)) {
 					fireTime -= FIRE_RATE;
 					
-					GrenadeHelper.I.SpawnGrenade(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE);
+					GrenadeHelper.I.SpawnGrenade(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE, this);
 				}
 			} else {
 				fireTime += dt;
@@ -76,6 +79,14 @@ package GameCom.GameComponents.Weapons {
 		
 		public function GetUpgradeIcon():BitmapData {
 			return null;
+		}
+		
+		public function ReportKills(newKills:int):void {
+			totalKills += newKills;
+			
+			if (totalKills >= 100) {
+				TrophyHelper.GotTrophyByName("Fire in the Hole");
+			}
 		}
 		
 	}

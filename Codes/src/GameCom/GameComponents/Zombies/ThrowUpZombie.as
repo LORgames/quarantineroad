@@ -124,7 +124,7 @@ package GameCom.GameComponents.Zombies
 			if(dt > 0) body.SetLinearVelocity(new b2Vec2(xSpeed, ySpeed));
 		}
 		
-		public function Hit(damage:Number):void {
+		public function Hit(damage:Number):Boolean {
 			myHP -= damage;
 			
 			if (myHP <= 0 && !dead) {
@@ -136,7 +136,11 @@ package GameCom.GameComponents.Zombies
 				}
 				
 				BGManager.I.AddBloodSplatter(this.x, this.y, false);
+				
+				return true;
 			}
+			
+			return false;
 		}
 		
 		public function HitPlayer(player:PlayerCharacter):Number {

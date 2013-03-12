@@ -99,8 +99,8 @@ package GameCom.GameComponents.Zombies {
 			}
 		}
 		
-		public function Hit(damage:Number):void {
-			
+		public function Hit(damage:Number):Boolean {
+			return false;
 		}
 		
 		public function HitPlayer(player:PlayerCharacter):Number {

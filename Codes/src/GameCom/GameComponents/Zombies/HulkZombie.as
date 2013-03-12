@@ -92,7 +92,7 @@ package GameCom.GameComponents.Zombies {
 			if(dt > 0) body.SetLinearVelocity(new b2Vec2(xSpeed, ySpeed));
 		}
 		
-		public function Hit(damage:Number):void {
+		public function Hit(damage:Number):Boolean {
 			myHP -= damage;
 			
 			if (myHP <= 0 && !isDead) {
@@ -102,7 +102,11 @@ package GameCom.GameComponents.Zombies {
 				if(Math.random() < 0.001) {
 					LootManager.I.SpawnAmmoAt(body.GetPosition());
 				}
+				
+				return true;
 			}
+			
+			return false;
 		}
 		
 		public function HitPlayer(player:PlayerCharacter):Number {

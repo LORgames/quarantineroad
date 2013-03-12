@@ -1,6 +1,7 @@
 package GameCom.Helpers {
 	import flash.display.Sprite;
 	import GameCom.GameComponents.Decorations.Grenade;
+	import GameCom.GameComponents.Weapons.IWeapon;
 	/**
 	 * ...
 	 * @author Paul
@@ -19,7 +20,7 @@ package GameCom.Helpers {
 			this.Layer = layer;
 		}
 		
-		public function SpawnGrenade(xPos:Number, yPos:Number):void {
+		public function SpawnGrenade(xPos:Number, yPos:Number, owner:IWeapon):void {
 			if (Spare_Grenades.length == 0) {
 				Spare_Grenades.push(new Grenade());
 			}
@@ -29,7 +30,7 @@ package GameCom.Helpers {
 			grenade.x = xPos;
 			grenade.y = yPos;
 			
-			grenade.Reset();
+			grenade.Reset(owner);
 			Layer.addChild(grenade);
 			
 			Used_Grenades.push(grenade);

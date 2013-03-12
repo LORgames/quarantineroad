@@ -3,6 +3,7 @@ package LORgames.Engine
 	import flash.events.NetStatusEvent;
 	import flash.net.SharedObject;
 	import flash.net.SharedObjectFlushStatus;
+	import GameCom.Helpers.TrophyHelper;
 	/**
 	 * ...
 	 * @author ...
@@ -28,6 +29,7 @@ package LORgames.Engine
 				settingsArray = new Array();
 			} else {
 				settingsArray = storageObject.data.S as Array;
+				TrophyHelper.GotTrophyByName("Back for Maaaw");
 			}
 			
 			if (GetAsInt("StorageRevision") != 0 && GetAsInt("StorageRevision") < Global.WipeStorageBelowRevision) {
@@ -98,7 +100,7 @@ package LORgames.Engine
             try {
                 flushStatus = storageObject.flush(10000);
             } catch (error:Error) {
-				mb = new MessageBox("An unexpected error occurred. Please reload the game.", Logger.MSG_ERROR);
+				//mb = new MessageBox("An unexpected error occurred. Please reload the game.", Logger.MSG_ERROR);
             }
 			
             if (flushStatus != null) {

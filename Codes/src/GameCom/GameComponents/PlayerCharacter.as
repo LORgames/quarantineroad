@@ -195,7 +195,7 @@ package GameCom.GameComponents
 			}
 		}
 		
-		public function Hit(damage:Number):void {
+		public function Hit(damage:Number):Boolean {
 			if(getTimer() > immunityTime) {
 				myHP -= damage;
 				GUIManager.I.Hearts.SetHealth(myHP);
@@ -208,6 +208,8 @@ package GameCom.GameComponents
 				//Immune if you got hurt
 				if(damage > 0) immunityTime = getTimer() + IMMUNITY_TIME;
 			}
+			
+			return false;
 		}
 		
 	}

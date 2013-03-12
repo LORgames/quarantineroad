@@ -12,6 +12,7 @@ package GameCom.GameComponents.Zombies
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.MathHelper;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
 	import GameCom.Managers.LootManager;
@@ -96,15 +97,25 @@ package GameCom.GameComponents.Zombies
 			if(dt > 0) body.SetLinearVelocity(new b2Vec2(xSpeed, ySpeed));
 		}
 		
-		public function Hit(damage:Number):void {
+		public function Hit(damage:Number):Boolean {
 			myHP -= damage;
 			
 			if (myHP <= 0 && !isDead) {
 				isDead = true;
 				
-				SqlshExplosion.RequestExplosionAt(this.x, this.y);
+				var kills:int = SqlshExplosion.RequestExplosionAt(this.x, this.y);
 				GUIManager.I.UpdateScore(SCORE);
+				
+				trace("ExplosionZombie Killed: " + kills);
+				
+				if (kills > 10) {
+					TrophyHelper.GotTrophyByName("Party Pooper");
+				}
+				
+				return true;
 			}
+			
+			return false;
 		}
 		
 		public function HitPlayer(player:PlayerCharacter):Number {
