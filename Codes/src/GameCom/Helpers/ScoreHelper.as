@@ -15,6 +15,8 @@ package GameCom.Helpers
 		public static var AllKills:KillCounterWrapper;
 		
 		public static var SlowKills:KillCounterWrapper;
+		public static var ShakeyKills:KillCounterWrapper;
+		
 		public static var LimpKills:KillCounterWrapper;
 		public static var RedKills:KillCounterWrapper;
 		public static var BlueKills:KillCounterWrapper;
@@ -29,7 +31,7 @@ package GameCom.Helpers
 			Time = new KillCounterWrapper(KillCounterWrapper.TIME);
 			
 			AllKills = new KillCounterWrapper(KillCounterWrapper.TOTAL);
-			
+			ShakeyKills = new KillCounterWrapper(KillCounterWrapper.SHAKEY_KILLS);
 			
 			SlowKills = new KillCounterWrapper(KillCounterWrapper.KILLS);
 			LimpKills = new KillCounterWrapper(KillCounterWrapper.KILLS);

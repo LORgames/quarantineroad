@@ -1,5 +1,6 @@
 package GameCom.Helpers 
 {
+	import GameCom.Managers.WorldManager;
 	import mochi.as3.MochiDigits;
 	/**
 	 * ...
@@ -37,6 +38,12 @@ package GameCom.Helpers
 			} else if (type == TIME) {
 				if (value > 180) TrophyHelper.GotTrophyByName("Time");
 				if (value > 360) TrophyHelper.GotTrophyByName("Man vs Zombie");
+			} else if (type == TOTAL) {
+				if (WorldManager.WorldShake >= 0.3) {
+					ScoreHelper.ShakeyKills.addValue(val);
+				}
+			} else if (type == SHAKEY_KILLS) {
+				if (value > 20) TrophyHelper.GotTrophyByName("Harlem Shake");
 			}
 		}
 	}
