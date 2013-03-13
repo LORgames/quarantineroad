@@ -30,7 +30,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public var fried:Vector.<IZombie>;
 		
-		private var battery:Number = Infinity;
+		private var battery:Number = 3.0;
 		
 		private var lightning:Lightning = new Lightning();
 		
@@ -61,7 +61,9 @@ package GameCom.GameComponents.Weapons {
 					points.push(new Point(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE));
 					
 					for (var i:int = 0; i < Math.min(3, fried.length); i++) {
-						fried[i].Hit(3);
+						if (fried[i].Hit(0.5)) {
+							ReportKills(1);
+						}
 						points.push(fried[i].GetPixelLocation());
 					}
 					

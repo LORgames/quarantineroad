@@ -62,7 +62,9 @@ package GameCom.GameComponents.Projectiles {
 			var contact:b2ContactEdge = body.GetContactList();
 			while (contact != null) {
 				if (contact.contact.IsTouching() && contact.other.GetUserData() is IHit && !owner.IsSafe(contact.other)) {
-					(contact.other.GetUserData() as IHit).Hit(damage);
+					if ((contact.other.GetUserData() as IHit).Hit(damage)) {
+						owner.ReportKills(1);
+					}
 					ExplosionManager.I.RequestBloodAt(this.x, animation.y+this.y);
 					break;
 				}
