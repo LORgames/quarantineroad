@@ -107,7 +107,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			FIRE_RATE = 0.2;
+			battery += Math.random() * 2 + 1;
 		}
 		
 		public function AddSafe(body:b2Body):void {

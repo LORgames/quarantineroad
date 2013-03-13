@@ -17,10 +17,11 @@ package GameCom.GameComponents.Weapons {
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
-		public var FIRE_RATE:Number = 0.8;
+		public var FIRE_RATE:Number = 1.5;
 		public var fireTime:Number = 0;
 		
 		private var totalKills:int = 0;
+		private var grenades:int = 5;
 		
 		public function RocketLauncher(body:b2Body) {
 			AddSafe(body);
@@ -30,10 +31,11 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Update(dt:Number, location:b2Vec2):void {
 			if (fireTime > FIRE_RATE) {
-				if(Keys.isKeyDown(32)) {
+				if(Keys.isKeyDown(32) && grenades > 0) {
 					fireTime -= FIRE_RATE;
 					
 					GrenadeHelper.I.SpawnGrenade(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE, this);
+					grenades--;
 				}
 			} else {
 				fireTime += dt;
@@ -45,11 +47,11 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetAmmoReadout():String {
-			return "INF";
+			return grenades.toString();
 		}
 		
 		public function AddAmmo():void {
-			FIRE_RATE = 0.2;
+			grenades++;
 		}
 		
 		private var isActive:Boolean = false;

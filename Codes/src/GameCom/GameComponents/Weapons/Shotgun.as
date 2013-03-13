@@ -71,7 +71,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			shells += 25;
+			shells += Math.random()*5 + 5;
 		}
 		
 		private var isActive:Boolean = false;

@@ -30,6 +30,8 @@ package GameCom.GameComponents.Weapons {
 		
 		private var isActive:Boolean = false;
 		
+		private var battery:Number = 10;
+		
 		public function LaserGun(body:b2Body, layer:Sprite) {
 			this.Layer = layer;
 			AddSafe(body);
@@ -38,11 +40,14 @@ package GameCom.GameComponents.Weapons {
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
 		public function Update(dt:Number, location:b2Vec2):void {
-			if(Keys.isKeyDown(Keyboard.SPACE)) {
+			if (Keys.isKeyDown(Keyboard.SPACE) && battery > 0) {
 				charge += dt;
 				
 				if (charge > CHARGE_TIME) {
 					charge = CHARGE_TIME;
+					
+					battery -= dt;
+					if (battery < 0) battery = 0;
 					
 					objectHit = null;
 					pointHit = new b2Vec2(location.x, 0);
@@ -80,11 +85,11 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetAmmoReadout():String {
-			return "INF";
+			return battery.toFixed(1);
 		}
 		
 		public function AddAmmo():void {
-			
+			battery += Math.random() * 4 + 1;
 		}
 		
 		public function Activate():void {

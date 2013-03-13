@@ -60,7 +60,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			FIRE_RATE = 0.2;
+			bullets += Math.random() * 20 + 40;
 		}
 		
 		private var isActive:Boolean = false;

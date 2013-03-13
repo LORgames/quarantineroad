@@ -16,8 +16,9 @@ package GameCom.GameComponents.Weapons {
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
-		public var FIRE_RATE:Number = 1.5;
+		public var FIRE_RATE:Number = 1.0;
 		public var fireTime:Number = 0;
+		private var bullets:int = 20;
 		
 		public function Sniper(body:b2Body) {
 			AddSafe(body);
@@ -27,9 +28,10 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Update(dt:Number, location:b2Vec2):void {
 			if (fireTime > FIRE_RATE) {
-				if(Keys.isKeyDown(32)) {
+				if(Keys.isKeyDown(32) && bullets > 0) {
 					fireTime -= FIRE_RATE;
 					BulletManager.I.FireAt(location, SniperBullet, this);
+					bullets--;
 				}
 			} else {
 				fireTime += dt;
@@ -41,11 +43,11 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			
+			bullets += Math.random() * 4 + 1;
 		}
 		
 		public function GetAmmoReadout():String {
-			return "INF";
+			return bullets.toString();
 		}
 		
 		private var isActive:Boolean = false;

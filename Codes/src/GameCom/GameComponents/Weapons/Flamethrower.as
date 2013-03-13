@@ -18,10 +18,11 @@ package GameCom.GameComponents.Weapons {
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
-		public var FIRE_RATE:Number = 0.2;
+		public var FIRE_RATE:Number = 0.15;
 		public var fireTime:Number = 0;
 		
 		private var totalKills:int = 0;
+		private var shots:int = 100;
 		
 		public function Flamethrower(body:b2Body) {
 			AddSafe(body);
@@ -31,9 +32,10 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Update(dt:Number, location:b2Vec2):void {
 			if (fireTime >= FIRE_RATE) {
-				if(Keys.isKeyDown(Keyboard.SPACE)) {
+				if(Keys.isKeyDown(Keyboard.SPACE) && shots > 0) {
 					fireTime -= FIRE_RATE;
-					BulletManager.I.FireAt(location, FlameProjectile, this, (Math.random()-0.5)*0.25);
+					BulletManager.I.FireAt(location, FlameProjectile, this, (Math.random() - 0.5) * 0.25);
+					shots--;
 				}
 			} else {
 				fireTime += dt;
@@ -45,11 +47,11 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetAmmoReadout():String {
-			return "INF";
+			return shots.toString();
 		}
 		
 		public function AddAmmo():void {
-			FIRE_RATE = 0.2;
+			shots += Math.random() * 25 + 25;
 		}
 		
 		private var isActive:Boolean = false;
