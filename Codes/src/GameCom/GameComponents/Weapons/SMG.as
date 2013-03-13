@@ -4,6 +4,7 @@ package GameCom.GameComponents.Weapons {
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.BitmapData;
+	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
@@ -20,7 +21,7 @@ package GameCom.GameComponents.Weapons {
 		public var FIRE_RATE:Number = 0.1;
 		public var fireTime:Number = 0;
 		
-		private var totalSMGs:int = 1;
+		private var totalSMGs:int = 0;
 		
 		private var bullets:int = 250;
 		
@@ -50,12 +51,19 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function Upgrade():void {
-			totalSMGs = 2;
-			GUIManager.I.RedrawWeapons();
-			TrophyHelper.GotTrophyByName("2 for 1");
+			if (totalSMGs == 0) {
+				totalSMGs = 1;
+				GUIManager.I.RedrawWeapons();
+				(safeFixtures[0].GetUserData() as PlayerCharacter).RedrawTopHalf();
+			} else {
+				totalSMGs = 2;
+				GUIManager.I.RedrawWeapons();
+				TrophyHelper.GotTrophyByName("2 for 1");
+			}
 		}
 		
 		public function GetAmmoReadout():String {
+			if (totalSMGs == 0) return "";
 			return bullets.toString();
 		}
 		
@@ -83,21 +91,27 @@ package GameCom.GameComponents.Weapons {
 		public function GetIcon():BitmapData {
 			if(totalSMGs == 2) {
 				return ThemeManager.Get("WeaponIcons/w03_dual_smg.png");
-			} else {
+			} else if(totalSMGs ==1 ) {
 				return ThemeManager.Get("WeaponIcons/w02_smg.png");
+			} else {
+				return null;
 			}
 		}
 		
 		public function GetPlayerBody():BitmapData {
 			if(totalSMGs == 2) {
 				return ThemeManager.Get("Player/top/base03_dual_smg.png");
-			} else {
+			} else if(totalSMGs == 1) {
 				return ThemeManager.Get("Player/top/base02_smg.png");
+			} else {
+				return ThemeManager.Get("Player/top/base.png");
 			}
 		}
 		
 		public function GetUpgradeIcon():BitmapData {
-			if(totalSMGs == 1) {
+			if (totalSMGs == 0) {
+				return ThemeManager.Get("WeaponIcons/w02_smg.png");
+			} else if(totalSMGs == 1) {
 				return ThemeManager.Get("WeaponIcons/w03_dual_smg.png");
 			}
 			

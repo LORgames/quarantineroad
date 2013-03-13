@@ -142,9 +142,7 @@ package GameCom.GameComponents
 				newEquipedWeapon = 6; // Flamethrower
 			} else if (Keys.isKeyDown(Keyboard.NUMBER_8)) {
 				newEquipedWeapon = 7; // Rocket Launcher
-			} /*else if (Keys.isKeyDown(Keyboard.SPACE)) {
-				GrenadeHelper.I.SpawnGrenade(this.x, this.y);
-			}*/
+			}
 			
 			if (newEquipedWeapon != activeWeapon) {
 				weapons[activeWeapon].Deactivate();
@@ -152,11 +150,7 @@ package GameCom.GameComponents
 				weapons[activeWeapon].Activate();
 				
 				GUIManager.I.RedrawWeapons();
-				
-				top.graphics.clear();
-				top.graphics.beginBitmapFill(weapons[activeWeapon].GetPlayerBody());
-				top.graphics.drawRect(0, 0, 21, 38);
-				top.graphics.endFill();
+				RedrawTopHalf();
 			}
 			
 			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1 + body.GetPosition().y));
@@ -229,6 +223,13 @@ package GameCom.GameComponents
 			}
 			
 			return false;
+		}
+		
+		public function RedrawTopHalf():void {
+			top.graphics.clear();
+			top.graphics.beginBitmapFill(weapons[activeWeapon].GetPlayerBody());
+			top.graphics.drawRect(0, 0, 21, 38);
+			top.graphics.endFill();
 		}
 		
 	}

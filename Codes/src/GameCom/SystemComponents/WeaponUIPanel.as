@@ -53,9 +53,11 @@ package GameCom.SystemComponents {
 			this.graphics.endFill();
 			
 			var bmpd:BitmapData = Weapon.GetIcon();
-			this.graphics.beginBitmapFill(bmpd, new Matrix(1, 0, 0, 1, (TILE_WIDTH - bmpd.width) / 2, 2), false, true);
-			this.graphics.drawRect((TILE_WIDTH - bmpd.width) / 2, 2, bmpd.width, bmpd.height);
-			this.graphics.endFill();
+			if(bmpd != null) {
+				this.graphics.beginBitmapFill(bmpd, new Matrix(1, 0, 0, 1, (TILE_WIDTH - bmpd.width) / 2, 2), false, true);
+				this.graphics.drawRect((TILE_WIDTH - bmpd.width) / 2, 2, bmpd.width, bmpd.height);
+				this.graphics.endFill();
+			}
 			
 			this.graphics.lineStyle(1, 0xFFFFFF);
 			this.graphics.moveTo(TILE_WIDTH, 5);
