@@ -64,9 +64,9 @@ package GameCom.SystemComponents
 			text.text = "";
 			text.autoSize = TextFieldAutoSize.LEFT;
 			text.selectable = false;
-			text.x = 9;
+			text.x = 17;
 			text.y = 59;
-			text.width = 106;
+			text.width = 100;
 			text.wordWrap = true;
 			
 			this.addChild(tab);
@@ -83,7 +83,6 @@ package GameCom.SystemComponents
 		}
 		
 		public function Update(e:Event):void {
-			trace("trophy update " + currentlyShowing);
 			
 			if (direction > 0) {
 				tab.x += direction;

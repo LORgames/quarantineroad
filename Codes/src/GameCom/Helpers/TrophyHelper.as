@@ -58,6 +58,7 @@ package GameCom.Helpers
 		}
 		
 		public static function HasTrophy(trophyID:int):Boolean {
+			trace("Trophies: " + trophyInfo.toString(2) + "&" + ((0x1<<trophyID) as int).toString(2));
 			return ((0x1 << trophyID) & trophyInfo) > 0;
 		}
 		

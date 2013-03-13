@@ -23,9 +23,12 @@ package GameCom.SystemComponents
 				
 				var bmpd:BitmapData = ThemeManager.Get(TrophyHelper.GetTrophyPictureName(i));
 				
-				if(!TrophyHelper.HasTrophy(i)) {
+				if (!TrophyHelper.HasTrophy(i)) {
+					trace("No has trophy: " + i);
 					bmpd = bmpd.clone();
 					bmpd.colorTransform(new Rectangle(0, 0, 44, 44), new ColorTransform(0.3, 0.3, 0.3, 0.5));
+				} else {
+					trace("Has trophy: " + i);
 				}
 				
 				this.graphics.beginBitmapFill(bmpd, mat);

@@ -6,6 +6,7 @@ package GameCom.States {
 	import flash.text.TextFormat;
 	import flash.text.TextFieldAutoSize;
 	import GameCom.Helpers.AudioStore;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.WorldManager;
 	import GameCom.SystemMain;
 	import flash.display.Bitmap;
@@ -74,6 +75,9 @@ package GameCom.States {
 			WorldManager.World.Step(0, 1, 1);
 			
 			Stats.Connect();
+			
+			TrophyHelper.TotalTrophies();
+			if(Stats.GetInt("Gameplays", 0) > 0) TrophyHelper.GotTrophyByName("Back for Maaaw");
 			
 			SystemMain.instance.StateTo(new MainMenu());
 		}
