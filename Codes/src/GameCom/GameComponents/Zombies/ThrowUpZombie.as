@@ -123,7 +123,7 @@ package GameCom.GameComponents.Zombies
 			animation.x = -animation.width / 2;
 			animation.y = -animation.height + RADIUS * Global.PHYSICS_SCALE;
 			
-			if(dt > 0) body.SetLinearVelocity(new b2Vec2(xSpeed, ySpeed));
+			if(dt > 0) body.SetLinearVelocityXY(xSpeed, ySpeed);
 		}
 		
 		public function Hit(damage:Number):Boolean {

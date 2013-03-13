@@ -41,6 +41,8 @@ package GameCom.Managers {
 		private var surviveTime:int = 0;
 		private var previousUpdate:int = 0;
 		
+		private var recycledSpawnLocation:b2Vec2 = new b2Vec2();
+		
 		public function ZombieManager(layer0:Sprite, layer1:Sprite) {
 			this.layer0 = layer0;
 			this.layer1 = layer1;
@@ -104,7 +106,9 @@ package GameCom.Managers {
 					handTimeout = HAND_DELAY;
 				}
 				
-				zombie.AddToScene(new b2Vec2((Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.9, Math.random() * -5 - 1), layer0, layer1);
+				recycledSpawnLocation.x = (Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.9;
+				recycledSpawnLocation.y = Math.random() * -5 - 1
+				zombie.AddToScene(recycledSpawnLocation, layer0, layer1);
 				
 				UsedZombies.push(zombie);
 				

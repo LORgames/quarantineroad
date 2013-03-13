@@ -216,6 +216,10 @@ package GameCom.States {
 			}
 			mDown = Keys.isKeyDown(Keyboard.Q);
 			
+			if (Keys.isKeyDown(Keyboard.P)) {
+				simulating = !simulating;
+			}
+			
 			this.graphics.clear();
 			this.graphics.beginFill(0);
 			this.graphics.drawRect(0, 0, (stage.stageWidth - Global.SCREEN_WIDTH) / 2, stage.stageHeight);

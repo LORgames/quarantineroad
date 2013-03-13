@@ -14,6 +14,8 @@ package GameCom.SystemComponents {
 		}
 		
 		public function SetHealth(newHP:int):void {
+			this.graphics.clear();
+			
 			for (var i:int = 0; i < MAX; i++) {
 				if (newHP >= (i+1)*2) {
 					this.graphics.beginBitmapFill(ThemeManager.Get("Hearts/Heart Full.png"), new Matrix(1, 0, 0, 1, (GAP + 12) * i, 0));

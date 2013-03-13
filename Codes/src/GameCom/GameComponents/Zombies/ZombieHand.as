@@ -72,7 +72,7 @@ package GameCom.GameComponents.Zombies {
 			this.x = Math.round(body.GetPosition().x * Global.PHYSICS_SCALE);
 			this.y = Math.round(body.GetPosition().y * Global.PHYSICS_SCALE);
 			
-			body.SetLinearVelocity(new b2Vec2(0, WorldManager.WorldScrollSpeed));
+			body.SetLinearVelocityXY(0, WorldManager.WorldScrollSpeed);
 			
 			animation.Update(dt);
 			animation.x = -animation.width / 2;

@@ -1,5 +1,6 @@
 package GameCom.Helpers 
 {
+	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.MessageBox;
 	import LORgames.Engine.Storage;
 	/**
@@ -49,19 +50,23 @@ package GameCom.Helpers
 			"Project Alice", "Kill 1000 amount of zombies (more than zombie slayer achievement)"
 		);
 		
+		private static var trophyInfo:int = 0;
+		
 		public static function TotalTrophies():int {
+			trophyInfo = Storage.GetAsInt("VARIABLE0");
 			return int(TrophyData.length/2);
 		}
 		
 		public static function HasTrophy(trophyID:int):Boolean {
-			var tropies:int = Storage.GetAsInt("VARIABLE0");
-			return ((0x1 << trophyID) & tropies) > 0;
+			return ((0x1 << trophyID) & trophyInfo) > 0;
 		}
 		
 		public static function GotTrophy(trophyID:int):void {
-			var trophies:int = Storage.GetAsInt("VARIABLE0");
-			trophies = (0x1 << trophyID) | trophies;
-			Storage.Set("VARIABLE0", trophies);
+			if(!HasTrophy(trophyID)) {
+				trophyInfo = (0x1 << trophyID) | trophyInfo;
+				Storage.Set("VARIABLE0", trophyInfo);
+				TrophyToast.I.AddTrophy(trophyID);
+			}
 		}
 		
 		public static function GetTrophyName(trophyID:int):String {

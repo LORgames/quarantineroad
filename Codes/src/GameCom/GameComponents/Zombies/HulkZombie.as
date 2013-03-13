@@ -90,7 +90,7 @@ package GameCom.GameComponents.Zombies {
 				contact = contact.next;
 			}*/
 			
-			if(dt > 0) body.SetLinearVelocity(new b2Vec2(xSpeed, ySpeed));
+			if(dt > 0) body.SetLinearVelocityXY(xSpeed, ySpeed);
 		}
 		
 		public function Hit(damage:Number):Boolean {
@@ -155,7 +155,7 @@ package GameCom.GameComponents.Zombies {
 		}
 		
 		public function RemoveFromScene(layer0:Sprite, layer1:Sprite):void {
-			body.SetPosition(new b2Vec2(0, -200));
+			body.SetPositionXY(Math.random()*10000, -200);
 			layer0.removeChild(this);
 			body.SetActive(false);
 			

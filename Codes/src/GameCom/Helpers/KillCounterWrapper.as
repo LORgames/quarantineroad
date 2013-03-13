@@ -14,19 +14,23 @@ package GameCom.Helpers
 		public static const SCORE:int = 4;
 		public static const SHAKEY_KILLS:int = 5;
 		
-		private var _val:MochiDigits = new MochiDigits();
+		//private var _val:MochiDigits = new MochiDigits();
+		public var Value:Number = 0;
+		
 		private var type:int = KILLS;
 		
 		public function KillCounterWrapper(type:int = KILLS) {
 			this.type = type;
 		}
 		
-		public function get Value():Number {
-			return _val.value;
-		}
+		//public function get Value():Number {
+		//	return _val.value;
+		//	return number;
+		//}
 		
 		public function AddValue(val:Number):void {
-			_val.addValue(val);
+			//_val.addValue(val);
+			Value += val;
 			
 			if (type == KILLS) {
 				ScoreHelper.AllKills.AddValue(val);
@@ -44,7 +48,8 @@ package GameCom.Helpers
 		}
 		
 		public function SetValue(value:Number):void {
-			_val.setValue(value);
+			//_val.setValue(value);
+			Value = value;
 			
 			if (type == DISTANCE) {
 				if (Value > 200 && ScoreHelper.AllKills.Value == 0) TrophyHelper.GotTrophyByName("Pacifist");

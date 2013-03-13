@@ -250,17 +250,20 @@ public class b2Body
 	* @param angle the new world rotation angle of the body in radians.
 	*/
 	public function SetPositionAndAngle(position:b2Vec2, angle:Number) : void{
+		SetPositionAndAngleXY(position.x, position.y, angle);
+	}
+	
+	public function SetPositionAndAngleXY(x_:Number, y_:Number, angle:Number) : void{
 		
 		var f:b2Fixture;
 		
 		//b2Settings.b2Assert(m_world.IsLocked() == false);
-		if (m_world.IsLocked() == true)
-		{
+		if (m_world.IsLocked() == true) {
 			return;
 		}
 		
 		m_xf.R.Set(angle);
-		m_xf.position.SetV(position);
+		m_xf.position.Set(x_, y_);
 		
 		//m_sweep.c0 = m_sweep.c = b2Mul(m_xf, m_sweep.localCenter);
 		//b2MulMV(m_xf.R, m_sweep.localCenter);
@@ -293,8 +296,7 @@ public class b2Body
 	 * if the angle is available.
 	 * @param xf the transform of position and angle to set the bdoy to.
 	 */
-	public function SetTransform(xf:b2Transform):void
-	{
+	public function SetTransform(xf:b2Transform):void {
 		SetPositionAndAngle(xf.position, xf.GetAngle());
 	}
 
@@ -318,9 +320,12 @@ public class b2Body
 	 * Setthe world body origin position.
 	 * @param position the new position of the body
 	 */
-	public function SetPosition(position:b2Vec2):void
-	{
+	public function SetPosition(position:b2Vec2):void {
 		SetPositionAndAngle(position, GetAngle());
+	}
+		
+	public function SetPositionXY(x_:Number, y_:Number):void {
+		SetPositionAndAngleXY(x_, y_, GetAngle());
 	}
 
 	/**
@@ -365,6 +370,17 @@ public class b2Body
 			return;
 		}
 		m_linearVelocity.SetV(v);
+	}
+
+	/**
+	* Set the linear velocity of the center of mass.
+	* @param v the new linear velocity of the center of mass.
+	*/
+	public function SetLinearVelocityXY(x_:Number, y_:Number) : void {
+		if ( m_type == b2_staticBody ) {
+			return;
+		}
+		m_linearVelocity.Set(x_, y_);
 	}
 
 	/**
