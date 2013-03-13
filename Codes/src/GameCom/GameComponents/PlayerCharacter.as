@@ -171,9 +171,9 @@ package GameCom.GameComponents
 			}
 			
 			if (Keys.isKeyDown(Keyboard.A) || Keys.isKeyDown(Keyboard.LEFT)) {
-				xSpeed = -5;
+				xSpeed = -1.5;
 			} else if (Keys.isKeyDown(Keyboard.D) || Keys.isKeyDown(Keyboard.RIGHT)) {
-				xSpeed = 5;
+				xSpeed = 1.5;
 			}
 			
 			if (xSpeed != 0 || ySpeed != 0) {

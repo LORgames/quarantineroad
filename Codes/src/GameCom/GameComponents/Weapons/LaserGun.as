@@ -60,7 +60,7 @@ package GameCom.GameComponents.Weapons {
 					
 					if(objectHit != null) {
 						if (objectHit.GetUserData() is IZombie) {
-							(objectHit.GetUserData() as IZombie).Hit(20);
+							(objectHit.GetUserData() as IZombie).Hit(0.25);
 						}
 					}
 				}
