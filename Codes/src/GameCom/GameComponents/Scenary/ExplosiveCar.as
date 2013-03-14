@@ -124,7 +124,7 @@ package GameCom.GameComponents.Scenary
 			if (ScoreHelper.Time.Value < 60) {
 				currentHP = 3;
 			} else {
-				currentHP = 15;
+				currentHP = 5 + int(10*Math.random());
 			}
 			
 			art.ChangePlayback(0.1, 0, 1, true);
