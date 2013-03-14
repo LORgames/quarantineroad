@@ -5,9 +5,11 @@ package GameCom.GameComponents.Weapons {
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
+	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.GrenadeHelper;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
+	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
 	 * ...
@@ -36,6 +38,8 @@ package GameCom.GameComponents.Weapons {
 					
 					GrenadeHelper.I.SpawnGrenade(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE, this);
 					grenades--;
+					
+					AudioController.PlaySound(AudioStore.GrenadeLauncher1);
 				}
 			} else {
 				fireTime += dt;

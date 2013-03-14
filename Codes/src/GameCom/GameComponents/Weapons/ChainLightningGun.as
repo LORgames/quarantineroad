@@ -13,9 +13,11 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.GameComponents.Decorations.Lightning;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Zombies.IZombie;
+	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.WorldManager;
+	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
 	 * ...
@@ -54,6 +56,8 @@ package GameCom.GameComponents.Weapons {
 					
 					if (fried.length > 0) {
 						battery -= FIRE_RATE;
+						
+						AudioController.PlaySound(AudioStore.ChainLightningGun1);
 					}
 					
 					//LIGHTNING
