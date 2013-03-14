@@ -1,4 +1,5 @@
 package GameCom.GameComponents.Projectiles {
+	import Box2D.Collision.Shapes.b2CircleShape;
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
 	import Box2D.Dynamics.Contacts.b2Contact;
@@ -54,6 +55,8 @@ package GameCom.GameComponents.Projectiles {
 			animation.x = -animation.width / 2;
 			animation.y = -animation.height + 0.1 * Global.PHYSICS_SCALE;
 			
+			(body.GetFixtureList().GetShape() as b2CircleShape).SetRadius(TIME_TO_LIVE-liveTime + 0.25);
+			
 			liveTime -= dt;
 			
 			//TODO: Fix world scrolling in speed.
@@ -95,8 +98,9 @@ package GameCom.GameComponents.Projectiles {
 			animation.ChangePlayback(0.1, 0, 8, true);
 			
 			this.damage = damage==0?BASE_DAMAGE:damage;
-			
 			this.angle = angle;
+			
+			(body.GetFixtureList().GetShape() as b2CircleShape).SetRadius(0.25);
 			
 			layer.addChild(this);
 		}
@@ -104,6 +108,8 @@ package GameCom.GameComponents.Projectiles {
 		public function Deactivate(layer:Sprite):void {
 			body.SetActive(false);
 			layer.removeChild(this);
+			
+			body.SetPositionAndAngleXY(30, 5, 0);
 		}
 	}
 

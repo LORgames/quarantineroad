@@ -27,7 +27,7 @@ package GameCom.GameComponents.Loot
 		private var updateTime:Number = 0;
 		
 		public function LootDrop() {
-			body = BodyHelper.GetGenericCircle(0.5, Global.PHYSICS_CATEGORY_LOOT, this);
+			body = BodyHelper.GetGenericCircle(0.75, Global.PHYSICS_CATEGORY_LOOT, this);
 			body.GetFixtureList().SetSensor(true);
 			body.SetActive(false);
 			
@@ -35,10 +35,10 @@ package GameCom.GameComponents.Loot
 			anim = LootDrop.GetAnimatedOverlay()
 			
 			back.x = -43;
-			back.y = -76;
+			back.y = -71;
 			
 			anim.x = -43;
-			anim.y = -76;
+			anim.y = -71;
 			
 			this.addChild(back);
 			this.addChild(item);

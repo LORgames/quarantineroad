@@ -132,7 +132,7 @@ package GameCom.GameComponents.Scenary
 		}
 		
 		public function RemoveFromScene(layer0:Sprite, layer1:Sprite):void {
-			
+			body.SetPositionAndAngleXY(50, 0, 0);
 		}
 		
 		public function GetPixelLocation():Point {

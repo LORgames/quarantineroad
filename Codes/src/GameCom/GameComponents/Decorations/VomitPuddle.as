@@ -59,6 +59,9 @@ package GameCom.GameComponents.Decorations
 		
 		public function Deactivate():void {
 			body.SetActive(false);
+			body.SetPositionAndAngleXY(-40, -50, 0);
+			this.x = -2000;
+			this.y = -2000;
 		}
 		
 		public function IsFinished():Boolean {
@@ -66,13 +69,15 @@ package GameCom.GameComponents.Decorations
 		}
 		
 		public function Update(dt:Number):void {
-			if (animation.IsStopped()) animation.ChangePlayback(0.1, 5, 11);
+			if (animation.IsStopped()) {
+				animation.ChangePlayback(0.1, 5, 11);
+			}
+			
 			animation.Update(dt);
 			
 			this.x = body.GetPosition().x * Global.PHYSICS_SCALE;
 			this.y = body.GetPosition().y * Global.PHYSICS_SCALE;
-			
-			body.SetLinearVelocity(new b2Vec2(0, WorldManager.WorldScrollSpeed));
+			body.SetLinearVelocityXY(0, WorldManager.WorldScrollSpeed);
 			
 			var edge:b2ContactEdge = body.GetContactList();
 			while (edge != null) {
