@@ -112,7 +112,7 @@ package GameCom.Managers {
 				
 				UsedZombies.push(zombie);
 				
-				spawnTimeout = 3;
+				spawnTimeout = 10;
 				
 				break;
 			}

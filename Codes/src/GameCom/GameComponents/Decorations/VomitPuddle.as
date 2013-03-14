@@ -42,7 +42,7 @@ package GameCom.GameComponents.Decorations
 			this.addChild(animation);
 			
 			animation.x = -animation.width / 2;
-			animation.y = -animation.height * 0.7;
+			animation.y = -animation.height * 0.6;
 			
 			body = BodyHelper.GetGenericCircle(1.5, Global.PHYSICS_CATEGORY_VOMIT, this, 0xFFFF & ~Global.PHYSICS_CATEGORY_WALLS & ~Global.PHYSICS_CATEGORY_BULLETS & ~Global.PHYSICS_CATEGORY_ZOMBIES);
 			body.GetFixtureList().SetSensor(true);

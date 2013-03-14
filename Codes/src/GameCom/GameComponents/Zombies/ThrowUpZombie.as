@@ -79,6 +79,8 @@ package GameCom.GameComponents.Zombies
 			//Create the defintion
 			body = BodyHelper.GetGenericCircle(RADIUS, Global.PHYSICS_CATEGORY_ZOMBIES, this, 0xFFFF & ~Global.PHYSICS_CATEGORY_WALLS & ~Global.PHYSICS_CATEGORY_VOMIT);
 			body.SetType(b2Body.b2_dynamicBody);
+			body.SetActive(false);
+			body.SetPositionAndAngleXY(60, -30, 0);
 		}
 		
 		public function Update(dt:Number):void {

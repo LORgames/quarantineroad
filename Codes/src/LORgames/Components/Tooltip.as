@@ -1,6 +1,7 @@
 package LORgames.Components 
 {
 	import flash.display.Sprite;
+	import flash.filters.GlowFilter;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
@@ -35,7 +36,7 @@ package LORgames.Components
 			this.floatingDistance = distance;
 			floatingDirection = direction;
 			
-			text.defaultTextFormat = new TextFormat("Verdana", 10, 0x716868);
+			text.defaultTextFormat = new TextFormat("Verdana", 10, 0x0);
 			text.wordWrap = true;
 			text.multiline = true;
 			text.selectable = false;
@@ -81,7 +82,7 @@ package LORgames.Components
 			this.graphics.clear();
 			
 			this.graphics.beginFill(0xF1EAEA, _alpha);
-			this.graphics.lineStyle(2, 0xE0D7D7);
+			//this.graphics.lineStyle(2, 0xE0D7D7);
 			
 			if(floatingDirection == UP) {
 				text.x = -text.width / 2;

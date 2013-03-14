@@ -23,7 +23,7 @@ package GameCom.GameComponents.Weapons {
 		public var FIRE_RATE:Number = 0.1;
 		public var fireTime:Number = 0;
 		
-		private var totalSMGs:int = 1;
+		private var totalSMGs:int = 2;
 		
 		private var bullets:int = 250;
 		
@@ -40,15 +40,17 @@ package GameCom.GameComponents.Weapons {
 				if(Keys.isKeyDown(32)) {
 					fireTime -= FIRE_RATE;
 					
-					for (var i:int = 0; i < totalSMGs; i++) {
-						if(bullets > 0) {
-							BulletManager.I.FireAt(location, BasicBullet, this, (Math.random() - 0.5), 5);
-							bullets--;
-							
-
-						}
-					}
+					if (totalSMGs > 0 && bullets > 0) {
+						BulletManager.I.FireAt(location, BasicBullet, this, (Math.random() - 0.5), 5);
+						bullets--;
+						
 						AudioController.PlaySound(AudioStore.SMG1);
+					}
+					
+					if (totalSMGs > 1 && bullets > 0) {
+						BulletManager.I.FireAt(new b2Vec2(location.x - 0.6, location.y), BasicBullet, this, (Math.random() - 0.5), 5);
+						bullets--;
+					}
 				}
 			} else {
 				fireTime += dt;

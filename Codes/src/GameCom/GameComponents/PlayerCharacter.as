@@ -153,7 +153,7 @@ package GameCom.GameComponents
 				RedrawTopHalf();
 			}
 			
-			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1 + body.GetPosition().y));
+			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1.3 + body.GetPosition().y));
 			
 			var xSpeed:Number = 0;
 			var ySpeed:Number = 0;

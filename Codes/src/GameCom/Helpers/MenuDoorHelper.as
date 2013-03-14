@@ -35,6 +35,8 @@ package GameCom.Helpers {
 			this.addChild(leftDoor);
 			this.addChild(overlay);
 			
+			this.mouseEnabled = false;
+			
 			stage.addEventListener(Event.ENTER_FRAME, Update, false, 0, true);
 		}
 		

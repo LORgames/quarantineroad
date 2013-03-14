@@ -42,7 +42,7 @@ package GameCom.States {
 		private var mbh:MenuBackgroundHelper = new MenuBackgroundHelper();
 		private var mdh:MenuDoorHelper = new MenuDoorHelper();
 		
-		private var tooltip:Tooltip = new Tooltip();
+		private var tooltip:Tooltip = new Tooltip("", Tooltip.UP, 20, 175);
 		
 		private var trophies:TrophyMenu = new TrophyMenu(tooltip);
 		
@@ -60,6 +60,7 @@ package GameCom.States {
 			this.addChild(trophies);
 			
 			this.addChild(background);
+			background.mouseEnabled = false;
 			
 			//Start Menu
 			StartBtn.addEventListener(MouseEvent.CLICK, PlayFunc, false, 0, true);
@@ -72,6 +73,8 @@ package GameCom.States {
 			this.addChild(WebsiteText);
 			
 			this.addChild(mdh);
+			
+			this.addChild(tooltip);
 			
 			this.stage.addEventListener(Event.RESIZE, Resized, false, 0, true);
 			Resized();
