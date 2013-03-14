@@ -19,6 +19,7 @@ package GameCom.States {
 	import LORgames.Components.BitmapButton;
 	import LORgames.Components.Button;
 	import LORgames.Components.TextBox;
+	import LORgames.Components.Tooltip;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	import LORgames.Engine.Storage;
@@ -41,7 +42,9 @@ package GameCom.States {
 		private var mbh:MenuBackgroundHelper = new MenuBackgroundHelper();
 		private var mdh:MenuDoorHelper = new MenuDoorHelper();
 		
-		private var trophies:TrophyMenu = new TrophyMenu();
+		private var tooltip:Tooltip = new Tooltip();
+		
+		private var trophies:TrophyMenu = new TrophyMenu(tooltip);
 		
 		public function MainMenu() {
 			//Just make sure we're ready to do this...

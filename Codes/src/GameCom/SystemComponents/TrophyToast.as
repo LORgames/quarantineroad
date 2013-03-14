@@ -13,6 +13,10 @@ package GameCom.SystemComponents
 	 * @author Paul
 	 */
 	public class TrophyToast extends Sprite {
+		private const OPENING:int = 0;
+		private const HOLDING:int = 1;
+		private const CLOSING:int = 2;
+		
 		private static var I_:TrophyToast;
 		
 		public static function get I():TrophyToast {
@@ -22,6 +26,8 @@ package GameCom.SystemComponents
 			
 			return I_;
 		}
+		
+		private var state:int = CLOSING;
 		
 		private var messages:Array = new Array();
 		
@@ -83,43 +89,65 @@ package GameCom.SystemComponents
 		}
 		
 		public function Update(e:Event):void {
-			
-			if (direction > 0) {
-				tab.x += direction;
-				
-				if (tab.x > 0) {
-					tab.x = 0;
-					direction = 0;
-				}
-			} else if (direction < 0) {
-				tab.x += direction;
-				
-				if (tab.x < -107) {
-					tab.x = -107;
-					direction = 0;
-					stage.removeEventListener(Event.ENTER_FRAME, Update);
+			if(state == HOLDING) {
+				if (direction > 0) {
+					tab.x += direction;
 					
-					currentlyShowing = -1;
+					if (tab.x > 0) {
+						tab.x = 0;
+						direction = 0;
+					}
+				} else if (direction < 0) {
+					tab.x += direction;
+					
+					if (tab.x < -107) {
+						tab.x = -107;
+						direction = 0;
+						
+						currentlyShowing = -1;
+						ShowNext();
+					}
+				} else {
+					waited_time += Global.TIME_STEP;
+					
+					if (waited_time > WAIT_TIME) {
+						direction = -5;
+					}
 				}
-			} else {
-				waited_time += Global.TIME_STEP;
+			} else if (state == OPENING) {
+				this.x += 2;
+				if (this.x >= 0) {
+					this.x = 0;
+					state = HOLDING;
+				}
+			} else if (state == CLOSING) {
+				this.x -= 2;
 				
-				if (waited_time > WAIT_TIME) {
-					direction = -5;
+				if (this.x < -20) {
+					this.x = -20;
+					stage.removeEventListener(Event.ENTER_FRAME, Update);
 				}
 			}
 		}
 		
 		private function ShowNext():void {
-			if (currentlyShowing == -1 && messages.length > 0) {
-				currentlyShowing = messages.pop();
-				waited_time = 0;
-				stage.addEventListener(Event.ENTER_FRAME, Update);
-				
-				text.text = TrophyHelper.GetTrophyName(currentlyShowing);
-				item.bitmapData = ThemeManager.Get(TrophyHelper.GetTrophyPictureName(currentlyShowing));
-				
-				direction = 5;
+			if (currentlyShowing == -1) {
+				if(messages.length > 0) {
+					currentlyShowing = messages.pop();
+					waited_time = 0;
+					stage.addEventListener(Event.ENTER_FRAME, Update);
+					
+					text.text = TrophyHelper.GetTrophyName(currentlyShowing);
+					item.bitmapData = ThemeManager.Get(TrophyHelper.GetTrophyPictureName(currentlyShowing));
+					
+					direction = 5;
+					
+					if(state == CLOSING) {
+						state = OPENING;
+					}
+				} else {
+					state = CLOSING;
+				}
 			}
 		}
 		

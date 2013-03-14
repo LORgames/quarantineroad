@@ -11,6 +11,7 @@ package GameCom.GameComponents.Scenary
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.Helpers.AnimatedSprite;
+	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.LootManager;
 	import GameCom.Managers.WorldManager;
@@ -116,10 +117,15 @@ package GameCom.GameComponents.Scenary
 		}
 		
 		public function AddToScene(position:b2Vec2, layer0:Sprite, layer1:Sprite):void {
-			currentHP = 15;
 			isDead = false;
 			body.SetPosition(position);
 			body.SetActive(true);
+			
+			if (ScoreHelper.Time.Value < 60) {
+				currentHP = 3;
+			} else {
+				currentHP = 15;
+			}
 			
 			art.ChangePlayback(0.1, 0, 1, true);
 			art.Update(0);

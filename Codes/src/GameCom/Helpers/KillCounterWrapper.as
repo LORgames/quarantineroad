@@ -52,10 +52,10 @@ package GameCom.Helpers
 			Value = value;
 			
 			if (type == DISTANCE) {
-				if (Value > 200 && ScoreHelper.AllKills.Value == 0) TrophyHelper.GotTrophyByName("Pacifist");
+				if (Value > 100 && ScoreHelper.AllKills.Value == 0) TrophyHelper.GotTrophyByName("Pacifist");
 				if (Value > 100) TrophyHelper.GotTrophyByName("100m Run");
+				if (Value > 250) TrophyHelper.GotTrophyByName("250m Run");
 				if (Value > 500) TrophyHelper.GotTrophyByName("500m Run");
-				if (Value > 1000) TrophyHelper.GotTrophyByName("1000m Run");
 			}
 		}
 	}

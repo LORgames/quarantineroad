@@ -6,13 +6,18 @@ package GameCom.SystemComponents
 	import flash.geom.Matrix;
 	import flash.geom.Rectangle;
 	import GameCom.Helpers.TrophyHelper;
+	import LORgames.Components.Tooltip;
 	/**
 	 * ...
 	 * @author Paul
 	 */
 	public class TrophyMenu extends Sprite {
 		
-		public function TrophyMenu() {
+		private var tooltip:Tooltip = null;
+		
+		public function TrophyMenu(tooltip:Tooltip) {
+			this.tooltip = tooltip;
+			
 			var totalTrophies:int = TrophyHelper.TotalTrophies();
 			
 			var mat:Matrix = new Matrix();

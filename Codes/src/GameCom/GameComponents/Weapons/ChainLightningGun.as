@@ -109,7 +109,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			battery += Math.random() * 2 + 1;
+			battery += Math.random() * 2 + 3;
 		}
 		
 		public function AddSafe(body:b2Body):void {

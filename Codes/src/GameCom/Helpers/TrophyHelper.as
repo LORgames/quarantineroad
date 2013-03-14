@@ -10,14 +10,14 @@ package GameCom.Helpers
 	public class TrophyHelper {
 		private static const TrophyData:Array = new Array(
 			"100m Run", "Move 100m in a single game.",
+			"250m Run", "Move 250m in a single game.",
 			"500m Run", "Move 500m in a single game.",
-			"1000m Run", "Move 1000m in a single game.",
 			
 			"Boomstick", "Get 100 kills with the shotgun in a single game.",
 			"Crispy", "Get 100 kills with the flame thrower in a single game.",
 			"Spray and Prey", "Kill 100 zombies with SMG or Dual SMG",
 			
-			"Pacifist", "Walk 200m without killing a zombie",
+			"Pacifist", "Walk 100m without killing a zombie. Including Melee!",
 			"Time", "Survive 3:00 min",
 			"Man vs Zombie", "Survive 6 minutes in a single game.",
 			
@@ -58,7 +58,6 @@ package GameCom.Helpers
 		}
 		
 		public static function HasTrophy(trophyID:int):Boolean {
-			trace("Trophies: " + trophyInfo.toString(2) + "&" + ((0x1<<trophyID) as int).toString(2));
 			return ((0x1 << trophyID) & trophyInfo) > 0;
 		}
 		
