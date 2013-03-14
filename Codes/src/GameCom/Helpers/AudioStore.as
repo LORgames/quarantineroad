@@ -69,23 +69,8 @@ package GameCom.Helpers
 		[Embed(source = "../../../lib/Audio/Shotgun/1.mp3")]
 		public static const ShotgunFire1:Class;
 		
-		[Embed(source = "../../../lib/Audio/Shotgun/2.mp3")]
-		public static const ShotgunFire2:Class;
-		
-		[Embed(source = "../../../lib/Audio/Shotgun/3.mp3")]
-		public static const ShotgunFire3:Class;
-		
-		[Embed(source = "../../../lib/Audio/Shotgun/4.mp3")]
-		public static const ShotgunFire4:Class;
-		
-		[Embed(source = "../../../lib/Audio/Shotgun/5.mp3")]
-		public static const ShotgunFire5:Class;
-		
-		[Embed(source = "../../../lib/Audio/Shotgun/6.mp3")]
-		public static const ShotgunFire6:Class;
-		
-		[Embed(source = "../../../lib/Audio/Shotgun/7.mp3")]
-		public static const ShotgunFire7:Class;
+		[Embed(source = "../../../lib/Audio/Sniper/sniper fire and reload.mp3")]
+		public static const SniperFire1:Class;
 		
 		[Embed(source = "../../../lib/Audio/Shotgun/reload.mp3")]
 		public static const ShotgunReload:Class;
@@ -111,7 +96,7 @@ package GameCom.Helpers
 		
 		public static var ZombieSounds:Array = new Array(ZombieSound2, ZombieSound3, ZombieSound4, ZombieSound5, ZombieSound6, ZombieSound7);
 		public static var FootstepSounds:Array = new Array(Footstep1, Footstep2, Footstep3, Footstep4, Footstep5);
-		public static var ShotgunFire:Array = new Array(ShotgunFire1, ShotgunFire2, ShotgunFire3, ShotgunFire4, ShotgunFire5, ShotgunFire6, ShotgunFire7);
+		public static var ShotgunFire:Array = new Array(ShotgunFire1);
 		
 		public static function GetZombieSound():Class {
 			return ZombieSounds[int(ZombieSounds.length * Math.random())];

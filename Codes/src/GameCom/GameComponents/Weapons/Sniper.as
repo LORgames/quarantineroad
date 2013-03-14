@@ -6,7 +6,9 @@ package GameCom.GameComponents.Weapons {
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Projectiles.SniperBullet;
+	import GameCom.Helpers.AudioStore;
 	import GameCom.Managers.BulletManager;
+	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
 	 * ...
@@ -32,6 +34,8 @@ package GameCom.GameComponents.Weapons {
 					fireTime -= FIRE_RATE;
 					BulletManager.I.FireAt(location, SniperBullet, this);
 					bullets--;
+					
+					AudioController.PlaySound(AudioStore.SniperFire1);
 				}
 			} else {
 				fireTime += dt;
