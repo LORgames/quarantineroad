@@ -1,8 +1,6 @@
-"Don't Bite Me Bro", "Die without taking any damage from zombies.",
-"Fully Loaded", "Obtain all weapon upgrades in a single game.",
-"Headshot", "Kill a zombie from more then 25m away with the sniper rifle.",
-"High Five", "<SQUISH> Killed by the hand.",
-"Max Ammo", "Obtain Full ammo for each type of weapon in a single game.",
-"New Shoes", "Walk through an acid pool and survive",
-"Throw like a girl", "Kill yourself with a grenade",
-"Brain", One of each kind of zombie killed
+* "Don't Bite Me Bro", "Die without taking any damage from zombies.",
+  "Fully Loaded", "Obtain all weapon upgrades in a single game.",
+* "High Five", "<SQUISH> Killed by the hand.",
+  "Max Ammo", "Obtain Full ammo for each type of weapon in a single game.",
+* "New Shoes", "Walk through an acid pool and survive",
+* "Brain", One of each kind of zombie killed

@@ -70,7 +70,7 @@ package GameCom.Managers
 			AudioController.PlaySound(AudioStore.Explode);
 		}
 		
-		public function RequestBombExplosionAt(p:Point, damage:Number = 100):int {
+		public function RequestBombExplosionAt(p:Point, damage:Number = 1500):int {
 			if (waiting_bomb_explosions.length == 0) {
 				var new_explosion:GrenadeExplosion = new GrenadeExplosion();
 				layer.addChild(new_explosion);
@@ -90,7 +90,7 @@ package GameCom.Managers
 			
 			AudioController.PlaySound(AudioStore.Explode);
 			
-			return WorldManager.Explode(new b2Vec2(p.x / Global.PHYSICS_SCALE, p.y / Global.PHYSICS_SCALE), 2.5, damage);
+			return WorldManager.Explode(new b2Vec2(p.x / Global.PHYSICS_SCALE, p.y / Global.PHYSICS_SCALE), 1.5, damage);
 		}
 		
 		public function RequestBloodAt(x:Number, y:Number):void {

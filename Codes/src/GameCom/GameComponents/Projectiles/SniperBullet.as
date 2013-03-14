@@ -10,6 +10,7 @@ package GameCom.GameComponents.Projectiles {
 	import GameCom.GameComponents.Zombies.ExplosionZombie;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.ExplosionManager;
 	/**
 	 * ...
@@ -20,6 +21,8 @@ package GameCom.GameComponents.Projectiles {
 		
 		private var damage:Number = 20;
 		private var owner:IWeapon;
+		
+		private var spawnY:Number = 0;
 		
 		private var animation:AnimatedSprite = new AnimatedSprite();
 		
@@ -54,6 +57,11 @@ package GameCom.GameComponents.Projectiles {
 			while (contact != null) {
 				if (contact.contact.IsTouching() && contact.other.GetUserData() is IHit && !owner.IsSafe(contact.other)) {
 					(contact.other.GetUserData() as IHit).Hit(damage);
+					
+					if (spawnY - contact.other.GetPosition().y > 25) {
+						TrophyHelper.GotTrophyByName("Headshot");
+					}
+					
 					ExplosionManager.I.RequestBloodAt(this.x, animation.y + this.y);
 					break;
 				}
@@ -79,6 +87,8 @@ package GameCom.GameComponents.Projectiles {
 			
 			body.SetPosition(newLocation);
 			body.SetActive(true);
+			
+			spawnY = newLocation.y;
 			
 			layer.addChild(this);
 		}

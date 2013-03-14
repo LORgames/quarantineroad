@@ -218,6 +218,10 @@ package GameCom.GameComponents
 					GameScreen.EndOfTheLine_TerminateASAP = true;
 				}
 				
+				if (damage > 10) {
+					TrophyHelper.GotTrophyByName("Throw like a girl");
+				}
+				
 				//Immune if you got hurt
 				if(damage > 0) immunityTime = getTimer() + IMMUNITY_TIME;
 			}

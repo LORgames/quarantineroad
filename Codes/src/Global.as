@@ -14,7 +14,7 @@ package  {
 		// Physics things
 		public static const PHYSICS_SCALE:Number = 20.0; //pixels per meter
 		public static const SCREEN_WIDTH:int = 500;
-		public static const DRAW_PHYSICS_ALWAYS:Boolean = true;
+		public static const DRAW_PHYSICS_ALWAYS:Boolean = false;
 		
 		public static const PHYSICS_CATEGORY_DEFAULT:int = 1;
 		public static const PHYSICS_CATEGORY_WALLS:int = 2;

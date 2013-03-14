@@ -31,7 +31,7 @@ package GameCom.SystemComponents
 		
 		private var messages:Array = new Array();
 		
-		private const WAIT_TIME:Number = 5;
+		private const WAIT_TIME:Number = 2;
 		private var waited_time:Number = 0;
 		private var direction:Number = -5;
 		

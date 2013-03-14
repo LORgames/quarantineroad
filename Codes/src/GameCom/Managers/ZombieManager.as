@@ -106,7 +106,7 @@ package GameCom.Managers {
 					handTimeout = HAND_DELAY;
 				}
 				
-				recycledSpawnLocation.x = (Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.9;
+				recycledSpawnLocation.x = (Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.8;
 				recycledSpawnLocation.y = Math.random() * -5 - 1
 				zombie.AddToScene(recycledSpawnLocation, layer0, layer1);
 				
