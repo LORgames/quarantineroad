@@ -81,7 +81,7 @@ package GameCom.Managers {
 				handTimeout -= dt;
 			}
 			
-			if (totalTime > previousUpdate + 2500) {
+			if (totalTime > previousUpdate + 5000) {
 				if (SpawnList.length == 0) {
 					//Spawning a random one
 					cls = ZombieTypes[int(ZombieTypes.length * Math.random())];
