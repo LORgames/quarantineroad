@@ -100,8 +100,8 @@ package GameCom.SystemComponents
 				} else if (direction < 0) {
 					tab.x += direction;
 					
-					if (tab.x < -107) {
-						tab.x = -107;
+					if (tab.x < -150) {
+						tab.x = -150;
 						direction = 0;
 						
 						currentlyShowing = -1;

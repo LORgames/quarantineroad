@@ -24,7 +24,7 @@ package GameCom.GameComponents.Zombies {
 	public class HulkZombie extends Sprite implements IZombie {
 		private const BASE_HP:Number = 20.0;
 		private const SCORE:int = 20;
-		private const SCREENSHAKE_AMT:Number = 0.1;
+		private const SCREENSHAKE_AMT:Number = 0.2;
 		
 		private const RADIUS:Number = 1.3;
 		

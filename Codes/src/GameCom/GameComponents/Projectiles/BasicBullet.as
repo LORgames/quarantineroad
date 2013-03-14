@@ -99,6 +99,7 @@ package GameCom.GameComponents.Projectiles {
 		
 		public function Deactivate(layer:Sprite):void {
 			body.SetActive(false);
+			body.SetPositionAndAngleXY(-20, 0, 0);
 			layer.removeChild(this);
 		}
 	}

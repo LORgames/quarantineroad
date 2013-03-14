@@ -67,6 +67,7 @@ package GameCom.GameComponents.Loot
 		
 		public function Deactivate():void {
 			body.SetActive(false);
+			body.SetPositionAndAngleXY( -50, 0, 0);
 		}
 		
 		public function ShouldDeactivate():Boolean {

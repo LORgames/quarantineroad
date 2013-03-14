@@ -21,7 +21,7 @@ package GameCom.GameComponents.Weapons {
 		public var FIRE_RATE:Number = 0.1;
 		public var fireTime:Number = 0;
 		
-		private var totalSMGs:int = 0;
+		private var totalSMGs:int = 1;
 		
 		private var bullets:int = 250;
 		
