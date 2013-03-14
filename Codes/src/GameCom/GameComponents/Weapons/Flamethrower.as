@@ -7,8 +7,10 @@ package GameCom.GameComponents.Weapons {
 	import flash.ui.Keyboard;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Projectiles.FlameProjectile;
+	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
+	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
 	 * ...
@@ -36,6 +38,8 @@ package GameCom.GameComponents.Weapons {
 					fireTime -= FIRE_RATE;
 					BulletManager.I.FireAt(location, FlameProjectile, this, (Math.random() - 0.5) * 0.25);
 					shots--;
+					
+					AudioController.PlaySound(AudioStore.FlameThrower1);
 				}
 			} else {
 				fireTime += dt;

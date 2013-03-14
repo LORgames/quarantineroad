@@ -9,8 +9,10 @@ package GameCom.GameComponents.Weapons {
 	import flash.ui.Keyboard;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Zombies.IZombie;
+	import GameCom.Helpers.AudioStore;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.WorldManager;
+	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
 	 * ...
@@ -48,6 +50,8 @@ package GameCom.GameComponents.Weapons {
 					
 					battery -= dt;
 					if (battery < 0) battery = 0;
+					
+					AudioController.PlaySound(AudioStore.Laser1);
 					
 					objectHit = null;
 					pointHit = new b2Vec2(location.x, 0);

@@ -78,6 +78,18 @@ package GameCom.Helpers
 		[Embed(source = "../../../lib/Audio/Chain Lightning Gun/electric zap.mp3")]
 		public static const ChainLightningGun1:Class;
 		
+		[Embed(source = "../../../lib/Audio/Flame Thrower/flamethrower2.mp3")]
+		public static const FlameThrower1:Class;
+		
+		[Embed(source = "../../../lib/Audio/Laser/laser sound repeat.mp3")]
+		public static const Laser1:Class;
+		
+		[Embed(source = "../../../lib/Audio/Pistol/pistol.mp3")]
+		public static const Pistol1:Class;
+		
+		[Embed(source = "../../../lib/Audio/SMG/new smg2.mp3")]
+		public static const SMG1:Class;
+		
 		[Embed(source = "../../../lib/Audio/Shotgun/reload.mp3")]
 		public static const ShotgunReload:Class;
 		

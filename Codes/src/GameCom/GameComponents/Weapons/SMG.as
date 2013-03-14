@@ -6,9 +6,11 @@ package GameCom.GameComponents.Weapons {
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
+	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
+	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
 	 * ...
@@ -42,8 +44,11 @@ package GameCom.GameComponents.Weapons {
 						if(bullets > 0) {
 							BulletManager.I.FireAt(location, BasicBullet, this, (Math.random() - 0.5), 5);
 							bullets--;
+							
+
 						}
 					}
+						AudioController.PlaySound(AudioStore.SMG1);
 				}
 			} else {
 				fireTime += dt;

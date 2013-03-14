@@ -55,7 +55,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			grenades++;
+			grenades+=2;
 		}
 		
 		private var isActive:Boolean = false;

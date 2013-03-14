@@ -6,9 +6,11 @@ package GameCom.GameComponents.Weapons {
 	import flash.display.BitmapData;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Projectiles.SniperBullet;
+	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
+	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
 	 * ...
@@ -32,6 +34,8 @@ package GameCom.GameComponents.Weapons {
 				if(Keys.isKeyDown(32)) {
 					fireTime -= FIRE_RATE;
 					BulletManager.I.FireAt(location, BasicBullet, this);
+					
+					AudioController.PlaySound(AudioStore.Pistol1);
 				}
 			} else {
 				fireTime += dt;
