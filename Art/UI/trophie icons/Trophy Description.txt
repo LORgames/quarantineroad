@@ -1,4 +1,4 @@
-* "Don't Bite Me Bro", "Die without taking any damage from zombies.",
+* "Don't Bite Me Bro", "Die without touching any zombies.",
   "Fully Loaded", "Obtain all weapon upgrades in a single game.",
 * "High Five", "<SQUISH> Killed by the hand.",
   "Max Ammo", "Obtain Full ammo for each type of weapon in a single game.",

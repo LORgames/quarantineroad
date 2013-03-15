@@ -27,6 +27,7 @@ package GameCom.GameComponents
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
 	import GameCom.Helpers.GrenadeHelper;
+	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Helpers.SpriteHelper;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.GUIManager;
@@ -191,7 +192,11 @@ package GameCom.GameComponents
 					if (contact.other.GetUserData() is LootDrop) {
 						(contact.other.GetUserData() as LootDrop).Pickup(weapons, this);
 					} else if (contact.other.GetUserData() is IZombie) {
-						Hit((contact.other.GetUserData() as IZombie).HitPlayer(this));
+						var d:Number = (contact.other.GetUserData() as IZombie).HitPlayer(this);
+						if(d > 0) {
+							Hit(d);
+							ScoreHelper.MeleeKills.AddValue(1);
+						}
 					}
 				}
 				

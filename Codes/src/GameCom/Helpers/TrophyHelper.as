@@ -34,7 +34,7 @@ package GameCom.Helpers
 			"Headshot", "Kill a zombie from more then 25m away with the sniper rifle.",
 			
 			"Throw like a girl", "Kill yourself with a grenade",
-			"Don't Bite Me Bro", "Die without taking any damage from zombies.",
+			"Don't Bite Me Bro", "Die without touching any zombies.",
 			"High Five", "*SQUISH* Killed by the hand.",
 			
 			"Party Pooper", "Kill 10 zombies in a single Bloat Explosion",

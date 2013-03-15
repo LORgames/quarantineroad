@@ -11,8 +11,8 @@ package GameCom.Helpers
 		public static const DISTANCE:int = 1;
 		public static const TIME:int = 2;
 		public static const TOTAL:int = 3;
-		public static const SCORE:int = 4;
-		public static const SHAKEY_KILLS:int = 5;
+		public static const OTHER_MISC:int = 4;
+		public static const OTHER_SHAKEY:int = 5;
 		
 		//private var _val:MochiDigits = new MochiDigits();
 		public var Value:Number = 0;
@@ -42,7 +42,7 @@ package GameCom.Helpers
 				if (Value > 100) TrophyHelper.GotTrophyByName("Piece of Cake");
 				if (Value > 500) TrophyHelper.GotTrophyByName("Zombie");
 				if (Value > 1000) TrophyHelper.GotTrophyByName("Project Alice");
-			} else if (type == SHAKEY_KILLS) {
+			} else if (type == OTHER_SHAKEY) {
 				if (Value > 20) TrophyHelper.GotTrophyByName("Harlem Shake");
 			}
 		}

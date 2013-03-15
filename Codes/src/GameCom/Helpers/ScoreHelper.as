@@ -14,9 +14,10 @@ package GameCom.Helpers
 		//Zombie kill stats
 		public static var AllKills:KillCounterWrapper;
 		
-		public static var SlowKills:KillCounterWrapper;
+		public static var MeleeKills:KillCounterWrapper;
 		public static var ShakeyKills:KillCounterWrapper;
 		
+		public static var SlowKills:KillCounterWrapper;
 		public static var LimpKills:KillCounterWrapper;
 		public static var RedKills:KillCounterWrapper;
 		public static var BlueKills:KillCounterWrapper;
@@ -26,12 +27,14 @@ package GameCom.Helpers
 		public static var HulkKills:KillCounterWrapper;
 		
 		public static function Reset():void {
-			Score = new KillCounterWrapper(KillCounterWrapper.SCORE);
+			Score = new KillCounterWrapper(KillCounterWrapper.OTHER_MISC);
 			Distance = new KillCounterWrapper(KillCounterWrapper.DISTANCE);
 			Time = new KillCounterWrapper(KillCounterWrapper.TIME);
 			
 			AllKills = new KillCounterWrapper(KillCounterWrapper.TOTAL);
-			ShakeyKills = new KillCounterWrapper(KillCounterWrapper.SHAKEY_KILLS);
+			
+			MeleeKills = new KillCounterWrapper(KillCounterWrapper.OTHER_MISC);
+			ShakeyKills = new KillCounterWrapper(KillCounterWrapper.OTHER_SHAKEY);
 			
 			SlowKills = new KillCounterWrapper(KillCounterWrapper.KILLS);
 			LimpKills = new KillCounterWrapper(KillCounterWrapper.KILLS);
