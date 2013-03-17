@@ -23,6 +23,8 @@ package GameCom.GameComponents.Weapons {
 		public var FIRE_RATE:Number = 0.15;
 		public var fireTime:Number = 0;
 		
+		private var collected:Boolean = false;
+		
 		private var totalKills:int = 0;
 		private var shots:int = 100;
 		
@@ -34,7 +36,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Update(dt:Number, location:b2Vec2):void {
 			if (fireTime >= FIRE_RATE) {
-				if(Keys.isKeyDown(Keyboard.SPACE) && shots > 0) {
+				if(Keys.isKeyDown(Keyboard.SPACE) && shots > 0 && collected) {
 					fireTime -= FIRE_RATE;
 					BulletManager.I.FireAt(location, FlameProjectile, this, (Math.random() - 0.5) * 0.25);
 					shots--;
@@ -47,11 +49,12 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function Upgrade():void {
-			
+			collected = true;
 		}
 		
 		public function GetAmmoReadout():String {
-			return shots.toString();
+			if (collected) return shots.toString();
+			return "";
 		}
 		
 		public function AddAmmo():void {
@@ -76,14 +79,17 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			return ThemeManager.Get("WeaponIcons/w10_flame_thrower.png");
+			if (collected) return ThemeManager.Get("WeaponIcons/w10_flame_thrower.png");
+			return null;
 		}
 		
 		public function GetPlayerBody():BitmapData {
-			return ThemeManager.Get("Player/top/base10_flame_thrower.png");
+			if (collected) return ThemeManager.Get("Player/top/base10_flame_thrower.png");
+			return ThemeManager.Get("Player/top/base.png");
 		}
 		
 		public function GetUpgradeIcon():BitmapData {
+			if (!collected) return ThemeManager.Get("WeaponIcons/w10_flame_thrower.png");
 			return null;
 		}
 		

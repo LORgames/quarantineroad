@@ -23,7 +23,7 @@ package GameCom.GameComponents.Weapons {
 		public var FIRE_RATE:Number = 0.1;
 		public var fireTime:Number = 0;
 		
-		private var totalSMGs:int = 2;
+		private var totalSMGs:int = 0;
 		
 		private var bullets:int = 250;
 		
@@ -60,8 +60,6 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			if (totalSMGs == 0) {
 				totalSMGs = 1;
-				GUIManager.I.RedrawWeapons();
-				(safeFixtures[0].GetUserData() as PlayerCharacter).RedrawTopHalf();
 			} else {
 				totalSMGs = 2;
 				GUIManager.I.RedrawWeapons();
@@ -75,7 +73,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			bullets += Math.random() * 20 + 40;
+			bullets += (Math.random() * 20 + 40) * totalSMGs;
 		}
 		
 		private var isActive:Boolean = false;

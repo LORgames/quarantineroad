@@ -64,6 +64,10 @@ package GameCom.GameComponents.Loot {
 			TrophyHelper.GotTrophyByName("Upgrade");
 			
 			equipment[type].Upgrade();
+			
+			GUIManager.I.RedrawWeapons();
+			player.RedrawTopHalf();
+			
 			super.Pickup(equipment, player);
 		}
 	}

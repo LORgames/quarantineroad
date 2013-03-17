@@ -32,6 +32,9 @@ package GameCom.GameComponents.Weapons {
 		
 		private var isActive:Boolean = false;
 		
+		private var collected:Boolean = false;
+		private var upgraded:Boolean = false;
+		
 		private var battery:Number = 10;
 		
 		public function LaserGun(body:b2Body, layer:Sprite) {
@@ -42,7 +45,7 @@ package GameCom.GameComponents.Weapons {
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
 		public function Update(dt:Number, location:b2Vec2):void {
-			if (Keys.isKeyDown(Keyboard.SPACE) && battery > 0) {
+			if (Keys.isKeyDown(Keyboard.SPACE) && battery > 0 && collected) {
 				charge += dt;
 				
 				if (charge > CHARGE_TIME) {
@@ -85,11 +88,17 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function Upgrade():void {
-			CHARGE_TIME = 0.1;
+			if (!collected) {
+				collected = true;
+			} else if (!upgraded) {
+				upgraded = true;
+				CHARGE_TIME = 0.1;
+			}
 		}
 		
 		public function GetAmmoReadout():String {
-			return battery.toFixed(1);
+			if (collected) return battery.toFixed(1);
+			return "";
 		}
 		
 		public function AddAmmo():void {
@@ -123,14 +132,19 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			return ThemeManager.Get("WeaponIcons/w07_laser.png");
+			if (collected) return ThemeManager.Get("WeaponIcons/w07_laser.png");
+			return null;
 		}
 		
 		public function GetPlayerBody():BitmapData {
-			return ThemeManager.Get("Player/top/base07_laser.png");
+			if (collected) return ThemeManager.Get("Player/top/base07_laser.png");
+			return ThemeManager.Get("Player/top/base.png");
 		}
 		
 		public function GetUpgradeIcon():BitmapData {
+			if(!collected || !upgraded) {
+				return ThemeManager.Get("WeaponIcons/w07_laser.png");
+			}
 			return null;
 		}
 		

@@ -18,6 +18,7 @@ package GameCom.GameComponents.Weapons {
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
+		private var collected:Boolean = false;
 		public var FIRE_RATE:Number = 1.0;
 		public var fireTime:Number = 0;
 		private var bullets:int = 20;
@@ -43,15 +44,18 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function Upgrade():void {
-			
+			if (!collected) {
+				collected = true;
+			}
 		}
 		
 		public function AddAmmo():void {
-			bullets += Math.random() * 4 + 1;
+			if (collected) bullets += Math.random() * 4 + 1;
 		}
 		
 		public function GetAmmoReadout():String {
-			return bullets.toString();
+			if (collected) return bullets.toString();
+			return "";
 		}
 		
 		private var isActive:Boolean = false;
@@ -72,18 +76,24 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			return ThemeManager.Get("WeaponIcons/w06_sniper.png");
-		}
-		
-		public function GetPlayerBody():BitmapData {
-			return ThemeManager.Get("Player/top/base06_sniper.png");
-		}
-		
-		public function GetUpgradeIcon():BitmapData {
+			if (collected) return ThemeManager.Get("WeaponIcons/w06_sniper.png");
 			return null;
 		}
 		
-		public function ReportKills(newKills:int):void {}
+		public function GetPlayerBody():BitmapData {
+			if(collected) {
+				return ThemeManager.Get("Player/top/base06_sniper.png");
+			} else {
+				return ThemeManager.Get("Player/top/base.png");
+			}
+		}
+		
+		public function GetUpgradeIcon():BitmapData {
+			if(!collected) return ThemeManager.Get("WeaponIcons/w06_sniper.png");
+			return null;
+		}
+		
+		public function ReportKills(newKills:int):void { }
 		
 	}
 

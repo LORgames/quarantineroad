@@ -25,6 +25,7 @@ package GameCom.GameComponents.Weapons {
 		public var FIRE_RATE:Number = 0.5;
 		public var fireTime:Number = 0;
 		
+		private var collected:Boolean = false;
 		private var upgraded:Boolean = false;
 		private var shells:int = 10;
 		
@@ -38,7 +39,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Update(dt:Number, location:b2Vec2):void {
 			if (fireTime > FIRE_RATE) {
-				if(Keys.isKeyDown(32)) {
+				if(Keys.isKeyDown(32) && collected) {
 					if(shells > 0) {
 						AudioController.PlaySound(AudioStore.GetShotgunFireSound());
 						
@@ -63,15 +64,18 @@ package GameCom.GameComponents.Weapons {
 			}
 		}
 		
-		
 		public function Upgrade():void {
-			upgraded = true;
-			FIRE_RATE = 0.5;
-			GUIManager.I.RedrawWeapons();
+			if(collected) {
+				upgraded = true;
+				FIRE_RATE = 0.5;
+				GUIManager.I.RedrawWeapons();
+			} else {
+				collected = true;
+			}
 		}
 		
 		public function AddAmmo():void {
-			shells += Math.random()*5 + 5;
+			if(collected) shells += Math.random() * 5 + 5;
 		}
 		
 		private var isActive:Boolean = false;
@@ -80,7 +84,11 @@ package GameCom.GameComponents.Weapons {
 		public function IsActive():Boolean { return isActive; }
 		
 		public function GetAmmoReadout():String {
-			return shells.toString();
+			if(collected) {
+				return shells.toString();
+			}
+			
+			return "";
 		}
 		
 		public function AddSafe(body:b2Body):void {
@@ -96,7 +104,9 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			if(!upgraded) {
+			if (!collected) {
+				return null;
+			} else if(!upgraded) {
 				return ThemeManager.Get("WeaponIcons/w04_shotgun.png");
 			} else {
 				return ThemeManager.Get("WeaponIcons/w05_combat_shotgun.png");
@@ -104,7 +114,9 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetPlayerBody():BitmapData {
-			if(!upgraded) {
+			if (!collected) {
+				return ThemeManager.Get("Player/top/base.png");
+			} else if(!upgraded) {
 				return ThemeManager.Get("Player/top/base04_shotgun.png");
 			} else {
 				return ThemeManager.Get("Player/top/base05_combat_shotgun.png");
@@ -112,7 +124,9 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetUpgradeIcon():BitmapData {
-			if(!upgraded) {
+			if (!collected) {
+				return ThemeManager.Get("WeaponIcons/w04_shotgun.png");
+			} else if(!upgraded) {
 				return ThemeManager.Get("WeaponIcons/w05_combat_shotgun.png");
 			}
 			

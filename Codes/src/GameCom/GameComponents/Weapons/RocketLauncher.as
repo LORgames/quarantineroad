@@ -22,6 +22,7 @@ package GameCom.GameComponents.Weapons {
 		public var FIRE_RATE:Number = 1.5;
 		public var fireTime:Number = 0;
 		
+		private var collected:Boolean = false;
 		private var totalKills:int = 0;
 		private var grenades:int = 5;
 		
@@ -47,15 +48,16 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function Upgrade():void {
-			
+			collected = true;
 		}
 		
 		public function GetAmmoReadout():String {
-			return grenades.toString();
+			if (collected) return grenades.toString();
+			return "";
 		}
 		
 		public function AddAmmo():void {
-			grenades+=2;
+			grenades += 2;
 		}
 		
 		private var isActive:Boolean = false;
@@ -76,14 +78,17 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			return ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png");
+			if (collected) return ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png");
+			return null;
 		}
 		
 		public function GetPlayerBody():BitmapData {
-			return ThemeManager.Get("Player/top/base09_grenade_launcher.png");
+			if (collected) return ThemeManager.Get("Player/top/base09_grenade_launcher.png");
+			return ThemeManager.Get("Player/top/base.png");
 		}
 		
 		public function GetUpgradeIcon():BitmapData {
+			if (!collected) return ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png");
 			return null;
 		}
 		

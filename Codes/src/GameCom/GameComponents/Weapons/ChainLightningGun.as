@@ -32,6 +32,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public var fried:Vector.<IZombie>;
 		
+		private var collected:Boolean = false;
 		private var battery:Number = 3.0;
 		
 		private var lightning:Lightning = new Lightning();
@@ -48,7 +49,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Update(dt:Number, location:b2Vec2):void {
 			if (fireTime > FIRE_RATE) {
-				if (battery > 0 && Keys.isKeyDown(32)) {
+				if (battery > 0 && Keys.isKeyDown(32) && collected) {
 					fireTime -= FIRE_RATE;
 					
 					fried = new Vector.<IZombie>();
@@ -89,11 +90,13 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function Upgrade():void {
-			
+			if (!collected) collected = true;
 		}
 		
 		public function GetAmmoReadout():String {
-			if(battery > Number.MIN_VALUE*5) {
+			if (!collected) {
+				return "";
+			} else if(battery > Number.MIN_VALUE*5) {
 				return battery.toFixed(1);
 			} else {
 				return "0.0";
@@ -113,7 +116,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			battery += Math.random() * 2 + 3;
+			if(collected) battery += Math.random() * 2 + 3;
 		}
 		
 		public function AddSafe(body:b2Body):void {
@@ -129,14 +132,17 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			return ThemeManager.Get("WeaponIcons/w11_chain_lightning.png");
+			if (collected) return ThemeManager.Get("WeaponIcons/w11_chain_lightning.png");
+			return null;
 		}
 		
 		public function GetPlayerBody():BitmapData {
-			return ThemeManager.Get("Player/top/base11_chain_lightning.png");
+			if (collected) return ThemeManager.Get("Player/top/base11_chain_lightning.png");
+			return ThemeManager.Get("Player/top/base.png");
 		}
 		
 		public function GetUpgradeIcon():BitmapData {
+			if (!collected) return ThemeManager.Get("WeaponIcons/w11_chain_lightning.png");
 			return null;
 		}
 		
