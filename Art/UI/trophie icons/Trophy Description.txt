@@ -1,4 +1,3 @@
-  "Fully Loaded", "Obtain all weapon upgrades in a single game.",
 * "High Five", "<SQUISH> Killed by the hand.",
   "Max Ammo", "Obtain Full ammo for each type of weapon in a single game.",
 * "New Shoes", "Walk through an acid pool and survive"

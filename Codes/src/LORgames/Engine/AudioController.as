@@ -61,10 +61,14 @@ package LORgames.Engine
 				var mySound:Sound = new soundCLS();
 				var channel:SoundChannel = null;
 				
-				channel = mySound.play();
-				channel.addEventListener(Event.SOUND_COMPLETE, soundFinished);
-				
-				quickPlaying.push(channel);
+				try {
+					channel = mySound.play();
+					channel.addEventListener(Event.SOUND_COMPLETE, soundFinished);
+					
+					quickPlaying.push(channel);
+				} finally {
+					trace("Unable to assign channel");
+				}
 			}
 		}
 		

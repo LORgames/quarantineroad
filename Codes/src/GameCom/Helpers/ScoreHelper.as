@@ -22,15 +22,19 @@ package GameCom.Helpers
 		public static var RedKills:KillCounterWrapper;
 		public static var BlueKills:KillCounterWrapper;
 		public static var ThrowUpKills:KillCounterWrapper;
-		public static var HandKills:KillCounterWrapper;
 		public static var ExplosiveKills:KillCounterWrapper;
 		public static var HulkKills:KillCounterWrapper;
+		
+		public static var TotalUpgrades:KillCounterWrapper;
 		
 		public static function Reset():void {
 			Score = new KillCounterWrapper(KillCounterWrapper.OTHER_MISC);
 			Distance = new KillCounterWrapper(KillCounterWrapper.DISTANCE);
 			Time = new KillCounterWrapper(KillCounterWrapper.TIME);
 			
+			TotalUpgrades = new KillCounterWrapper(KillCounterWrapper.OTHER_MISC);
+			
+			//KILL TYPES
 			AllKills = new KillCounterWrapper(KillCounterWrapper.TOTAL);
 			
 			MeleeKills = new KillCounterWrapper(KillCounterWrapper.OTHER_MISC);

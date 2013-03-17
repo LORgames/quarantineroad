@@ -112,15 +112,6 @@ package GameCom.GameComponents.Zombies
 			var xSpeed:Number = 0;
 			var ySpeed:Number = (stopped?0:mySpeed) + WorldManager.WorldScrollSpeed;
 			
-			//TODO: Logic to set X and Y speeds
-			if (this.y < WorldManager.WorldTargetY+100 && WorldManager.WorldTargetY - this.y < stage.stageHeight / 3) {
-				if (this.x < WorldManager.WorldTargetX) {
-					xSpeed = (stopped?0:2);
-				} else {
-					xSpeed = (stopped?0:-2);
-				}
-			}
-			
 			animation.Update(dt);
 			animation.x = -animation.width / 2;
 			animation.y = -animation.height + RADIUS * Global.PHYSICS_SCALE;

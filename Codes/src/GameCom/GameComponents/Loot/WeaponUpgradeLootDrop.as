@@ -7,6 +7,7 @@ package GameCom.GameComponents.Loot {
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.GameComponents.Weapons.IWeapon;
 	import GameCom.Helpers.BodyHelper;
+	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Helpers.SpriteHelper;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.GUIManager;
@@ -59,14 +60,19 @@ package GameCom.GameComponents.Loot {
 		}
 		
 		public override function Pickup(equipment:Vector.<IWeapon>, player:PlayerCharacter):void {
-			trace("Upgraded: " + type);
-			
-			TrophyHelper.GotTrophyByName("Upgrade");
 			
 			equipment[type].Upgrade();
 			
 			GUIManager.I.RedrawWeapons();
 			player.RedrawTopHalf();
+			
+			//Apply trophies
+			TrophyHelper.GotTrophyByName("Upgrade");
+			
+			ScoreHelper.TotalUpgrades.AddValue(1);
+			if (ScoreHelper.TotalUpgrades.Value == 11) {
+				TrophyHelper.GotTrophyByName("Fully Loaded");
+			}
 			
 			super.Pickup(equipment, player);
 		}

@@ -49,8 +49,8 @@ package GameCom.Managers {
 			
 			SpawnList = SpawnList.concat(ZombieSpawns.Spawns);
 			
-			for (var i:int = 0; i < 10; i++) {
-				UnusedZombies.push(new SlowZombie());
+			for (var i:int = 0; i < 20; i++) {
+				UnusedZombies.push(new ThrowUpZombie());
 			}
 			
 			ZombieTypes.push(BlueZombie);
