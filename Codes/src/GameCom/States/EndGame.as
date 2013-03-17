@@ -109,7 +109,17 @@ package GameCom.States {
 			Stats.SetHighestInt("HighestZombieKills", parseInt(zombiekills));
 			
 			//PROCESS ACHIEVEMENTS
-			if(Stats.GetInt("Gameplays") >= 28) TrophyHelper.GotTrophyByName("28 Plays Later");
+			if (Stats.GetInt("Gameplays") >= 28) TrophyHelper.GotTrophyByName("28 Plays Later"); //should really be moved to the other place...
+			if (ScoreHelper.MeleeKills.Value == 0) TrophyHelper.GotTrophyByName("Don't Bite Me Bro");
+			
+			//Process 'Brain' Achievement.
+			if (ScoreHelper.BlueKills.Value > 0 &&
+				ScoreHelper.ExplosiveKills.Value > 0 &&
+				ScoreHelper.HulkKills.Value > 0 &&
+				ScoreHelper.LimpKills.Value > 0 &&
+				ScoreHelper.RedKills.Value > 0 &&
+				ScoreHelper.SlowKills.Value > 0 &&
+				ScoreHelper.ThrowUpKills.Value > 0) TrophyHelper.GotTrophyByName("Brain");
 		}
 		
 		public function CreateTextField(str:String):TextField {
