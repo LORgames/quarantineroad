@@ -89,7 +89,7 @@ package {
 			var approx:Boolean = false;
 			
 			if (e.bytesTotal == 0) {
-				totalBytes = 10627557;
+				totalBytes = 5659695;
 				approx = true;
 			}
 			

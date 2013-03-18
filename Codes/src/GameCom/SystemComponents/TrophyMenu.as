@@ -24,8 +24,8 @@ package GameCom.SystemComponents
 			var mat:Matrix = new Matrix();
 			
 			for (var i:int = 0; i < totalTrophies; i++) {
-				mat.tx = (i % 6) * 57 + 69 + (int(i / 3) % 2 == 0?0:35);
-				mat.ty = Math.floor(i / 6) * 53 + 70;
+				mat.tx = (i % 6) * 45 + 69;
+				mat.ty = Math.floor(i / 6) * 45 + 70;
 				
 				var bmpd:BitmapData = ThemeManager.Get(TrophyHelper.GetTrophyPictureName(i));
 				
@@ -45,11 +45,11 @@ package GameCom.SystemComponents
 		
 		public function rollOver(me:MouseEvent):void {
 			
-			var eX:int = (me.localX-69-(me.stageX>this.stage.stageWidth/2?35:0)) / 57;
-			var eY:int = (me.localY-70) / 53;
+			var eX:int = (me.localX-69) / 45;
+			var eY:int = (me.localY-70) / 45;
 			
-			var matTX:int = eX * 57 + 69 + (eX < 3?44:35);
-			var matTY:int = eY * 53 + 70 + 22;
+			var matTX:int = eX * 45 + 69;
+			var matTY:int = eY * 45 + 70 + 22;
 			
 			tooltip.SetText(TrophyHelper.GetTrophyName(eY * 6 + eX) + " (" + (TrophyHelper.HasTrophy(eY*6+eX)?"Unl":"L") +"ocked)\n\n" + TrophyHelper.GetTrophyDescription(eY * 6 + eX));
 			

@@ -63,6 +63,8 @@ package GameCom.GameComponents.Loot
 			body.SetActive(true);
 			
 			pickedUP = false;
+			
+			Update(0);
 		}
 		
 		public function Deactivate():void {

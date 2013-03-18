@@ -50,7 +50,7 @@ package GameCom.Managers {
 			SpawnList = SpawnList.concat(ZombieSpawns.Spawns);
 			
 			for (var i:int = 0; i < 20; i++) {
-				UnusedZombies.push(new ThrowUpZombie());
+				UnusedZombies.push(new SlowZombie());
 			}
 			
 			ZombieTypes.push(BlueZombie);
@@ -107,7 +107,7 @@ package GameCom.Managers {
 				}
 				
 				recycledSpawnLocation.x = (Math.random() - 0.5) * Global.SCREEN_WIDTH / Global.PHYSICS_SCALE * 0.8;
-				recycledSpawnLocation.y = Math.random() * -5 - 1
+				recycledSpawnLocation.y = Math.random() * -5 - 2;
 				zombie.AddToScene(recycledSpawnLocation, layer0, layer1);
 				
 				UsedZombies.push(zombie);
@@ -122,7 +122,6 @@ package GameCom.Managers {
 				
 				if (UsedZombies[i].OutsideScene()) {
 					UsedZombies[i].RemoveFromScene(layer0, layer1);
-					
 					UnusedZombies.push(UsedZombies.splice(i, 1)[0]);
 					i--;
 				}
