@@ -16,6 +16,7 @@ package GameCom.GameComponents.Weapons {
 	 * @author Paul
 	 */
 	public class Shotgun implements IWeapon {
+		private var MAX_AMMO:int = int.MAX_VALUE; //LOLOLOLOL TOO MANY AMMO.
 		
 		public const RANGE:Number = 5;
 		public const DAMAGE:Number = 10;
@@ -76,6 +77,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function AddAmmo():void {
 			if(collected) shells += Math.random() * 5 + 5;
+			if (shells > MAX_AMMO) shells = MAX_AMMO;
 		}
 		
 		private var isActive:Boolean = false;

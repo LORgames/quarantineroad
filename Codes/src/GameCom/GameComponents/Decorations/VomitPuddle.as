@@ -8,6 +8,7 @@ package GameCom.GameComponents.Decorations
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.WorldManager;
 	/**
 	 * ...
@@ -16,6 +17,8 @@ package GameCom.GameComponents.Decorations
 	public class VomitPuddle extends Sprite implements IExplosion {
 		private var animation:AnimatedSprite;
 		private var body:b2Body;
+		
+		private var touchedPlayer:Boolean = false;
 		
 		public function VomitPuddle() {
 			animation = new AnimatedSprite();
@@ -79,15 +82,23 @@ package GameCom.GameComponents.Decorations
 			this.y = body.GetPosition().y * Global.PHYSICS_SCALE;
 			body.SetLinearVelocityXY(0, WorldManager.WorldScrollSpeed);
 			
+			var isTouching:Boolean = false;
+			
 			var edge:b2ContactEdge = body.GetContactList();
 			while (edge != null) {
 				if (edge.contact.IsTouching()) {
 					if (edge.other.GetUserData() is PlayerCharacter) {
 						(edge.other.GetUserData() as PlayerCharacter).Hit(1);
+						touchedPlayer = true;
+						isTouching = true;
 					}
 				}
 				
 				edge = edge.next;
+			}
+			
+			if (!isTouching && touchedPlayer) {
+				TrophyHelper.GotTrophyByName("New Shoes");
 			}
 		}
 		
@@ -138,6 +149,21 @@ package GameCom.GameComponents.Decorations
 					waiting_explosions.push(b);
 					i--;
 				}
+			}
+		}
+		
+		public static function Reset():void {
+			var b:VomitPuddle;
+			
+			while (playing_explosions.length > 0) {
+				b = playing_explosions.pop();
+				layer.removeChild(b);
+				b.Deactivate();
+				waiting_explosions.push(b);
+			}
+			
+			while (waiting_explosions.length > 0) {
+				b = waiting_explosions.pop();
 			}
 		}
 	}

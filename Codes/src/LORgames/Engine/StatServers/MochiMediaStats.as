@@ -16,15 +16,15 @@ package LORgames.Engine.StatServers
 		
 		private function onConnectError(str:String):void {
 			//trace("mochi stats error: " + str);
-			//isWorking = false;
+			isWorking = false;
 		}
 		
 		public function StartLevel():void {
-			MochiEvents.startPlay();
+			if(isWorking) MochiEvents.startPlay();
 		}
 		
 		public function EndLevel():void {
-			MochiEvents.endPlay();
+			if(isWorking) MochiEvents.endPlay();
 		}
 		
 		public function Submit(statname:String, statvalue:int):void {

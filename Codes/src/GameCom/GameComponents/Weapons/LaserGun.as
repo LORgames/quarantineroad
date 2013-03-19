@@ -19,6 +19,7 @@ package GameCom.GameComponents.Weapons {
 	 * @author Paul
 	 */
 	public class LaserGun implements IWeapon {
+		private var MAX_AMMO:int = int.MAX_VALUE; //LOLOLOLOL TOO MANY AMMO.
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
@@ -103,6 +104,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function AddAmmo():void {
 			battery += Math.random() * 4 + 1;
+			if (battery > MAX_AMMO) battery = MAX_AMMO;
 		}
 		
 		public function Activate():void {

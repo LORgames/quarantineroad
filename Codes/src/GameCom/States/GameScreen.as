@@ -17,6 +17,7 @@ package GameCom.States {
 	import flash.ui.Keyboard;
 	import flash.utils.getTimer;
 	import flash.utils.Timer;
+	import GameCom.GameComponents.Decorations.VomitPuddle;
 	import GameCom.GameComponents.Loot.LootDrop;
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AudioStore;
@@ -99,6 +100,7 @@ package GameCom.States {
 			stage.focus = stage;
 			
 			//Clear out all the dead bodies
+			VomitPuddle.Reset();
 			WorldManager.CleanupDynamics();
 			
 			this.addEventListener(Event.ENTER_FRAME, Update, false, 0, true);

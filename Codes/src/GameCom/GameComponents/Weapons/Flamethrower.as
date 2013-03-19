@@ -17,6 +17,7 @@ package GameCom.GameComponents.Weapons {
 	 * @author Paul
 	 */
 	public class Flamethrower implements IWeapon {
+		private var MAX_AMMO:int = int.MAX_VALUE; //LOLOLOLOL TOO MANY AMMO.
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
@@ -59,6 +60,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function AddAmmo():void {
 			shots += Math.random() * 25 + 25;
+			if (shots > MAX_AMMO) shots = MAX_AMMO;
 		}
 		
 		private var isActive:Boolean = false;

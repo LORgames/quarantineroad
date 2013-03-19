@@ -66,8 +66,8 @@ package LORgames.Engine
 					channel.addEventListener(Event.SOUND_COMPLETE, soundFinished);
 					
 					quickPlaying.push(channel);
-				} finally {
-					trace("Unable to assign channel");
+				} catch(e:Error) {
+					trace("Unable to assign channel?: " + e.message);
 				}
 			}
 		}

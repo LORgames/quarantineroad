@@ -1,3 +1,2 @@
 * "High Five", "<SQUISH> Killed by the hand.",
-  "Max Ammo", "Obtain Full ammo for each type of weapon in a single game.",
-* "New Shoes", "Walk through an acid pool and survive"
+  "Max Ammo", "Obtain Full ammo for each type of weapon in a single game."

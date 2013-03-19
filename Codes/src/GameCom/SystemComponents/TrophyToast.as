@@ -65,7 +65,7 @@ package GameCom.SystemComponents
 			
 			text = new TextField();
 			text.embedFonts = true;
-			text.defaultTextFormat = new TextFormat("Visitor", 20, 0xFFFFFF);
+			text.defaultTextFormat = new TextFormat("Visitor", 16, 0xFFFFFF);
 			text.filters = new Array(new GlowFilter(0x0, 1, 7, 7, 3));
 			text.text = "";
 			text.autoSize = TextFieldAutoSize.LEFT;

@@ -16,6 +16,7 @@ package GameCom.GameComponents.Weapons {
 	 * @author Paul
 	 */
 	public class RocketLauncher implements IWeapon {
+		private var MAX_AMMO:int = int.MAX_VALUE; //LOLOLOLOL TOO MANY AMMO.
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
@@ -58,6 +59,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function AddAmmo():void {
 			grenades += 2;
+			if (grenades > MAX_AMMO) grenades = MAX_AMMO;
 		}
 		
 		private var isActive:Boolean = false;
