@@ -83,14 +83,14 @@ package GameCom.GameComponents.Decorations {
 			this.x = body.GetPosition().x * Global.PHYSICS_SCALE;
 			this.y = body.GetPosition().y * Global.PHYSICS_SCALE;
 			
+			if (body.GetContactList() != null && body.GetContactList().other.GetUserData() is IZombie) {
+				animation.Stop();
+			}
+			
 			if (animation.IsStopped()) {
 				owner.ReportKills(ExplosionManager.I.RequestBombExplosionAt(new Point(this.x, this.y)));
 				this.parent.removeChild(this);
 				Deactivate();
-			}
-			
-			if (body.GetContactList() != null && body.GetContactList().other.GetUserData() is IZombie) {
-				animation.Stop();
 			}
 		}
 		
