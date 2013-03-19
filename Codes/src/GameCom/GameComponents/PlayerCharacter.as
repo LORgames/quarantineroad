@@ -7,6 +7,7 @@ package GameCom.GameComponents
 	import Box2D.Dynamics.b2FixtureDef;
 	import Box2D.Dynamics.Contacts.b2ContactEdge;
 	import flash.display.Bitmap;
+	import flash.display.InteractiveObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.filters.GlowFilter;
@@ -154,7 +155,7 @@ package GameCom.GameComponents
 				RedrawTopHalf();
 			}
 			
-			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1.3 + body.GetPosition().y));
+			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1.4 + body.GetPosition().y));
 			
 			var xSpeed:Number = 0;
 			var ySpeed:Number = 0;
@@ -169,6 +170,18 @@ package GameCom.GameComponents
 				xSpeed = -1.5;
 			} else if (Keys.isKeyDown(Keyboard.D) || Keys.isKeyDown(Keyboard.RIGHT)) {
 				xSpeed = 1.5;
+			}
+			
+			if (Keys.isKeyDown(Keyboard.O)) {
+				for (var index:int = 0 ; index < weapons.length; index++) {
+					if (weapons[index].GetUpgradeIcon() != null) {
+						weapons[index].Upgrade();
+					}
+					
+					weapons[index].AddAmmo();
+				}
+				
+				RedrawTopHalf();
 			}
 			
 			if (xSpeed != 0 || ySpeed != 0) {

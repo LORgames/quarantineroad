@@ -21,8 +21,11 @@ package GameCom.GameComponents.Weapons {
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
+		public var isUpgraded:Boolean = false;
 		public var FIRE_RATE:Number = 0.4;
 		public var fireTime:Number = 0;
+		
+		public var firedLeft:Boolean = true;
 		
 		public function BasicGun(body:b2Body) {
 			AddSafe(body);
@@ -34,7 +37,14 @@ package GameCom.GameComponents.Weapons {
 			if (fireTime > FIRE_RATE) {
 				if(Keys.isKeyDown(32)) {
 					fireTime -= FIRE_RATE;
-					BulletManager.I.FireAt(location, BasicBullet, this);
+					
+					if(firedLeft || !isUpgraded) {
+						BulletManager.I.FireAt(location, BasicBullet, this);
+					} else {
+						BulletManager.I.FireAt(new b2Vec2(location.x - 0.6, location.y), BasicBullet, this);
+					}
+					
+					firedLeft = !firedLeft;
 					
 					AudioController.PlaySound(AudioStore.Pistol1);
 				}
@@ -44,8 +54,8 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function Upgrade():void {
-			FIRE_RATE = 0.2;
-			GUIManager.I.RedrawWeapons();
+			isUpgraded = true;
+			FIRE_RATE = 0.3;
 			TrophyHelper.GotTrophyByName("2 for 1");
 		}
 		
@@ -79,7 +89,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
-			if(FIRE_RATE > 0.3) {
+			if(!isUpgraded) {
 				return ThemeManager.Get("WeaponIcons/w00_pistol.png");
 			} else {
 				return ThemeManager.Get("WeaponIcons/w01_dual_pistol.png");
@@ -87,7 +97,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetPlayerBody():BitmapData {
-			if(FIRE_RATE > 0.3) {
+			if(!isUpgraded) {
 				return ThemeManager.Get("Player/top/base00_pistol.png");
 			} else {
 				return ThemeManager.Get("Player/top/base01_dual_pistol.png");
@@ -95,7 +105,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetUpgradeIcon():BitmapData {
-			if (FIRE_RATE > 0.3) {
+			if (!isUpgraded) {
 				return ThemeManager.Get("WeaponIcons/w01_dual_pistol.png");
 			}
 			
