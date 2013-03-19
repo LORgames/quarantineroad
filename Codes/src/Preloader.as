@@ -21,6 +21,8 @@ package {
 	 * @author P. Fox
 	 */
 	public class Preloader extends MovieClip {
+		[Embed(source="../lib/visitor1.ttf", fontName="Visitor", embedAsCFF=false)]
+		private static var fontName:Class;
 		
 		private const AD_SIZE_X:int = 800;
 		private const AD_SIZE_Y:int = 600;

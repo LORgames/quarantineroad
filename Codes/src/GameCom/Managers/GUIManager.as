@@ -29,9 +29,6 @@ package GameCom.Managers {
 	 * @author Paul
 	 */
 	public class GUIManager extends Sprite {
-		[Embed(source="../../../lib/visitor1.ttf", fontName="Visitor", embedAsCFF=false)]
-		private static var fontName:Class;
-
 		public static var I:GUIManager;
 		
 		private var PopupSprite:Sprite = new Sprite();

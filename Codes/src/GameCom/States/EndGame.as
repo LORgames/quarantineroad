@@ -32,6 +32,7 @@ package GameCom.States {
 	 */
 	public class EndGame extends Sprite {
 		//Buttons and stuff?
+		private var road:Sprite = new Sprite();
 		private var background:Sprite = new Sprite();
 		
 		private var RestartBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Restart Button.png"), ThemeManager.Get("Interface/Restart Button Mouse Over.png"));
@@ -67,6 +68,13 @@ package GameCom.States {
 			background.graphics.beginBitmapFill(ThemeManager.Get("Interface/Restart Menu.png"));
 			background.graphics.drawRect(0, 0, Global.SCREEN_WIDTH, 600);
 			background.graphics.endFill();
+			
+			road.graphics.beginBitmapFill(ThemeManager.Get("Terrain/Road.png"));
+			road.graphics.drawRect(0, 0, Global.SCREEN_WIDTH, 300);
+			road.graphics.endFill();
+			
+			//The road
+			this.addChild(road);
 			
 			//The hand thing
 			this.addChild(handAnimation);
@@ -152,6 +160,9 @@ package GameCom.States {
 			
 			background.x = (this.stage.stageWidth - background.width) / 2;
 			background.y = (this.stage.stageHeight - background.height) / 2;
+			
+			road.x = background.x;
+			road.y = background.y;
 			
 			RestartBtn.x = background.x + 38;
 			RestartBtn.y = background.y + 230;
