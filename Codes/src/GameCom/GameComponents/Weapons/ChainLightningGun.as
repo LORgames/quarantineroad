@@ -24,7 +24,7 @@ package GameCom.GameComponents.Weapons {
 	 * @author Paul
 	 */
 	public class ChainLightningGun implements IWeapon {
-		private var MAX_AMMO:int = 30; //LOLOLOLOL TOO MANY AMMO.
+		private var MAX_AMMO:int = 20; //LOLOLOLOL TOO MANY AMMO.
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
@@ -117,7 +117,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			if(collected) battery += Math.random() * 2 + 3;
+			if(collected) battery += Math.random() * 2 + 2;
 			if (battery > MAX_AMMO) battery = MAX_AMMO;
 		}
 		
