@@ -23,12 +23,16 @@ package GameCom.GameComponents.Zombies {
 	public class ZombieHand extends Sprite implements IZombie {
 		private const BASE_HP:Number = 1.0;
 		private const SCORE:int = 1;
-		private const BASE_WAIT_TIME:Number = 0.5;
+		
+		private const BASE_WAIT_TIME:Number = 1.5;
+		private const BASE_HURT_TIME:Number = 0.5;
+		
 		private const SCREENSHAKE_AMT:Number = 50.0;
 		
 		private const RISING:int = 0;
 		private const HITING:int = 1;
-		private const HIDING:int = 2;
+		private const HURTIN:int = 2;
+		private const HIDING:int = 3;
 		
 		private var body:b2Body;
 		private var state:int = RISING;
@@ -60,6 +64,7 @@ package GameCom.GameComponents.Zombies {
 			body.SetType(b2Body.b2_kinematicBody);
 			
 			body.SetLinearDamping(0.5);
+			body.SetActive(false);
 		}
 		
 		public function SetPlayer(plr:PlayerCharacter):void {
@@ -83,19 +88,23 @@ package GameCom.GameComponents.Zombies {
 				
 				if (waitTime < 0) {
 					state = HITING;
-					animation.ChangePlayback(0.25, 9, 1, true);
-					body.SetActive(true);
-					body.GetFixtureList().SetSensor(false);
+					animation.ChangePlayback(0.25, 5, 5, true);
 					
-					WorldManager.WorldShake += SCREENSHAKE_AMT;
+					waitTime = BASE_HURT_TIME;
 				}
 			} else if (animation.IsStopped() && state == HITING) {
-				WorldManager.WorldShake -= SCREENSHAKE_AMT;
-				//body.SetActive(false);
-				body.GetFixtureList().SetSensor(true);
+				state = HURTIN;
+				WorldManager.WorldShake += SCREENSHAKE_AMT;
+			} else if (animation.IsStopped() && state == HURTIN) {
+				waitTime -= dt;
 				
-				state = HIDING;
-				animation.ChangePlayback(0.1, 10, 4, true);
+				if (waitTime < 0) {
+					WorldManager.WorldShake -= SCREENSHAKE_AMT;
+					body.GetFixtureList().SetSensor(true);
+					
+					state = HIDING;
+					animation.ChangePlayback(0.1, 10, 4, true);
+				}
 			}
 		}
 		
@@ -118,10 +127,13 @@ package GameCom.GameComponents.Zombies {
 		public function AddToScene(position:b2Vec2, layer0:Sprite, layer1:Sprite):void {
 			layer0.addChild(this);
 			
-			animation.ChangePlayback(0.1, 0, 10, true);
+			animation.ChangePlayback(0.1, 0, 6, true);
 			
 			state = RISING;
 			waitTime = BASE_WAIT_TIME;
+			
+			body.SetActive(true);
+			body.GetFixtureList().SetSensor(false);
 			
 			Update(0);
 		}

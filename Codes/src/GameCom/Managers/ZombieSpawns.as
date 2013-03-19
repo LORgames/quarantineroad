@@ -9,7 +9,6 @@ package GameCom.Managers {
 		BlueZombie,
 		ThrowUpZombie,
 		RedZombie,
-		ZombieHand,
 		BlueZombie,
 		BlueZombie,
 		RedZombie,
@@ -84,8 +83,8 @@ package GameCom.Managers {
 		LimpZombie,
 		LimpZombie,
 		LimpZombie,
-		LimpZombie
-		
+		LimpZombie//,
+		//ZombieHand
 		);
 	}
 }

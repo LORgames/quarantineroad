@@ -125,7 +125,6 @@ package GameCom.States {
 			// bgManager (ground) is added to groundLayer
 			bgManager = new BGManager(groundLayer);
 			
-			
 			explosionManager = new ExplosionManager(eyeLayer, groundLayer);
 			
 			scenicManager = new ScenicManager(objectLayer);
@@ -137,8 +136,6 @@ package GameCom.States {
 			zombies.AddPlayer(player);
 			
 			loot = new LootManager(groundLayer);
-			
-			//player.Respawn();
 			
 			simulating = true;
 			MockUpdate();

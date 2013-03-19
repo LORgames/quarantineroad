@@ -19,6 +19,9 @@ package GameCom.Managers {
 	 * @author Paul
 	 */
 	public class ZombieManager {
+		private var SPAWN_TIMEOUT:Number = 0.3333; // How many seconds before a zombie is added to the screen
+		private var SPAWN_AVAILABLE:Number = 5.0; // How many seconds before a zombie is added to the available spawn list
+		
 		private var UsedZombies:Vector.<IZombie> = new Vector.<IZombie>();
 		private var UnusedZombies:Vector.<IZombie> = new Vector.<IZombie>();
 		
@@ -33,9 +36,9 @@ package GameCom.Managers {
 		private var layer0:Sprite;
 		private var layer1:Sprite;
 		
-		private var spawnTimeout:int = 0;
+		private var spawnTimeout:Number = 0;
 		
-		private const HAND_DELAY:Number = 15;
+		private const HAND_DELAY:Number = 2.5;
 		private var handTimeout:Number = 0;
 		
 		private var surviveTime:int = 0;
@@ -73,7 +76,7 @@ package GameCom.Managers {
 			var i:int;
 			var cls:Class;
 			
-			if (Math.random() < 0.025) {
+			if (Math.random() < 0.015) {
 				AudioController.PlaySound(AudioStore.GetZombieSound());
 			}
 			
@@ -81,7 +84,7 @@ package GameCom.Managers {
 				handTimeout -= dt;
 			}
 			
-			if (totalTime > previousUpdate + 5000) {
+			if (totalTime > previousUpdate + SPAWN_AVAILABLE*1000) { //TODO: DIFFICULTY0
 				if (SpawnList.length == 0) {
 					//Spawning a random one
 					cls = ZombieTypes[int(ZombieTypes.length * Math.random())];
@@ -112,7 +115,7 @@ package GameCom.Managers {
 				
 				UsedZombies.push(zombie);
 				
-				spawnTimeout = 10;
+				spawnTimeout = SPAWN_TIMEOUT; //TODO: DIFFICULTY 1
 				
 				break;
 			}
@@ -127,7 +130,7 @@ package GameCom.Managers {
 				}
 			}
 			
-			spawnTimeout--;
+			spawnTimeout -= dt;
 		}
 		
 	}
