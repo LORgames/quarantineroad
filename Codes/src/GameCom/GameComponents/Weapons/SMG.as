@@ -78,6 +78,10 @@ package GameCom.GameComponents.Weapons {
 			if (bullets > MAX_AMMO) bullets = MAX_AMMO;
 		}
 		
+		public function IsMaxAmmo():Boolean {
+			return (bullets == MAX_AMMO);
+		}
+		
 		private var isActive:Boolean = false;
 		public function Activate():void { isActive = true; }
 		public function Deactivate():void { isActive = false; }

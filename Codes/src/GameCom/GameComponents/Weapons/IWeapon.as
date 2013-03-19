@@ -13,6 +13,7 @@ package GameCom.GameComponents.Weapons {
 		
 		function AddAmmo():void;
 		function GetAmmoReadout():String;
+		function IsMaxAmmo():Boolean;
 		
 		function Activate():void;
 		function Deactivate():void;

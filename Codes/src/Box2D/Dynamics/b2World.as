@@ -755,8 +755,7 @@ public class b2World
 	 * Return true to continue to the next fixture.
 	 * @param aabb the query box.
 	 */
-	public function QueryAABB(callback:Function, aabb:b2AABB):void
-	{
+	public function QueryAABB(callback:Function, aabb:b2AABB):void {
 		var broadPhase:IBroadPhase = m_contactManager.m_broadPhase;
 		function WorldQueryWrapper(proxy:*):Boolean
 		{

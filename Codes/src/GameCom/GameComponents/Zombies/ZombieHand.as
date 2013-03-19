@@ -1,4 +1,5 @@
 package GameCom.GameComponents.Zombies {
+	import Box2D.Collision.b2AABB;
 	import Box2D.Collision.Shapes.b2CircleShape;
 	import Box2D.Common.Math.b2Vec2;
 	import Box2D.Dynamics.b2Body;
@@ -11,6 +12,7 @@ package GameCom.GameComponents.Zombies {
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BGManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
@@ -24,7 +26,7 @@ package GameCom.GameComponents.Zombies {
 		private const BASE_HP:Number = 1.0;
 		private const SCORE:int = 1;
 		
-		private const BASE_WAIT_TIME:Number = 1.5;
+		private const BASE_WAIT_TIME:Number = 0.5;
 		private const BASE_HURT_TIME:Number = 0.5;
 		
 		private const SCREENSHAKE_AMT:Number = 50.0;
@@ -81,7 +83,7 @@ package GameCom.GameComponents.Zombies {
 			
 			animation.Update(dt);
 			animation.x = -animation.width / 2;
-			animation.y = -animation.height + 0.6 * Global.PHYSICS_SCALE;
+			animation.y = -animation.height + 0.8 * Global.PHYSICS_SCALE;
 			
 			if (animation.IsStopped() && state == RISING) {
 				waitTime -= dt;
@@ -95,6 +97,12 @@ package GameCom.GameComponents.Zombies {
 			} else if (animation.IsStopped() && state == HITING) {
 				state = HURTIN;
 				WorldManager.WorldShake += SCREENSHAKE_AMT;
+				
+				var aabb:b2AABB = new b2AABB();
+				aabb.lowerBound.Set(body.GetPosition().x - 1.5, body.GetPosition().y - 1.5);
+				aabb.upperBound.Set(body.GetPosition().x + 1.5, body.GetPosition().y + 1.5);
+				
+				WorldManager.World.QueryAABB(HittingCallback, aabb);
 			} else if (animation.IsStopped() && state == HURTIN) {
 				waitTime -= dt;
 				
@@ -106,6 +114,16 @@ package GameCom.GameComponents.Zombies {
 					animation.ChangePlayback(0.1, 10, 4, true);
 				}
 			}
+		}
+		
+		public function HittingCallback(fixture:b2Fixture):Boolean {
+			if (fixture.GetUserData() is PlayerCharacter) {
+				if ((fixture.GetUserData() as PlayerCharacter).Hit(9)) {
+					TrophyHelper.GotTrophyByName("High Five");
+				}
+			}
+			
+			return true;
 		}
 		
 		public function Hit(damage:Number):Boolean {

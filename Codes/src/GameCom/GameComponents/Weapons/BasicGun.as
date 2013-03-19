@@ -57,6 +57,10 @@ package GameCom.GameComponents.Weapons {
 			return "INF";
 		}
 		
+		public function IsMaxAmmo():Boolean {
+			return true;
+		}
+		
 		private var isActive:Boolean = false;
 		public function Activate():void { isActive = true; }
 		public function Deactivate():void { isActive = false; }

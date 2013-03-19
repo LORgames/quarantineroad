@@ -8,6 +8,7 @@ package GameCom.GameComponents.Loot {
 	import GameCom.GameComponents.Weapons.IWeapon;
 	import GameCom.Helpers.BodyHelper;
 	import GameCom.Helpers.SpriteHelper;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.WorldManager;
 	/**
 	 * ...
@@ -27,8 +28,18 @@ package GameCom.GameComponents.Loot {
 		}
 		
 		public override function Pickup(equipment:Vector.<IWeapon>, player:PlayerCharacter):void {
+			var giveTrophy:Boolean = true;
+			
 			for (var i:int = 0; i < equipment.length; i++) {
 				equipment[i].AddAmmo();
+				
+				if (giveTrophy && !equipment[i].IsMaxAmmo()) {
+					giveTrophy = false;
+				}
+			}
+			
+			if (giveTrophy) {
+				TrophyHelper.GotTrophyByName("Max Ammo");
 			}
 			
 			super.Pickup(equipment, player);

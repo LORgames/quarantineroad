@@ -107,6 +107,10 @@ package GameCom.GameComponents.Weapons {
 			if (battery > MAX_AMMO) battery = MAX_AMMO;
 		}
 		
+		public function IsMaxAmmo():Boolean {
+			return (battery == MAX_AMMO);
+		}
+		
 		public function Activate():void {
 			isActive = true;
 		}

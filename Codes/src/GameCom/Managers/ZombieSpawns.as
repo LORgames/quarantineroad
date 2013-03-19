@@ -83,8 +83,8 @@ package GameCom.Managers {
 		LimpZombie,
 		LimpZombie,
 		LimpZombie,
-		LimpZombie//,
-		//ZombieHand
+		LimpZombie,
+		ZombieHand
 		);
 	}
 }

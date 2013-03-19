@@ -214,7 +214,7 @@ package GameCom.GameComponents
 				myHP = Math.min(myHP, 10);
 				
 				GUIManager.I.Hearts.SetHealth(myHP);
-			} else if(getTimer() > immunityTime) {
+			} else if(getTimer() > immunityTime && myHP > 0) {
 				myHP -= damage;
 				GUIManager.I.Hearts.SetHealth(myHP);
 				
@@ -225,6 +225,10 @@ package GameCom.GameComponents
 				
 				if (damage > 10) {
 					TrophyHelper.GotTrophyByName("Throw like a girl");
+				}
+				
+				if (myHP <= 0) {
+					return true;
 				}
 				
 				//Immune if you got hurt

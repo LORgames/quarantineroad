@@ -62,6 +62,10 @@ package GameCom.GameComponents.Weapons {
 			if (grenades > MAX_AMMO) grenades = MAX_AMMO;
 		}
 		
+		public function IsMaxAmmo():Boolean {
+			return (grenades == MAX_AMMO);
+		}
+		
 		private var isActive:Boolean = false;
 		public function Activate():void { isActive = true; }
 		public function Deactivate():void { isActive = false; }
