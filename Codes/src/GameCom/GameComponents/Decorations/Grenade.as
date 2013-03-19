@@ -5,6 +5,7 @@ package GameCom.GameComponents.Decorations {
 	import flash.geom.Point;
 	import flash.utils.getTimer;
 	import GameCom.GameComponents.Weapons.IWeapon;
+	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
 	import GameCom.Managers.ExplosionManager;
@@ -86,6 +87,10 @@ package GameCom.GameComponents.Decorations {
 				owner.ReportKills(ExplosionManager.I.RequestBombExplosionAt(new Point(this.x, this.y)));
 				this.parent.removeChild(this);
 				Deactivate();
+			}
+			
+			if (body.GetContactList() != null && body.GetContactList().other.GetUserData() is IZombie) {
+				animation.Stop();
 			}
 		}
 		

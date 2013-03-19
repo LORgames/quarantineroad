@@ -9,6 +9,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.GrenadeHelper;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
+	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
@@ -50,6 +51,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Upgrade():void {
 			collected = true;
+			TrophyToast.I.AddWeaponPickup("Grenade Launcher", ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png"));
 		}
 		
 		public function GetAmmoReadout():String {

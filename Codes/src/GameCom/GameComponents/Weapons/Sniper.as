@@ -8,6 +8,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.GameComponents.Projectiles.SniperBullet;
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Managers.BulletManager;
+	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
@@ -47,6 +48,7 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			if (!collected) {
 				collected = true;
+				TrophyToast.I.AddWeaponPickup("Sniper Rifle", ThemeManager.Get("WeaponIcons/w06_sniper.png"));
 			}
 		}
 		

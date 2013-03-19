@@ -17,6 +17,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.WorldManager;
+	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
@@ -91,7 +92,10 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function Upgrade():void {
-			if (!collected) collected = true;
+			if (!collected) {
+				collected = true;
+				TrophyToast.I.AddWeaponPickup("Chain Lightning", ThemeManager.Get("WeaponIcons/w11_chain_lightning.png"));
+			}
 		}
 		
 		public function GetAmmoReadout():String {

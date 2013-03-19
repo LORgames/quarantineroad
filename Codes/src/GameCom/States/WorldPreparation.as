@@ -44,11 +44,7 @@ package GameCom.States {
 		public function Init(e:Event = null):void {
 			removeEventListener(Event.ADDED_TO_STAGE, Init);
 			
-			background = new Preloader.Logo();
-			
 			//Start Menu
-			this.addChild(background);
-			
 			PercentageText.selectable = false;
 			PercentageText.defaultTextFormat = new TextFormat("Verdana", 40, 0xFFFFFF);
 			PercentageText.autoSize = TextFieldAutoSize.CENTER;
@@ -90,14 +86,11 @@ package GameCom.States {
 			this.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
 			this.graphics.endFill();
 			
-			background.x = (this.stage.stageWidth - background.width) / 2;
-			background.y = (this.stage.stageHeight - background.height) / 2;
+			PercentageText.x = this.stage.stageWidth/2 - PercentageText.width / 2;
+			PercentageText.y = this.stage.stageHeight/2 + 100;
 			
-			PercentageText.x = background.x + 366 - PercentageText.width / 2;
-			PercentageText.y = background.y + 510;
-			
-			DisplayText.x = background.x + 250 - DisplayText.width / 2;
-			DisplayText.y = background.y + 415;
+			DisplayText.x = this.stage.stageWidth/2 - DisplayText.width / 2;
+			DisplayText.y = this.stage.stageHeight/2 + 60;
 		}
 		
 		public function UpdatePercentageLoaded(newPercent:String):void {

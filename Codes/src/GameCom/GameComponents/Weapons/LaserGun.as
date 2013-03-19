@@ -12,6 +12,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.WorldManager;
+	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
@@ -91,9 +92,11 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			if (!collected) {
 				collected = true;
+				TrophyToast.I.AddWeaponPickup("Laser", ThemeManager.Get("WeaponIcons/w07_laser.png"));
 			} else if (!upgraded) {
 				upgraded = true;
 				CHARGE_TIME = 0.1;
+				TrophyToast.I.AddWeaponPickup("Improved Laser", ThemeManager.Get("WeaponIcons/w07_laser.png"));
 			}
 		}
 		

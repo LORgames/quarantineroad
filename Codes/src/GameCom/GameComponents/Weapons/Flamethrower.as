@@ -10,6 +10,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
+	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
@@ -51,6 +52,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Upgrade():void {
 			collected = true;
+			TrophyToast.I.AddWeaponPickup("Flamethrower", ThemeManager.Get("WeaponIcons/w10_flame_thrower.png"));
 		}
 		
 		public function GetAmmoReadout():String {

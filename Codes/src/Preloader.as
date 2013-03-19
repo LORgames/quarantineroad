@@ -27,10 +27,6 @@ package {
 		private const AD_SIZE_X:int = 800;
 		private const AD_SIZE_Y:int = 600;
 		
-		[Embed(source="../lib/logo.png")]
-        [Bindable]
-        public static var Logo:Class;
-		
 		private var DisplayText:TextField = new TextField();
 		private var PercentageText:TextField = new TextField();
 		
@@ -117,18 +113,13 @@ package {
 			this.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
 			this.graphics.endFill();
 			
-			var bmp:Bitmap = new Logo() as Bitmap;
-			var mat:Matrix = new Matrix(1, 0, 0, 1, (stage.stageWidth - bmp.width) / 2, (stage.stageHeight - bmp.height) / 2);
-
-			this.graphics.beginBitmapFill(bmp.bitmapData, mat, false, false);
-			this.graphics.drawRect((stage.stageWidth - bmp.width) / 2, (stage.stageHeight - bmp.height) / 2, bmp.width, bmp.height);
-			this.graphics.endFill();
+			var mat:Matrix = new Matrix(1, 0, 0, 1, stage.stageWidth / 2, stage.stageHeight / 2);
 			
-			PercentageText.x = mat.tx + 366 - PercentageText.width / 2;
-			PercentageText.y = mat.ty + 510;
+			PercentageText.x = mat.tx - PercentageText.width / 2;
+			PercentageText.y = mat.ty + 100;
 			
-			DisplayText.x = mat.tx + 250 - DisplayText.width / 2;
-			DisplayText.y = mat.ty + 415;
+			DisplayText.x = mat.tx - DisplayText.width / 2;
+			DisplayText.y = mat.ty + 60;
 		}
 		
 		private function loadingFinished():void {

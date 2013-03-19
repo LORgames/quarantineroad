@@ -78,6 +78,10 @@ package GameCom.Helpers
 			return isStopped;
 		}
 		
+		public function Stop():void {
+			isStopped = true;
+		}
+		
 	}
 
 }

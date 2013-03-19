@@ -10,6 +10,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
+	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
@@ -57,6 +58,8 @@ package GameCom.GameComponents.Weapons {
 			isUpgraded = true;
 			FIRE_RATE = 0.3;
 			TrophyHelper.GotTrophyByName("2 for 1");
+			
+			TrophyToast.I.AddWeaponPickup("Dual Pistols", ThemeManager.Get("WeaponIcons/w01_dual_pistol.png"));
 		}
 		
 		public function AddAmmo():void {

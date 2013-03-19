@@ -13,13 +13,13 @@ package GameCom.Helpers
 			"250m Run", "Move 250m in a single game.",
 			"500m Run", "Move 500m in a single game.",
 			
-			"Boomstick", "Get 100 kills with the shotgun in a single game.",
-			"Crispy", "Get 100 kills with the flame thrower in a single game.",
-			"Spray and Prey", "Kill 100 zombies with SMG or Dual SMG",
-			
 			"Pacifist", "Walk 100m without killing a zombie. Including Melee!",
 			"Time", "Survive 3:00 min",
 			"Man vs Zombie", "Survive 6 minutes in a single game.",
+			
+			"Boomstick", "Get 100 kills with the shotgun in a single game.",
+			"Crispy", "Get 100 kills with the flame thrower in a single game.",
+			"Spray and Prey", "Kill 100 zombies with SMG or Dual SMG",
 			
 			"Tesla's Pride", "Kill 100 zombies with the lightning gun",
 			"Fire in the Hole", "Kill 100 zombies with grenades in a single game.",

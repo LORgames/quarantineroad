@@ -9,6 +9,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
+	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	/**
@@ -70,8 +71,10 @@ package GameCom.GameComponents.Weapons {
 				upgraded = true;
 				FIRE_RATE = 0.5;
 				GUIManager.I.RedrawWeapons();
+				TrophyToast.I.AddWeaponPickup("Combat Shotgun", ThemeManager.Get("WeaponIcons/w05_combat_shotgun.png"));
 			} else {
 				collected = true;
+				TrophyToast.I.AddWeaponPickup("Shotgun", ThemeManager.Get("WeaponIcons/w04_shotgun.png"));
 			}
 		}
 		

@@ -1,6 +1,7 @@
 package GameCom.SystemComponents 
 {
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.filters.GlowFilter;
@@ -68,7 +69,7 @@ package GameCom.SystemComponents
 			text.defaultTextFormat = new TextFormat("Visitor", 16, 0xFFFFFF);
 			text.filters = new Array(new GlowFilter(0x0, 1, 7, 7, 3));
 			text.text = "";
-			text.autoSize = TextFieldAutoSize.LEFT;
+			text.autoSize = TextFieldAutoSize.CENTER;
 			text.selectable = false;
 			text.x = 17;
 			text.y = 59;
@@ -132,13 +133,13 @@ package GameCom.SystemComponents
 		
 		private function ShowNext():void {
 			if (currentlyShowing == -1) {
-				if(messages.length > 0) {
-					currentlyShowing = messages.pop();
+				if (messages.length > 0) {
+					currentlyShowing = 1;
 					waited_time = 0;
 					stage.addEventListener(Event.ENTER_FRAME, Update);
 					
-					text.text = TrophyHelper.GetTrophyName(currentlyShowing);
-					item.bitmapData = ThemeManager.Get(TrophyHelper.GetTrophyPictureName(currentlyShowing));
+					item.bitmapData = messages.pop();
+					text.text = messages.pop();
 					
 					direction = 5;
 					
@@ -152,7 +153,16 @@ package GameCom.SystemComponents
 		}
 		
 		public function AddTrophy(id:int):void {
-			messages.push(id);
+			messages.push(TrophyHelper.GetTrophyName(id));
+			messages.push(ThemeManager.Get(TrophyHelper.GetTrophyPictureName(id)));
+			
+			ShowNext();
+		}
+		
+		public function AddWeaponPickup(text:String, bmp:BitmapData):void {
+			messages.push(text);
+			messages.push(bmp);
+			
 			ShowNext();
 		}
 		
