@@ -15,7 +15,7 @@ package GameCom.GameComponents.Weapons {
 	 * @author Paul
 	 */
 	public class Sniper implements IWeapon {
-		private var MAX_AMMO:int = int.MAX_VALUE; //LOLOLOLOL TOO MANY AMMO.
+		private var MAX_AMMO:int = 32; //LOLOLOLOL TOO MANY AMMO.
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
@@ -51,7 +51,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			if (collected) bullets += Math.random() * 4 + 1;
+			if (collected) bullets += Math.random() * 3 + 3;
 			
 			if (bullets > MAX_AMMO) bullets = MAX_AMMO;
 		}

@@ -16,10 +16,10 @@ package GameCom.GameComponents.Weapons {
 	 * @author Paul
 	 */
 	public class Shotgun implements IWeapon {
-		private var MAX_AMMO:int = int.MAX_VALUE; //LOLOLOLOL TOO MANY AMMO.
+		private var MAX_AMMO:int = 40; //LOLOLOLOL TOO MANY AMMO.
 		
 		public const RANGE:Number = 5;
-		public const DAMAGE:Number = 10;
+		public const DAMAGE:Number = 5;
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		

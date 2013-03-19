@@ -17,7 +17,7 @@ package GameCom.GameComponents.Weapons {
 	 * @author Paul
 	 */
 	public class SMG implements IWeapon {
-		private var MAX_AMMO:int = int.MAX_VALUE; //LOLOLOLOL TOO MANY AMMO.
+		private var MAX_AMMO:int = 600; //LOLOLOLOL TOO MANY AMMO.
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
@@ -26,7 +26,7 @@ package GameCom.GameComponents.Weapons {
 		
 		private var totalSMGs:int = 0;
 		
-		private var bullets:int = 250;
+		private var bullets:int = 100;
 		
 		private var totalKills:int = 0;
 		
@@ -74,7 +74,7 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function AddAmmo():void {
-			bullets += (Math.random() * 20 + 40) * totalSMGs;
+			bullets += (Math.random() * 30 + 50) * totalSMGs;
 			if (bullets > MAX_AMMO) bullets = MAX_AMMO;
 		}
 		
