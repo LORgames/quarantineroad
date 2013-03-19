@@ -14,6 +14,8 @@ package GameCom.Helpers
 		public static const OTHER_MISC:int = 4;
 		public static const OTHER_SHAKEY:int = 5;
 		
+		public static var nextAlert:Number = 0;
+		
 		//private var _val:MochiDigits = new MochiDigits();
 		public var Value:Number = 0;
 		

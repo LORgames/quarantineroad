@@ -15,27 +15,18 @@ package GameCom.GameComponents.Decorations {
 	 * ...
 	 * @author ...
 	 */
-	public class Grenade extends Sprite {
+	public class Rocket extends Sprite {
 		private var animation:AnimatedSprite;
 		private var body:b2Body;
 		
 		private var owner:IWeapon;
+		private var isDead:Boolean = false;
 		
-		public function Grenade() {
+		public function Rocket() {
 			animation = new AnimatedSprite();
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_0.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_1.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_2.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_3.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_4.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_5.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_6.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_7.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_8.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_9.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_10.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_11.png"));
-			animation.AddFrame(ThemeManager.Get("Grenade/Grenade0_12.png"));
+			animation.AddFrame(ThemeManager.Get("bullets/Rocket_0.png"));
+			animation.AddFrame(ThemeManager.Get("bullets/Rocket_1.png"));
+			animation.AddFrame(ThemeManager.Get("bullets/Rocket_2.png"));
 			
 			animation.ChangePlayback(0.1, 0, 1, true);
 			animation.Update(0.5);
@@ -55,19 +46,17 @@ package GameCom.GameComponents.Decorations {
 			body.SetPosition(new b2Vec2(this.x / Global.PHYSICS_SCALE, this.y / Global.PHYSICS_SCALE));
 			body.SetActive(true);
 			
-			animation.ChangePlayback(0.1, 0, 13, true);
+			animation.ChangePlayback(0.1, 0, 2);
 			
-			body.SetLinearVelocity(new b2Vec2(0,0));
-			body.SetAngularVelocity(0);
-			
-			var throwSpeed:b2Vec2 = new b2Vec2(0, -0.5);
-			body.ApplyImpulse(throwSpeed, body.GetWorldCenter());
+			body.SetLinearVelocityXY(0, -15 + WorldManager.WorldScrollSpeed);
+			isDead = false;
 			
 			this.owner = owner;
 		}
 		
 		public function Deactivate():void {
 			body.SetActive(false);
+			body.SetPositionXY(483, 483);
 			
 			if (this.parent != null) {
 				this.parent.removeChild(this);
@@ -75,7 +64,8 @@ package GameCom.GameComponents.Decorations {
 		}
 		
 		public function IsFinished():Boolean {
-			return animation.IsStopped();
+			if (body.GetPosition().y < 0) return true;
+			return isDead;
 		}
 		
 		public function Update(dt:Number):void {
@@ -87,14 +77,11 @@ package GameCom.GameComponents.Decorations {
 			var edge:b2ContactEdge = body.GetContactList();
 			while (edge != null) {
 				if (edge.contact.IsTouching() && edge.other.GetUserData() is IZombie) {
-					animation.Stop();
+					owner.ReportKills(ExplosionManager.I.RequestBombExplosionAt(new Point(this.x, this.y)));
+					isDead = true;
 				}
 				
 				edge = edge.next;
-			}
-			
-			if (animation.IsStopped()) {
-				owner.ReportKills(ExplosionManager.I.RequestBombExplosionAt(new Point(this.x, this.y)));
 			}
 		}
 		

@@ -25,6 +25,8 @@ package GameCom.GameComponents.Weapons {
 		public var fireTime:Number = 0;
 		
 		private var collected:Boolean = false;
+		private var upgraded:Boolean = false;
+		
 		private var totalKills:int = 0;
 		private var grenades:int = 5;
 		
@@ -39,10 +41,15 @@ package GameCom.GameComponents.Weapons {
 				if(Keys.isKeyDown(32) && grenades > 0) {
 					fireTime -= FIRE_RATE;
 					
-					GrenadeHelper.I.SpawnGrenade(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE, this);
+					if (!upgraded) {
+						GrenadeHelper.I.SpawnGrenade(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE, this);
+						AudioController.PlaySound(AudioStore.GrenadeLauncher1);
+					} else {
+						GrenadeHelper.I.SpawnRocket(location.x * Global.PHYSICS_SCALE, location.y * Global.PHYSICS_SCALE, this);
+					}
+					
 					grenades--;
 					
-					AudioController.PlaySound(AudioStore.GrenadeLauncher1);
 				}
 			} else {
 				fireTime += dt;
@@ -50,8 +57,13 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function Upgrade():void {
-			collected = true;
-			TrophyToast.I.AddWeaponPickup("Grenade Launcher", ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png"));
+			if (!collected) {
+				TrophyToast.I.AddWeaponPickup("Grenade Launcher", ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png"));
+				collected = true;
+			} else if (!upgraded) {
+				TrophyToast.I.AddWeaponPickup("Rocket Poop", ThemeManager.Get("WeaponIcons/w15_rocketpoop.png"));
+				upgraded = true;
+			}
 		}
 		
 		public function GetAmmoReadout():String {
@@ -86,17 +98,20 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
+			if (upgraded) return ThemeManager.Get("WeaponIcons/w15_rocketpoop.png");
 			if (collected) return ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png");
 			return null;
 		}
 		
 		public function GetPlayerBody():BitmapData {
+			if (upgraded) return ThemeManager.Get("Player/top/base12_rocket_launcher.png");
 			if (collected) return ThemeManager.Get("Player/top/base09_grenade_launcher.png");
 			return ThemeManager.Get("Player/top/base.png");
 		}
 		
 		public function GetUpgradeIcon():BitmapData {
 			if (!collected) return ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png");
+			if (!upgraded) return ThemeManager.Get("WeaponIcons/w15_rocketpoop.png");
 			return null;
 		}
 		

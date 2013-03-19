@@ -96,7 +96,7 @@ package GameCom.GameComponents.Weapons {
 			} else if (!upgraded) {
 				upgraded = true;
 				CHARGE_TIME = 0.1;
-				TrophyToast.I.AddWeaponPickup("Improved Laser", ThemeManager.Get("WeaponIcons/w07_laser.png"));
+				TrophyToast.I.AddWeaponPickup("Laser Poop", ThemeManager.Get("WeaponIcons/w14_laserpoop.png"));
 			}
 		}
 		
@@ -141,7 +141,9 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetIcon():BitmapData {
+			if (upgraded) return ThemeManager.Get("WeaponIcons/w14_laserpoop.png");
 			if (collected) return ThemeManager.Get("WeaponIcons/w07_laser.png");
+			
 			return null;
 		}
 		
@@ -151,8 +153,10 @@ package GameCom.GameComponents.Weapons {
 		}
 		
 		public function GetUpgradeIcon():BitmapData {
-			if(!collected || !upgraded) {
+			if (!collected) {
 				return ThemeManager.Get("WeaponIcons/w07_laser.png");
+			} else if (!upgraded) {
+				return ThemeManager.Get("WeaponIcons/w14_laserpoop.png");
 			}
 			return null;
 		}
