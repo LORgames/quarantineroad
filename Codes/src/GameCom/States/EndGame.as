@@ -79,7 +79,7 @@ package GameCom.States {
 			//The hand thing
 			this.addChild(handAnimation);
 			
-			//Start Menu
+			//Start Menuo
 			this.addChild(background);
 			
 			RestartBtn.addEventListener(MouseEvent.CLICK, RestartClicked, false, 0, true);

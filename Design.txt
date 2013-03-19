@@ -21,3 +21,18 @@ Motorbike
 Body Armour
 Allies
 Health Pickup
+
+-------------------ART LIST
+4x Screenshots
+100x100 Icon
+200x200 Icon
+250x200 Icon
+Gameplay video url?
+
+
+
+-------------------GAME DESCRIPTION (Needs to be posted everywhere)
+Shoot through hordes of zombies trying to survive.
+
+-------------------INSTRUCTIONS
+Use WASD or Arrow keys (move) in conjunction with Spacebar (fire) to splat a horde of zombies stopping you leaving the city. Or entering the city, or just running on a road, however you interpret it.
