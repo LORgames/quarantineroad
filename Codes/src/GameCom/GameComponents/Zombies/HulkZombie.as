@@ -41,6 +41,9 @@ package GameCom.GameComponents.Zombies {
 			animation.AddFrame(ThemeManager.Get("Zombies/Hulk Zombie/0_1.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Hulk Zombie/0_2.png"));
 			animation.AddFrame(ThemeManager.Get("Zombies/Hulk Zombie/0_3.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Hulk Zombie/0_4.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Hulk Zombie/0_5.png"));
+			animation.AddFrame(ThemeManager.Get("Zombies/Hulk Zombie/0_6.png"));
 			animation.ChangePlayback(0.12, 0, 4);
 			this.addChild(animation);
 			
@@ -65,6 +68,7 @@ package GameCom.GameComponents.Zombies {
 			body = WorldManager.World.CreateBody(bodyDef);
 			body.CreateFixture(fixture);
 			body.SetFixedRotation(true);
+			body.SetActive(false);
 			
 			body.SetLinearDamping(0.5);
 		}
@@ -90,7 +94,10 @@ package GameCom.GameComponents.Zombies {
 				contact = contact.next;
 			}*/
 			
-			if(dt > 0) body.SetLinearVelocityXY(xSpeed, ySpeed);
+			if (dt > 0) {
+				if (!isDead) body.SetLinearVelocityXY(xSpeed, ySpeed);
+				else body.SetLinearVelocityXY(0, WorldManager.WorldScrollSpeed);
+			}
 		}
 		
 		public function Hit(damage:Number):Boolean {
@@ -106,6 +113,8 @@ package GameCom.GameComponents.Zombies {
 					LootManager.I.SpawnAmmoAt(body.GetPosition());
 				}
 				
+				animation.ChangePlayback(0.1, 4, 3, true);
+				
 				return true;
 			}
 			
@@ -113,6 +122,8 @@ package GameCom.GameComponents.Zombies {
 		}
 		
 		public function HitPlayer(player:PlayerCharacter):Number {
+			if (isDead) return 0;
+			
 			if(player.x < this.x) {
 				player.body.ApplyImpulse(new b2Vec2(-mySpeed/2, mySpeed/2), player.body.GetWorldCenter());
 			} else {
@@ -127,10 +138,6 @@ package GameCom.GameComponents.Zombies {
 		}
 		
 		public function OutsideScene():Boolean {
-			if (myHP <= 0) {
-				return true;
-			}
-			
 			if (this.y - animation.height > animation.stage.stageHeight) {
 				return true;
 			}
@@ -149,6 +156,7 @@ package GameCom.GameComponents.Zombies {
 			
 			mySpeed = 4.0 + Math.random()*2;
 			
+			animation.ChangePlayback(0.12, 0, 4);
 			Update(0);
 			
 			WorldManager.WorldShake += SCREENSHAKE_AMT;

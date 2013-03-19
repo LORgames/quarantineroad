@@ -4,6 +4,7 @@ package GameCom.Managers {
 	public class ZombieSpawns {
 		public static var Spawns:Array = new Array(
 		
+		ZombieHand,
 		SlowZombie,
 		SlowZombie,
 		BlueZombie,
@@ -83,8 +84,7 @@ package GameCom.Managers {
 		LimpZombie,
 		LimpZombie,
 		LimpZombie,
-		LimpZombie,
-		ZombieHand
+		LimpZombie
 		);
 	}
 }

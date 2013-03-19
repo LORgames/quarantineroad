@@ -87,10 +87,17 @@ package GameCom.Managers {
 			if (totalTime > previousUpdate + SPAWN_AVAILABLE*1000) { //TODO: DIFFICULTY0
 				if (SpawnList.length == 0) {
 					//Spawning a random one
-					cls = ZombieTypes[int(ZombieTypes.length * Math.random())];
+					if(UnusedZombies.length < 100) {
+						cls = ZombieTypes[int(ZombieTypes.length * Math.random())];
+					}
 				} else {
 					//Spawn from the list
 					cls = (SpawnList.pop() as Class);
+					
+					if (SpawnList.length == 0) {
+						SPAWN_TIMEOUT = 0.05;
+						SPAWN_AVAILABLE = 2.0;
+					}
 				}
 				
 				UnusedZombies.push(new cls());

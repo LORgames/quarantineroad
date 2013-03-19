@@ -99,7 +99,7 @@ package GameCom.GameComponents.Zombies {
 				WorldManager.WorldShake += SCREENSHAKE_AMT;
 				
 				var aabb:b2AABB = new b2AABB();
-				aabb.lowerBound.Set(body.GetPosition().x - 1.5, body.GetPosition().y - 1.5);
+				aabb.lowerBound.Set(body.GetPosition().x - 1.5, body.GetPosition().y - 1.0);
 				aabb.upperBound.Set(body.GetPosition().x + 1.5, body.GetPosition().y + 1.5);
 				
 				WorldManager.World.QueryAABB(HittingCallback, aabb);

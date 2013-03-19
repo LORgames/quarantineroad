@@ -9,6 +9,8 @@ package GameCom.Managers
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.utils.ByteArray;
+	import GameCom.Helpers.AudioStore;
+	import LORgames.Engine.AudioController;
 	/**
 	 * ...
 	 * @author Miles
@@ -107,6 +109,8 @@ package GameCom.Managers
 			piece.graphics.beginBitmapFill(bmpd, new Matrix(flipX?-1:1, 0, 0, 1, locationX-(flipX?-bmpd.width/2:bmpd.width/2), locationY-bmpd.height/2), false, true);
 			piece.graphics.drawRect(locationX-bmpd.width/2, locationY-bmpd.height/2, bmpd.width, bmpd.height);
 			piece.graphics.endFill();
+			
+			AudioController.PlaySound(AudioStore.GetZombieDeath());
 		}
 		
 		public function AddRandomTrash(piece:Sprite):void {
