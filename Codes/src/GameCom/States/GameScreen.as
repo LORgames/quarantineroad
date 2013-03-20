@@ -1,29 +1,17 @@
 package GameCom.States {
-	import Box2D.Collision.Shapes.b2PolygonShape;
-	import Box2D.Common.Math.b2Vec2;
-	import Box2D.Dynamics.b2Body;
-	import Box2D.Dynamics.b2BodyDef;
-	import Box2D.Dynamics.b2DebugDraw;
-	import Box2D.Dynamics.b2World;
 	import flash.display.GradientType;
-	import flash.display.SpreadMethod;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.KeyboardEvent;
-	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
-	import flash.geom.Rectangle;
 	import flash.media.SoundChannel;
 	import flash.ui.Keyboard;
-	import flash.utils.getTimer;
-	import flash.utils.Timer;
 	import GameCom.GameComponents.Decorations.VomitPuddle;
-	import GameCom.GameComponents.Loot.LootDrop;
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.GrenadeHelper;
 	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Helpers.TrophyHelper;
+	import GameCom.Managers.BGManager;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.ExplosionManager;
 	import GameCom.Managers.GUIManager;
@@ -32,12 +20,8 @@ package GameCom.States {
 	import GameCom.Managers.WorldManager;
 	import GameCom.Managers.ZombieManager;
 	import GameCom.SystemMain;
-	import LORgames.Components.Button;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
-	import GameCom.Managers.BGManager;
-	import LORgames.Engine.Logger;
-	import LORgames.Engine.MessageBox;
 	import LORgames.Engine.Stats;
 	/**
 	 * ...
@@ -77,6 +61,7 @@ package GameCom.States {
 		
 		//olol toggle bool for mute
 		private var mDown:Boolean = false;
+		private var pDown:Boolean = false;
 		
 		public static var EndOfTheLine_TerminateASAP:Boolean = false;
 		
@@ -143,6 +128,7 @@ package GameCom.States {
 			WorldManager.WorldScrolled = 0;
 			
 			Stats.StartLevel();
+			if (Stats.GetInt("Gameplays") >= 28) TrophyHelper.GotTrophyByName("28 Plays Later");
 			
 			Resize();
 		}
@@ -191,7 +177,6 @@ package GameCom.States {
 			
 			//Update the things that draw
 			bgManager.Update();
-			
 			gui.Update();
 			
 			for (var i:int = 1; i < objectLayer.numChildren-1; i++) {
@@ -210,14 +195,17 @@ package GameCom.States {
 				WorldManager.debugDrawLayer.graphics.clear();
 			}
 			
-			if (mDown && !Keys.isKeyDown(Keyboard.Q)) {
+			//Mute/Unmute
+			if (mDown && !Keys.isKeyDown(Keyboard.M)) {
 				AudioController.SetMuted(!AudioController.GetMuted());
 			}
-			mDown = Keys.isKeyDown(Keyboard.Q);
+			mDown = Keys.isKeyDown(Keyboard.M);
 			
-			if (Keys.isKeyDown(Keyboard.P)) {
+			//Pause/Unpause
+			if (pDown && !Keys.isKeyDown(Keyboard.P)) {
 				simulating = !simulating;
 			}
+			pDown = Keys.isKeyDown(Keyboard.P);
 			
 			this.graphics.clear();
 			this.graphics.beginFill(0);

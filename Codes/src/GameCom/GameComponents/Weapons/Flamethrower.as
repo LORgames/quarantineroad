@@ -52,7 +52,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Upgrade():void {
 			collected = true;
-			TrophyToast.I.AddWeaponPickup("Flamethrower", ThemeManager.Get("WeaponIcons/w10_flame_thrower.png"));
+			TrophyToast.I.AddWeaponPickup("Flame Thrower", ThemeManager.Get("WeaponIcons/w10_flame_thrower.png"));
 		}
 		
 		public function GetAmmoReadout():String {

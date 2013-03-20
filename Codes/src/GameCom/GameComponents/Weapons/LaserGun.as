@@ -9,6 +9,7 @@ package GameCom.GameComponents.Weapons {
 	import flash.ui.Keyboard;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Zombies.IZombie;
+	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.WorldManager;
@@ -39,9 +40,26 @@ package GameCom.GameComponents.Weapons {
 		
 		private var battery:Number = 5;
 		
+		private var StartNode:AnimatedSprite = new AnimatedSprite();
+		private var EndNode:AnimatedSprite = new AnimatedSprite();
+		
 		public function LaserGun(body:b2Body, layer:Sprite) {
 			this.Layer = layer;
 			AddSafe(body);
+			
+			StartNode.AddFrame(ThemeManager.Get("bullets/laser01.png"));
+			StartNode.AddFrame(ThemeManager.Get("bullets/laser02.png"));
+			StartNode.AddFrame(ThemeManager.Get("bullets/laser11.png"));
+			StartNode.AddFrame(ThemeManager.Get("bullets/laser12.png"));
+			StartNode.ChangePlayback(0.1, 0, 2);
+			layer.addChild(StartNode);
+			
+			EndNode.AddFrame(ThemeManager.Get("bullets/laser03.png"));
+			EndNode.AddFrame(ThemeManager.Get("bullets/Laser04.png"));
+			EndNode.AddFrame(ThemeManager.Get("bullets/laser13.png"));
+			EndNode.AddFrame(ThemeManager.Get("bullets/Laser14.png"));
+			EndNode.ChangePlayback(0.1, 0, 2);
+			layer.addChild(EndNode);
 		}
 		
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
@@ -49,6 +67,8 @@ package GameCom.GameComponents.Weapons {
 		public function Update(dt:Number, location:b2Vec2):void {
 			if (Keys.isKeyDown(Keyboard.SPACE) && battery > 0 && collected) {
 				charge += dt;
+				
+				location.SubtractXY(0, 1);
 				
 				if (charge > CHARGE_TIME) {
 					charge = CHARGE_TIME;
@@ -63,9 +83,18 @@ package GameCom.GameComponents.Weapons {
 					WorldManager.World.RayCast(RCCallback, location, pointHit);
 					
 					Layer.graphics.clear();
-					Layer.graphics.beginBitmapFill(ThemeManager.Get("bullets/Laser00.png"), new Matrix(1, 0, 0, 1, int(location.x * Global.PHYSICS_SCALE) - 3, 0));
+					
+					if (upgraded) Layer.graphics.beginBitmapFill(ThemeManager.Get("bullets/Laser10.png"), new Matrix(1, 0, 0, 1, int(location.x * Global.PHYSICS_SCALE) - 3, 0));
+					else Layer.graphics.beginBitmapFill(ThemeManager.Get("bullets/Laser00.png"), new Matrix(1, 0, 0, 1, int(location.x * Global.PHYSICS_SCALE) - 3, 0));
+					
 					Layer.graphics.drawRect(int(pointHit.x * Global.PHYSICS_SCALE) - 2, int(pointHit.y * Global.PHYSICS_SCALE) - 20, 6, (location.y - pointHit.y) * Global.PHYSICS_SCALE + 20);
 					Layer.graphics.endFill();
+					
+					StartNode.visible = true; StartNode.x = location.x * Global.PHYSICS_SCALE - StartNode.width/2; StartNode.y = location.y * Global.PHYSICS_SCALE - StartNode.height/2;
+					EndNode.visible = true; EndNode.x = pointHit.x * Global.PHYSICS_SCALE - EndNode.width/2; EndNode.y = pointHit.y * Global.PHYSICS_SCALE - EndNode.height/2 - 20;
+					
+					StartNode.Update(dt);
+					EndNode.Update(dt);
 					
 					if(objectHit != null) {
 						if (objectHit.GetUserData() is IZombie) {
@@ -76,6 +105,8 @@ package GameCom.GameComponents.Weapons {
 			} else {
 				charge = 0;
 				Layer.graphics.clear();
+				StartNode.visible = false;
+				EndNode.visible = false;
 			}
 		}
 		
@@ -92,11 +123,14 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			if (!collected) {
 				collected = true;
-				TrophyToast.I.AddWeaponPickup("Laser", ThemeManager.Get("WeaponIcons/w07_laser.png"));
+				TrophyToast.I.AddWeaponPickup("Fishin' Laser", ThemeManager.Get("WeaponIcons/w07_laser.png"));
 			} else if (!upgraded) {
 				upgraded = true;
 				CHARGE_TIME = 0.1;
-				TrophyToast.I.AddWeaponPickup("Laser Poop", ThemeManager.Get("WeaponIcons/w14_laserpoop.png"));
+				TrophyToast.I.AddWeaponPickup("Fission Laser", ThemeManager.Get("WeaponIcons/w14_laserpoop.png"));
+				
+				StartNode.ChangePlayback(0.1, 2, 2);
+				EndNode.ChangePlayback(0.1, 2, 2);
 			}
 		}
 		
@@ -122,6 +156,8 @@ package GameCom.GameComponents.Weapons {
 			isActive = false
 			charge = 0;
 			Layer.graphics.clear();
+			StartNode.visible = false;
+			EndNode.visible = false;
 		}
 		
 		public function IsActive():Boolean {

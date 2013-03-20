@@ -15,6 +15,7 @@ package GameCom.Helpers
 		public static const OTHER_SHAKEY:int = 5;
 		
 		public static var nextAlert:Number = 0;
+		public static var lastKillAt:Number = 0;
 		
 		//private var _val:MochiDigits = new MochiDigits();
 		public var Value:Number = 0;
@@ -23,6 +24,10 @@ package GameCom.Helpers
 		
 		public function KillCounterWrapper(type:int = KILLS) {
 			this.type = type;
+			
+			if (type == TOTAL) {
+				lastKillAt = 0;
+			}
 		}
 		
 		//public function get Value():Number {
@@ -40,6 +45,7 @@ package GameCom.Helpers
 				if (Value > 180) TrophyHelper.GotTrophyByName("Time");
 				if (Value > 360) TrophyHelper.GotTrophyByName("Man vs Zombie");
 			} else if (type == TOTAL) {
+				lastKillAt = ScoreHelper.Distance.Value;
 				if (WorldManager.WorldShake >= 2) ScoreHelper.ShakeyKills.AddValue(val);
 				if (Value > 100) TrophyHelper.GotTrophyByName("Piece of Cake");
 				if (Value > 500) TrophyHelper.GotTrophyByName("Zombie");
@@ -54,7 +60,7 @@ package GameCom.Helpers
 			Value = value;
 			
 			if (type == DISTANCE) {
-				if (Value > 100 && ScoreHelper.AllKills.Value == 0) TrophyHelper.GotTrophyByName("Pacifist");
+				if (Value > 100 + lastKillAt) TrophyHelper.GotTrophyByName("Pacifist");
 				if (Value > 100) TrophyHelper.GotTrophyByName("100m Run");
 				if (Value > 250) TrophyHelper.GotTrophyByName("250m Run");
 				if (Value > 500) TrophyHelper.GotTrophyByName("500m Run");

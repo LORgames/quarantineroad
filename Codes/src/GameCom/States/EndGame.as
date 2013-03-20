@@ -111,13 +111,46 @@ package GameCom.States {
 			
 			Resized();
 			
+			//////////////////////////////////////////////////////////////////////////////////////////
 			//SET SOME STATS
-			Stats.SetHighestInt("HighestScore", parseInt(score));
-			Stats.SetHighestNumber("HighestDistance", parseFloat(distance));
-			Stats.SetHighestInt("HighestZombieKills", parseInt(zombiekills));
+			//////////////////////////////////////////////////////////////////////////////////////////
+			
+			//Update highscores
+			trace("Time: " + ScoreHelper.Time.Value);
+			Stats.SetHighestInt("HighestScore", ScoreHelper.Score.Value);
+			Stats.SetHighestNumber("HighestDistance", ScoreHelper.Distance.Value);
+			Stats.SetHighestNumber("LongestTime", ScoreHelper.Time.Value);
+			
+			Stats.SetHighestInt("TotalKillsHigh", ScoreHelper.AllKills.Value);
+			Stats.SetHighestInt("MeleeKillsHigh", ScoreHelper.MeleeKills.Value);
+			Stats.SetHighestInt("ShakeyKillsHigh", ScoreHelper.ShakeyKills.Value);
+			
+			Stats.SetHighestInt("SlowKillsHigh", ScoreHelper.SlowKills.Value);
+			Stats.SetHighestInt("LimpKillsHigh", ScoreHelper.LimpKills.Value);
+			Stats.SetHighestInt("BlueKillsHigh", ScoreHelper.BlueKills.Value);
+			Stats.SetHighestInt("RedKillsHigh", ScoreHelper.RedKills.Value);
+			Stats.SetHighestInt("HulkKillsHigh", ScoreHelper.HulkKills.Value);
+			Stats.SetHighestInt("ExplosiveKillsHigh", ScoreHelper.ExplosiveKills.Value);
+			Stats.SetHighestInt("ThrowUpKillsHigh", ScoreHelper.ThrowUpKills.Value);
+			
+			//Add to the totals
+			Stats.AddValue("TotalScore", ScoreHelper.Score.Value);
+			Stats.AddValue("TotalDistance", ScoreHelper.Distance.Value);
+			Stats.AddValue("TotalTime", ScoreHelper.Time.Value);
+			
+			Stats.AddValue("TotalKills", ScoreHelper.AllKills.Value);
+			Stats.AddValue("MeleeKills", ScoreHelper.MeleeKills.Value);
+			Stats.AddValue("ShakeyKills", ScoreHelper.ShakeyKills.Value);
+			
+			Stats.AddValue("SlowKills", ScoreHelper.SlowKills.Value);
+			Stats.AddValue("LimpKills", ScoreHelper.LimpKills.Value);
+			Stats.AddValue("BlueKills", ScoreHelper.BlueKills.Value);
+			Stats.AddValue("RedKills", ScoreHelper.RedKills.Value);
+			Stats.AddValue("HulkKills", ScoreHelper.HulkKills.Value);
+			Stats.AddValue("ExplosiveKills", ScoreHelper.ExplosiveKills.Value);
+			Stats.AddValue("ThrowUpKills", ScoreHelper.ThrowUpKills.Value);
 			
 			//PROCESS ACHIEVEMENTS
-			if (Stats.GetInt("Gameplays") >= 28) TrophyHelper.GotTrophyByName("28 Plays Later"); //should really be moved to the other place...
 			if (ScoreHelper.MeleeKills.Value == 0) TrophyHelper.GotTrophyByName("Don't Bite Me Bro");
 			
 			//Process 'Brain' Achievement.

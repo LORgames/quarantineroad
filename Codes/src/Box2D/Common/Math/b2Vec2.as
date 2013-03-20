@@ -55,6 +55,11 @@ public class b2Vec2
 	{
 		x -= v.x; y -= v.y;
 	}
+	
+	public function SubtractXY(_x:Number, _y:Number) : void {
+		x -= _x;
+		y -= _y;
+	}
 
 	public function Multiply(a:Number) : void
 	{

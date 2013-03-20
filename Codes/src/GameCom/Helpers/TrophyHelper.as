@@ -33,11 +33,11 @@ package GameCom.Helpers
 			"Harlem Shake", "Kill 20 zombies while the screen is shaking in a single game.",
 			"Headshot", "Kill a zombie from more then 25m away with the sniper rifle.",
 			
-			"Throw like a girl", "Kill yourself with a grenade",
+			"Throw like a girl", "Kill yourself with a grenade", //needs to be changed
 			"Don't Bite Me Bro", "Die without touching any zombies.",
 			"High Five", "*SQUISH* Killed by the hand.",
 			
-			"Party Pooper", "Kill 10 zombies in a single Bloat Explosion",
+			"Party Pooper", "Kill 5 zombies in a single Bloat Explosion",
 			"Close Call", "Pick up a health pack when on half a heart left.",
 			"Max Ammo", "Obtain Full ammo for each type of weapon in a single game.",
 			

@@ -15,6 +15,7 @@ package GameCom.SystemComponents
 	public class TrophyMenu extends Sprite {
 		
 		private var tooltip:Tooltip = null;
+		private var tracking:Boolean = false;
 		
 		public function TrophyMenu(tooltip:Tooltip) {
 			this.tooltip = tooltip;
@@ -24,8 +25,8 @@ package GameCom.SystemComponents
 			var mat:Matrix = new Matrix();
 			
 			for (var i:int = 0; i < totalTrophies; i++) {
-				mat.tx = (i % 6) * 45 + 69;
-				mat.ty = Math.floor(i / 6) * 45 + 70;
+				mat.tx = (i % 6) * 45;
+				mat.ty = Math.floor(i / 6) * 45;
 				
 				var bmpd:BitmapData = ThemeManager.Get(TrophyHelper.GetTrophyPictureName(i));
 				
@@ -41,30 +42,33 @@ package GameCom.SystemComponents
 			
 			this.addEventListener(MouseEvent.ROLL_OVER, rollOver, false, 0, true);
 			this.addEventListener(MouseEvent.ROLL_OUT, rollOut, false, 0, true);
+			this.addEventListener(MouseEvent.MOUSE_MOVE, mouseMove, false, 0, true);
 		}
 		
 		public function rollOver(me:MouseEvent):void {
-			
-			var eX:int = (me.localX-69) / 45;
-			var eY:int = (me.localY-70) / 45;
-			
-			var matTX:int = eX * 45 + 69;
-			var matTY:int = eY * 45 + 70 + 22;
-			
-			tooltip.SetText(TrophyHelper.GetTrophyName(eY * 6 + eX) + " (" + (TrophyHelper.HasTrophy(eY*6+eX)?"Unl":"L") +"ocked)\n\n" + TrophyHelper.GetTrophyDescription(eY * 6 + eX));
-			
-			if (eX < 3) {
-				tooltip.ChangeDirection(Tooltip.RIGHT);
-			} else {
+			tracking = true;
+			mouseMove(me);
+		}
+		
+		public function mouseMove(me:MouseEvent):void {
+			if(tracking) {
+				var eX:int = me.localX / 45;
+				var eY:int = me.localY / 45;
+				
+				var matTX:int = eX * 45;
+				var matTY:int = eY * 45 + 22;
+				
+				tooltip.SetText(TrophyHelper.GetTrophyName(eY * 6 + eX) + " (" + (TrophyHelper.HasTrophy(eY*6+eX)?"Unl":"L") +"ocked)\n\n" + TrophyHelper.GetTrophyDescription(eY * 6 + eX));
 				tooltip.ChangeDirection(Tooltip.LEFT);
+				
+				tooltip.visible = true;
+				tooltip.x = matTX + this.x;
+				tooltip.y = matTY + this.y;
 			}
-			
-			tooltip.visible = true;
-			tooltip.x = matTX + this.x;
-			tooltip.y = matTY + this.y;
 		}
 		
 		public function rollOut(me:MouseEvent):void {
+			tracking = false;
 			tooltip.visible = false;
 		}
 		

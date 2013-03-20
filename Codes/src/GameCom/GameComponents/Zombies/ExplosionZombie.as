@@ -112,7 +112,7 @@ package GameCom.GameComponents.Zombies
 				
 				trace("ExplosionZombie Killed: " + kills);
 				
-				if (kills > 10) {
+				if (kills > 5) {
 					TrophyHelper.GotTrophyByName("Party Pooper");
 				}
 				

@@ -13,6 +13,7 @@ package GameCom.Managers {
 	import GameCom.GameComponents.Zombies.ThrowUpZombie;
 	import GameCom.GameComponents.Zombies.ZombieHand;
 	import GameCom.Helpers.AudioStore;
+	import GameCom.Helpers.ScoreHelper;
 	import LORgames.Engine.AudioController;
 	/**
 	 * ...
@@ -76,6 +77,9 @@ package GameCom.Managers {
 			var i:int;
 			var cls:Class;
 			
+			SPAWN_TIMEOUT -= dt * 7 / 15000;
+			if (SPAWN_TIMEOUT < 0.1) SPAWN_TIMEOUT = 0.1;
+			
 			if (Math.random() < 0.015) {
 				AudioController.PlaySound(AudioStore.GetZombieSound());
 			}
@@ -84,7 +88,7 @@ package GameCom.Managers {
 				handTimeout -= dt;
 			}
 			
-			if (totalTime > previousUpdate + SPAWN_AVAILABLE*1000) { //TODO: DIFFICULTY0
+			if (totalTime > previousUpdate + SPAWN_AVAILABLE*1000) {
 				if (SpawnList.length == 0) {
 					//Spawning a random one
 					if(UnusedZombies.length < 100) {
@@ -93,11 +97,6 @@ package GameCom.Managers {
 				} else {
 					//Spawn from the list
 					cls = (SpawnList.pop() as Class);
-					
-					if (SpawnList.length == 0) {
-						SPAWN_TIMEOUT = 0.05;
-						SPAWN_AVAILABLE = 2.0;
-					}
 				}
 				
 				UnusedZombies.push(new cls());
@@ -122,7 +121,7 @@ package GameCom.Managers {
 				
 				UsedZombies.push(zombie);
 				
-				spawnTimeout = SPAWN_TIMEOUT; //TODO: DIFFICULTY 1
+				spawnTimeout = SPAWN_TIMEOUT;
 				
 				break;
 			}

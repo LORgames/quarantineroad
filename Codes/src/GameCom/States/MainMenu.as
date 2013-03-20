@@ -8,8 +8,8 @@ package GameCom.States {
 	import flash.text.TextFormat;
 	import flash.text.TextFieldAutoSize;
 	import GameCom.Helpers.AudioStore;
+	import GameCom.Helpers.InstructionsHelper;
 	import GameCom.Helpers.MenuBackgroundHelper;
-	import GameCom.Helpers.MenuDoorHelper;
 	import GameCom.SystemComponents.TrophyMenu;
 	import GameCom.SystemMain;
 	import flash.display.Bitmap;
@@ -36,15 +36,13 @@ package GameCom.States {
 		private var background:Sprite = new Sprite();
 		
 		private var StartBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Start Button.png"), ThemeManager.Get("Interface/Start Button Mouse Over.png"));
-		private var TrophiesBtn:BitmapButton = new BitmapButton(211, 59, ThemeManager.Get("Interface/Trophies Button.png"), ThemeManager.Get("Interface/Trophies Button Mouse Over.png"));
 		private var WebsiteText:Button = new Button("WEBSITE", 200, 20, 10, null, true);
 		
 		private var mbh:MenuBackgroundHelper = new MenuBackgroundHelper();
-		private var mdh:MenuDoorHelper = new MenuDoorHelper();
-		
 		private var tooltip:Tooltip = new Tooltip("", Tooltip.UP, 20, 175);
 		
 		private var trophies:TrophyMenu = new TrophyMenu(tooltip);
+		private var instructions:InstructionsHelper = new InstructionsHelper();
 		
 		public function MainMenu() {
 			//Just make sure we're ready to do this...
@@ -56,40 +54,26 @@ package GameCom.States {
 			removeEventListener(Event.ADDED_TO_STAGE, Init);
 			
 			this.addChild(mbh);
-			
-			this.addChild(trophies);
-			
 			this.addChild(background);
-			background.mouseEnabled = false;
+			this.addChild(trophies);
 			
 			//Start Menu
 			StartBtn.addEventListener(MouseEvent.CLICK, PlayFunc, false, 0, true);
 			this.addChild(StartBtn);
 			
-			TrophiesBtn.addEventListener(MouseEvent.CLICK, TropiesFunc, false, 0, true);
-			this.addChild(TrophiesBtn);
-			
 			WebsiteText.addEventListener(MouseEvent.CLICK, WebsiteFunc, false, 0, true);
 			this.addChild(WebsiteText);
 			
-			this.addChild(mdh);
-			
 			this.addChild(tooltip);
+			this.addChild(instructions);
 			
 			this.stage.addEventListener(Event.RESIZE, Resized, false, 0, true);
 			Resized();
 		}
 		
 		public function PlayFunc(e:MouseEvent):void {
-			if (mdh.parent == this) mdh.CleanUp();
-			
 			AudioController.PlaySound(AudioStore.MenuClick);
 			SystemMain.instance.StateTo(new GameScreen());
-		}
-		
-		public function TropiesFunc(e:MouseEvent):void {
-			AudioController.PlaySound(AudioStore.MenuClick);
-			mdh.Switch();
 		}
 		
 		public function WebsiteFunc(e:MouseEvent):void {
@@ -100,7 +84,7 @@ package GameCom.States {
 		public function Resized(e:Event = null):void {
 			if (!this.stage) return;
 			
-			var bmp:BitmapData = ThemeManager.Get("Interface/Menu.png");
+			var bmp:BitmapData = ThemeManager.Get("Interface/NewMenu.png");
 			var mat:Matrix = new Matrix(1, 0, 0, 1, (stage.stageWidth - bmp.width) / 2, (stage.stageHeight - bmp.height) / 2);
 			
 			background.graphics.clear();
@@ -108,32 +92,21 @@ package GameCom.States {
 			background.graphics.drawRect((stage.stageWidth - bmp.width) / 2, (stage.stageHeight - bmp.height) / 2, bmp.width, bmp.height);
 			background.graphics.endFill();
 			
-			StartBtn.x = mat.tx + 39;
-			StartBtn.y = mat.ty + 395;
-			
-			TrophiesBtn.x = mat.tx + 251;
-			TrophiesBtn.y = mat.ty + 395;
+			StartBtn.x = mat.tx + 0;
+			StartBtn.y = mat.ty + 223
+			;
 			
 			WebsiteText.x = (stage.stageWidth-WebsiteText.width) / 2;
 			WebsiteText.y = mat.ty + 5;
 			
-			mdh.x = mat.tx;
-			mdh.y = mat.ty;
+			trophies.x = mat.tx + 213;
+			trophies.y = mat.ty + 35;
+			
+			instructions.x = mat.tx + 302;
+			instructions.y = mat.ty + 303;
 			
 			mbh.x = mat.tx;
 			mbh.y = mat.ty;
-		}
-		
-		public function MouseOverText(e:MouseEvent):void {
-			var textField:TextField = e.currentTarget as TextField;
-			
-			textField.filters = new Array(new GlowFilter(0x337C8C));
-		}
-		
-		public function MouseOutText(e:MouseEvent):void {
-			var textField:TextField = e.currentTarget as TextField;
-			
-			textField.filters = new Array();
 		}
 		
 	}
