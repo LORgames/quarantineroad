@@ -141,19 +141,19 @@ package GameCom.States {
 			//Add to the totals
 			Stats.AddValue("TotalScore", ScoreHelper.Score.Value);
 			Stats.AddValue("TotalDistance", ScoreHelper.Distance.Value);
-			Stats.AddValue("TotalTime", ScoreHelper.Time.Value);
+			Stats.AddValue("TotalTime", ScoreHelper.Time.Value*100);
 			
 			Stats.AddValue("TotalKills", ScoreHelper.AllKills.Value);
 			Stats.AddValue("MeleeKills", ScoreHelper.MeleeKills.Value);
 			Stats.AddValue("ShakeyKills", ScoreHelper.ShakeyKills.Value);
 			
-			Stats.AddValue("SlowKills", ScoreHelper.SlowKills.Value);
-			Stats.AddValue("LimpKills", ScoreHelper.LimpKills.Value);
-			Stats.AddValue("BlueKills", ScoreHelper.BlueKills.Value);
-			Stats.AddValue("RedKills", ScoreHelper.RedKills.Value);
-			Stats.AddValue("HulkKills", ScoreHelper.HulkKills.Value);
-			Stats.AddValue("ExplosiveKills", ScoreHelper.ExplosiveKills.Value);
-			Stats.AddValue("ThrowUpKills", ScoreHelper.ThrowUpKills.Value);
+			Stats.AddValue("SlowKillsTotal", ScoreHelper.SlowKills.Value);
+			Stats.AddValue("LimpKillsTotal", ScoreHelper.LimpKills.Value);
+			Stats.AddValue("BlueKillsTotal", ScoreHelper.BlueKills.Value);
+			Stats.AddValue("RedKillsTotal", ScoreHelper.RedKills.Value);
+			Stats.AddValue("HulkKillsTotal", ScoreHelper.HulkKills.Value);
+			Stats.AddValue("ExplosiveKillsTotal", ScoreHelper.ExplosiveKills.Value);
+			Stats.AddValue("ThrowUpKillsTotal", ScoreHelper.ThrowUpKills.Value);
 			
 			//PROCESS ACHIEVEMENTS
 			if (ScoreHelper.MeleeKills.Value == 0) TrophyHelper.GotTrophyByName("Don't Bite Me Bro");

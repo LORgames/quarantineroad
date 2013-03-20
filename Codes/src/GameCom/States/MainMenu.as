@@ -10,6 +10,7 @@ package GameCom.States {
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.InstructionsHelper;
 	import GameCom.Helpers.MenuBackgroundHelper;
+	import GameCom.Helpers.StatsScreen;
 	import GameCom.SystemComponents.TrophyMenu;
 	import GameCom.SystemMain;
 	import flash.display.Bitmap;
@@ -43,6 +44,7 @@ package GameCom.States {
 		
 		private var trophies:TrophyMenu = new TrophyMenu(tooltip);
 		private var instructions:InstructionsHelper = new InstructionsHelper();
+		private var stats:StatsScreen = new StatsScreen();
 		
 		public function MainMenu() {
 			//Just make sure we're ready to do this...
@@ -66,6 +68,7 @@ package GameCom.States {
 			
 			this.addChild(tooltip);
 			this.addChild(instructions);
+			this.addChild(stats);
 			
 			this.stage.addEventListener(Event.RESIZE, Resized, false, 0, true);
 			Resized();
@@ -93,8 +96,7 @@ package GameCom.States {
 			background.graphics.endFill();
 			
 			StartBtn.x = mat.tx + 0;
-			StartBtn.y = mat.ty + 223
-			;
+			StartBtn.y = mat.ty + 223;
 			
 			WebsiteText.x = (stage.stageWidth-WebsiteText.width) / 2;
 			WebsiteText.y = mat.ty + 5;
@@ -104,6 +106,9 @@ package GameCom.States {
 			
 			instructions.x = mat.tx + 302;
 			instructions.y = mat.ty + 303;
+			
+			stats.x = mat.tx + 8;
+			stats.y = mat.ty + 307;
 			
 			mbh.x = mat.tx;
 			mbh.y = mat.ty;

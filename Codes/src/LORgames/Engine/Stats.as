@@ -66,6 +66,10 @@ package LORgames.Engine {
 			return Storage.GetAsInt(statname, defaultValue);
 		}
 		
+		public static function GetString(statname:String, defaultValue:int = 0):String {
+			return GetInt(statname, defaultValue).toString();
+		}
+		
 		public static function StartLevel():void {
 			statServer.StartLevel();
 			AddOne("Gameplays");

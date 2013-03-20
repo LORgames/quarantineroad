@@ -95,7 +95,7 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			if (!collected) {
 				collected = true;
-				TrophyToast.I.AddWeaponPickup("Chain Lightning", ThemeManager.Get("WeaponIcons/w11_chain_lightning.png"));
+				TrophyToast.I.AddWeaponPickup("Tesla Rifle", ThemeManager.Get("WeaponIcons/w11_chain_lightning.png"));
 			}
 		}
 		
