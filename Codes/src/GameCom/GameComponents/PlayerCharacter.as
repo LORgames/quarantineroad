@@ -155,7 +155,15 @@ package GameCom.GameComponents
 				RedrawTopHalf();
 			}
 			
-			weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1.4 + body.GetPosition().y));
+			if (!weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1.4 + body.GetPosition().y))) {
+				//Run out of ammo
+				weapons[activeWeapon].Deactivate();
+				activeWeapon = 0;
+				weapons[activeWeapon].Activate();
+				
+				GUIManager.I.RedrawWeapons();
+				RedrawTopHalf();
+			}
 			
 			var xSpeed:Number = 0;
 			var ySpeed:Number = 0;

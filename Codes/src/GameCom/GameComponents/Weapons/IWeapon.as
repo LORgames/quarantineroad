@@ -7,7 +7,7 @@ package GameCom.GameComponents.Weapons {
 	 * @author Paul
 	 */
 	public interface IWeapon {
-		function Update(dt:Number, location:b2Vec2):void;
+		function Update(dt:Number, location:b2Vec2):Boolean;
 		
 		function Upgrade():void;
 		

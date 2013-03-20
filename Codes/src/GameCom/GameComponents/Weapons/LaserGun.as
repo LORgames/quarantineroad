@@ -68,7 +68,7 @@ package GameCom.GameComponents.Weapons {
 		
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
-		public function Update(dt:Number, location:b2Vec2):void {
+		public function Update(dt:Number, location:b2Vec2):Boolean {
 			if (Keys.isKeyDown(Keyboard.SPACE) && battery > 0 && collected) {
 				charge += dt;
 				
@@ -94,7 +94,7 @@ package GameCom.GameComponents.Weapons {
 					Layer.graphics.drawRect(int(pointHit.x * Global.PHYSICS_SCALE) - 2, int(pointHit.y * Global.PHYSICS_SCALE) - 20, 6, (location.y - pointHit.y) * Global.PHYSICS_SCALE);
 					Layer.graphics.endFill();
 					
-					StartNode.visible = true; StartNode.x = location.x * Global.PHYSICS_SCALE - StartNode.width/2; StartNode.y = location.y * Global.PHYSICS_SCALE - StartNode.height/2;
+					StartNode.visible = true; StartNode.x = location.x * Global.PHYSICS_SCALE - StartNode.width/2; StartNode.y = location.y * Global.PHYSICS_SCALE - StartNode.height/2 - 20;
 					EndNode.visible = true; EndNode.x = pointHit.x * Global.PHYSICS_SCALE - EndNode.width/2; EndNode.y = pointHit.y * Global.PHYSICS_SCALE - EndNode.height/2 - 20;
 					
 					StartNode.Update(dt);
@@ -114,6 +114,9 @@ package GameCom.GameComponents.Weapons {
 				StartNode.visible = false;
 				EndNode.visible = false;
 			}
+			
+			if (battery == 0) return false;
+			return true;
 		}
 		
 		private function RCCallback(fixture:b2Fixture, point:b2Vec2, normal:b2Vec2, fraction:Number):Number {

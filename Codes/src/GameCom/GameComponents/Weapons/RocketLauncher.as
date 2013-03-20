@@ -37,7 +37,7 @@ package GameCom.GameComponents.Weapons {
 		
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
-		public function Update(dt:Number, location:b2Vec2):void {
+		public function Update(dt:Number, location:b2Vec2):Boolean {
 			if (fireTime > FIRE_RATE) {
 				if(Keys.isKeyDown(32) && grenades > 0) {
 					fireTime -= FIRE_RATE;
@@ -54,6 +54,9 @@ package GameCom.GameComponents.Weapons {
 			} else {
 				fireTime += dt;
 			}
+			
+			if (grenades == 0) return false;
+			return true;
 		}
 		
 		public function Upgrade():void {

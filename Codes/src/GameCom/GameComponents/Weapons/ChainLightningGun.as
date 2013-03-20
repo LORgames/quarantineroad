@@ -50,7 +50,7 @@ package GameCom.GameComponents.Weapons {
 		
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
-		public function Update(dt:Number, location:b2Vec2):void {
+		public function Update(dt:Number, location:b2Vec2):Boolean {
 			if (fireTime > FIRE_RATE) {
 				if (battery > 0 && Keys.isKeyDown(32) && collected) {
 					fireTime -= FIRE_RATE;
@@ -82,6 +82,10 @@ package GameCom.GameComponents.Weapons {
 			}
 			
 			lightning.Update(dt);
+			
+			if (battery == 0) return false;
+			
+			return true;
 		}
 		
 		public function QueryZombie(fixture:b2Fixture):Boolean {
