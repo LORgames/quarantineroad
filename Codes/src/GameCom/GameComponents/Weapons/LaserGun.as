@@ -16,6 +16,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
+	import LORgames.Engine.Stats;
 	/**
 	 * ...
 	 * @author Paul
@@ -37,6 +38,8 @@ package GameCom.GameComponents.Weapons {
 		
 		private var collected:Boolean = false;
 		private var upgraded:Boolean = false;
+		
+		private var totalKills:int = 0;
 		
 		private var battery:Number = 5;
 		
@@ -98,7 +101,9 @@ package GameCom.GameComponents.Weapons {
 					
 					if(objectHit != null) {
 						if (objectHit.GetUserData() is IZombie) {
-							(objectHit.GetUserData() as IZombie).Hit(0.25);
+							if ((objectHit.GetUserData() as IZombie).Hit(0.25)) {
+								totalKills++;
+							}
 						}
 					}
 				}
@@ -197,7 +202,12 @@ package GameCom.GameComponents.Weapons {
 			return null;
 		}
 		
-		public function ReportKills(newKills:int):void {}
+		public function ReportKills(newKills:int):void { }
+		
+		public function ReportStatistics():void {
+			Stats.SetHighestInt("LaserKillsHigh", totalKills);
+			Stats.AddValue("LaserKillsTotal", totalKills);
+		}
 	}
 
 }

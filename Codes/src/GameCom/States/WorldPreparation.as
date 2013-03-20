@@ -45,14 +45,16 @@ package GameCom.States {
 			removeEventListener(Event.ADDED_TO_STAGE, Init);
 			
 			//Start Menu
+			PercentageText.embedFonts = true;
 			PercentageText.selectable = false;
-			PercentageText.defaultTextFormat = new TextFormat("Verdana", 40, 0xFFFFFF);
+			PercentageText.defaultTextFormat = new TextFormat("Visitor", 40, 0xFFFFFF);
 			PercentageText.autoSize = TextFieldAutoSize.CENTER;
 			PercentageText.text = "0.00%";
 			this.addChild(PercentageText);
 			
+			DisplayText.embedFonts = true;
 			DisplayText.selectable = false;
-			DisplayText.defaultTextFormat = new TextFormat("Verdana", 16, 0xFFFFFF);
+			DisplayText.defaultTextFormat = new TextFormat("Visitor", 16, 0xFFFFFF);
 			DisplayText.autoSize = TextFieldAutoSize.CENTER;
 			DisplayText.text = "Preparing Assets...";
 			this.addChild(DisplayText);

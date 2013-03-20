@@ -52,13 +52,15 @@ package {
 			loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioError);
 			
 			// Show the Loader
+			DisplayText.embedFonts = true;
 			PercentageText.selectable = false;
-			PercentageText.defaultTextFormat = new TextFormat("Verdana", 40, 0xFFFFFF);
+			PercentageText.defaultTextFormat = new TextFormat("Visitor", 40, 0xFFFFFF);
 			PercentageText.autoSize = TextFieldAutoSize.CENTER;
 			PercentageText.text = "0.00%";
 			this.addChild(PercentageText);
 			
-			DisplayText.defaultTextFormat = new TextFormat("Verdana", 16, 0xFFFFFF);
+			DisplayText.embedFonts = true;
+			DisplayText.defaultTextFormat = new TextFormat("Visitor", 16, 0xFFFFFF);
 			DisplayText.autoSize = TextFieldAutoSize.CENTER;
 			DisplayText.selectable = false;
 			this.addChild(DisplayText);

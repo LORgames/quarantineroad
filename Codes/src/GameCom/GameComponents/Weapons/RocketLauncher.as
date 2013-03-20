@@ -12,6 +12,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
+	import LORgames.Engine.Stats;
 	/**
 	 * ...
 	 * @author Paul
@@ -61,7 +62,7 @@ package GameCom.GameComponents.Weapons {
 				TrophyToast.I.AddWeaponPickup("Grenade Launcher", ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png"));
 				collected = true;
 			} else if (!upgraded) {
-				TrophyToast.I.AddWeaponPickup("Rocket Poop", ThemeManager.Get("WeaponIcons/w15_rocketpoop.png"));
+				TrophyToast.I.AddWeaponPickup("Rocket Launcher", ThemeManager.Get("WeaponIcons/w15_rocketpoop.png"));
 				upgraded = true;
 			}
 		}
@@ -121,6 +122,11 @@ package GameCom.GameComponents.Weapons {
 			if (totalKills >= 100) {
 				TrophyHelper.GotTrophyByName("Fire in the Hole");
 			}
+		}
+		
+		public function ReportStatistics():void {
+			Stats.SetHighestInt("RocketKillsHigh", totalKills);
+			Stats.AddValue("RocketKillsTotal", totalKills);
 		}
 		
 	}

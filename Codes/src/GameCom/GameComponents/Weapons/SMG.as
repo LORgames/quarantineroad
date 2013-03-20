@@ -13,6 +13,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
+	import LORgames.Engine.Stats;
 	/**
 	 * ...
 	 * @author Paul
@@ -138,6 +139,11 @@ package GameCom.GameComponents.Weapons {
 			if (totalKills > 100) {
 				TrophyHelper.GotTrophyByName("Spray and Prey");
 			}
+		}
+		
+		public function ReportStatistics():void {
+			Stats.SetHighestInt("SMGKillsHigh", totalKills);
+			Stats.AddValue("SMGKillsTotal", totalKills);
 		}
 		
 	}

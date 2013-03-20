@@ -11,6 +11,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
+	import LORgames.Engine.Stats;
 	/**
 	 * ...
 	 * @author Paul
@@ -24,6 +25,8 @@ package GameCom.GameComponents.Weapons {
 		public var FIRE_RATE:Number = 1.0;
 		public var fireTime:Number = 0;
 		private var bullets:int = 20;
+		
+		private var totalKills:int = 0;
 		
 		public function Sniper(body:b2Body) {
 			AddSafe(body);
@@ -102,7 +105,14 @@ package GameCom.GameComponents.Weapons {
 			return null;
 		}
 		
-		public function ReportKills(newKills:int):void { }
+		public function ReportKills(newKills:int):void {
+			totalKills += newKills;
+		}
+		
+		public function ReportStatistics():void {
+			Stats.SetHighestInt("SniperKillsHigh", totalKills);
+			Stats.AddValue("SniperKillsTotal", totalKills);
+		}
 		
 	}
 

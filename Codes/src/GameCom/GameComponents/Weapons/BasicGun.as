@@ -10,9 +10,11 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
+	import GameCom.SystemComponents.Stat;
 	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
+	import LORgames.Engine.Stats;
 	/**
 	 * ...
 	 * @author Paul
@@ -21,6 +23,8 @@ package GameCom.GameComponents.Weapons {
 		private var MAX_AMMO:int = int.MAX_VALUE; //LOLOLOLOL TOO MANY AMMO.
 		
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
+		
+		private var totalKills:int = 0;
 		
 		public var isUpgraded:Boolean = false;
 		public var FIRE_RATE:Number = 0.4;
@@ -115,7 +119,14 @@ package GameCom.GameComponents.Weapons {
 			return null;
 		}
 		
-		public function ReportKills(newKills:int):void {}
+		public function ReportKills(newKills:int):void {
+			totalKills += newKills;
+		}
+		
+		public function ReportStatistics():void {
+			Stats.SetHighestInt("PistolKillsHigh", totalKills);
+			Stats.AddValue("PistolKillsTotal", totalKills);
+		}
 		
 	}
 

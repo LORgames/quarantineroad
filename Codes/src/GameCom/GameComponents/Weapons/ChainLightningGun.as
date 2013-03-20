@@ -20,6 +20,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
+	import LORgames.Engine.Stats;
 	/**
 	 * ...
 	 * @author Paul
@@ -162,6 +163,11 @@ package GameCom.GameComponents.Weapons {
 			if (totalKills > 100) {
 				TrophyHelper.GotTrophyByName("Tesla's Pride");
 			}
+		}
+		
+		public function ReportStatistics():void {
+			Stats.SetHighestInt("LightningKillsHigh", totalKills);
+			Stats.AddValue("LightningKillsTotal", totalKills);
 		}
 		
 	}

@@ -9,6 +9,7 @@ package GameCom.States {
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Helpers.TrophyHelper;
+	import GameCom.Managers.GUIManager;
 	import GameCom.SystemMain;
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -118,8 +119,8 @@ package GameCom.States {
 			//Update highscores
 			trace("Time: " + ScoreHelper.Time.Value);
 			Stats.SetHighestInt("HighestScore", ScoreHelper.Score.Value);
-			Stats.SetHighestNumber("HighestDistance", ScoreHelper.Distance.Value);
-			Stats.SetHighestNumber("LongestTime", ScoreHelper.Time.Value);
+			Stats.SetHighestInt("HighestDistance", ScoreHelper.Distance.Value);
+			Stats.SetHighestInt("LongestTime", ScoreHelper.Time.Value*100);
 			
 			Stats.SetHighestInt("TotalKillsHigh", ScoreHelper.AllKills.Value);
 			Stats.SetHighestInt("MeleeKillsHigh", ScoreHelper.MeleeKills.Value);
@@ -132,6 +133,10 @@ package GameCom.States {
 			Stats.SetHighestInt("HulkKillsHigh", ScoreHelper.HulkKills.Value);
 			Stats.SetHighestInt("ExplosiveKillsHigh", ScoreHelper.ExplosiveKills.Value);
 			Stats.SetHighestInt("ThrowUpKillsHigh", ScoreHelper.ThrowUpKills.Value);
+			
+			for (var i:int = 0; i < GUIManager.I.Weapons.length; i++) {
+				GUIManager.I.Weapons[i].Weapon.ReportStatistics();
+			}
 			
 			//Add to the totals
 			Stats.AddValue("TotalScore", ScoreHelper.Score.Value);
