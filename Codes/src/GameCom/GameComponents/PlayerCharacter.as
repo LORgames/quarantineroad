@@ -128,22 +128,30 @@ package GameCom.GameComponents
 			
 			if (activeWeapon == -1) activeWeapon = 0;
 			
-			if (Keys.isKeyDown(Keyboard.NUMBER_1)) {
+			if (Keys.isKeyDown(Keyboard.NUMBER_1) || Keys.isKeyDown(Keyboard.NUMPAD_1)) {
 				newEquipedWeapon = 0; // Pistols
-			} else if (Keys.isKeyDown(Keyboard.NUMBER_2)) {
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_2) || Keys.isKeyDown(Keyboard.NUMPAD_2)) {
 				newEquipedWeapon = 1; // SMGs
-			} else if (Keys.isKeyDown(Keyboard.NUMBER_3)) {
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_3) || Keys.isKeyDown(Keyboard.NUMPAD_3)) {
 				newEquipedWeapon = 2; // Shotguns
-			} else if (Keys.isKeyDown(Keyboard.NUMBER_4)) {
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_4) || Keys.isKeyDown(Keyboard.NUMPAD_4)) {
 				newEquipedWeapon = 3; // Sniper
-			} else if (Keys.isKeyDown(Keyboard.NUMBER_5)) {
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_5) || Keys.isKeyDown(Keyboard.NUMPAD_5)) {
 				newEquipedWeapon = 4; // Laser
-			} else if (Keys.isKeyDown(Keyboard.NUMBER_6)) {
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_6) || Keys.isKeyDown(Keyboard.NUMPAD_6)) {
 				newEquipedWeapon = 5; // Chain Lightning
-			} else if (Keys.isKeyDown(Keyboard.NUMBER_7)) {
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_7) || Keys.isKeyDown(Keyboard.NUMPAD_7)) {
 				newEquipedWeapon = 6; // Flamethrower
-			} else if (Keys.isKeyDown(Keyboard.NUMBER_8)) {
+			} else if (Keys.isKeyDown(Keyboard.NUMBER_8) || Keys.isKeyDown(Keyboard.NUMPAD_8)) {
 				newEquipedWeapon = 7; // Rocket Launcher
+			}
+			
+			if (Keys.isKeyDown(Keyboard.Q) || Keys.isKeyDown(Keyboard.NUMBER_0)) {
+				newEquipedWeapon--;
+				if (newEquipedWeapon < 0) newEquipedWeapon = 7;
+			} else if (Keys.isKeyDown(Keyboard.E) || Keys.isKeyDown(Keyboard.PERIOD)) {
+				newEquipedWeapon++;
+				if (newEquipedWeapon > 7) newEquipedWeapon = 0;
 			}
 			
 			if (newEquipedWeapon != activeWeapon && weapons[newEquipedWeapon].GetIcon() != null) {

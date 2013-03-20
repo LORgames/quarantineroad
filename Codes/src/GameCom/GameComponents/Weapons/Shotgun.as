@@ -4,6 +4,7 @@ package GameCom.GameComponents.Weapons {
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.BitmapData;
+	import flash.ui.Keyboard;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.TrophyHelper;
@@ -42,7 +43,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Update(dt:Number, location:b2Vec2):Boolean {
 			if (fireTime > FIRE_RATE) {
-				if(Keys.isKeyDown(32) && collected) {
+				if((Keys.isKeyDown(Keyboard.SPACE) || Keys.isKeyDown(Keyboard.NUMPAD_ENTER)) && collected) {
 					if(shells > 0) {
 						AudioController.PlaySound(AudioStore.GetShotgunFireSound());
 						

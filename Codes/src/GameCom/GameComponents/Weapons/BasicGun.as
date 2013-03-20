@@ -4,6 +4,7 @@ package GameCom.GameComponents.Weapons {
 	import Box2D.Dynamics.b2Fixture;
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.BitmapData;
+	import flash.ui.Keyboard;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Projectiles.SniperBullet;
 	import GameCom.Helpers.AudioStore;
@@ -40,7 +41,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Update(dt:Number, location:b2Vec2):Boolean {
 			if (fireTime > FIRE_RATE) {
-				if(Keys.isKeyDown(32)) {
+				if(Keys.isKeyDown(Keyboard.SPACE) || Keys.isKeyDown(Keyboard.NUMPAD_ENTER)) {
 					fireTime -= FIRE_RATE;
 					
 					if(firedLeft || !isUpgraded) {

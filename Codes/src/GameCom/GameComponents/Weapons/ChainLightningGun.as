@@ -10,6 +10,7 @@ package GameCom.GameComponents.Weapons {
 	import flash.display.Sprite;
 	import flash.events.WeakFunctionClosure;
 	import flash.geom.Point;
+	import flash.ui.Keyboard;
 	import GameCom.GameComponents.Decorations.Lightning;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Zombies.IZombie;
@@ -52,7 +53,7 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Update(dt:Number, location:b2Vec2):Boolean {
 			if (fireTime > FIRE_RATE) {
-				if (battery > 0 && Keys.isKeyDown(32) && collected) {
+				if (battery > 0 && (Keys.isKeyDown(Keyboard.SPACE) || Keys.isKeyDown(Keyboard.NUMPAD_ENTER)) && collected) {
 					fireTime -= FIRE_RATE;
 					
 					fried = new Vector.<IZombie>();
