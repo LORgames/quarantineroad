@@ -117,7 +117,7 @@ package GameCom.States {
 			//////////////////////////////////////////////////////////////////////////////////////////
 			
 			//Update highscores
-			trace("Time: " + ScoreHelper.Time.Value);
+			Storage.DisableSave();
 			Stats.SetHighestInt("HighestScore", ScoreHelper.Score.Value);
 			Stats.SetHighestInt("HighestDistance", ScoreHelper.Distance.Value);
 			Stats.SetHighestInt("LongestTime", ScoreHelper.Time.Value*100);
@@ -154,6 +154,8 @@ package GameCom.States {
 			Stats.AddValue("HulkKillsTotal", ScoreHelper.HulkKills.Value);
 			Stats.AddValue("ExplosiveKillsTotal", ScoreHelper.ExplosiveKills.Value);
 			Stats.AddValue("ThrowUpKillsTotal", ScoreHelper.ThrowUpKills.Value);
+			Storage.EnableSave();
+			Storage.Save();
 			
 			//PROCESS ACHIEVEMENTS
 			if (ScoreHelper.MeleeKills.Value == 0) TrophyHelper.GotTrophyByName("Don't Bite Me Bro");

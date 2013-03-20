@@ -172,18 +172,6 @@ package GameCom.GameComponents
 				xSpeed = 1.5;
 			}
 			
-			if (Keys.isKeyDown(Keyboard.O)) {
-				for (var index:int = 0 ; index < weapons.length; index++) {
-					if (weapons[index].GetUpgradeIcon() != null) {
-						weapons[index].Upgrade();
-					}
-					
-					weapons[index].AddAmmo();
-				}
-				
-				RedrawTopHalf();
-			}
-			
 			if (xSpeed != 0 || ySpeed != 0) {
 				animation.Update(dt);
 			}

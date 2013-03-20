@@ -28,7 +28,9 @@ package GameCom.GameComponents.Loot {
 			var bmpd:BitmapData;
 			
 			if (Math.random() < 0.33) {
-				if(Math.random() > 0.5) {
+				pickedUP = true;
+				
+				if(Math.random() > 0.8) {
 					LootManager.I.SpawnAmmoAt(location);
 				} else {
 					LootManager.I.SpawnHealthAt(location);
@@ -70,14 +72,14 @@ package GameCom.GameComponents.Loot {
 		}
 		
 		public override function Pickup(equipment:Vector.<IWeapon>, player:PlayerCharacter):void {
+			//Apply trophies
+			if(equipment[type].GetIcon() != null) TrophyHelper.GotTrophyByName("Upgrade");
+			
 			equipment[type].Upgrade();
 			equipment[type].AddAmmo();
 			
 			GUIManager.I.RedrawWeapons();
 			player.RedrawTopHalf();
-			
-			//Apply trophies
-			TrophyHelper.GotTrophyByName("Upgrade");
 			
 			ScoreHelper.TotalUpgrades.AddValue(1);
 			if (ScoreHelper.TotalUpgrades.Value == 11) {

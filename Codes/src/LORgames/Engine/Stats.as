@@ -21,6 +21,7 @@ package LORgames.Engine {
 		public static function AddOne(statname:String):void {
 			var stat:int = Storage.GetAsInt(statname, 0);
 			stat++;
+			
 			Storage.Set(statname, stat);
 			
 			statServer.Submit(statname, stat);
@@ -78,7 +79,6 @@ package LORgames.Engine {
 		public static function EndLevel():void {
 			statServer.EndLevel();
 		}
-		
 	}
 
 }

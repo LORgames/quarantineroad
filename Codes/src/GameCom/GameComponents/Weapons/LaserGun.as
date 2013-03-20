@@ -72,7 +72,7 @@ package GameCom.GameComponents.Weapons {
 			if (Keys.isKeyDown(Keyboard.SPACE) && battery > 0 && collected) {
 				charge += dt;
 				
-				location.SubtractXY(0, 1);
+				location.SubtractXY(0.1, 0);
 				
 				if (charge > CHARGE_TIME) {
 					charge = CHARGE_TIME;
@@ -91,7 +91,7 @@ package GameCom.GameComponents.Weapons {
 					if (upgraded) Layer.graphics.beginBitmapFill(ThemeManager.Get("bullets/Laser10.png"), new Matrix(1, 0, 0, 1, int(location.x * Global.PHYSICS_SCALE) - 3, 0));
 					else Layer.graphics.beginBitmapFill(ThemeManager.Get("bullets/Laser00.png"), new Matrix(1, 0, 0, 1, int(location.x * Global.PHYSICS_SCALE) - 3, 0));
 					
-					Layer.graphics.drawRect(int(pointHit.x * Global.PHYSICS_SCALE) - 2, int(pointHit.y * Global.PHYSICS_SCALE) - 20, 6, (location.y - pointHit.y) * Global.PHYSICS_SCALE + 20);
+					Layer.graphics.drawRect(int(pointHit.x * Global.PHYSICS_SCALE) - 2, int(pointHit.y * Global.PHYSICS_SCALE) - 20, 6, (location.y - pointHit.y) * Global.PHYSICS_SCALE);
 					Layer.graphics.endFill();
 					
 					StartNode.visible = true; StartNode.x = location.x * Global.PHYSICS_SCALE - StartNode.width/2; StartNode.y = location.y * Global.PHYSICS_SCALE - StartNode.height/2;

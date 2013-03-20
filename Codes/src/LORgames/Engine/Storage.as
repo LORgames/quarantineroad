@@ -12,6 +12,8 @@ package LORgames.Engine {
 		private static var storageArray:Array = new Array();
 		private static var settingsArray:Array = new Array();
 		
+		private static var saveEnabled:Boolean = true;
+		
 		private static var mb:MessageBox;
 		
 		private static function Initialize():void {
@@ -85,6 +87,8 @@ package LORgames.Engine {
 		}
 
         public static function Save():void {
+			if (!saveEnabled) return;
+			
 			if (storageObject == null) {
 				return;
 			}
@@ -151,6 +155,13 @@ package LORgames.Engine {
 			return defaultValue;
 		}
 		
+		public static function EnableSave():void {
+			saveEnabled = true;
+		}
+		
+		public static function DisableSave():void {
+			saveEnabled = false;
+		}
 	}
 
 }
