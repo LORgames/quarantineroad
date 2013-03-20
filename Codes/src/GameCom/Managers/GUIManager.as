@@ -37,7 +37,8 @@ package GameCom.Managers {
 		public var Hearts:HeartBar = new HeartBar();
 		public var Score:TextField = new TextField();
 		
-		private var ScoreValue:int = 0;
+		public var DistanceTF:TextField = new TextField();
+		public var TimeTF:TextField = new TextField();
 		
 		private var MuteButton:Button = new Button("Mute", 20, 20, 6);
 		
@@ -54,12 +55,28 @@ package GameCom.Managers {
 			this.addChild(Hearts);
 			
 			Score.embedFonts = true;
-			Score.defaultTextFormat = new TextFormat("Visitor", 20, 0xFFFFFF);
+			Score.defaultTextFormat = new TextFormat("Visitor", 24, 0xFFFFFF);
 			Score.filters = new Array(new GlowFilter(0x0, 1, 7, 7, 3));
 			Score.text = "";
 			Score.autoSize = TextFieldAutoSize.LEFT;
 			Score.selectable = false;
 			this.addChild(Score);
+			
+			DistanceTF.embedFonts = true;
+			DistanceTF.defaultTextFormat = new TextFormat("Visitor", 12, 0xFFFFFF);
+			DistanceTF.filters = new Array(new GlowFilter(0x0, 1, 7, 7, 3));
+			DistanceTF.text = "";
+			DistanceTF.autoSize = TextFieldAutoSize.RIGHT;
+			DistanceTF.selectable = false;
+			this.addChild(DistanceTF);
+			
+			TimeTF.embedFonts = true;
+			TimeTF.defaultTextFormat = new TextFormat("Visitor", 12, 0xFFFFFF);
+			TimeTF.filters = new Array(new GlowFilter(0x0, 1, 7, 7, 3));
+			TimeTF.text = "";
+			TimeTF.autoSize = TextFieldAutoSize.LEFT;
+			TimeTF.selectable = false;
+			this.addChild(TimeTF);
 			
 			this.addChild(MuteButton);
 			MuteButton.addEventListener(MouseEvent.CLICK, MuteClicked, false, 0, true);
@@ -72,9 +89,16 @@ package GameCom.Managers {
 			if (stage == null) return;
 			
 			Score.text = ScoreHelper.Score.Value.toString();
-			
 			Score.x = (stage.stageWidth - Score.width) / 2;
 			Score.y = 30;
+			
+			DistanceTF.text = ScoreHelper.Distance.Value.toFixed() + " M";
+			DistanceTF.x = stage.stageWidth/2 - DistanceTF.width - 3;
+			DistanceTF.y = 55;
+			
+			TimeTF.text = ScoreHelper.Time.Value.toFixed() + " S";
+			TimeTF.x = stage.stageWidth/2 + 3;
+			TimeTF.y = 55;
 			
 			for (var i:int = 0; i < Weapons.length; i++) {
 				Weapons[i].Draw();
