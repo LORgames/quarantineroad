@@ -36,7 +36,7 @@ package GameCom.Helpers
 			//General stats
 			AddRow("Score", Stats.GetString("HighestScore"), Stats.GetString("TotalScore"));
 			AddRow("Distance", Stats.GetString("HighestDistance"), Stats.GetString("TotalDistance"));
-			AddRow("Time", Stats.GetInt("LongestTime") / 100.0 + "", Stats.GetInt("TotalTime") / 100.0 + "");
+			AddRow("Time (Seconds)", Stats.GetInt("LongestTime") / 100.0 + "", Stats.GetInt("TotalTime") / 100.0 + "");
 			
 			AddRow("All Kills", Stats.GetString("TotalKillsHigh"), Stats.GetString("TotalKills"));
 			AddRow("Melee Kills", Stats.GetString("MeleeKillsHigh"), Stats.GetString("MeleeKills"));

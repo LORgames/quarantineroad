@@ -31,7 +31,7 @@ package GameCom.Helpers
 			
 			"My name is Hurl", "Kill 25 Vomit Zombies in a single game.",
 			"Harlem Shake", "Kill 20 zombies while the screen is shaking in a single game.",
-			"Headshot", "Kill 25 zombies from more then 25m away with the sniper rifle in a single game.",
+			"Headshot", "Kill 25 zombies from more then 20m away with the sniper rifle in a single game.",
 			
 			"Brain", "Kill at least 1 of each type of zombie in a single game.",
 			"Don't Bite Me Bro", "Die without touching any zombies.",

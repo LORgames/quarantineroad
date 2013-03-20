@@ -61,7 +61,7 @@ package GameCom.GameComponents.Projectiles {
 						owner.ReportKills(1);
 					}
 					
-					if (spawnY - contact.other.GetPosition().y > 25) {
+					if (spawnY - contact.other.GetPosition().y > 20) {
 						(owner as Sniper).LongRange();
 					}
 					
