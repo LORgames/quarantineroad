@@ -5,6 +5,7 @@ package GameCom.GameComponents.Weapons {
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
+	import flash.events.WeakFunctionClosure;
 	import flash.geom.Matrix;
 	import flash.ui.Keyboard;
 	import GameCom.GameComponents.PlayerCharacter;
@@ -15,7 +16,8 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.WorldManager;
-	import GameCom.SystemComponents.TrophyToast;
+	import GameCom.SystemComponents.WeaponToast;
+	import GameCom.SystemComponents.WeaponToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	import LORgames.Engine.Stats;
@@ -133,11 +135,11 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			if (!collected) {
 				collected = true;
-				TrophyToast.I.AddWeaponPickup("Ruby Laser", ThemeManager.Get("WeaponIcons/w07_laser.png"));
+				WeaponToast.I.AddWeaponPickup("Ruby Laser", ThemeManager.Get("WeaponIcons/w07_laser.png"));
 			} else if (!upgraded) {
 				upgraded = true;
 				CHARGE_TIME = 0.1;
-				TrophyToast.I.AddWeaponPickup("Fission Laser", ThemeManager.Get("WeaponIcons/w14_laserpoop.png"));
+				WeaponToast.I.AddWeaponPickup("Fission Laser", ThemeManager.Get("WeaponIcons/w14_laserpoop.png"));
 				
 				StartNode.ChangePlayback(0.1, 2, 2);
 				EndNode.ChangePlayback(0.1, 2, 2);

@@ -11,7 +11,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
-	import GameCom.SystemComponents.TrophyToast;
+	import GameCom.SystemComponents.WeaponToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	import LORgames.Engine.Stats;
@@ -77,10 +77,10 @@ package GameCom.GameComponents.Weapons {
 				upgraded = true;
 				FIRE_RATE = 0.5;
 				GUIManager.I.RedrawWeapons();
-				TrophyToast.I.AddWeaponPickup("Combat Shotgun", ThemeManager.Get("WeaponIcons/w05_combat_shotgun.png"));
+				WeaponToast.I.AddWeaponPickup("Combat Shotgun", ThemeManager.Get("WeaponIcons/w05_combat_shotgun.png"));
 			} else {
 				collected = true;
-				TrophyToast.I.AddWeaponPickup("Shotgun", ThemeManager.Get("WeaponIcons/w04_shotgun.png"));
+				WeaponToast.I.AddWeaponPickup("Shotgun", ThemeManager.Get("WeaponIcons/w04_shotgun.png"));
 			}
 		}
 		

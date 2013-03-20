@@ -19,6 +19,7 @@ package GameCom.States {
 	import GameCom.Managers.ScenicManager;
 	import GameCom.Managers.WorldManager;
 	import GameCom.Managers.ZombieManager;
+	import GameCom.SystemComponents.PauseButton;
 	import GameCom.SystemComponents.PauseScreen;
 	import GameCom.SystemMain;
 	import LORgames.Engine.AudioController;
@@ -52,6 +53,7 @@ package GameCom.States {
 		private var loot:LootManager;
 		
 		private var pauseScreen:PauseScreen = new PauseScreen(Unpause);
+		private var pauseButton:PauseButton = new PauseButton(Pause, IsPaused);
 		
 		private var gui:GUIManager;
 		
@@ -285,7 +287,23 @@ package GameCom.States {
 			eyeLayer.graphics.drawRect( -Global.SCREEN_WIDTH / 2, 0, Global.SCREEN_WIDTH, stage.stageHeight);
 			eyeLayer.graphics.endFill();
 			
+			pauseButton.x = stage.stageWidth - pauseButton.width;
+			pauseButton.y = 0;
+			
 			GUIManager.I.Resize();
+		}
+		
+		public function Pause():void {
+			if (simulating) {
+				this.addChild(pauseScreen);
+				simulating = false;
+			} else {
+				Unpause();
+			}
+		}
+		
+		public function IsPaused():Boolean {
+			return !simulating;
 		}
 		
 		public function Unpause():void {

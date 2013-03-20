@@ -1,5 +1,4 @@
-package GameCom.SystemComponents 
-{
+package GameCom.SystemComponents {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
@@ -13,16 +12,16 @@ package GameCom.SystemComponents
 	 * ...
 	 * @author Paul
 	 */
-	public class TrophyToast extends Sprite {
+	public class WeaponToast extends Sprite {
 		private const OPENING:int = 0;
 		private const HOLDING:int = 1;
 		private const CLOSING:int = 2;
 		
-		private static var I_:TrophyToast;
+		private static var I_:WeaponToast;
 		
-		public static function get I():TrophyToast {
+		public static function get I():WeaponToast {
 			if (I_ == null) {
-				I_ = new TrophyToast();
+				I_ = new WeaponToast();
 			}
 			
 			return I_;
@@ -45,7 +44,7 @@ package GameCom.SystemComponents
 		private var item:Bitmap;
 		private var text:TextField;
 		
-		public function TrophyToast() {
+		public function WeaponToast() {
 			I_ = this;
 			this.addEventListener(Event.ADDED_TO_STAGE, Added);
 			
@@ -56,13 +55,14 @@ package GameCom.SystemComponents
 			this.removeEventListener(Event.ADDED_TO_STAGE, Added);
 			
 			this.y = 100;
+			this.x = stage.stageWidth + 20;
 			
 			item = new Bitmap();
 			item.x = 40;
 			item.y = 11;
 			
-			overlay = new Bitmap(ThemeManager.Get("Interface/achievement unlocked left side.png"));
-			underlap = new Bitmap(ThemeManager.Get("Interface/achievement unlocked right side.png"));
+			overlay = new Bitmap(ThemeManager.Get("Interface/weapon side.png"));
+			underlap = new Bitmap(ThemeManager.Get("Interface/weapon side2.png"));
 			
 			text = new TextField();
 			text.embedFonts = true;
@@ -71,10 +71,12 @@ package GameCom.SystemComponents
 			text.text = "";
 			text.autoSize = TextFieldAutoSize.CENTER;
 			text.selectable = false;
-			text.x = 17;
+			text.x = 26;
 			text.y = 59;
 			text.width = 100;
 			text.wordWrap = true;
+			
+			overlay.x = -overlay.width;
 			
 			this.addChild(tab);
 			this.addChild(overlay);
@@ -83,26 +85,28 @@ package GameCom.SystemComponents
 			tab.addChild(text);
 			tab.addChild(item);
 			
-			tab.x = -110;
+			tab.x = -30;
 			tab.y = 6;
 			
 			//Do some things.
 		}
 		
 		public function Update(e:Event):void {
+			if (!stage) return;
+			
 			if(state == HOLDING) {
-				if (direction > 0) {
-					tab.x += direction;
+				if (direction > 0) { //OPENING
+					tab.x -= direction;
 					
-					if (tab.x > 0) {
-						tab.x = 0;
+					if (tab.x < -tab.width) {
+						tab.x = -tab.width;
 						direction = 0;
 					}
 				} else if (direction < 0) {
-					tab.x += direction;
+					tab.x -= direction; //CLOSING
 					
-					if (tab.x < -110) {
-						tab.x = -110;
+					if (tab.x > -30) {
+						tab.x = -30;
 						direction = 0;
 						
 						currentlyShowing = -1;
@@ -116,16 +120,17 @@ package GameCom.SystemComponents
 					}
 				}
 			} else if (state == OPENING) {
-				this.x += 2;
-				if (this.x >= 0) {
-					this.x = 0;
+				this.x -= 2;
+				
+				if (this.x < stage.stageWidth) {
+					this.x = stage.stageWidth;
 					state = HOLDING;
 				}
 			} else if (state == CLOSING) {
-				this.x -= 2;
+				this.x += 2;
 				
-				if (this.x < -30) {
-					this.x = -30;
+				if (this.x >= stage.stageWidth + 30) {
+					this.x = stage.stageWidth + 30;
 					stage.removeEventListener(Event.ENTER_FRAME, Update);
 				}
 			}
@@ -139,7 +144,7 @@ package GameCom.SystemComponents
 					stage.addEventListener(Event.ENTER_FRAME, Update);
 					
 					item.bitmapData = messages.pop();
-					text.text = messages.pop();
+					text.htmlText = messages.pop();
 					
 					direction = 5;
 					
@@ -152,9 +157,9 @@ package GameCom.SystemComponents
 			}
 		}
 		
-		public function AddTrophy(id:int):void {
-			messages.push(TrophyHelper.GetTrophyName(id));
-			messages.push(ThemeManager.Get(TrophyHelper.GetTrophyPictureName(id)));
+		public function AddWeaponPickup(text:String, bmp:BitmapData):void {
+			messages.push(text);
+			messages.push(bmp);
 			
 			ShowNext();
 		}

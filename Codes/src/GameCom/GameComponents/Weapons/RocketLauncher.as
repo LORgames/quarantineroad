@@ -11,7 +11,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.GrenadeHelper;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
-	import GameCom.SystemComponents.TrophyToast;
+	import GameCom.SystemComponents.WeaponToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	import LORgames.Engine.Stats;
@@ -63,10 +63,10 @@ package GameCom.GameComponents.Weapons {
 		
 		public function Upgrade():void {
 			if (!collected) {
-				TrophyToast.I.AddWeaponPickup("Grenade Launcher", ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png"));
+				WeaponToast.I.AddWeaponPickup("Grenade Launcher", ThemeManager.Get("WeaponIcons/w09_grenade_launcher.png"));
 				collected = true;
 			} else if (!upgraded) {
-				TrophyToast.I.AddWeaponPickup("Rocket Launcher", ThemeManager.Get("WeaponIcons/w15_rocketpoop.png"));
+				WeaponToast.I.AddWeaponPickup("Rocket Launcher", ThemeManager.Get("WeaponIcons/w15_rocketpoop.png"));
 				upgraded = true;
 			}
 		}

@@ -13,7 +13,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
 	import GameCom.SystemComponents.Stat;
-	import GameCom.SystemComponents.TrophyToast;
+	import GameCom.SystemComponents.WeaponToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	import LORgames.Engine.Stats;
@@ -67,7 +67,7 @@ package GameCom.GameComponents.Weapons {
 			FIRE_RATE = 0.3;
 			TrophyHelper.GotTrophyByName("2 for 1");
 			
-			TrophyToast.I.AddWeaponPickup("Dual Pistols", ThemeManager.Get("WeaponIcons/w01_dual_pistol.png"));
+			WeaponToast.I.AddWeaponPickup("Dual Pistols", ThemeManager.Get("WeaponIcons/w01_dual_pistol.png"));
 		}
 		
 		public function AddAmmo():void {

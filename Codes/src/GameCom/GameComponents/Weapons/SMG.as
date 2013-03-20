@@ -11,7 +11,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.GUIManager;
-	import GameCom.SystemComponents.TrophyToast;
+	import GameCom.SystemComponents.WeaponToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	import LORgames.Engine.Stats;
@@ -67,12 +67,12 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			if (totalSMGs == 0) {
 				totalSMGs = 1;
-				TrophyToast.I.AddWeaponPickup("SMG", ThemeManager.Get("WeaponIcons/w02_smg.png"));
+				WeaponToast.I.AddWeaponPickup("SMG", ThemeManager.Get("WeaponIcons/w02_smg.png"));
 			} else {
 				totalSMGs = 2;
 				GUIManager.I.RedrawWeapons();
 				TrophyHelper.GotTrophyByName("2 for 1");
-				TrophyToast.I.AddWeaponPickup("Dual SMG", ThemeManager.Get("WeaponIcons/w03_dual_smg.png"));
+				WeaponToast.I.AddWeaponPickup("Dual SMG", ThemeManager.Get("WeaponIcons/w03_dual_smg.png"));
 			}
 		}
 		

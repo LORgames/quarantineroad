@@ -11,7 +11,8 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.AudioStore;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
-	import GameCom.SystemComponents.TrophyToast;
+	import GameCom.SystemComponents.WeaponToast;
+	import GameCom.SystemComponents.WeaponToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	import LORgames.Engine.Mousey;
@@ -59,7 +60,7 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			if (!collected) {
 				collected = true;
-				TrophyToast.I.AddWeaponPickup("Sniper Rifle", ThemeManager.Get("WeaponIcons/w06_sniper.png"));
+				WeaponToast.I.AddWeaponPickup("Sniper Rifle", ThemeManager.Get("WeaponIcons/w06_sniper.png"));
 			}
 		}
 		

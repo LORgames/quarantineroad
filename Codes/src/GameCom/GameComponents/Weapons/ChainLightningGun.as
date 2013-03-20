@@ -19,7 +19,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.WorldManager;
-	import GameCom.SystemComponents.TrophyToast;
+	import GameCom.SystemComponents.WeaponToast;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
 	import LORgames.Engine.Stats;
@@ -101,7 +101,7 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			if (!collected) {
 				collected = true;
-				TrophyToast.I.AddWeaponPickup("Tesla Rifle", ThemeManager.Get("WeaponIcons/w11_chain_lightning.png"));
+				WeaponToast.I.AddWeaponPickup("Tesla Rifle", ThemeManager.Get("WeaponIcons/w11_chain_lightning.png"));
 			}
 		}
 		
