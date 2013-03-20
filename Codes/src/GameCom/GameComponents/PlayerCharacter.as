@@ -146,7 +146,7 @@ package GameCom.GameComponents
 				newEquipedWeapon = 7; // Rocket Launcher
 			}
 			
-			if (newEquipedWeapon != activeWeapon) {
+			if (newEquipedWeapon != activeWeapon && weapons[newEquipedWeapon].GetIcon() != null) {
 				weapons[activeWeapon].Deactivate();
 				activeWeapon = newEquipedWeapon;
 				weapons[activeWeapon].Activate();

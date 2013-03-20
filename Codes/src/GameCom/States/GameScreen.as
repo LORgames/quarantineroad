@@ -19,6 +19,7 @@ package GameCom.States {
 	import GameCom.Managers.ScenicManager;
 	import GameCom.Managers.WorldManager;
 	import GameCom.Managers.ZombieManager;
+	import GameCom.SystemComponents.PauseScreen;
 	import GameCom.SystemMain;
 	import LORgames.Engine.AudioController;
 	import LORgames.Engine.Keys;
@@ -49,6 +50,8 @@ package GameCom.States {
 		private var scenicManager:ScenicManager;
 		private var zombies:ZombieManager;
 		private var loot:LootManager;
+		
+		private var pauseScreen:PauseScreen = new PauseScreen(Unpause);
 		
 		private var gui:GUIManager;
 		
@@ -100,7 +103,7 @@ package GameCom.States {
 			
 			worldSpr.addChild(WorldManager.debugDrawLayer);
 			
-			gui = new GUIManager(Pause, MockUpdate);
+			gui = new GUIManager(Unpause, MockUpdate);
 			this.addChild(gui);
 			
 			// player is added to objectLayer
@@ -204,6 +207,14 @@ package GameCom.States {
 			//Pause/Unpause
 			if (pDown && !Keys.isKeyDown(Keyboard.P)) {
 				simulating = !simulating;
+				
+				if (simulating) {
+					if (pauseScreen.parent == this) {
+						this.removeChild(pauseScreen);
+					}
+				} else {
+					this.addChild(pauseScreen);
+				}
 			}
 			pDown = Keys.isKeyDown(Keyboard.P);
 			
@@ -230,12 +241,6 @@ package GameCom.States {
 			
 			worldSpr.x = Math.floor(WorldManager.WorldX + stage.stageWidth / 2);
 			worldSpr.y = Math.floor(WorldManager.WorldY + stage.stageHeight / 2);
-		}
-		
-		private function Pause():void {
-			if(!EndOfTheLine_TerminateASAP) {
-				simulating = !simulating;
-			}
 		}
 		
 		private function Cleanup():void {
@@ -288,6 +293,12 @@ package GameCom.States {
 			eyeLayer.graphics.endFill();
 			
 			GUIManager.I.Resize();
+		}
+		
+		public function Unpause():void {
+			this.removeChild(pauseScreen);
+			stage.focus = this;
+			simulating = true;
 		}
 	}
 }

@@ -17,6 +17,7 @@ package GameCom.Managers {
 	import GameCom.Helpers.MathHelper;
 	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Helpers.SpriteHelper;
+	import GameCom.States.GameScreen;
 	import GameCom.SystemComponents.HeartBar;
 	import GameCom.SystemComponents.WeaponUIPanel;
 	import LORgames.Components.Button;
@@ -92,13 +93,13 @@ package GameCom.Managers {
 			Score.x = (stage.stageWidth - Score.width) / 2;
 			Score.y = 30;
 			
-			DistanceTF.text = ScoreHelper.Distance.Value.toFixed() + " M";
-			DistanceTF.x = stage.stageWidth/2 - DistanceTF.width - 3;
-			DistanceTF.y = 55;
+			DistanceTF.text = ScoreHelper.Distance.Value.toFixed() + " :DIST";
+			DistanceTF.x = stage.stageWidth/2 - DistanceTF.width - 40;
+			DistanceTF.y = 35;
 			
-			TimeTF.text = ScoreHelper.Time.Value.toFixed() + " S";
-			TimeTF.x = stage.stageWidth/2 + 3;
-			TimeTF.y = 55;
+			TimeTF.text = "TIME: " + ScoreHelper.Time.Value.toFixed();
+			TimeTF.x = stage.stageWidth/2 + 40;
+			TimeTF.y = 35;
 			
 			for (var i:int = 0; i < Weapons.length; i++) {
 				Weapons[i].Draw();
