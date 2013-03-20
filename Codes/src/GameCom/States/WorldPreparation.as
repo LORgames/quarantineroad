@@ -1,4 +1,5 @@
 package GameCom.States {
+	import flash.display.MovieClip;
 	import flash.filters.DropShadowFilter;
 	import flash.filters.GlowFilter;
 	import flash.net.URLRequest;
@@ -34,6 +35,7 @@ package GameCom.States {
 		
 		private var DisplayText:TextField = new TextField();
 		private var PercentageText:TextField = new TextField();
+		private var Zombie:MovieClip = new MovieClip();
 		
 		public function WorldPreparation() {
 			//Just make sure we're ready to do this...
@@ -58,6 +60,9 @@ package GameCom.States {
 			DisplayText.autoSize = TextFieldAutoSize.CENTER;
 			DisplayText.text = "Preparing Assets...";
 			this.addChild(DisplayText);
+			
+			Zombie = new Preloader.WalkingZombie();
+			this.addChild(Zombie);
 			
 			this.stage.addEventListener(Event.RESIZE, Resized, false, 0, true);
 			Resized();
@@ -92,23 +97,14 @@ package GameCom.States {
 			PercentageText.y = this.stage.stageHeight/2 + 100;
 			
 			DisplayText.x = this.stage.stageWidth/2 - DisplayText.width / 2;
-			DisplayText.y = this.stage.stageHeight/2 + 60;
+			DisplayText.y = this.stage.stageHeight / 2 + 60;
+			
+			Zombie.x = this.stage.stageWidth/2;
+			Zombie.y = this.stage.stageHeight/2;
 		}
 		
 		public function UpdatePercentageLoaded(newPercent:String):void {
 			PercentageText.text = newPercent + "%";
-		}
-		
-		public function MouseOverText(e:MouseEvent):void {
-			var textField:TextField = e.currentTarget as TextField;
-			
-			textField.filters = new Array(new GlowFilter(0x337C8C));
-		}
-		
-		public function MouseOutText(e:MouseEvent):void {
-			var textField:TextField = e.currentTarget as TextField;
-			
-			textField.filters = new Array();
 		}
 		
 	}

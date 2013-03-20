@@ -1,5 +1,6 @@
 package GameCom.SystemComponents 
 {
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -11,12 +12,18 @@ package GameCom.SystemComponents
 	public class PauseScreen extends Sprite {
 		
 		private var pauseBtn:BitmapButton = new BitmapButton(195, 40, ThemeManager.Get("Interface/play button.png"), ThemeManager.Get("Interface/play button moused over.png"));
+		private var zombie:MovieClip;
+		
 		private var clicked:Function;
+		
 		
 		public function PauseScreen(_clicked:Function) {
 			this.addEventListener(Event.ADDED_TO_STAGE, Init);
 			
 			clicked = _clicked;
+			
+			zombie = new Preloader.WalkingZombie();
+			this.addChild(zombie);
 			
 			this.addChild(pauseBtn);
 			pauseBtn.addEventListener(MouseEvent.CLICK, Unpause, false, 0, true);
@@ -30,6 +37,9 @@ package GameCom.SystemComponents
 			
 			pauseBtn.x = (stage.stageWidth - pauseBtn.width) / 2;
 			pauseBtn.y = (stage.stageHeight + pauseBtn.height) / 2;
+			
+			zombie.x = (stage.stageWidth) / 2;
+			zombie.y = (stage.stageHeight - zombie.height) / 2;
 		}
 		
 		public function Unpause(me:MouseEvent):void {

@@ -1,5 +1,6 @@
 package {
 	import flash.display.Sprite;
+	import GameCom.GameComponents.Zombies.ZombieHand;
 	import GameCom.Helpers.SpriteHelper;
 	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
@@ -22,11 +23,15 @@ package {
 	 */
 	public class Preloader extends MovieClip {
 		[Embed(source="../lib/visitor1.ttf", fontName="Visitor", embedAsCFF=false)]
-		private static var fontName:Class;
+		public static var fontName:Class;
+		
+		[Embed(source="../lib/EmbeddedArt/WalkingAnimation.swf", symbol="LORgames.ZombieWalkClass")]
+		public static var WalkingZombie:Class;
 		
 		private const AD_SIZE_X:int = 800;
 		private const AD_SIZE_Y:int = 600;
 		
+		private var Zombie:MovieClip = new MovieClip();
 		private var DisplayText:TextField = new TextField();
 		private var PercentageText:TextField = new TextField();
 		
@@ -64,6 +69,9 @@ package {
 			DisplayText.autoSize = TextFieldAutoSize.CENTER;
 			DisplayText.selectable = false;
 			this.addChild(DisplayText);
+			
+			Zombie = new WalkingZombie() as MovieClip;
+			this.addChild(Zombie);
 			
 			//TODO: ENABLE ADS
 			isAdFinished = true;
@@ -122,6 +130,9 @@ package {
 			
 			DisplayText.x = mat.tx - DisplayText.width / 2;
 			DisplayText.y = mat.ty + 60;
+			
+			Zombie.x = mat.tx;
+			Zombie.y = mat.ty;
 		}
 		
 		private function loadingFinished():void {
