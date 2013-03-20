@@ -30,7 +30,7 @@ package GameCom.GameComponents.Loot {
 			if (Math.random() < 0.33) {
 				pickedUP = true;
 				
-				if(Math.random() > 0.8) {
+				if(Math.random() < 0.8) {
 					LootManager.I.SpawnAmmoAt(location);
 				} else {
 					LootManager.I.SpawnHealthAt(location);
