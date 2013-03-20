@@ -36,11 +36,14 @@ package GameCom.Helpers
 			//General stats
 			AddRow("Score", Stats.GetString("HighestScore"), Stats.GetString("TotalScore"));
 			AddRow("Distance", Stats.GetString("HighestDistance"), Stats.GetString("TotalDistance"));
-			AddRow("Time", Stats.GetInt("LongestTime")/100.0 + "s", Stats.GetInt("TotalTime")/100.0 + "s");
+			AddRow("Time", Stats.GetInt("LongestTime") / 100.0 + "s", Stats.GetInt("TotalTime") / 100.0 + "s");
+			
+			AddRow("All Kills", Stats.GetString("TotalKillsHigh"), Stats.GetString("TotalKills"));
+			AddRow("Melee Kills", Stats.GetString("MeleeKillsHigh"), Stats.GetString("MeleeKills"));
+			AddRow("Shakey Kills", Stats.GetString("ShakeyKillsHigh"), Stats.GetString("ShakeyKills"));
 			AddRow(); //Intended Blank
 			
 			//Weapons
-			AddRow("WEAPON KILLS", "", "");
 			AddRow("Pistol", Stats.GetString("PistolKillsHigh"), Stats.GetString("PistolKillsTotal"));
 			AddRow("Tesla Rifle", Stats.GetString("LightningKillsHigh"), Stats.GetString("LightningKillsTotal"));
 			AddRow("Flamethrower", Stats.GetString("FireKillsHigh"), Stats.GetString("FireKillsTotal"));
@@ -52,7 +55,6 @@ package GameCom.Helpers
 			AddRow(); //Intended Blank
 			
 			//Zombies
-			AddRow("ZOMBIE DEATHS", "", "");
 			AddRow("Slow", Stats.GetString("SlowKillsHigh"), Stats.GetString("SlowKillsTotal"));
 			AddRow("Limping", Stats.GetString("LimpKillsHigh"), Stats.GetString("LimpKillsTotal"));
 			AddRow("Tanky (Blue)", Stats.GetString("BlueKillsHigh"), Stats.GetString("BlueKillsTotal"));
@@ -60,10 +62,6 @@ package GameCom.Helpers
 			AddRow("Hulk", Stats.GetString("HulkKillsHigh"), Stats.GetString("HulkKillsTotal"));
 			AddRow("Sick (Vomiting)", Stats.GetString("ThrowUpKillsHigh"), Stats.GetString("ThrowUpKillsTotal"));
 			AddRow("Bloat (Explosive)", Stats.GetString("ExplosiveKillsHigh"), Stats.GetString("ExplosiveKillsTotal"));
-			AddRow(); //Intended Blank
-			
-			//Blank Template Row
-			AddRow();
 		}
 		
 		private function Update(e:Event):void {

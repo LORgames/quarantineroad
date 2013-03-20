@@ -99,7 +99,7 @@ package GameCom.States {
 			StartBtn.y = mat.ty + 223;
 			
 			WebsiteText.x = (stage.stageWidth-WebsiteText.width) / 2;
-			WebsiteText.y = mat.ty + 5;
+			WebsiteText.y = mat.ty + 580;
 			
 			trophies.x = mat.tx + 213;
 			trophies.y = mat.ty + 35;
@@ -108,7 +108,7 @@ package GameCom.States {
 			instructions.y = mat.ty + 303;
 			
 			stats.x = mat.tx + 8;
-			stats.y = mat.ty + 307;
+			stats.y = mat.ty + 303;
 			
 			mbh.x = mat.tx;
 			mbh.y = mat.ty;

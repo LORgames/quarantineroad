@@ -228,16 +228,17 @@ package GameCom.GameComponents
 				
 				GUIManager.I.Hearts.SetHealth(myHP);
 			} else if(getTimer() > immunityTime && myHP > 0) {
+				if (damage > 10) {
+					TrophyHelper.GotTrophyByName("Throw like a girl");
+					damage = 1;
+				}
+				
 				myHP -= damage;
 				GUIManager.I.Hearts.SetHealth(myHP);
 				
 				if (myHP <= 0 && time == -1) {
 					time = 1;
 					GameScreen.EndOfTheLine_TerminateASAP = true;
-				}
-				
-				if (damage > 10) {
-					TrophyHelper.GotTrophyByName("Throw like a girl");
 				}
 				
 				if (myHP <= 0) {

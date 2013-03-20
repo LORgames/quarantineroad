@@ -50,7 +50,6 @@ package GameCom.GameComponents.Weapons {
 					}
 					
 					grenades--;
-					
 				}
 			} else {
 				fireTime += dt;

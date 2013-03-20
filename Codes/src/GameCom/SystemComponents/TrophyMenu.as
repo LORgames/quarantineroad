@@ -32,7 +32,7 @@ package GameCom.SystemComponents
 				
 				if (!TrophyHelper.HasTrophy(i)) {
 					bmpd = bmpd.clone();
-					bmpd.colorTransform(new Rectangle(0, 0, 44, 44), new ColorTransform(0.3, 0.3, 0.3, 0.5));
+					bmpd.colorTransform(new Rectangle(0, 0, 44, 44), new ColorTransform(0.5, 0.3, 0.3, 0.5));
 				}
 				
 				this.graphics.beginBitmapFill(bmpd, mat);
@@ -58,7 +58,7 @@ package GameCom.SystemComponents
 				var matTX:int = eX * 45;
 				var matTY:int = eY * 45 + 22;
 				
-				tooltip.SetText(TrophyHelper.GetTrophyName(eY * 6 + eX) + " (" + (TrophyHelper.HasTrophy(eY*6+eX)?"Unl":"L") +"ocked)\n\n" + TrophyHelper.GetTrophyDescription(eY * 6 + eX));
+				tooltip.SetText(TrophyHelper.GetTrophyName(eY * 6 + eX) + " (<font color='#" + (TrophyHelper.HasTrophy(eY*6+eX)?"00FF00'>Unl":"FF0000'>L") +"ocked</font>)\n\n" + TrophyHelper.GetTrophyDescription(eY * 6 + eX));
 				tooltip.ChangeDirection(Tooltip.LEFT);
 				
 				tooltip.visible = true;

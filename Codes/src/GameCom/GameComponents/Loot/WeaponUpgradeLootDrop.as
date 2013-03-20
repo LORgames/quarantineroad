@@ -27,6 +27,16 @@ package GameCom.GameComponents.Loot {
 		public override function Reassign(location:b2Vec2):void {
 			var bmpd:BitmapData;
 			
+			if (Math.random() < 0.33) {
+				if(Math.random() > 0.5) {
+					LootManager.I.SpawnAmmoAt(location);
+				} else {
+					LootManager.I.SpawnHealthAt(location);
+				}
+				
+				return;
+			}
+			
 			for (var i:int = 0; i < 3; i++) {
 				type = Math.random() * 8;
 				bmpd = GUIManager.I.Weapons[type].Weapon.GetUpgradeIcon();
@@ -60,8 +70,8 @@ package GameCom.GameComponents.Loot {
 		}
 		
 		public override function Pickup(equipment:Vector.<IWeapon>, player:PlayerCharacter):void {
-			
 			equipment[type].Upgrade();
+			equipment[type].AddAmmo();
 			
 			GUIManager.I.RedrawWeapons();
 			player.RedrawTopHalf();
