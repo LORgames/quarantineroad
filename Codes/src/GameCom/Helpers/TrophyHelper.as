@@ -47,7 +47,7 @@ package GameCom.Helpers
 			
 			"Piece of Cake", "Kill 99 zombies in a single game.",
 			"Zombie", "Kill 5000 zombies in total.",
-			"Project Alice", "Kill 25000 zombies in total."
+			"Project Alice", "Kill 10000 zombies in total."
 		);
 		
 		private static var trophyInfo:int = 0;

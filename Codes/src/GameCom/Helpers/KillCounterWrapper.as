@@ -51,7 +51,7 @@ package GameCom.Helpers
 				if (WorldManager.WorldShake >= 1) ScoreHelper.ShakeyKills.AddValue(val);
 				if (Value >= 99) TrophyHelper.GotTrophyByName("Piece of Cake");
 				if (Value+nextAlert >= 5000) TrophyHelper.GotTrophyByName("Zombie");
-				if (Value+nextAlert >= 25000) TrophyHelper.GotTrophyByName("Project Alice");
+				if (Value+nextAlert >= 10000) TrophyHelper.GotTrophyByName("Project Alice");
 			} else if (type == OTHER_SHAKEY) {
 				if (Value > 20) TrophyHelper.GotTrophyByName("Harlem Shake");
 			}
