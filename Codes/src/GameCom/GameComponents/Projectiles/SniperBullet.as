@@ -7,6 +7,7 @@ package GameCom.GameComponents.Projectiles {
 	import GameCom.GameComponents.Decorations.SniperTrail;
 	import GameCom.GameComponents.IHit;
 	import GameCom.GameComponents.Weapons.IWeapon;
+	import GameCom.GameComponents.Weapons.Sniper;
 	import GameCom.GameComponents.Zombies.ExplosionZombie;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
@@ -61,7 +62,7 @@ package GameCom.GameComponents.Projectiles {
 					}
 					
 					if (spawnY - contact.other.GetPosition().y > 25) {
-						TrophyHelper.GotTrophyByName("Headshot");
+						(owner as Sniper).LongRange();
 					}
 					
 					ExplosionManager.I.RequestBloodAt(this.x, animation.y + this.y);

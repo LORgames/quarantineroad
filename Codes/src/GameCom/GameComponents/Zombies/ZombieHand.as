@@ -12,6 +12,7 @@ package GameCom.GameComponents.Zombies {
 	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.BodyHelper;
+	import GameCom.Helpers.ScoreHelper;
 	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BGManager;
 	import GameCom.Managers.ExplosionManager;
@@ -119,6 +120,7 @@ package GameCom.GameComponents.Zombies {
 		public function HittingCallback(fixture:b2Fixture):Boolean {
 			if (fixture.GetUserData() is PlayerCharacter) {
 				if ((fixture.GetUserData() as PlayerCharacter).Hit(9)) {
+					ScoreHelper.MeleeKills.AddValue(1);
 					TrophyHelper.GotTrophyByName("High Five");
 				}
 			}

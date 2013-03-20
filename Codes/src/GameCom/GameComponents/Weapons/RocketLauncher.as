@@ -23,7 +23,7 @@ package GameCom.GameComponents.Weapons {
 		private var safeFixtures:Vector.<b2Body> = new Vector.<b2Body>();
 		
 		public var FIRE_RATE:Number = 1.5;
-		public var fireTime:Number = 0;
+		public var fireTime:Number = 1.5;
 		
 		private var collected:Boolean = false;
 		private var upgraded:Boolean = false;
@@ -118,7 +118,7 @@ package GameCom.GameComponents.Weapons {
 		public function ReportKills(newKills:int):void {
 			totalKills += newKills;
 			
-			if (totalKills >= 100) {
+			if (totalKills >= 50) {
 				TrophyHelper.GotTrophyByName("Fire in the Hole");
 			}
 		}

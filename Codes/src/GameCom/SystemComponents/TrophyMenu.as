@@ -58,7 +58,7 @@ package GameCom.SystemComponents
 				var matTX:int = eX * 45;
 				var matTY:int = eY * 45 + 22;
 				
-				tooltip.SetText(TrophyHelper.GetTrophyName(eY * 6 + eX) + " (<font color='#" + (TrophyHelper.HasTrophy(eY*6+eX)?"00FF00'>Unl":"FF0000'>L") +"ocked</font>)\n\n" + TrophyHelper.GetTrophyDescription(eY * 6 + eX));
+				tooltip.SetText(TrophyHelper.GetTrophyName(eY * 6 + eX) + " (<font color='#" + (TrophyHelper.HasTrophy(eY*6+eX)?"008000'>Unl":"800000'>L") +"ocked</font>)\n\n" + TrophyHelper.GetTrophyDescription(eY * 6 + eX));
 				tooltip.ChangeDirection(Tooltip.LEFT);
 				
 				tooltip.visible = true;

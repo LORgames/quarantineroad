@@ -146,7 +146,7 @@ package GameCom.GameComponents.Weapons {
 		public function ReportKills(newKills:int):void {
 			totalKills += newKills;
 			
-			if (totalKills > 100) {
+			if (totalKills > 150) {
 				TrophyHelper.GotTrophyByName("Boomstick");
 			}
 		}

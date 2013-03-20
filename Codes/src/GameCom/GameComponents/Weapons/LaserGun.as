@@ -11,6 +11,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.Helpers.AnimatedSprite;
 	import GameCom.Helpers.AudioStore;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.Managers.WorldManager;
 	import GameCom.SystemComponents.TrophyToast;
@@ -102,7 +103,7 @@ package GameCom.GameComponents.Weapons {
 					if(objectHit != null) {
 						if (objectHit.GetUserData() is IZombie) {
 							if ((objectHit.GetUserData() as IZombie).Hit(0.25)) {
-								totalKills++;
+								ReportKills(1);
 							}
 						}
 					}
@@ -128,7 +129,7 @@ package GameCom.GameComponents.Weapons {
 		public function Upgrade():void {
 			if (!collected) {
 				collected = true;
-				TrophyToast.I.AddWeaponPickup("Fishin' Laser", ThemeManager.Get("WeaponIcons/w07_laser.png"));
+				TrophyToast.I.AddWeaponPickup("Ruby Laser", ThemeManager.Get("WeaponIcons/w07_laser.png"));
 			} else if (!upgraded) {
 				upgraded = true;
 				CHARGE_TIME = 0.1;
@@ -202,7 +203,13 @@ package GameCom.GameComponents.Weapons {
 			return null;
 		}
 		
-		public function ReportKills(newKills:int):void { }
+		public function ReportKills(newKills:int):void {
+			totalKills += newKills;
+			
+			if (totalKills > 250) {
+				TrophyHelper.GotTrophyByName("Ima Firin Mah Lazer");
+			}
+		}
 		
 		public function ReportStatistics():void {
 			Stats.SetHighestInt("LaserKillsHigh", totalKills);

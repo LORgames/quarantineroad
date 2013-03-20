@@ -9,45 +9,45 @@ package GameCom.Helpers
 	 */
 	public class TrophyHelper {
 		private static const TrophyData:Array = new Array(
-			"100m Run", "Move 100m in a single game.",
 			"250m Run", "Move 250m in a single game.",
 			"500m Run", "Move 500m in a single game.",
+			"1000m Run", "Move 1000m in a single game.",
 			
 			"Pacifist", "Walk 100m without killing a zombie. Including Melee!",
-			"Time", "Survive 3:00 min",
+			"Time", "Survive 3 minutes in a single game.",
 			"Man vs Zombie", "Survive 6 minutes in a single game.",
 			
-			"Boomstick", "Get 100 kills with the shotgun in a single game.",
-			"Crispy", "Get 100 kills with the flame thrower in a single game.",
-			"Spray and Prey", "Kill 100 zombies with SMG or Dual SMG",
+			"Boomstick", "Get 150 kills with the shotgun in a single game.",
+			"Crispy", "Get 250 kills with the flame thrower in a single game.",
+			"Spray and Prey", "Kill 250 zombies with SMG or Dual SMG in a single game.",
 			
-			"Tesla's Pride", "Kill 100 zombies with the lightning gun",
-			"Fire in the Hole", "Kill 100 zombies with grenades in a single game.",
-			"Brain", "Kill at least 1 of each type of zombie in a single game.",
+			"Tesla's Pride", "Kill 500 zombies with the lightning gun in a single game.",
+			"Fire in the Hole", "Kill 50 zombies with grenades or rockets in a single game.",
+			"Ima Firin Mah Lazer", "Kill 250 zombies with the laser in a single game.", //needs to be changed
 			
 			"28 Plays Later", "Play the game 28 times.",
 			"Back for Maaaw", "Reload the game after a break.",
-			"New Shoes", "Walk through an acid pool and survive",
+			"New Shoes", "Walk through an acid pool and survive.",
 			
 			"My name is Hurl", "Kill 25 Vomit Zombies in a single game.",
 			"Harlem Shake", "Kill 20 zombies while the screen is shaking in a single game.",
-			"Headshot", "Kill a zombie from more then 25m away with the sniper rifle.",
+			"Headshot", "Kill 25 zombies from more then 25m away with the sniper rifle in a single game.",
 			
-			"Throw like a girl", "Kill yourself with a grenade", //needs to be changed
+			"Brain", "Kill at least 1 of each type of zombie in a single game.",
 			"Don't Bite Me Bro", "Die without touching any zombies.",
 			"High Five", "*SQUISH* Killed by the hand.",
 			
-			"Party Pooper", "Kill 5 zombies in a single Bloat Explosion",
+			"Party Pooper", "Kill 5 zombies in a single Bloat Explosion.",
 			"Close Call", "Pick up a health pack when on half a heart left.",
 			"Max Ammo", "Obtain Full ammo for each type of weapon in a single game.",
 			
-			"Upgrade", "Find a weapon Upgrade",
+			"Upgrade", "Find a weapon Upgrade.",
 			"2 for 1", "Pick up a secondary pistol or SMG.",
 			"Fully Loaded", "Obtain all weapon upgrades in a single game.",
 			
-			"Piece of Cake", "Kill 99 zombies",
-			"Zombie", "Kill 500 amount of zombies (more than Piece of Cake achievement)",
-			"Project Alice", "Kill 1000 amount of zombies (more than zombie slayer achievement)"
+			"Piece of Cake", "Kill 99 zombies in a single game.",
+			"Zombie", "Kill 5000 zombies in total.",
+			"Project Alice", "Kill 25000 zombies in total."
 		);
 		
 		private static var trophyInfo:int = 0;

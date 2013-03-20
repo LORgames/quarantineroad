@@ -33,8 +33,8 @@ package  {
 		public static const POSITION_ITERATIONS:int = 1;
 		
 		//Storage things
-		public static const StorageRevision:int = 3;
-		public static const WipeStorageBelowRevision:int = 3;
+		public static const StorageRevision:int = 4;
+		public static const WipeStorageBelowRevision:int = 4;
 	}
 
 }

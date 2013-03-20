@@ -1,6 +1,7 @@
 package GameCom.Helpers 
 {
 	import GameCom.Managers.WorldManager;
+	import LORgames.Engine.Stats;
 	import mochi.as3.MochiDigits;
 	/**
 	 * ...
@@ -27,6 +28,7 @@ package GameCom.Helpers
 			
 			if (type == TOTAL) {
 				lastKillAt = 0;
+				nextAlert = Stats.GetInt("TotalKills");
 			}
 		}
 		
@@ -47,9 +49,9 @@ package GameCom.Helpers
 			} else if (type == TOTAL) {
 				lastKillAt = ScoreHelper.Distance.Value;
 				if (WorldManager.WorldShake >= 2) ScoreHelper.ShakeyKills.AddValue(val);
-				if (Value > 100) TrophyHelper.GotTrophyByName("Piece of Cake");
-				if (Value > 500) TrophyHelper.GotTrophyByName("Zombie");
-				if (Value > 1000) TrophyHelper.GotTrophyByName("Project Alice");
+				if (Value >= 99) TrophyHelper.GotTrophyByName("Piece of Cake");
+				if (Value+nextAlert >= 5000) TrophyHelper.GotTrophyByName("Zombie");
+				if (Value+nextAlert >= 25000) TrophyHelper.GotTrophyByName("Project Alice");
 			} else if (type == OTHER_SHAKEY) {
 				if (Value > 20) TrophyHelper.GotTrophyByName("Harlem Shake");
 			}
@@ -61,9 +63,9 @@ package GameCom.Helpers
 			
 			if (type == DISTANCE) {
 				if (Value > 100 + lastKillAt) TrophyHelper.GotTrophyByName("Pacifist");
-				if (Value > 100) TrophyHelper.GotTrophyByName("100m Run");
 				if (Value > 250) TrophyHelper.GotTrophyByName("250m Run");
 				if (Value > 500) TrophyHelper.GotTrophyByName("500m Run");
+				if (Value > 1000) TrophyHelper.GotTrophyByName("1000m Run");
 			}
 		}
 	}

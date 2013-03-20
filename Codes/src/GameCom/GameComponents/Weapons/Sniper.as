@@ -7,6 +7,7 @@ package GameCom.GameComponents.Weapons {
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Projectiles.SniperBullet;
 	import GameCom.Helpers.AudioStore;
+	import GameCom.Helpers.TrophyHelper;
 	import GameCom.Managers.BulletManager;
 	import GameCom.SystemComponents.TrophyToast;
 	import LORgames.Engine.AudioController;
@@ -27,6 +28,7 @@ package GameCom.GameComponents.Weapons {
 		private var bullets:int = 20;
 		
 		private var totalKills:int = 0;
+		private var longRangeKills:int = 0;
 		
 		public function Sniper(body:b2Body) {
 			AddSafe(body);
@@ -107,6 +109,11 @@ package GameCom.GameComponents.Weapons {
 		
 		public function ReportKills(newKills:int):void {
 			totalKills += newKills;
+		}
+		
+		public function LongRange():void {
+			longRangeKills++;
+			if(longRangeKills > 25) TrophyHelper.GotTrophyByName("Headshot");
 		}
 		
 		public function ReportStatistics():void {
