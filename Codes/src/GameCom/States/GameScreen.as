@@ -124,7 +124,9 @@ package GameCom.States {
 			zombies = new ZombieManager(objectLayer, eyeLayer);
 			zombies.AddPlayer(player);
 			
-			loot = new LootManager(groundLayer);
+			loot = new LootManager(objectLayer);
+			
+			this.addChild(pauseButton);
 			
 			simulating = true;
 			MockUpdate();
@@ -201,15 +203,7 @@ package GameCom.States {
 			
 			//Pause/Unpause
 			if (pDown && !Keys.isKeyDown(Keyboard.P)) {
-				simulating = !simulating;
-				
-				if (simulating) {
-					if (pauseScreen.parent == this) {
-						this.removeChild(pauseScreen);
-					}
-				} else {
-					this.addChild(pauseScreen);
-				}
+				Pause();
 			}
 			pDown = Keys.isKeyDown(Keyboard.P);
 			
@@ -300,6 +294,8 @@ package GameCom.States {
 			} else {
 				Unpause();
 			}
+			
+			pauseButton.Redraw();
 		}
 		
 		public function IsPaused():Boolean {
@@ -310,6 +306,8 @@ package GameCom.States {
 			this.removeChild(pauseScreen);
 			stage.focus = this;
 			simulating = true;
+			
+			pauseButton.Redraw();
 		}
 	}
 }

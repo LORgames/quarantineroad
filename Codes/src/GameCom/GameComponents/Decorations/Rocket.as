@@ -35,7 +35,7 @@ package GameCom.GameComponents.Decorations {
 			animation.x = -animation.width / 2;
 			animation.y = -animation.height + 0.4 * Global.PHYSICS_SCALE;
 			
-			body = BodyHelper.GetGenericCircle(0.4, Global.PHYSICS_CATEGORY_BULLETS, this, 0xFFFF & ~Global.PHYSICS_CATEGORY_PLAYER);
+			body = BodyHelper.GetGenericCircle(0.4, Global.PHYSICS_CATEGORY_BULLETS, this, 0xFFFF & ~Global.PHYSICS_CATEGORY_PLAYER & ~Global.PHYSICS_CATEGORY_WALLS & ~Global.PHYSICS_CATEGORY_VOMIT & ~Global.PHYSICS_CATEGORY_BULLETS);
 			body.SetType(b2Body.b2_dynamicBody);
 			body.GetFixtureList().SetRestitution(0.3);
 			body.SetActive(false);

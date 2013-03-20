@@ -58,7 +58,7 @@ package GameCom.SystemComponents {
 			this.x = stage.stageWidth + 20;
 			
 			item = new Bitmap();
-			item.x = 40;
+			item.x = 50;
 			item.y = 11;
 			
 			overlay = new Bitmap(ThemeManager.Get("Interface/weapon side.png"));
@@ -144,7 +144,9 @@ package GameCom.SystemComponents {
 					stage.addEventListener(Event.ENTER_FRAME, Update);
 					
 					item.bitmapData = messages.pop();
-					text.htmlText = messages.pop();
+					text.text = messages.pop();
+					
+					text.x = 26;
 					
 					direction = 5;
 					

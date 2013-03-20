@@ -85,7 +85,7 @@ package GameCom.GameComponents.Weapons {
 			
 			lightning.Update(dt);
 			
-			if (battery == 0) return false;
+			if (battery < Number.MIN_VALUE*5) return false;
 			
 			return true;
 		}

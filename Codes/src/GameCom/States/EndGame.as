@@ -92,7 +92,7 @@ package GameCom.States {
 			this.addChild(adContainer);
 			
 			//TODO: ENABLE ADS
-			MochiAd.showClickAwayAd( { clip:adContainer, id:"5a3aaf31eb62a90e" } );
+			MochiAd.showClickAwayAd( { clip:adContainer, id:"5a3aaf31eb62a90e", ad_failed:ShowDeliveranceAd, ad_skipped:ShowDeliveranceAd } );
 			
 			handAnimation.AddFrame(ThemeManager.Get("Zombies/Hand/0_5.png"));
 			handAnimation.AddFrame(ThemeManager.Get("Zombies/Hand/0_6.png"));
@@ -168,6 +168,17 @@ package GameCom.States {
 				ScoreHelper.RedKills.Value > 0 &&
 				ScoreHelper.SlowKills.Value > 0 &&
 				ScoreHelper.ThrowUpKills.Value > 0) TrophyHelper.GotTrophyByName("Brain");
+		}
+		
+		public function ShowDeliveranceAd():void {
+			adContainer.addChild(new Bitmap(ThemeManager.Get("Interface/Deliverance Ad.png")));
+			adContainer.addEventListener(MouseEvent.CLICK, ClickedDeliveranceAd, false, 0, true);
+			adContainer.mouseEnabled = true;
+			adContainer.buttonMode = true;
+		}
+		
+		public function ClickedDeliveranceAd(e:*):void {
+			flash.net.navigateToURL(new URLRequest("http://www.kongregate.com/games/LORgames/deliverance"), "_self");
 		}
 		
 		public function CreateTextField(str:String):TextField {

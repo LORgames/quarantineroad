@@ -23,8 +23,8 @@ package GameCom.SystemComponents {
 		public function Redraw():void {
 			this.graphics.clear();
 			
-			if(!GetPaused()) this.graphics.beginBitmapFill(ThemeManager.Get("Interface/play button.png"));
-			else this.graphics.beginBitmapFill(ThemeManager.Get("Interface/play button.png"));
+			if(!GetPaused()) this.graphics.beginBitmapFill(ThemeManager.Get("Interface/pause.png"));
+			else this.graphics.beginBitmapFill(ThemeManager.Get("Interface/play.png"));
 			
 			this.graphics.drawRect(0, 0, 29, 26);
 			this.graphics.endFill();

@@ -74,9 +74,9 @@ package {
 			this.addChild(Zombie);
 			
 			//TODO: ENABLE ADS
-			isAdFinished = true;
-			//this.addChild(adContainer);
-			//MochiAd.showPreGameAd({clip:adContainer, id:"5a3aaf31eb62a90e", res:stage.stageWidth+"x"+stage.stageHeight, ad_finished:fAdFinished, no_progress_bar:true});
+			//isAdFinished = true;
+			this.addChild(adContainer);
+			MochiAd.showPreGameAd({clip:adContainer, id:"5a3aaf31eb62a90e", res:stage.stageWidth+"x"+stage.stageHeight, ad_finished:fAdFinished, no_progress_bar:true});
 			
 			resize(null);
 		}
@@ -97,7 +97,7 @@ package {
 			var approx:Boolean = false;
 			
 			if (e.bytesTotal == 0) {
-				totalBytes = 5659695;
+				totalBytes = 5856704;
 				approx = true;
 			}
 			

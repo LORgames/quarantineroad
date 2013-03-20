@@ -109,6 +109,8 @@ package GameCom.GameComponents.Zombies {
 				ScoreHelper.Score.AddValue(SCORE);
 				ScoreHelper.HulkKills.AddValue(1);
 				
+				WorldManager.WorldShake -= SCREENSHAKE_AMT;
+				
 				if(Math.random() < 0.001) {
 					LootManager.I.SpawnAmmoAt(body.GetPosition());
 				}
@@ -167,7 +169,7 @@ package GameCom.GameComponents.Zombies {
 			layer0.removeChild(this);
 			body.SetActive(false);
 			
-			WorldManager.WorldShake -= SCREENSHAKE_AMT;
+			if (!isDead) WorldManager.WorldShake -= SCREENSHAKE_AMT;
 		}
 		
 		public function GetPixelLocation():Point {
