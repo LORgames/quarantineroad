@@ -160,7 +160,7 @@ package GameCom.GameComponents.Weapons {
 		public function ReportKills(newKills:int):void {
 			totalKills += newKills;
 			
-			if (totalKills > 250) {
+			if (totalKills > 200) {
 				TrophyHelper.GotTrophyByName("Tesla's Pride");
 			}
 		}

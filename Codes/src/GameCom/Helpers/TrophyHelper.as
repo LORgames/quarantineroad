@@ -21,7 +21,7 @@ package GameCom.Helpers
 			"Crispy", "Get 250 kills with the flame thrower in a single game.",
 			"Spray and Prey", "Kill 250 zombies with SMG or Dual SMG in a single game.",
 			
-			"Tesla's Pride", "Kill 250 zombies with the lightning gun in a single game.",
+			"Tesla's Pride", "Kill 200 zombies with the lightning gun in a single game.",
 			"Fire in the Hole", "Kill 50 zombies with grenades or rockets in a single game.",
 			"Ima Firin Mah Lazer", "Kill 250 zombies with the laser in a single game.", //needs to be changed
 			
