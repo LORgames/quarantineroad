@@ -57,7 +57,7 @@ package {
 			loaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioError);
 			
 			// Show the Loader
-			DisplayText.embedFonts = true;
+			PercentageText.embedFonts = true;
 			PercentageText.selectable = false;
 			PercentageText.defaultTextFormat = new TextFormat("Visitor", 40, 0xFFFFFF);
 			PercentageText.autoSize = TextFieldAutoSize.CENTER;

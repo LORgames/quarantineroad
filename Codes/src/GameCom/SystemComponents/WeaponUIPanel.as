@@ -21,7 +21,7 @@ package GameCom.SystemComponents {
 		
 		private var keyID:TextField;
 		
-		public function WeaponUIPanel(weapon:IWeapon) {
+		public function WeaponUIPanel(weapon:IWeapon, _keyID:String) {
 			this.Weapon = weapon;
 			
 			info = new TextField();
@@ -35,12 +35,15 @@ package GameCom.SystemComponents {
 			
 			keyID = new TextField();
 			keyID.embedFonts = true;
-			keyID.defaultTextFormat = new TextFormat("Visitor", 10, 0xFFFFFF);
+			keyID.defaultTextFormat = new TextFormat("Visitor", 14, 0xFFFFFF);
 			keyID.filters = new Array(new GlowFilter(0x0, 1, 2, 2, 5));
-			keyID.text = "0";
+			keyID.text = _keyID;
 			keyID.autoSize = TextFieldAutoSize.LEFT;
 			keyID.selectable = false;
 			this.addChild(keyID);
+			
+			keyID.x = 5;
+			keyID.y = 5;
 		}
 		
 		public function Draw():void {
@@ -59,7 +62,7 @@ package GameCom.SystemComponents {
 			} else {
 				this.graphics.beginGradientFill(GradientType.LINEAR, [0xFFFFFF,0xFFFFFF], [0, 0.3], [0, 255], mat);
 			}
-				
+			
 			this.graphics.drawRect(0, 0, TILE_WIDTH, TILE_HEIGHT);
 			this.graphics.endFill();
 			

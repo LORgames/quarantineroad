@@ -120,7 +120,7 @@ package GameCom.Managers {
 		
 		public function AddWeapons(newWeps:Vector.<IWeapon>):void {
 			for (var i:int = 0; i < newWeps.length; i++) {
-				var wui:WeaponUIPanel = new WeaponUIPanel(newWeps[i]);
+				var wui:WeaponUIPanel = new WeaponUIPanel(newWeps[i], (i+1).toString());
 				this.addChild(wui);
 				Weapons.push(wui);
 			}

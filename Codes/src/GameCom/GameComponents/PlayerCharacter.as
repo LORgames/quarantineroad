@@ -265,7 +265,7 @@ package GameCom.GameComponents
 		
 		public function ShouldFire():Boolean {
 			if (Keys.isKeyDown(Keyboard.SPACE)) return true;
-			if (Keys.isKeyDown(Keyboard.NUMPAD_ENTER)) return true;
+			if (Keys.isKeyDown(Keyboard.NUMPAD_ENTER) || Keys.isKeyDown(Keyboard.ENTER)) return true;
 			if (Mousey.IsClicking()) return true;
 			
 			return false;
