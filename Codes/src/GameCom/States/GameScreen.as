@@ -63,7 +63,6 @@ package GameCom.States {
 		private var sc:SoundChannel;
 		
 		//olol toggle bool for mute
-		private var mDown:Boolean = false;
 		private var pDown:Boolean = false;
 		
 		public static var EndOfTheLine_TerminateASAP:Boolean = false;
@@ -197,12 +196,6 @@ package GameCom.States {
 			} else {
 				WorldManager.debugDrawLayer.graphics.clear();
 			}
-			
-			//Mute/Unmute
-			if (mDown && !Keys.isKeyDown(Keyboard.M)) {
-				AudioController.SetMuted(!AudioController.GetMuted());
-			}
-			mDown = Keys.isKeyDown(Keyboard.M);
 			
 			//Pause/Unpause
 			if (pDown && !Keys.isKeyDown(Keyboard.P)) {

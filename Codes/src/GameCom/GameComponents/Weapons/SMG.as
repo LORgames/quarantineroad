@@ -39,9 +39,9 @@ package GameCom.GameComponents.Weapons {
 		
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
-		public function Update(dt:Number, location:b2Vec2):Boolean {
+		public function Update(dt:Number, location:b2Vec2, player:PlayerCharacter):Boolean {
 			if (fireTime > FIRE_RATE) {
-				if(Keys.isKeyDown(Keyboard.SPACE) || Keys.isKeyDown(Keyboard.NUMPAD_ENTER)) {
+				if(player.ShouldFire()) {
 					fireTime -= FIRE_RATE;
 					
 					if (totalSMGs > 0 && bullets > 0) {

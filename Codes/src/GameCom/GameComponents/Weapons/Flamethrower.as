@@ -5,6 +5,7 @@ package GameCom.GameComponents.Weapons {
 	import Box2D.Dynamics.b2FixtureDef;
 	import flash.display.BitmapData;
 	import flash.ui.Keyboard;
+	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Projectiles.FlameProjectile;
 	import GameCom.Helpers.AudioStore;
@@ -37,9 +38,9 @@ package GameCom.GameComponents.Weapons {
 		
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
-		public function Update(dt:Number, location:b2Vec2):Boolean {
+		public function Update(dt:Number, location:b2Vec2, player:PlayerCharacter):Boolean {
 			if (fireTime >= FIRE_RATE) {
-				if((Keys.isKeyDown(Keyboard.SPACE) || Keys.isKeyDown(Keyboard.NUMPAD_ENTER)) && shots > 0 && collected) {
+				if(player.ShouldFire() && shots > 0 && collected) {
 					fireTime -= FIRE_RATE;
 					BulletManager.I.FireAt(location, FlameProjectile, this, (Math.random() - 0.5) * 0.25);
 					shots--;

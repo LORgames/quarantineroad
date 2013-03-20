@@ -17,7 +17,9 @@ package GameCom.SystemComponents {
 		public static const TILE_HEIGHT:int = 40;
 		
 		public var Weapon:IWeapon;
-		private var info:TextField;
+		private var info:TextField
+		
+		private var keyID:TextField;
 		
 		public function WeaponUIPanel(weapon:IWeapon) {
 			this.Weapon = weapon;
@@ -30,6 +32,15 @@ package GameCom.SystemComponents {
 			info.autoSize = TextFieldAutoSize.LEFT;
 			info.selectable = false;
 			this.addChild(info);
+			
+			keyID = new TextField();
+			keyID.embedFonts = true;
+			keyID.defaultTextFormat = new TextFormat("Visitor", 10, 0xFFFFFF);
+			keyID.filters = new Array(new GlowFilter(0x0, 1, 2, 2, 5));
+			keyID.text = "0";
+			keyID.autoSize = TextFieldAutoSize.LEFT;
+			keyID.selectable = false;
+			this.addChild(keyID);
 		}
 		
 		public function Draw():void {

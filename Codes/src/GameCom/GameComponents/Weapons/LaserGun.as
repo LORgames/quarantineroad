@@ -7,6 +7,7 @@ package GameCom.GameComponents.Weapons {
 	import flash.display.Sprite;
 	import flash.geom.Matrix;
 	import flash.ui.Keyboard;
+	import GameCom.GameComponents.PlayerCharacter;
 	import GameCom.GameComponents.Projectiles.BasicBullet;
 	import GameCom.GameComponents.Zombies.IZombie;
 	import GameCom.Helpers.AnimatedSprite;
@@ -68,8 +69,8 @@ package GameCom.GameComponents.Weapons {
 		
 		/* INTERFACE GameCom.GameComponents.Weapons.IWeapon */
 		
-		public function Update(dt:Number, location:b2Vec2):Boolean {
-			if ((Keys.isKeyDown(Keyboard.SPACE) || Keys.isKeyDown(Keyboard.NUMPAD_ENTER)) && battery > 0 && collected) {
+		public function Update(dt:Number, location:b2Vec2, player:PlayerCharacter):Boolean {
+			if (player.ShouldFire() && battery > 0 && collected) {
 				charge += dt;
 				
 				location.SubtractXY(0.1, 0);

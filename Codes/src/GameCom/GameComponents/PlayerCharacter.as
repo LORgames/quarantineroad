@@ -36,6 +36,7 @@ package GameCom.GameComponents
 	import GameCom.States.GameScreen;
 	import LORgames.Engine.Keys;
 	import LORgames.Engine.MessageBox;
+	import LORgames.Engine.Mousey;
 	/**
 	 * ...
 	 * @author Paul
@@ -163,7 +164,7 @@ package GameCom.GameComponents
 				RedrawTopHalf();
 			}
 			
-			if (!weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1.4 + body.GetPosition().y))) {
+			if (!weapons[activeWeapon].Update(dt, new b2Vec2(0.3 + body.GetPosition().x, -1.4 + body.GetPosition().y), this)) {
 				//Run out of ammo
 				weapons[activeWeapon].Deactivate();
 				activeWeapon = 0;
@@ -260,6 +261,14 @@ package GameCom.GameComponents
 			top.graphics.beginBitmapFill(weapons[activeWeapon].GetPlayerBody());
 			top.graphics.drawRect(0, 0, 21, 38);
 			top.graphics.endFill();
+		}
+		
+		public function ShouldFire():Boolean {
+			if (Keys.isKeyDown(Keyboard.SPACE)) return true;
+			if (Keys.isKeyDown(Keyboard.NUMPAD_ENTER)) return true;
+			if (Mousey.IsClicking()) return true;
+			
+			return false;
 		}
 		
 	}

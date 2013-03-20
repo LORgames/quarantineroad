@@ -1,6 +1,7 @@
 package GameCom {
 	import GameCom.States.*;
 	import flash.display.Sprite;
+	import GameCom.SystemComponents.SoundButton;
 	import LORgames.Localization.Strings;
 	
 	/**
@@ -21,6 +22,7 @@ package GameCom {
 			Strings.FillWithDefaultValues();
 			
 			this.addChild(contentLayer);
+			this.addChild(new SoundButton());
 			
 			contentLayer.addChild(new WorldPreparation());
 			//contentLayer.addChild(new MainMenu());
