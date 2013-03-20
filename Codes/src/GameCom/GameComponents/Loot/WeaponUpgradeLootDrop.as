@@ -27,7 +27,7 @@ package GameCom.GameComponents.Loot {
 		public override function Reassign(location:b2Vec2):void {
 			var bmpd:BitmapData;
 			
-			if (Math.random() < 0.33) {
+			if (Math.random() < 0.20) {
 				pickedUP = true;
 				
 				if(Math.random() < 0.8) {
