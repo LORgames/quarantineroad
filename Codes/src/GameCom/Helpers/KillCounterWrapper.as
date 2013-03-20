@@ -48,7 +48,7 @@ package GameCom.Helpers
 				if (Value > 360) TrophyHelper.GotTrophyByName("Man vs Zombie");
 			} else if (type == TOTAL) {
 				lastKillAt = ScoreHelper.Distance.Value;
-				if (WorldManager.WorldShake >= 2) ScoreHelper.ShakeyKills.AddValue(val);
+				if (WorldManager.WorldShake >= 1) ScoreHelper.ShakeyKills.AddValue(val);
 				if (Value >= 99) TrophyHelper.GotTrophyByName("Piece of Cake");
 				if (Value+nextAlert >= 5000) TrophyHelper.GotTrophyByName("Zombie");
 				if (Value+nextAlert >= 25000) TrophyHelper.GotTrophyByName("Project Alice");
