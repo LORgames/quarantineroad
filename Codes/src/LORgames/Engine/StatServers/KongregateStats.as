@@ -58,14 +58,11 @@ package LORgames.Engine.StatServers
 		public function EndLevel():void {}
 		
 		public function Submit(statname:String, statvalue:int):void {
-			if (statname.indexOf("stat_") == 0) {
-				try {
-					kongregate.stats.submit(statname.substr(5), statvalue);
-				} catch (ex:Error) {
-					new MessageBox("A wild Kongregate Bug has appeared!\n\n " + ex.name + "\n\n" + ex.message, 0, null, "OK?");
-				}
+			try {
+				kongregate.stats.submit(statname, statvalue);
+			} catch (ex:Error) {
+				new MessageBox("A wild Kongregate Bug has appeared!\n\n " + ex.name + "\n\n" + ex.message, 0, null, "OK?");
 			}
-			
 		}
 		
 	}
